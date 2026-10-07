@@ -34,7 +34,6 @@
             flex-direction: column;
         }
 
-        /* Header Styling */
         header {
             background: linear-gradient(135deg, #0f172a, #1e293b);
             color: white;
@@ -57,6 +56,15 @@
         header p {
             font-size: 0.9rem;
             color: #94a3b8;
+            margin-bottom: 4px;
+        }
+
+        .tagline {
+            font-size: 0.8rem;
+            color: #34d399;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .admin-badge-btn {
@@ -77,7 +85,6 @@
             background: var(--primary);
         }
 
-        /* Container & Layout */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -86,7 +93,6 @@
             flex: 1;
         }
 
-        /* Banner / Category Showcase */
         .banner-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -116,10 +122,6 @@
             transition: 0.3s;
         }
 
-        .category-card:hover img {
-            filter: brightness(0.8);
-        }
-
         .category-card .content {
             position: absolute;
             bottom: 0;
@@ -140,7 +142,6 @@
             color: #cbd5e1;
         }
 
-        /* Controls / Filter Bar */
         .filter-bar {
             display: flex;
             justify-content: space-between;
@@ -200,7 +201,6 @@
             border-color: var(--primary);
         }
 
-        /* Products Grid */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -217,10 +217,6 @@
             flex-direction: column;
             transition: 0.3s;
             border: 1px solid #f1f5f9;
-        }
-
-        .product-card:hover {
-            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.1);
         }
 
         .product-img-container {
@@ -308,10 +304,9 @@
             padding: 10px;
             border-radius: 10px;
             cursor: pointer;
-            display: none; /* Only visible for admin */
+            display: none;
         }
 
-        /* Admin Panel Modal / Section */
         #admin-panel {
             display: none;
             background: white;
@@ -351,7 +346,22 @@
             font-size: 0.9rem;
         }
 
-        /* Checkout Modal */
+        /* Orders Dashboard Section inside Admin */
+        .orders-section {
+            margin-top: 25px;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 20px;
+        }
+
+        .order-item-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+        }
+
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -370,6 +380,8 @@
             width: 100%;
             max-width: 450px;
             box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .modal-content h3 {
@@ -386,7 +398,20 @@
             color: var(--text-muted);
         }
 
-        /* Footer */
+        #qr-container {
+            display: none;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        #qr-container img {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+        }
+
         footer {
             background: #1e293b;
             color: #94a3b8;
@@ -407,12 +432,12 @@
     <header>
         <button class="admin-badge-btn" onclick="toggleAdminMode()"><i class="fa-solid fa-lock" id="admin-icon"></i> Admin</button>
         <h1>NEW VERMA MEDICALS</h1>
-        <p>लोहरबरवा, बरवड्डा, धनबाद, झारखंड | विश्वसनीय और किफायती स्वास्थ्य सेवा</p>
+        <p>लोहरबरवा, बरवड्डा, धनबाद, झारखंड | संपर्क: +91 XXXXXXXXXX</p>
+        <div class="tagline">Your Health, Our Priority</div>
     </header>
 
     <div class="container">
         
-        <!-- Category Banners with Impressive Photos -->
         <div class="banner-grid">
             <div class="category-card" onclick="filterByCategory('Baby Care')">
                 <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=600&q=80" alt="Baby Care">
@@ -437,12 +462,12 @@
             </div>
         </div>
 
-        <!-- Admin Panel (Hidden by default, requires PIN 1234) -->
+        <!-- Admin Panel with Stronger Password & QR Setup -->
         <div id="admin-panel">
-            <h2><i class="fa-solid fa-user-shield"></i> एडमिन पैनल (डेटा जोड़ें)</h2>
+            <h2><i class="fa-solid fa-user-shield"></i> एडमिन पैनल (डेटा और QR कोड सेटिंग्स)</h2>
             <div class="form-group">
                 <label>उत्पाद का नाम (Product Name)</label>
-                <input type="text" id="p-name" placeholder="जैसे: Horlicks Mother's Plus / Baby Soap">
+                <input type="text" id="p-name" placeholder="जैसे: Horlicks Mother's Plus">
             </div>
             <div class="form-group">
                 <label>कैटेगरी (Category)</label>
@@ -457,13 +482,24 @@
                 <input type="number" id="p-price" placeholder="जैसे: 250">
             </div>
             <div class="form-group">
-                <label>फोटो का लिंक (Image URL)</label>
-                <input type="text" id="p-img" placeholder="सिगरेट/उत्पाद का इमेज लिंक यहाँ डालें">
+                <label>उत्पाद फोटो का लिंक (Product Image URL)</label>
+                <input type="text" id="p-img" placeholder="इमेज लिंक यहाँ डालें">
             </div>
-            <button class="btn-primary" onclick="addProduct()">डेटाबेस में सेव करें</button>
+            <div class="form-group">
+                <label>दुकान का UPI QR Code फोटो लिंक (ऑनलाइन पेमेंट के लिए)</label>
+                <input type="text" id="store-qr-url" placeholder="अपने PhonePe/GooglePay QR कोड का इमेज लिंक डालें">
+            </div>
+            <button class="btn-primary" onclick="saveAdminData()">डेटाबेस में सेव करें</button>
+
+            <!-- Orders Dashboard inside Admin -->
+            <div class="orders-section">
+                <h3><i class="fa-solid fa-clipboard-list"></i> ग्राहकों के ऑर्डर्स (Live Orders)</h3>
+                <div id="admin-orders-list">
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">कोई नया ऑर्डर नहीं है।</p>
+                </div>
+            </div>
         </div>
 
-        <!-- Filter & Search Bar -->
         <div class="filter-bar">
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -477,14 +513,12 @@
             </div>
         </div>
 
-        <!-- Products Listing Grid -->
         <div class="products-grid" id="products-container">
-            <!-- Items will load dynamically from Firebase Realtime Database -->
         </div>
 
     </div>
 
-    <!-- Checkout Modal -->
+    <!-- Checkout Modal with UPI QR & WhatsApp Forwarding -->
     <div class="modal-overlay" id="checkout-modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeCheckoutModal()">&times;</button>
@@ -505,12 +539,20 @@
             </div>
             <div class="form-group">
                 <label>भुगतान का तरीका (Payment Type)</label>
-                <select id="payment-type">
+                <select id="payment-type" onchange="checkPaymentMethod()">
                     <option value="COD">Cash on Delivery (कैश ऑन डिलीवरी)</option>
-                    <option value="Online">Online Pay (UPI / QR Code)</option>
+                    <option value="Online">Online Pay (UPI / QR Code Scan)</option>
                 </select>
             </div>
-            <button class="btn-primary" style="width: 100%; margin-top: 10px;" onclick="submitOrder()">ऑर्डर प्लेस करें</button>
+
+            <!-- QR Code container shown if Online payment is chosen -->
+            <div id="qr-container">
+                <p style="font-size: 0.85rem; color: var(--accent); font-weight: 600; margin-bottom: 5px;">स्कैन करके भुगतान करें (Scan & Pay):</p>
+                <img id="display-qr-img" src="" alt="UPI QR Code" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=300&q=80'">
+                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 5px;">भुगतान करने के बाद नीचे आर्डर प्लेस करें बटन दबाएं।</p>
+            </div>
+
+            <button class="btn-primary" style="width: 100%; margin-top: 10px;" onclick="submitOrder()">WhatsApp पर आर्डर भेजें</button>
         </div>
     </div>
 
@@ -518,12 +560,10 @@
         <p>&copy; 2026 <span>New Verma Medicals</span>. All Rights Reserved. | Barwadda, Dhanbad</p>
     </footer>
 
-    <!-- Firebase SDK Scripts -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-        // Your Firebase Database Configuration
         const firebaseConfig = {
             databaseURL: "https://new-verma-medicals-default-rtdb.firebaseio.com/"
         };
@@ -533,20 +573,24 @@
 
         let isAdmin = false;
         let allProducts = [];
+        let allOrders = [];
         let selectedProductForOrder = null;
+        let savedQrUrl = "";
 
-        // Toggle Admin Mode using PIN 1234
+        // Secure Strong Admin Password Pin
+        const ADMIN_SECRET_PIN = "Verma@Med#2026";
+
         window.toggleAdminMode = function() {
             if (!isAdmin) {
-                let pin = prompt("एडमिन पिन (PIN) दर्ज करें:");
-                if (pin === "1234") {
+                let pin = prompt("सुरक्षित एडमिन पासवर्ड दर्ज करें:");
+                if (pin === ADMIN_SECRET_PIN) {
                     isAdmin = true;
                     document.getElementById("admin-panel").style.display = "block";
                     document.getElementById("admin-icon").className = "fa-solid fa-unlock";
-                    alert("एडमिन मोड ऑन हो गया है!");
+                    alert("सुरक्षित एडमिन मोड ऑन हो गया है!");
                     renderProducts(allProducts);
                 } else if(pin !== null) {
-                    alert("गलत पिन!");
+                    alert("गलत पासवर्ड!");
                 }
             } else {
                 isAdmin = false;
@@ -557,40 +601,48 @@
             }
         }
 
-        // Add Product to Firebase Database
-        window.addProduct = function() {
+        window.saveAdminData = function() {
             const name = document.getElementById("p-name").value.trim();
             const category = document.getElementById("p-category").value;
             const price = document.getElementById("p-price").value.trim();
             let img = document.getElementById("p-img").value.trim();
+            const qrInput = document.getElementById("store-qr-url").value.trim();
 
-            if (!name || !price) {
-                alert("कृपया उत्पाद का नाम और मूल्य भरें!");
-                return;
+            if(qrInput) {
+                const qrRef = ref(db, 'settings/qrCode');
+                set(qrRef, qrInput);
             }
 
-            // Default fallback images based on category if image URL is not provided
-            if(!img) {
-                if(category === 'Baby Care') img = "https://images.unsplash.com/photo-1522771930-78848d9293e8?auto=format&fit=crop&w=400&q=80";
-                else if(category === 'Mother Care') img = "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=400&q=80";
-                else img = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80";
-            }
+            if (name && price) {
+                if(!img) {
+                    if(category === 'Baby Care') img = "https://images.unsplash.com/photo-1522771930-78848d9293e8?auto=format&fit=crop&w=400&q=80";
+                    else if(category === 'Mother Care') img = "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=400&q=80";
+                    else img = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80";
+                }
 
-            const productsRef = ref(db, 'products');
-            const newProductRef = push(productsRef);
-            set(newProductRef, {
-                name, category, price, img
-            }).then(() => {
-                alert("उत्पाद सफलतापूर्वक जोड़ दिया गया है!");
-                document.getElementById("p-name").value = "";
-                document.getElementById("p-price").value = "";
-                document.getElementById("p-img").value = "";
-            }).catch((error) => {
-                alert("एरर: " + error.message);
-            });
+                const productsRef = ref(db, 'products');
+                const newProductRef = push(productsRef);
+                set(newProductRef, { name, category, price, img }).then(() => {
+                    alert("उत्पाद और सेटिंग्स सफलतापूर्वक सेव हो गई हैं!");
+                    document.getElementById("p-name").value = "";
+                    document.getElementById("p-price").value = "";
+                    document.getElementById("p-img").value = "";
+                });
+            } else {
+                alert("सेटिंग्स सेव हो गई हैं!");
+            }
         }
 
-        // Fetch Products Real-time from Firebase
+        // Fetch QR Code and Settings
+        const settingsRef = ref(db, 'settings');
+        onValue(settingsRef, (snapshot) => {
+            const data = snapshot.val();
+            if(data && data.qrCode) {
+                savedQrUrl = data.qrCode;
+                document.getElementById("display-qr-img").src = savedQrUrl;
+            }
+        });
+
         const productsRef = ref(db, 'products');
         onValue(productsRef, (snapshot) => {
             const data = snapshot.val();
@@ -603,7 +655,35 @@
             renderProducts(allProducts);
         });
 
-        // Render Products to Screen
+        // Fetch Orders for Admin
+        const ordersRef = ref(db, 'orders');
+        onValue(ordersRef, (snapshot) => {
+            const data = snapshot.val();
+            allOrders = [];
+            const ordersListContainer = document.getElementById("admin-orders-list");
+            ordersListContainer.innerHTML = "";
+
+            if (data) {
+                Object.keys(data).reverse().forEach(key => {
+                    const ord = data[key];
+                    allOrders.push({ id: key, ...ord });
+                    
+                    const div = document.createElement("div");
+                    div.className = "order-item-box";
+                    div.innerHTML = `
+                        <b>समय:</b> ${ord.timestamp}<br>
+                        <b>ग्राहक:</b> ${ord.customerName} (${ord.customerPhone})<br>
+                        <b>आइटम:</b> ${ord.productName} - <b>₹${ord.productPrice}</b><br>
+                        <b>भुगतान:</b> ${ord.paymentType}<br>
+                        <b>पता:</b> ${ord.address}
+                    `;
+                    ordersListContainer.appendChild(div);
+                });
+            } else {
+                ordersListContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">कोई नया ऑर्डर नहीं है।</p>`;
+            }
+        });
+
         window.renderProducts = function(products) {
             const container = document.getElementById("products-container");
             container.innerHTML = "";
@@ -635,7 +715,6 @@
             });
         }
 
-        // Delete Product (Admin Only)
         window.deleteProduct = function(id) {
             if (confirm("क्या आप वाकई इस उत्पाद को हटाना चाहते हैं?")) {
                 remove(ref(db, 'products/' + id)).then(() => {
@@ -644,9 +723,7 @@
             }
         }
 
-        // Filter by Category
         window.filterByCategory = function(category) {
-            // Update active buttons styling
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 if(btn.innerText.includes(category) || (category === 'All' && btn.innerText === 'सभी')) {
                     btn.classList.add('active');
@@ -663,22 +740,32 @@
             }
         }
 
-        // Search Products
         window.searchProducts = function() {
             const query = document.getElementById("search-input").value.toLowerCase();
             const filtered = allProducts.filter(p => p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
             renderProducts(filtered);
         }
 
-        // Checkout Modal Functions
         window.openCheckoutModal = function(name, price) {
             selectedProductForOrder = { name, price };
             document.getElementById("modal-product-info").innerText = `चुना गया आइटम: ${name} (मूल्य: ₹${price})`;
             document.getElementById("checkout-modal").style.display = "flex";
+            document.getElementById("payment-type").value = "COD";
+            document.getElementById("qr-container").style.display = "none";
         }
 
         window.closeCheckoutModal = function() {
             document.getElementById("checkout-modal").style.display = "none";
+        }
+
+        window.checkPaymentMethod = function() {
+            const method = document.getElementById("payment-type").value;
+            const qrBox = document.getElementById("qr-container");
+            if(method === "Online") {
+                qrBox.style.display = "block";
+            } else {
+                qrBox.style.display = "none";
+            }
         }
 
         window.submitOrder = function() {
@@ -686,13 +773,13 @@
             const phone = document.getElementById("cust-phone").value.trim();
             const address = document.getElementById("cust-address").value.trim();
             const payment = document.getElementById("payment-type").value;
+            const timeStr = new Date().toLocaleString();
 
             if (!name || !phone || !address) {
                 alert("कृपया अपनी सभी जानकारी (नाम, फोन, पता) भरें!");
                 return;
             }
 
-            // Save order to Firebase orders node
             const ordersRef = ref(db, 'orders');
             const newOrderRef = push(ordersRef);
             set(newOrderRef, {
@@ -702,15 +789,31 @@
                 paymentType: payment,
                 productName: selectedProductForOrder.name,
                 productPrice: selectedProductForOrder.price,
-                timestamp: new Date().toLocaleString()
+                timestamp: timeStr
             }).then(() => {
-                alert(`धन्यवाद ${name}! आपका ऑर्डर सफलताપૂર્વক दर्ज हो गया है। हम जल्द ही आपसे संपर्क करेंगे।`);
+                // Construct WhatsApp Message
+                const message = `*NEW VERMA MEDICALS - नया आर्डर* \n\n` +
+                                `🕒 समय: ${timeStr}\n` +
+                                `📦 उत्पाद: ${selectedProductForOrder.name}\n` +
+                                `💰 मूल्य: ₹${selectedProductForOrder.price}\n` +
+                                `💳 भुगतान: ${payment}\n` +
+                                `👤 ग्राहक: ${name}\n` +
+                                `📞 फोन: ${phone}\n` +
+                                `🏠 पता: ${address}`;
+
+                const encodedMsg = encodeURIComponent(message);
+                // WhatsApp share URL (Shop owner WhatsApp number placeholder)
+                const whatsappUrl = `https://wa.me/?text=${encodedMsg}`;
+
+                alert("आर्डर डेटाबेस में सेव हो गया है! अब WhatsApp पर आर्डर भेजने के लिए आगे बढ़ें।");
+                window.open(whatsappUrl, '_blank');
+                
                 closeCheckoutModal();
                 document.getElementById("cust-name").value = "";
                 document.getElementById("cust-phone").value = "";
                 document.getElementById("cust-address").value = "";
             }).catch(err => {
-                alert("ऑर्डर सबमिट करने में समस्या: " + err.message);
+                alert("एरर: " + err.message);
             });
         }
     </script>
