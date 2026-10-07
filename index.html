@@ -193,10 +193,9 @@
             <button class="close-modal" onclick="toggleTermsModal()">&times;</button>
             <h3><i class="fa-solid fa-file-contract"></i> नियम और शर्तें (Terms & Conditions)</h3>
             <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 15px; line-height: 1.6;">
-                <p><b>1. आदेश और पुष्टि (Orders):</b> न्यू वर्मा मेडिकल्स पर दिए गए सभी आर्डर दुकान की उपलब्धता के अधीन हैं। एडमिन द्वारा आर्डर स्वीकार किए जाने पर आपको व्हाट्सएप पर सूचना मिल जाएगी।</p><br>
-                <p><b>2. मूल्य और भुगतान (Pricing & Payment):</b> सभी दवाइयों और उत्पादों के मूल्य स्थानीय बाजार दरों के अनुसार हैं। भुगतान आप कैश ऑन डिलीवरी (COD) या ऑनलाइन माध्यम से कर सकते हैं।</p><br>
-                <p><b>3. डिलीवरी और कैंसिलेशन (Delivery & Cancellation):</b> बरवड्डा और लोहरबरवा क्षेत्र के भीतर समय पर डिलीवरी का प्रयास किया जाता है। स्टॉक या क्षेत्र की समस्या होने पर एडमिन द्वारा आर्डर रद्द किया जा सकता है जिसका कारण आपको सूचित कर दिया जाएगा।</p><br>
-                <p><b>4. गोपनीयता (Privacy):</b> आपका मोबाइल नंबर और पता केवल आर्डर डिलीवरी के उपयोग के लिए सुरक्षित रखा जाता है।</p>
+                <p><b>1. आदेश और पुष्टि (Orders):</b> न्यू वर्मा मेडिकल्स पर दिए गए सभी आर्डर दुकान की उपलब्धता के अधीन हैं।</p><br>
+                <p><b>2. मूल्य और भुगतान (Pricing & Payment):</b> सभी दवाइयों और उत्पादों के मूल्य स्थानीय बाजार दरों के अनुसार हैं। भुगतान कैश ऑन डिलीवरी (COD) या ऑनलाइन उपलब्ध है।</p><br>
+                <p><b>3. डिलीवरी और कैंसिलेशन (Delivery & Cancellation):</b> बरवड्डा और लोहरबरवा क्षेत्र के भीतर समय पर डिलीवरी का प्रयास किया जाता है। स्टॉक न होने पर एडमिन द्वारा आर्डर रद्द किया जा सकता है।</p>
             </div>
         </div>
     </div>
@@ -232,7 +231,7 @@
                 <label>अन्य कारण (Custom Reason)</label>
                 <input type="text" id="custom-reason-input" placeholder="कारण यहाँ लिखें...">
             </div>
-            <button class="btn-danger" style="width: 100%; padding: 10px;" onclick="confirmOrderCancellation()">कैंसिल करें और ग्राहक को WhatsApp पर भेजें</button>
+            <button class="btn-danger" style="width: 100%; padding: 10px;" onclick="confirmOrderCancellation()">आर्डर रद्द करें</button>
         </div>
     </div>
 
@@ -261,7 +260,7 @@
                     <option value="Online">Online Pay (UPI / QR Code Scan)</option>
                 </select>
             </div>
-            <button class="btn-primary" style="width: 100%;" onclick="submitOrder()">ऑर्डर सबमिट करें और दुकानदार को भेजें</button>
+            <button class="btn-primary" style="width: 100%;" onclick="submitOrder()">ऑर्डर सबमिट करें</button>
         </div>
     </div>
 
@@ -287,7 +286,6 @@
         let selectedProductForOrder = null;
         let selectedOrderForCancel = null;
         const ADMIN_SECRET_PIN = "Verma@Med#2026";
-        const OWNER_WHATSAPP = "917992308032";
 
         function showToast(text) {
             const toast = document.getElementById("notification-toast");
@@ -347,12 +345,12 @@
                 const div = document.createElement("div");
                 div.className = "order-item-box";
                 div.innerHTML = `
-                    <b>समय:</b> ${ord.timestamp}<br>
+                    <b>आर्डर समय:</b> ${ord.timestamp}<br>
                     <b>आइटम:</b> ${ord.productName} - <b>₹${ord.productPrice}</b><br>
                     <b>भुगतान:</b> ${ord.paymentType}<br>
                     <b>पता:</b> ${ord.address}<br>
                     <b>स्टेटस:</b> <span style="color: ${statusColor}; font-weight: bold;">${ord.status}</span>
-                    ${ord.deliveryTime ? `<br><b>डिलीवरी समय:</b> ${ord.deliveryTime}` : ''}
+                    ${ord.deliveryDateTime ? `<br><b>📅 डिलीवरी तिथि व समय:</b> <span style="color: #0284c7; font-weight: bold;">${ord.deliveryDateTime}</span>` : ''}
                     ${ord.reason ? `<br><b>कारण:</b> ${ord.reason}` : ''}
                 `;
                 container.appendChild(div);
@@ -423,8 +421,8 @@
                         <b>पता:</b> ${ord.address}<br>
                         <b>स्टेटस:</b> <span style="color: orange; font-weight: bold;">Pending</span>
                         <div class="order-actions" style="display: ${isAdmin ? 'flex' : 'none'};">
-                            <button class="btn-success" onclick="acceptOrderPrompt('${ord.id}', '${ord.customerPhone}', '${ord.productName}')"><i class="fa-solid fa-check"></i> Accept & Deliver Time</button>
-                            <button class="btn-danger" onclick="openRejectModal('${ord.id}', '${ord.customerPhone}', '${ord.productName}')"><i class="fa-solid fa-xmark"></i> Cancel Order</button>
+                            <button class="btn-success" onclick="acceptOrderPrompt('${ord.id}')"><i class="fa-solid fa-check"></i> Accept & Deliver Time</button>
+                            <button class="btn-danger" onclick="openRejectModal('${ord.id}')"><i class="fa-solid fa-xmark"></i> Cancel Order</button>
                         </div>
                     `;
                     liveContainer.appendChild(div);
@@ -436,7 +434,7 @@
                         <b>ग्राहक:</b> ${ord.customerName} (${ord.customerPhone})<br>
                         <b>आइटम:</b> ${ord.productName} - <b>₹${ord.productPrice}</b><br>
                         <b>अंतिम स्टेटस:</b> <span style="color: ${statusColor}; font-weight: bold;">${status}</span><br>
-                        ${ord.deliveryTime ? `<b>डिलीवरी समय:</b> ${ord.deliveryTime}<br>` : ''}
+                        ${ord.deliveryDateTime ? `<b>डिलीवरी तिथि व समय:</b> ${ord.deliveryDateTime}<br>` : ''}
                         ${ord.reason ? `<b>कारण:</b> ${ord.reason}<br>` : ''}
                         <div class="order-actions" style="display: ${isAdmin ? 'flex' : 'none'};">
                             <button class="btn-danger" style="background: #64748b;" onclick="deleteOrderHistory('${ord.id}')"><i class="fa-solid fa-trash"></i> हिस्ट्री से डिलीट करें</button>
@@ -450,22 +448,20 @@
             if (historyCount === 0) historyContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">कोई आर्डर इतिहास नहीं है।</p>`;
         }
 
-        window.acceptOrderPrompt = function(orderId, phone, productName) {
-            let deliveryTime = prompt("डिलीवरी का समय दर्ज करें (जैसे: 30 मिनट में या शाम 5 बजे):", "30 मिनट में");
-            if (deliveryTime !== null) {
+        window.acceptOrderPrompt = function(orderId) {
+            let deliveryDateTime = prompt("डिलीवरी की तिथि और समय दर्ज करें\n(जैसे: 09/10/2026, शाम 5:00 बजे या 30 मिनट में):", "30 मिनट में");
+            if (deliveryDateTime !== null && deliveryDateTime.trim() !== "") {
                 update(ref(db, 'orders/' + orderId), { 
                     status: "Accepted / Delivered",
-                    deliveryTime: deliveryTime 
+                    deliveryDateTime: deliveryDateTime 
                 }).then(() => {
-                    showToast("आर्डर स्वीकार कर लिया गया!");
-                    const msg = `*NEW VERMA MEDICALS*\n\nनमस्ते, आपका आर्डर "${productName}" स्वीकार कर लिया गया है।\n\n🕒 संभावित डिलीवरी समय: ${deliveryTime}\n\nधन्यवाद!`;
-                    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+                    showToast("आर्डर स्वीकार कर लिया गया और समय सेट हो गया!");
                 });
             }
         }
 
-        window.openRejectModal = function(orderId, phone, productName) {
-            selectedOrderForCancel = { id: orderId, phone, productName };
+        window.openRejectModal = function(orderId) {
+            selectedOrderForCancel = { id: orderId };
             document.getElementById("reject-modal").style.display = "flex";
         }
 
@@ -491,8 +487,6 @@
                 reason: finalReason
             }).then(() => {
                 showToast("आर्डर रद्द कर दिया गया!");
-                const rejectionMsg = `*NEW VERMA MEDICALS*\n\nनमस्ते, आपका "${selectedOrderForCancel.productName}" का आर्डर रद्द कर दिया गया है।\n\n*कारण:* ${finalReason}\n\nअसुविधा के लिए खेद है।`;
-                window.open(`https://wa.me/${selectedOrderForCancel.phone}?text=${encodeURIComponent(rejectionMsg)}`, '_blank');
                 closeRejectModal();
             });
         }
@@ -567,10 +561,11 @@
                 timestamp: timeStr,
                 status: "Pending"
             }).then(() => {
-                const message = `*NEW VERMA MEDICALS - नया आर्डर*\n\n🕒 समय: ${timeStr}\n📦 उत्पाद: ${selectedProductForOrder.name}\n💰 मूल्य: ₹${selectedProductForOrder.price}\n💳 भुगतान: ${payment}\n👤 ग्राहक: ${name}\n📞 फोन: ${phone}\n🏠 पता: ${address}`;
-                
-                window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank');
+                showToast("आपका आर्डर सफलताપૂર્વक सबमिट हो गया है!");
                 closeCheckoutModal();
+                document.getElementById("cust-name").value = "";
+                document.getElementById("cust-phone").value = "";
+                document.getElementById("cust-address").value = "";
             });
         }
     </script>
