@@ -33,30 +33,18 @@
             position: sticky; top: 0; z-index: 100; overflow: hidden;
         }
 
-        header::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-            animation: lightShine 4s infinite linear;
-        }
-
-        @keyframes lightShine {
-            0% { left: -100%; }
-            100% { left: 200%; }
-        }
-
         header h1 { font-size: 1.8rem; font-weight: 700; color: #38bdf8; margin-bottom: 0.2rem; }
         header p { font-size: 0.9rem; color: #94a3b8; margin-bottom: 4px; }
         .tagline { font-size: 0.8rem; color: #34d399; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; }
 
-        .admin-badge-btn {
-            position: absolute; right: 15px; top: 20px; background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2); color: white; padding: 6px 12px;
-            border-radius: 20px; font-size: 0.8rem; cursor: pointer; transition: 0.3s; z-index: 10;
+        .header-buttons {
+            position: absolute; right: 15px; top: 20px; display: flex; gap: 8px; z-index: 10;
         }
-        .admin-badge-btn:hover { background: var(--primary); transform: scale(1.05); }
+        .action-badge-btn {
+            background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; transition: 0.3s;
+        }
+        .action-badge-btn:hover { background: var(--primary); transform: scale(1.05); }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; width: 100%; flex: 1; }
 
@@ -87,7 +75,6 @@
         .btn-primary { background: var(--primary); color: white; border: none; padding: 10px; border-radius: 10px; font-weight: 500; cursor: pointer; }
         .btn-success { background: #10b981; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
         .btn-danger { background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
-        .btn-return { background: #f59e0b; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
 
         #admin-panel { display: none; background: white; padding: 25px; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 30px; border: 2px dashed var(--primary); }
         .form-group { margin-bottom: 15px; }
@@ -109,14 +96,19 @@
 
         footer { background: #1e293b; color: #94a3b8; text-align: center; padding: 20px; font-size: 0.85rem; margin-top: auto; }
         footer span { color: #38bdf8; }
+        .terms-link { color: #38bdf8; text-decoration: underline; cursor: pointer; margin-left: 5px; }
+        .terms-link:hover { color: #ffffff; }
     </style>
 </head>
 <body>
 
-    <div id="notification-toast">ऑर्डर अपडेट हो गया!</div>
+    <div id="notification-toast">अपडेट हो गया!</div>
 
     <header>
-        <button class="admin-badge-btn" onclick="toggleAdminMode()"><i class="fa-solid fa-lock" id="admin-icon"></i> Admin</button>
+        <div class="header-buttons">
+            <button class="action-badge-btn" onclick="toggleCustomerOrdersModal()"><i class="fa-solid fa-box"></i> My Orders</button>
+            <button class="action-badge-btn" onclick="toggleAdminMode()"><i class="fa-solid fa-lock" id="admin-icon"></i> Admin</button>
+        </div>
         <h1>NEW VERMA MEDICALS</h1>
         <p>लोहरबरवा, बरवड्डा, धनबाद, झारखंड | संपर्क: +91 7992308032</p>
         <div class="tagline">Your Health, Our Priority</div>
@@ -173,7 +165,7 @@
 
             <!-- Order History Log Section -->
             <div class="orders-section">
-                <h3><i class="fa-solid fa-clock-rotate-left"></i> आर्डर इतिहास (Order History Log)</h3>
+                <h3><i class="fa-solid fa-clock-rotate-left"></i> आर्डर इतिहास और डिलीट विकल्प (Order History Log)</h3>
                 <div id="admin-order-history-list"></div>
             </div>
         </div>
@@ -195,6 +187,34 @@
 
     </div>
 
+    <!-- Terms & Conditions Modal -->
+    <div class="modal-overlay" id="terms-modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="toggleTermsModal()">&times;</button>
+            <h3><i class="fa-solid fa-file-contract"></i> नियम और शर्तें (Terms & Conditions)</h3>
+            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 15px; line-height: 1.6;">
+                <p><b>1. आदेश और पुष्टि (Orders):</b> न्यू वर्मा मेडिकल्स पर दिए गए सभी आर्डर दुकान की उपलब्धता के अधीन हैं। एडमिन द्वारा आर्डर स्वीकार किए जाने पर आपको व्हाट्सएप पर सूचना मिल जाएगी।</p><br>
+                <p><b>2. मूल्य और भुगतान (Pricing & Payment):</b> सभी दवाइयों और उत्पादों के मूल्य स्थानीय बाजार दरों के अनुसार हैं। भुगतान आप कैश ऑन डिलीवरी (COD) या ऑनलाइन माध्यम से कर सकते हैं।</p><br>
+                <p><b>3. डिलीवरी और कैंसिलेशन (Delivery & Cancellation):</b> बरवड्डा और लोहरबरवा क्षेत्र के भीतर समय पर डिलीवरी का प्रयास किया जाता है। स्टॉक या क्षेत्र की समस्या होने पर एडमिन द्वारा आर्डर रद्द किया जा सकता है जिसका कारण आपको सूचित कर दिया जाएगा।</p><br>
+                <p><b>4. गोपनीयता (Privacy):</b> आपका मोबाइल नंबर और पता केवल आर्डर डिलीवरी के उपयोग के लिए सुरक्षित रखा जाता है।</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer 'My Orders' Modal -->
+    <div class="modal-overlay" id="customer-orders-modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="toggleCustomerOrdersModal()">&times;</button>
+            <h3><i class="fa-solid fa-bag-shopping"></i> मेरे ऑर्डर्स (My Orders)</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">अपने मोबाइल नंबर से किए गए सभी आर्डर यहाँ देखें:</p>
+            <div class="form-group">
+                <label>अपना रजिस्टर्ड मोबाइल नंबर दर्ज करें</label>
+                <input type="tel" id="check-cust-phone" placeholder="10 अंकों का मोबाइल नंबर..." oninput="loadCustomerOrders()">
+            </div>
+            <div id="customer-orders-result" style="margin-top: 15px;"></div>
+        </div>
+    </div>
+
     <!-- Rejection/Cancellation Reason Modal -->
     <div class="modal-overlay" id="reject-modal">
         <div class="modal-content">
@@ -212,7 +232,7 @@
                 <label>अन्य कारण (Custom Reason)</label>
                 <input type="text" id="custom-reason-input" placeholder="कारण यहाँ लिखें...">
             </div>
-            <button class="btn-danger" style="width: 100%; padding: 10px;" onclick="confirmOrderCancellation()">कैंसिल करें और ग्राहक को सूचित करें</button>
+            <button class="btn-danger" style="width: 100%; padding: 10px;" onclick="confirmOrderCancellation()">कैंसिल करें और ग्राहक को WhatsApp पर भेजें</button>
         </div>
     </div>
 
@@ -241,12 +261,13 @@
                     <option value="Online">Online Pay (UPI / QR Code Scan)</option>
                 </select>
             </div>
-            <button class="btn-primary" style="width: 100%;" onclick="submitOrder()">WhatsApp पर आर्डर भेजें</button>
+            <button class="btn-primary" style="width: 100%;" onclick="submitOrder()">ऑर्डर सबमिट करें और दुकानदार को भेजें</button>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 <span>New Verma Medicals</span>. All Rights Reserved. | Barwadda, Dhanbad</p>
+        <p>&copy; 2026 <span>New Verma Medicals</span>. All Rights Reserved. | Barwadda, Dhanbad<br>
+        <span class="terms-link" onclick="toggleTermsModal()">Terms & Conditions (नियम और शर्तें)</span></p>
     </footer>
 
     <script type="module">
@@ -266,7 +287,7 @@
         let selectedProductForOrder = null;
         let selectedOrderForCancel = null;
         const ADMIN_SECRET_PIN = "Verma@Med#2026";
-        const OWNER_WHATSAPP = "917992308032"; // आपकी दुकान का नंबर
+        const OWNER_WHATSAPP = "917992308032";
 
         function showToast(text) {
             const toast = document.getElementById("notification-toast");
@@ -293,6 +314,49 @@
                 renderProducts(allProducts);
                 showToast("एडमिन मोड बंद हो गया!");
             }
+        }
+
+        window.toggleCustomerOrdersModal = function() {
+            const modal = document.getElementById("customer-orders-modal");
+            modal.style.display = modal.style.display === "flex" ? "none" : "flex";
+        }
+
+        window.toggleTermsModal = function() {
+            const modal = document.getElementById("terms-modal");
+            modal.style.display = modal.style.display === "flex" ? "none" : "flex";
+        }
+
+        window.loadCustomerOrders = function() {
+            const phone = document.getElementById("check-cust-phone").value.trim();
+            const container = document.getElementById("customer-orders-result");
+            container.innerHTML = "";
+
+            if (phone.length < 10) {
+                container.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">कृपया पूरा 10 अंकों का मोबाइल नंबर दर्ज करें।</p>`;
+                return;
+            }
+
+            const matchedOrders = allOrders.filter(ord => ord.customerPhone === phone);
+            if (matchedOrders.length === 0) {
+                container.innerHTML = `<p style="color: #ef4444; font-size: 0.85rem;">इस नंबर से कोई आर्डर नहीं मिला है।</p>`;
+                return;
+            }
+
+            matchedOrders.forEach(ord => {
+                let statusColor = ord.status === "Pending" ? "orange" : (ord.status.includes("Accepted") ? "green" : "red");
+                const div = document.createElement("div");
+                div.className = "order-item-box";
+                div.innerHTML = `
+                    <b>समय:</b> ${ord.timestamp}<br>
+                    <b>आइटम:</b> ${ord.productName} - <b>₹${ord.productPrice}</b><br>
+                    <b>भुगतान:</b> ${ord.paymentType}<br>
+                    <b>पता:</b> ${ord.address}<br>
+                    <b>स्टेटस:</b> <span style="color: ${statusColor}; font-weight: bold;">${ord.status}</span>
+                    ${ord.deliveryTime ? `<br><b>डिलीवरी समय:</b> ${ord.deliveryTime}` : ''}
+                    ${ord.reason ? `<br><b>कारण:</b> ${ord.reason}` : ''}
+                `;
+                container.appendChild(div);
+            });
         }
 
         window.saveAdminData = function() {
@@ -336,6 +400,8 @@
         window.renderOrders = function() {
             const liveContainer = document.getElementById("admin-live-orders-list");
             const historyContainer = document.getElementById("admin-order-history-list");
+            if (!liveContainer || !historyContainer) return;
+
             liveContainer.innerHTML = "";
             historyContainer.innerHTML = "";
 
@@ -357,22 +423,23 @@
                         <b>पता:</b> ${ord.address}<br>
                         <b>स्टेटस:</b> <span style="color: orange; font-weight: bold;">Pending</span>
                         <div class="order-actions" style="display: ${isAdmin ? 'flex' : 'none'};">
-                            <button class="btn-success" onclick="acceptOrder('${ord.id}', '${ord.customerPhone}', '${ord.productName}')"><i class="fa-solid fa-check"></i> Accept Order</button>
+                            <button class="btn-success" onclick="acceptOrderPrompt('${ord.id}', '${ord.customerPhone}', '${ord.productName}')"><i class="fa-solid fa-check"></i> Accept & Deliver Time</button>
                             <button class="btn-danger" onclick="openRejectModal('${ord.id}', '${ord.customerPhone}', '${ord.productName}')"><i class="fa-solid fa-xmark"></i> Cancel Order</button>
                         </div>
                     `;
                     liveContainer.appendChild(div);
                 } else {
                     historyCount++;
-                    let statusColor = status === "Accepted / Delivered" ? "green" : "red";
+                    let statusColor = status.includes("Accepted") ? "green" : "red";
                     div.innerHTML = `
                         <b>समय:</b> ${ord.timestamp}<br>
                         <b>ग्राहक:</b> ${ord.customerName} (${ord.customerPhone})<br>
                         <b>आइटम:</b> ${ord.productName} - <b>₹${ord.productPrice}</b><br>
                         <b>अंतिम स्टेटस:</b> <span style="color: ${statusColor}; font-weight: bold;">${status}</span><br>
+                        ${ord.deliveryTime ? `<b>डिलीवरी समय:</b> ${ord.deliveryTime}<br>` : ''}
                         ${ord.reason ? `<b>कारण:</b> ${ord.reason}<br>` : ''}
                         <div class="order-actions" style="display: ${isAdmin ? 'flex' : 'none'};">
-                            ${status === "Accepted / Delivered" ? `<button class="btn-return" onclick="returnMedicine('${ord.customerPhone}', '${ord.productName}')"><i class="fa-solid fa-rotate-left"></i> दवाई रिटर्न (Return)</button>` : ''}
+                            <button class="btn-danger" style="background: #64748b;" onclick="deleteOrderHistory('${ord.id}')"><i class="fa-solid fa-trash"></i> हिस्ट्री से डिलीट करें</button>
                         </div>
                     `;
                     historyContainer.appendChild(div);
@@ -380,15 +447,21 @@
             });
 
             if (pendingCount === 0) liveContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">कोई लाइव पेंडिंग ऑर्डर नहीं है।</p>`;
-            if (historyCount === 0) historyContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">कोई पिछला आर्डर इतिहास नहीं है।</p>`;
+            if (historyCount === 0) historyContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">कोई आर्डर इतिहास नहीं है।</p>`;
         }
 
-        window.acceptOrder = function(orderId, phone, productName) {
-            update(ref(db, 'orders/' + orderId), { status: "Accepted / Delivered" }).then(() => {
-                showToast("आर्डर स्वीकार कर लिया गया!");
-                const msg = `*NEW VERMA MEDICALS*\n\nनमस्ते, आपका आर्डर "${productName}" स्वीकार कर लिया गया है। जल्द ही डिलीवर कर दिया जाएगा। धन्यवाद!`;
-                window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
-            });
+        window.acceptOrderPrompt = function(orderId, phone, productName) {
+            let deliveryTime = prompt("डिलीवरी का समय दर्ज करें (जैसे: 30 मिनट में या शाम 5 बजे):", "30 मिनट में");
+            if (deliveryTime !== null) {
+                update(ref(db, 'orders/' + orderId), { 
+                    status: "Accepted / Delivered",
+                    deliveryTime: deliveryTime 
+                }).then(() => {
+                    showToast("आर्डर स्वीकार कर लिया गया!");
+                    const msg = `*NEW VERMA MEDICALS*\n\nनमस्ते, आपका आर्डर "${productName}" स्वीकार कर लिया गया है।\n\n🕒 संभावित डिलीवरी समय: ${deliveryTime}\n\nधन्यवाद!`;
+                    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+                });
+            }
         }
 
         window.openRejectModal = function(orderId, phone, productName) {
@@ -424,12 +497,11 @@
             });
         }
 
-        window.returnMedicine = function(phone, productName) {
-            let reason = prompt("दवाई रिटर्न (Return) करने की स्थिति या कारण दर्ज करें:", "दवाई सही स्थिति में नहीं है।");
-            if (reason) {
-                showToast("रिटर्न अनुरोध अपडेट हुआ!");
-                const returnMsg = `*NEW VERMA MEDICALS - दवाई रिटर्न (Return)*\n\nनमस्ते, आपका "${productName}" का रिटर्न अनुरोध नोट कर लिया गया है।\n\n*कारण:* ${reason}\n\nसंपर्क: 7992308032`;
-                window.open(`https://wa.me/${phone}?text=${encodeURIComponent(returnMsg)}`, '_blank');
+        window.deleteOrderHistory = function(orderId) {
+            if (confirm("क्या आप वाकई इस आर्डर हिस्ट्री को हमेशा के लिए डिलीट करना चाहते हैं?")) {
+                remove(ref(db, 'orders/' + orderId)).then(() => {
+                    showToast("आर्डर हिस्ट्री डिलीट हो गई!");
+                });
             }
         }
 
@@ -483,7 +555,7 @@
 
             if (!name || !phone || !address) { alert("कृपया सभी जानकारी भरें!"); return; }
 
-            showToast("आर्डर डेटाबेस में दर्ज हो रहा है...");
+            showToast("आर्डर दर्ज हो रहा है...");
             const ordersRef = ref(db, 'orders');
             push(ordersRef, {
                 customerName: name,
@@ -496,7 +568,7 @@
                 status: "Pending"
             }).then(() => {
                 const message = `*NEW VERMA MEDICALS - नया आर्डर*\n\n🕒 समय: ${timeStr}\n📦 उत्पाद: ${selectedProductForOrder.name}\n💰 मूल्य: ₹${selectedProductForOrder.price}\n💳 भुगतान: ${payment}\n👤 ग्राहक: ${name}\n📞 फोन: ${phone}\n🏠 पता: ${address}`;
-                // सीधा दुकान के WhatsApp नंबर पर खुलेगा बिना किसी अन्यचयन के
+                
                 window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank');
                 closeCheckoutModal();
             });
