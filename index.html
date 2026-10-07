@@ -346,7 +346,6 @@
             font-size: 0.9rem;
         }
 
-        /* Orders Dashboard Section inside Admin */
         .orders-section {
             margin-top: 25px;
             border-top: 1px solid #e2e8f0;
@@ -356,10 +355,37 @@
         .order-item-box {
             background: #f8fafc;
             border: 1px solid #cbd5e1;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
             font-size: 0.85rem;
+        }
+
+        .order-actions {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-reject {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .btn-return {
+            background: #f59e0b;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
         }
 
         .modal-overlay {
@@ -432,7 +458,7 @@
     <header>
         <button class="admin-badge-btn" onclick="toggleAdminMode()"><i class="fa-solid fa-lock" id="admin-icon"></i> Admin</button>
         <h1>NEW VERMA MEDICALS</h1>
-        <p>लोहरबरवा, बरवड्डा, धनबाद, झारखंड | संपर्क: +91 XXXXXXXXXX</p>
+        <p>लोहरबरवा, बरवड्डा, धनबाद, झारखंड | संपर्क: +91 7992308032</p>
         <div class="tagline">Your Health, Our Priority</div>
     </header>
 
@@ -462,7 +488,7 @@
             </div>
         </div>
 
-        <!-- Admin Panel with Stronger Password & QR Setup -->
+        <!-- Admin Panel -->
         <div id="admin-panel">
             <h2><i class="fa-solid fa-user-shield"></i> एडमिन पैनल (डेटा और QR कोड सेटिंग्स)</h2>
             <div class="form-group">
@@ -493,7 +519,7 @@
 
             <!-- Orders Dashboard inside Admin -->
             <div class="orders-section">
-                <h3><i class="fa-solid fa-clipboard-list"></i> ग्राहकों के ऑर्डर्स (Live Orders)</h3>
+                <h3><i class="fa-solid fa-clipboard-list"></i> ग्राहकों के ऑर्डर्स और रिटर्न (Live Orders & Returns)</h3>
                 <div id="admin-orders-list">
                     <p style="color: var(--text-muted); font-size: 0.85rem;">कोई नया ऑर्डर नहीं है।</p>
                 </div>
@@ -518,7 +544,7 @@
 
     </div>
 
-    <!-- Checkout Modal with UPI QR & WhatsApp Forwarding -->
+    <!-- Checkout Modal -->
     <div class="modal-overlay" id="checkout-modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeCheckoutModal()">&times;</button>
@@ -545,7 +571,7 @@
                 </select>
             </div>
 
-            <!-- QR Code container shown if Online payment is chosen -->
+            <!-- QR Code container -->
             <div id="qr-container">
                 <p style="font-size: 0.85rem; color: var(--accent); font-weight: 600; margin-bottom: 5px;">स्कैन करके भुगतान करें (Scan & Pay):</p>
                 <img id="display-qr-img" src="" alt="UPI QR Code" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=300&q=80'">
@@ -576,8 +602,6 @@
         let allOrders = [];
         let selectedProductForOrder = null;
         let savedQrUrl = "";
-
-        // Secure Strong Admin Password Pin
         const ADMIN_SECRET_PIN = "Verma@Med#2026";
 
         window.toggleAdminMode = function() {
@@ -589,6 +613,7 @@
                     document.getElementById("admin-icon").className = "fa-solid fa-unlock";
                     alert("सुरक्षित एडमिन मोड ऑन हो गया है!");
                     renderProducts(allProducts);
+                    renderOrders();
                 } else if(pin !== null) {
                     alert("गलत पासवर्ड!");
                 }
@@ -598,6 +623,7 @@
                 document.getElementById("admin-icon").className = "fa-solid fa-lock";
                 alert("एडमिन मोड बंद हो गया है।");
                 renderProducts(allProducts);
+                renderOrders();
             }
         }
 
@@ -633,7 +659,6 @@
             }
         }
 
-        // Fetch QR Code and Settings
         const settingsRef = ref(db, 'settings');
         onValue(settingsRef, (snapshot) => {
             const data = snapshot.val();
@@ -655,34 +680,64 @@
             renderProducts(allProducts);
         });
 
-        // Fetch Orders for Admin
         const ordersRef = ref(db, 'orders');
         onValue(ordersRef, (snapshot) => {
             const data = snapshot.val();
             allOrders = [];
+            if (data) {
+                Object.keys(data).reverse().forEach(key => {
+                    allOrders.push({ id: key, ...data[key] });
+                });
+            }
+            renderOrders();
+        });
+
+        window.renderOrders = function() {
             const ordersListContainer = document.getElementById("admin-orders-list");
             ordersListContainer.innerHTML = "";
 
-            if (data) {
-                Object.keys(data).reverse().forEach(key => {
-                    const ord = data[key];
-                    allOrders.push({ id: key, ...ord });
-                    
-                    const div = document.createElement("div");
-                    div.className = "order-item-box";
-                    div.innerHTML = `
-                        <b>समय:</b> ${ord.timestamp}<br>
-                        <b>ग्राहक:</b> ${ord.customerName} (${ord.customerPhone})<br>
-                        <b>आइटम:</b> ${ord.productName} - <b>₹${ord.productPrice}</b><br>
-                        <b>भुगतान:</b> ${ord.paymentType}<br>
-                        <b>पता:</b> ${ord.address}
-                    `;
-                    ordersListContainer.appendChild(div);
-                });
-            } else {
+            if (allOrders.length === 0) {
                 ordersListContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">कोई नया ऑर्डर नहीं है।</p>`;
+                return;
             }
-        });
+
+            allOrders.forEach(ord => {
+                const div = document.createElement("div");
+                div.className = "order-item-box";
+                div.innerHTML = `
+                    <b>समय:</b> ${ord.timestamp}<br>
+                    <b>ग्राहक:</b> ${ord.customerName} (${ord.customerPhone})<br>
+                    <b>आइटम:</b> ${ord.productName} - <b>₹${ord.productPrice}</b><br>
+                    <b>भुगतान:</b> ${ord.paymentType}<br>
+                    <b>पता:</b> ${ord.address}<br>
+                    <div class="order-actions" style="display: ${isAdmin ? 'flex' : 'none'};">
+                        <button class="btn-reject" onclick="rejectOrder('${ord.customerPhone}', '${ord.productName}')"><i class="fa-solid fa-xmark"></i> आर्डर अस्वीकार करें</button>
+                        <button class="btn-return" onclick="returnMedicine('${ord.customerPhone}', '${ord.productName}')"><i class="fa-solid fa-rotate-left"></i> दवाई रिटर्न (Return)</button>
+                    </div>
+                `;
+                ordersListContainer.appendChild(div);
+            });
+        }
+
+        window.rejectOrder = function(phone, productName) {
+            let reason = prompt("ऑर्डर अस्वीकार करने का कारण दर्ज करें:", "माफ़ कीजिए, अभी यह आइटम स्टॉक में उपलब्ध नहीं है।");
+            if (reason) {
+                const rejectionMsg = `*NEW VERMA MEDICALS* \n\nनमस्ते, आपका "${productName}" का आर्डर अस्वीकार कर दिया गया है। \n\n*कारण:* ${reason}\n\nअसुविधा के लिए हमें खेद है।`;
+                const encodedMsg = encodeURIComponent(rejectionMsg);
+                const whatsappUrl = `https://wa.me/${phone}?text=${encodedMsg}`;
+                window.open(whatsappUrl, '_blank');
+            }
+        }
+
+        window.returnMedicine = function(phone, productName) {
+            let reason = prompt("दवाई रिटर्न (Return) करने की स्थिति या कारण दर्ज करें:", "दवाई सही स्थिति में नहीं है / एक्सपायरी नज़दीक है।");
+            if (reason) {
+                const returnMsg = `*NEW VERMA MEDICALS - दवाई रिटर्न (Return)* \n\nनमस्ते, आपका "${productName}" का रिटर्न अनुरोध अपडेट कर दिया गया है। \n\n*स्थिति / कारण:* ${reason}\n\nअधिक जानकारी के लिए संपर्क करें: 7992308032`;
+                const encodedMsg = encodeURIComponent(returnMsg);
+                const whatsappUrl = `https://wa.me/${phone}?text=${encodedMsg}`;
+                window.open(whatsappUrl, '_blank');
+            }
+        }
 
         window.renderProducts = function(products) {
             const container = document.getElementById("products-container");
@@ -791,7 +846,6 @@
                 productPrice: selectedProductForOrder.price,
                 timestamp: timeStr
             }).then(() => {
-                // Construct WhatsApp Message
                 const message = `*NEW VERMA MEDICALS - नया आर्डर* \n\n` +
                                 `🕒 समय: ${timeStr}\n` +
                                 `📦 उत्पाद: ${selectedProductForOrder.name}\n` +
@@ -802,7 +856,6 @@
                                 `🏠 पता: ${address}`;
 
                 const encodedMsg = encodeURIComponent(message);
-                // WhatsApp share URL (Shop owner WhatsApp number placeholder)
                 const whatsappUrl = `https://wa.me/?text=${encodedMsg}`;
 
                 alert("आर्डर डेटाबेस में सेव हो गया है! अब WhatsApp पर आर्डर भेजने के लिए आगे बढ़ें।");
