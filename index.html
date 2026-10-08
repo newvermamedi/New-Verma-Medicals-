@@ -388,6 +388,7 @@
         let isAdmin = false;
         let allProducts = [];
         let allOrders = [];
+        let allReturns = [];
         let allCredits = [];
         let selectedProductForOrder = null;
         let selectedOrderForCancel = null;
@@ -491,7 +492,7 @@
             }
 
             matchedOrders.forEach(ord => {
-                let statusColor = ord.status === "Pending" ? "orange" : (ord.status.includes("Delivered") ? "green" : "red");
+                let statusColor = ord.status.includes("Confirmed") ? "green" : (ord.status === "Pending" ? "orange" : "blue");
                 const div = document.createElement("div");
                 div.className = "order-item-box";
                 
@@ -513,10 +514,16 @@
 
                 if (ord.status === "Pending") {
                     actionDiv.innerHTML += `<button class="btn-danger" onclick="openRejectModal('${ord.id}')"><i class="fa-solid fa-xmark"></i> आर्डर कैंसिल करें</button>`;
-                } else if (ord.status.includes("Accepted") && !ord.status.includes("Delivered")) {
+                } else if (ord.status.includes("Accepted") && !ord.status.includes("Customer Confirmed")) {
                     actionDiv.innerHTML += `<button class="btn-success" onclick="markCustomerDelivered('${ord.id}')"><i class="fa-solid fa-check-double"></i> मुझे मिल गया (Delivered Confirm)</button>`;
-                } else if (ord.status.includes("Delivered")) {
-                    actionDiv.innerHTML += `<button class="btn-danger" style="background:#d97706;" onclick="openReturnModal('${ord.id}')"><i class="fa-solid fa-rotate-left"></i> दवाई रिटर्न करें</button>`;
+                } else if (ord.status.includes("Confirmed")) {
+                    // Check if already requested return
+                    let existingReturn = allReturns.find(r => r.orderId === ord.id);
+                    if (!existingReturn) {
+                        actionDiv.innerHTML += `<button class="btn-danger" style="background:#d97706;" onclick="openReturnModal('${ord.id}')"><i class="fa-solid fa-rotate-left"></i> दवाई रिटर्न करें</button>`;
+                    } else {
+                        actionDiv.innerHTML += `<span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">(रिटर्न अनुरोध सबमिट हो चुका है)</span>`;
+                    }
                 }
 
                 div.appendChild(actionDiv);
@@ -525,10 +532,11 @@
         }
 
         window.markCustomerDelivered = function(orderId) {
-            update(ref(db, 'orders/' + orderId), {
-                status: "Delivered (Confirmed by Customer)"
-            }).then(() => {
+            let ord = allOrders.find(o => o.id === orderId);
+            let newStatus = ord.status.includes("Admin Confirmed") ? "Delivered & Confirmed (Both)" : "Delivered (Customer Confirmed)";
+            update(ref(db, 'orders/' + orderId), { status: newStatus }).then(() => {
                 showToast("डिलीवरी कन्फर्म हो गई!");
+                refreshCustomerOrdersView();
             });
         }
 
@@ -558,6 +566,7 @@
             }).then(() => {
                 showToast("रिटर्न अनुरोध सबमिट हो गया है!");
                 closeReturnModal();
+                refreshCustomerOrdersView();
             });
         }
 
@@ -603,11 +612,12 @@
         const returnsRef = ref(db, 'returns');
         onValue(returnsRef, (snapshot) => {
             const data = snapshot.val();
-            window.allReturns = [];
+            allReturns = [];
             if (data) {
-                Object.keys(data).reverse().forEach(key => window.allReturns.push({ id: key, ...data[key] }));
+                Object.keys(data).reverse().forEach(key => allReturns.push({ id: key, ...data[key] }));
             }
             if (isAdmin) renderReturns();
+            if (verifiedPhoneNum) refreshCustomerOrdersView();
         });
 
         const creditsRef = ref(db, 'credits');
@@ -694,7 +704,7 @@
                     liveContainer.appendChild(div);
                 } else {
                     historyCount++;
-                    let statusColor = status.includes("Delivered") ? "green" : (status.includes("Accepted") ? "blue" : "red");
+                    let statusColor = status.includes("Confirmed") ? "green" : (status.includes("Accepted") ? "blue" : "red");
                     div.innerHTML = `
                         <b>समय:</b> ${ord.timestamp}<br>
                         <b>ग्राहक:</b> ${ord.customerName} (${ord.customerPhone})<br>
@@ -703,7 +713,7 @@
                         ${ord.deliveryDateTime ? `<b>डिलीवरी तिथि व समय:</b> ${ord.deliveryDateTime}<br>` : ''}
                         ${ord.reason ? `<b>कारण:</b> ${ord.reason}<br>` : ''}
                         <div class="order-actions" style="display: ${isAdmin ? 'flex' : 'none'};">
-                            ${!status.includes("Delivered") ? `<button class="btn-success" onclick="markAdminDelivered('${ord.id}')"><i class="fa-solid fa-check-double"></i> Delivered टिक करें</button>` : ''}
+                            ${!status.includes("Admin Confirmed") ? `<button class="btn-success" onclick="markAdminDelivered('${ord.id}')"><i class="fa-solid fa-check-double"></i> Delivered टिक करें</button>` : ''}
                             <button class="btn-danger" style="background: #64748b;" onclick="deleteOrderHistory('${ord.id}')"><i class="fa-solid fa-trash"></i> हिस्ट्री से डिलीट करें</button>
                         </div>
                     `;
@@ -720,8 +730,7 @@
             if (!retContainer) return;
             retContainer.innerHTML = "";
 
-            let returnsList = window.allReturns || [];
-            let pendingReturns = returnsList.filter(r => r.status === "Pending Return Approval");
+            let pendingReturns = allReturns.filter(r => r.status === "Pending Return Approval");
 
             if (pendingReturns.length === 0) {
                 retContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">कोई नया रिटर्न अनुरोध नहीं है।</p>`;
@@ -786,9 +795,9 @@
         }
 
         window.markAdminDelivered = function(orderId) {
-            update(ref(db, 'orders/' + orderId), {
-                status: "Accepted / Delivered (Admin Confirmed)"
-            }).then(() => {
+            let ord = allOrders.find(o => o.id === orderId);
+            let newStatus = ord.status.includes("Customer Confirmed") ? "Delivered & Confirmed (Both)" : "Accepted / Delivered (Admin Confirmed)";
+            update(ref(db, 'orders/' + orderId), { status: newStatus }).then(() => {
                 showToast("आर्डर डिलीवर्ड मार्क कर दिया गया!");
             });
         }
