@@ -153,7 +153,7 @@
 </head>
 <body>
 
-    <div id="notification-toast">अपडेट हो गया!</div>
+    <div id="notification-toast">Update ho gaya!</div>
 
     <header>
         <div class="header-buttons">
@@ -161,7 +161,7 @@
             <button class="action-badge-btn" onclick="toggleAdminMode()"><i class="fa-solid fa-lock" id="admin-icon"></i> Admin</button>
         </div>
         <h1>NEW VERMA MEDICALS</h1>
-        <p>लोहरबरवा, बरवड्डा, धनबाद, झारखंड | संपर्क: +91 7992308032</p>
+        <p>Loharbarwa, Barwadda, Dhanbad, Jharkhand | Sampark: +91 7992308032</p>
         <div class="tagline">Your Health, Our Priority</div>
     </header>
 
@@ -170,28 +170,28 @@
         <div class="banner-grid">
             <div class="category-card" onclick="filterByCategory('Baby Care')">
                 <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=600&q=80" alt="Baby Care">
-                <div class="content"><h3>Baby Care Products</h3><p>कोमल देखभाल आपके नन्हें मुन्नों के लिए</p></div>
+                <div class="content"><h3>Baby Care Products</h3><p>Komal dekhbhal nanhe munno ke liye</p></div>
             </div>
             <div class="category-card" onclick="filterByCategory('Mother Care')">
                 <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80" alt="Mother Care">
-                <div class="content"><h3>Mother Care Essentials</h3><p>मातृत्व के हर पल के लिए विशेष सुरक्षा</p></div>
+                <div class="content"><h3>Mother Care Essentials</h3><p>Matratva ke har pal ke liye vishesh suraksha</p></div>
             </div>
             <div class="category-card" onclick="filterByCategory('General')">
                 <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80" alt="General Medicines">
-                <div class="content"><h3>General Medicines & Care</h3><p>दवाइयां और सर्जिकल उपकरण</p></div>
+                <div class="content"><h3>General Medicines & Care</h3><p>Dawaiyan aur surgical upkaran</p></div>
             </div>
         </div>
 
         <!-- Admin Panel -->
         <div id="admin-panel">
-            <h2><i class="fa-solid fa-user-shield"></i> एडमिन डैशबोर्ड (Admin Dashboard)</h2>
+            <h2><i class="fa-solid fa-user-shield"></i> Admin Dashboard</h2>
             
             <div class="form-group">
-                <label>उत्पाद का नाम (Product Name)</label>
-                <input type="text" id="p-name" placeholder="जैसे: Horlicks Mother's Plus">
+                <label>Product Name</label>
+                <input type="text" id="p-name" placeholder="Jaise: Horlicks Mother's Plus">
             </div>
             <div class="form-group">
-                <label>कैटेगरी (Category)</label>
+                <label>Category</label>
                 <select id="p-category">
                     <option value="Baby Care">Baby Care</option>
                     <option value="Mother Care">Mother Care</option>
@@ -199,39 +199,39 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>मूल्य (Price in ₹)</label>
-                <input type="number" id="p-price" placeholder="जैसे: 250">
+                <label>Price in ₹</label>
+                <input type="number" id="p-price" placeholder="Jaise: 250">
             </div>
             <div class="form-group">
-                <label>उत्पाद फोटो का लिंक (Product Image URL)</label>
-                <input type="text" id="p-img" placeholder="इमेज लिंक यहाँ डालें">
+                <label>Product Image URL</label>
+                <input type="text" id="p-img" placeholder="Image link yahan dalein">
             </div>
-            <button class="btn-primary" onclick="saveAdminData()">डेटाबेस में सेव करें</button>
+            <button class="btn-primary" onclick="saveAdminData()">Database mein save karein</button>
 
             <!-- Admin Search Customer Credit/Wallet Balance -->
             <div class="orders-section">
-                <h3><i class="fa-solid fa-magnifying-glass"></i> ग्राहक क्रेडिट/वॉलेट खोजें (Search Customer Credits)</h3>
+                <h3><i class="fa-solid fa-magnifying-glass"></i> Search Customer Credits</h3>
                 <div class="form-group" style="margin-top: 10px;">
-                    <input type="text" id="admin-search-credit-input" placeholder="ग्राहक का मोबाइल नंबर या कूपन कोड दर्ज करें..." onkeyup="searchAdminCredits()">
+                    <input type="text" id="admin-search-credit-input" placeholder="Customer mobile number ya coupon code darj karein..." onkeyup="searchAdminCredits()">
                 </div>
                 <div id="admin-search-credit-result"></div>
             </div>
 
             <!-- Live Orders Section -->
             <div class="orders-section">
-                <h3><i class="fa-solid fa-bell"></i> लाइव ऑर्डर्स (Live Pending Orders)</h3>
+                <h3><i class="fa-solid fa-bell"></i> Live Pending Orders</h3>
                 <div id="admin-live-orders-list"></div>
             </div>
 
             <!-- Return Requests Section -->
             <div class="orders-section">
-                <h3><i class="fa-solid fa-rotate-left"></i> रिटर्न/बदलाव अनुरोध (Return & Exchange Requests)</h3>
+                <h3><i class="fa-solid fa-rotate-left"></i> Return & Exchange Requests</h3>
                 <div id="admin-return-requests-list"></div>
             </div>
 
             <!-- Order History Log Section -->
             <div class="orders-section">
-                <h3><i class="fa-solid fa-clock-rotate-left"></i> आर्डर इतिहास और डिलीट विकल्प (Order History Log)</h3>
+                <h3><i class="fa-solid fa-clock-rotate-left"></i> Order History Log</h3>
                 <div id="admin-order-history-list"></div>
             </div>
         </div>
@@ -239,10 +239,10 @@
         <div class="filter-bar">
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="search-input" placeholder="दवाइयां या प्रोडक्ट्स खोजें..." onkeyup="searchProducts()">
+                <input type="text" id="search-input" placeholder="Dawaiyan ya products khojein..." onkeyup="searchProducts()">
             </div>
             <div class="filter-buttons">
-                <button class="filter-btn active" onclick="filterByCategory('All')">सभी</button>
+                <button class="filter-btn active" onclick="filterByCategory('All')">Sabhi</button>
                 <button class="filter-btn" onclick="filterByCategory('Baby Care')">Baby Care</button>
                 <button class="filter-btn" onclick="filterByCategory('Mother Care')">Mother Care</button>
                 <button class="filter-btn" onclick="filterByCategory('General')">General</button>
@@ -257,33 +257,33 @@
     <div class="modal-overlay" id="terms-modal">
         <div class="modal-content">
             <button class="close-modal" onclick="toggleTermsModal()">&times;</button>
-            <h3><i class="fa-solid fa-file-contract"></i> नियम और शर्तें (Terms & Conditions)</h3>
+            <h3><i class="fa-solid fa-file-contract"></i> Terms & Conditions</h3>
             <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 15px; line-height: 1.6;">
-                <p><b>1. आदेश और पुष्टि (Orders):</b> न्यू वर्मा मेडिकल्स पर दिए गए सभी आर्डर दुकान की उपलब्धता के अधीन हैं।</p><br>
-                <p><b>2. मूल्य और भुगतान (Pricing & Payment):</b> सभी दवाइयों और उत्पादों के मूल्य स्थानीय बाजार दरों के अनुसार हैं। भुगतान कैश ऑन डिलीवरी (COD) या ऑनलाइन उपलब्ध है।</p><br>
-                <p><b>3. डिलीवरी और कैंसिलेशन (Delivery & Cancellation):</b> बरवड्डा और लोहरबरवा क्षेत्र के भीतर समय पर डिलीवरी का प्रयास किया जाता है। स्टॉक न होने पर एडमिन द्वारा आर्डर रद्द किया जा सकता है।</p><br>
-                <p><b>4. रिटर्न और रिफंड पॉलिसी (Return & Refund Policy):</b> कोई भी दवाई रिटर्न करने पर यदि ग्राहक कैश रिफंड (पैसा) चुनता है, तो कुल राशि में से <b>3% की कटौती</b> करके शेष राशि दी जाएगी। कैश कभी भी डायरेक्ट रिफंड नहीं होगा। यदि ग्राहक <b>'दवाई के बदले दवाई' (Medicine Exchange)</b> चुनता है, तो एक भी रुपया कटौती नहीं की जाएगी और उतनी ही राशि का क्रेडिट कूपन/बैलेंस दे दिया जाएगा जिसे अगली खरीदारी में इस्तेमाल कर सकते हैं।</p>
+                <p><b>1. Orders:</b> New Verma Medicals par diye gaye sabhi order upalabdhata ke adheen hain.</p><br>
+                <p><b>2. Pricing & Payment:</b> Sabhi dawaiyon ke mulya sthaniye bazaar daro ke anusaar hain. Payment COD ya online upalabdh hai.</p><br>
+                <p><b>3. Delivery & Cancellation:</b> Barwadda aur Loharbarwa kshetra ke bheetar samay par delivery ka prayas kiya jata hai.</p><br>
+                <p><b>4. Return & Refund Policy:</b> Dawai return karne par cash refund chunne par 3% ki koti ki jayegi. Exchange chunne par 0% deduction aur credit coupon milega.</p>
             </div>
         </div>
     </div>
 
-    <!-- Customer 'My Orders' Modal with OTP, Delivery Confirmation, Return & Credit Coupon -->
+    <!-- Customer 'My Orders' Modal -->
     <div class="modal-overlay" id="customer-orders-modal">
         <div class="modal-content">
             <button class="close-modal" onclick="toggleCustomerOrdersModal()">&times;</button>
-            <h3><i class="fa-solid fa-bag-shopping"></i> मेरे ऑर्डर्स (My Orders)</h3>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">सुरक्षा के लिए, पहले अपने मोबाइल नंबर पर OTP प्राप्त करें:</p>
+            <h3><i class="fa-solid fa-bag-shopping"></i> My Orders</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">Suraksha ke liye, pehle mobile number par OTP praapt karein:</p>
             
             <div class="form-group" id="otp-phone-group">
-                <label>रजिस्टर्ड मोबाइल नंबर दर्ज करें</label>
-                <input type="tel" id="check-cust-phone" placeholder="10 अंकों का मोबाइल नंबर...">
-                <button class="btn-primary" style="width: 100%; margin-top: 10px;" onclick="sendCustomerOTP()">OTP भेजें</button>
+                <label>Registered Mobile Number</label>
+                <input type="tel" id="check-cust-phone" placeholder="10 anko ka mobile number...">
+                <button class="btn-primary" style="width: 100%; margin-top: 10px;" onclick="sendCustomerOTP()">OTP Bhejein</button>
             </div>
 
             <div class="form-group" id="otp-verify-group" style="display: none;">
-                <label>4-अंकों का OTP दर्ज करें (Demo OTP: <b style="color:var(--primary);" id="display-demo-otp">1234</b>)</label>
-                <input type="text" id="entered-otp" placeholder="OTP यहाँ लिखें (जैसे: 1234)">
-                <button class="btn-success" style="width: 100%; margin-top: 10px;" onclick="verifyCustomerOTP()">OTP सत्यापित करें और ऑर्डर्स देखें</button>
+                <label>Enter 4-digit OTP (Demo OTP: <b style="color:var(--primary);" id="display-demo-otp">1234</b>)</label>
+                <input type="text" id="entered-otp" placeholder="OTP yahan likhein">
+                <button class="btn-success" style="width: 100%; margin-top: 10px;" onclick="verifyCustomerOTP()">Verify OTP & View Orders</button>
             </div>
 
             <div id="customer-orders-result" style="margin-top: 15px;"></div>
@@ -294,21 +294,21 @@
     <div class="modal-overlay" id="reject-modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeRejectModal()">&times;</button>
-            <h3>ऑर्डर रद्द करने का कारण चुनें</h3>
+            <h3>Order Cancel karne ka kaaran chunein</h3>
             <div class="form-group">
-                <label>कारण चुनें (Select Reason)</label>
+                <label>Select Reason</label>
                 <select id="reject-reason-select" onchange="toggleCustomReasonInput()">
-                    <option value="Changed my mind / Not needed">Changed my mind / Not needed (मन बदल गया / जरूरत नहीं है)</option>
-                    <option value="Ordered by mistake">Ordered by mistake (गलती से आर्डर हो गया)</option>
-                    <option value="Out of stock">Out of stock (स्टॉक में उपलब्ध नहीं है)</option>
-                    <option value="Other">Other (अन्य कारण लिखें)</option>
+                    <option value="Changed my mind / Not needed">Changed my mind / Not needed</option>
+                    <option value="Ordered by mistake">Ordered by mistake</option>
+                    <option value="Out of stock">Out of stock</option>
+                    <option value="Other">Other</option>
                 </select>
             </div>
             <div class="form-group" id="custom-reason-box" style="display: none;">
-                <label>अन्य कारण (Custom Reason)</label>
-                <input type="text" id="custom-reason-input" placeholder="कारण यहाँ लिखें...">
+                <label>Custom Reason</label>
+                <input type="text" id="custom-reason-input" placeholder="Kaaran yahan likhein...">
             </div>
-            <button class="btn-danger" style="width: 100%; padding: 10px;" onclick="confirmOrderCancellation()">आर्डर रद्द करें</button>
+            <button class="btn-danger" style="width: 100%; padding: 10px;" onclick="confirmOrderCancellation()">Order Cancel Karein</button>
         </div>
     </div>
 
@@ -316,16 +316,16 @@
     <div class="modal-overlay" id="return-modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeReturnModal()">&times;</button>
-            <h3>दवाई रिटर्न / बदलाव अनुरोध</h3>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">कृपया अपना रिटर्न विकल्प चुनें:</p>
+            <h3>Dawai Return / Exchange Anurodh</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">Apna return vikalp chunein:</p>
             <div class="form-group">
-                <label>विकल्प चुनें (Select Option)</label>
+                <label>Select Option</label>
                 <select id="return-option-select">
-                    <option value="Medicine for Medicine">Medicine for medicine (दवाई के बदले दवाई - 0% कटौती)</option>
-                    <option value="Medicine for Cash">Medicine for cash / Money (दवाई के बदले पैसा - 3% कटौती)</option>
+                    <option value="Medicine for Medicine">Medicine for medicine (0% deduction)</option>
+                    <option value="Medicine for Cash">Medicine for cash / Money (3% deduction)</option>
                 </select>
             </div>
-            <button class="btn-primary" style="width: 100%; padding: 10px;" onclick="submitReturnRequest()">रिटर्न अनुरोध भेजें</button>
+            <button class="btn-primary" style="width: 100%; padding: 10px;" onclick="submitReturnRequest()">Return Anurodh Bhejein</button>
         </div>
     </div>
 
@@ -333,45 +333,45 @@
     <div class="modal-overlay" id="checkout-modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeCheckoutModal()">&times;</button>
-            <h3>ऑर्डर कन्फर्म करें</h3>
+            <h3>Order Confirm Karein</h3>
             <p id="modal-product-info" style="font-size: 0.9rem; margin-bottom: 15px; color: var(--text-muted);"></p>
             
             <div class="form-group">
-                <label>क्रेडिट कूपन कोड (यदि आपके पास पिछला रिटर्न बैलेंस है)</label>
+                <label>Credit Coupon Code (Agar pichhla balance hai)</label>
                 <div style="display: flex; gap: 8px;">
-                    <input type="text" id="coupon-code-input" placeholder="कूपन कोड यहाँ लिखें...">
-                    <button class="btn-success" type="button" onclick="applyCouponCode()" style="white-space: nowrap;">लागू करें</button>
+                    <input type="text" id="coupon-code-input" placeholder="Coupon code yahan likhein...">
+                    <button class="btn-success" type="button" onclick="applyCouponCode()" style="white-space: nowrap;">Laagu Karein</button>
                 </div>
                 <small id="coupon-msg" style="color: var(--accent); font-weight: 500;"></small>
             </div>
 
             <div class="form-group">
-                <label>आपका नाम</label>
-                <input type="text" id="cust-name" placeholder="अपना पूरा नाम लिखें">
+                <label>Aapka Naam</label>
+                <input type="text" id="cust-name" placeholder="Apna pura naam likhein">
             </div>
             <div class="form-group">
-                <label>मोबाइल नंबर</label>
-                <input type="tel" id="cust-phone" placeholder="10 अंकों का मोबाइल नंबर">
+                <label>Mobile Number</label>
+                <input type="tel" id="cust-phone" placeholder="10 anko ka mobile number">
             </div>
             <div class="form-group">
-                <label>पता</label>
-                <input type="text" id="cust-address" placeholder="लोहरबरवा, बरवड्डा या आसपास...">
+                <label>Pata (Address)</label>
+                <input type="text" id="cust-address" placeholder="Loharbarwa, Barwadda ya aaspaas...">
             </div>
             <div class="form-group">
-                <label>भुगतान का तरीका</label>
+                <label>Payment Type</label>
                 <select id="payment-type">
-                    <option value="COD">Cash on Delivery (कैश ऑन डिलीवरी)</option>
-                    <option value="Online">Online Pay (UPI / QR Code Scan)</option>
+                    <option value="COD">Cash on Delivery (COD)</option>
+                    <option value="Online">Online Pay (UPI / QR)</option>
                 </select>
             </div>
             <div id="final-payable-box" style="font-weight: 600; margin-bottom: 15px; color: var(--primary);"></div>
-            <button class="btn-primary" style="width: 100%;" onclick="submitOrder()">ऑर्डर सबमिट करें</button>
+            <button class="btn-primary" style="width: 100%;" onclick="submitOrder()">Order Submit Karein</button>
         </div>
     </div>
 
     <footer>
         <p>&copy; 2026 <span>New Verma Medicals</span>. All Rights Reserved. | Barwadda, Dhanbad<br>
-        <span class="terms-link" onclick="toggleTermsModal()">Terms & Conditions (नियम और शर्तें)</span></p>
+        <span class="terms-link" onclick="toggleTermsModal()">Terms & Conditions (Niyam aur Shartein)</span></p>
     </footer>
 
     <script type="module">
@@ -409,7 +409,7 @@
 
         window.toggleAdminMode = function() {
             if (!isAdmin) {
-                let pin = prompt("सुरक्षित एडमिन पासवर्ड दर्ज करें:");
+                let pin = prompt("Surakshit Admin Password darj karein:");
                 if (pin === ADMIN_SECRET_PIN) {
                     isAdmin = true;
                     document.getElementById("admin-panel").style.display = "block";
@@ -418,14 +418,14 @@
                     renderOrders();
                     renderReturns();
                     searchAdminCredits();
-                    showToast("एडमिन मोड ऑन हो गया!");
-                } else if(pin !== null) alert("गलत पासवर्ड!");
+                    showToast("Admin mode on ho gaya!");
+                } else if(pin !== null) alert("Galat Password!");
             } else {
                 isAdmin = false;
                 document.getElementById("admin-panel").style.display = "none";
                 document.getElementById("admin-icon").className = "fa-solid fa-lock";
                 renderProducts(allProducts);
-                showToast("एडमिन मोड बंद हो गया!");
+                showToast("Admin mode band ho gaya!");
             }
         }
 
@@ -446,7 +446,7 @@
         window.sendCustomerOTP = function() {
             const phone = document.getElementById("check-cust-phone").value.trim();
             if (phone.length < 10) {
-                alert("कृपया वैध 10 अंकों का मोबाइल नंबर दर्ज करें!");
+                alert("Kripya vaid 10 anko ka mobile number darj karein!");
                 return;
             }
             verifiedPhoneNum = phone;
@@ -455,16 +455,16 @@
             
             document.getElementById("otp-phone-group").style.display = "none";
             document.getElementById("otp-verify-group").style.display = "block";
-            showToast("OTP भेज दिया गया है!");
+            showToast("OTP bhej diya gaya hai!");
         }
 
         window.verifyCustomerOTP = function() {
             const entered = document.getElementById("entered-otp").value.trim();
             if (entered !== generatedOtpCode) {
-                alert("गलत OTP! कृपया सही OTP दर्ज करें।");
+                alert("Galat OTP! Kripya sahi OTP darj karein.");
                 return;
             }
-            showToast("OTP सत्यापित हो गया!");
+            showToast("OTP satyapit ho gaya!");
             refreshCustomerOrdersView();
         }
 
@@ -473,21 +473,21 @@
             container.innerHTML = "";
 
             const matchedOrders = allOrders.filter(ord => ord.customerPhone === verifiedPhoneNum);
-            
             const matchedCredits = allCredits.filter(cr => cr.customerPhone === verifiedPhoneNum && !cr.isUsed);
+            
             if (matchedCredits.length > 0) {
                 let creditBox = document.createElement("div");
                 creditBox.className = "order-item-box";
                 creditBox.style.background = "#e0f2fe";
-                creditBox.innerHTML = `<b>🏷️ आपके उपलब्ध क्रेडिट कूपन (Return Credits):</b><br>`;
+                creditBox.innerHTML = `<b>🏷️ Aapke Upalabdh Credit Coupons:</b><br>`;
                 matchedCredits.forEach(cr => {
-                    creditBox.innerHTML += `कोड: <b style="color:var(--primary)">${cr.couponCode}</b> | राशि: <b>₹${cr.amount}</b> (${cr.type})<br>`;
+                    creditBox.innerHTML += `Code: <b style="color:var(--primary)">${cr.couponCode}</b> | Raashi: <b>₹${cr.amount}</b> (${cr.type})<br>`;
                 });
                 container.appendChild(creditBox);
             }
 
             if (matchedOrders.length === 0 && matchedCredits.length === 0) {
-                container.innerHTML = `<p style="color: #ef4444; font-size: 0.85rem; margin-top:10px;">इस नंबर से कोई आर्डर या क्रेडिट नहीं मिला है।</p>`;
+                container.innerHTML = `<p style="color: #ef4444; font-size: 0.85rem; margin-top:10px;">Is number se koi order ya credit nahi mila hai.</p>`;
                 return;
             }
 
@@ -497,13 +497,13 @@
                 div.className = "order-item-box";
                 
                 div.innerHTML = `
-                    <b>आर्डर समय:</b> ${ord.timestamp}<br>
-                    <b>आइटम:</b> ${ord.productName} - <b>₹${ord.productPrice}</b><br>
-                    <b>भुगतान:</b> ${ord.paymentType}<br>
-                    <b>पता:</b> ${ord.address}<br>
-                    <b>स्टेटस:</b> <span style="color: ${statusColor}; font-weight: bold;">${ord.status}</span>
-                    ${ord.deliveryDateTime ? `<br><b>📅 डिलीवरी तिथि व समय:</b> <span style="color: #0284c7; font-weight: bold;">${ord.deliveryDateTime}</span>` : ''}
-                    ${ord.reason ? `<br><b>कारण:</b> ${ord.reason}` : ''}
+                    <b>Order Time:</b> ${ord.timestamp}<br>
+                    <b>Item:</b> ${ord.productName} - <b>₹${ord.productPrice}</b><br>
+                    <b>Payment:</b> ${ord.paymentType}<br>
+                    <b>Address:</b> ${ord.address}<br>
+                    <b>Status:</b> <span style="color: ${statusColor}; font-weight: bold;">${ord.status}</span>
+                    ${ord.deliveryDateTime ? `<br><b>📅 Delivery Date & Time:</b> <span style="color: #0284c7; font-weight: bold;">${ord.deliveryDateTime}</span>` : ''}
+                    ${ord.reason ? `<br><b>Kaaran:</b> ${ord.reason}` : ''}
                 `;
 
                 let actionDiv = document.createElement("div");
@@ -513,16 +513,18 @@
                 actionDiv.style.flexWrap = "wrap";
 
                 if (ord.status === "Pending") {
-                    actionDiv.innerHTML += `<button class="btn-danger" onclick="openRejectModal('${ord.id}')"><i class="fa-solid fa-xmark"></i> आर्डर कैंसिल करें</button>`;
+                    actionDiv.innerHTML += `<button class="btn-danger" onclick="openRejectModal('${ord.id}')"><i class="fa-solid fa-xmark"></i> Order Cancel Karein</button>`;
                 } else if (ord.status.includes("Accepted") && !ord.status.includes("Customer Confirmed")) {
-                    actionDiv.innerHTML += `<button class="btn-success" onclick="markCustomerDelivered('${ord.id}')"><i class="fa-solid fa-check-double"></i> मुझे मिल गया (Delivered Confirm)</button>`;
+                    actionDiv.innerHTML += `<button class="btn-success" onclick="markCustomerDelivered('${ord.id}')"><i class="fa-solid fa-check-double"></i> Mujhe Mil Gaya (Delivered Confirm)</button>`;
                 } else if (ord.status.includes("Confirmed")) {
-                    // Check if already requested return
                     let existingReturn = allReturns.find(r => r.orderId === ord.id);
-                    if (!existingReturn) {
-                        actionDiv.innerHTML += `<button class="btn-danger" style="background:#d97706;" onclick="openReturnModal('${ord.id}')"><i class="fa-solid fa-rotate-left"></i> दवाई रिटर्न करें</button>`;
+                    // Bug Fix: If item price is 0 (purchased via full coupon), do not show return button!
+                    if (parseFloat(ord.productPrice) <= 0) {
+                        actionDiv.innerHTML += `<span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">(₹0 item par return lagu nahi hai)</span>`;
+                    } else if (!existingReturn) {
+                        actionDiv.innerHTML += `<button class="btn-danger" style="background:#d97706;" onclick="openReturnModal('${ord.id}')"><i class="fa-solid fa-rotate-left"></i> Dawai Return Karein</button>`;
                     } else {
-                        actionDiv.innerHTML += `<span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">(रिटर्न अनुरोध सबमिट हो चुका है)</span>`;
+                        actionDiv.innerHTML += `<span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">(Return anurodh submit ho chuka hai)</span>`;
                     }
                 }
 
@@ -535,7 +537,7 @@
             let ord = allOrders.find(o => o.id === orderId);
             let newStatus = ord.status.includes("Admin Confirmed") ? "Delivered & Confirmed (Both)" : "Delivered (Customer Confirmed)";
             update(ref(db, 'orders/' + orderId), { status: newStatus }).then(() => {
-                showToast("डिलीवरी कन्फर्म हो गई!");
+                showToast("Delivery confirm ho gayi!");
                 refreshCustomerOrdersView();
             });
         }
@@ -564,7 +566,7 @@
                 status: "Pending Return Approval",
                 timestamp: new Date().toLocaleString()
             }).then(() => {
-                showToast("रिटर्न अनुरोध सबमिट हो गया है!");
+                showToast("Return anurodh submit ho gaya hai!");
                 closeReturnModal();
                 refreshCustomerOrdersView();
             });
@@ -580,7 +582,7 @@
                 if(!img) img = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80";
                 const productsRef = ref(db, 'products');
                 push(productsRef, { name, category, price, img }).then(() => {
-                    showToast("उत्पाद सेव हो गया!");
+                    showToast("Product save ho gaya!");
                     document.getElementById("p-name").value = "";
                     document.getElementById("p-price").value = "";
                     document.getElementById("p-img").value = "";
@@ -637,13 +639,13 @@
             resContainer.innerHTML = "";
 
             if (!query) {
-                resContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.8rem;">मोबाइल नंबर या कूपन कोड लिखकर खोजें...</p>`;
+                resContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.8rem;">Mobile number ya coupon code likhkar khojein...</p>`;
                 return;
             }
 
             const matched = allCredits.filter(cr => cr.customerPhone.toLowerCase().includes(query) || cr.couponCode.toLowerCase().includes(query));
             if (matched.length === 0) {
-                resContainer.innerHTML = `<p style="color: #ef4444; font-size: 0.85rem;">कोई रिकॉर्ड नहीं मिला।</p>`;
+                resContainer.innerHTML = `<p style="color: #ef4444; font-size: 0.85rem;">Koi record nahi mila.</p>`;
                 return;
             }
 
@@ -651,21 +653,28 @@
                 const div = document.createElement("div");
                 div.className = "order-item-box";
                 div.style.background = cr.isUsed ? "#f1f5f9" : "#ecfdf5";
+                
+                // Detailed usage label mapping
+                let statusText = 'Upalabdh (Active)';
+                if(cr.isUsed) {
+                    statusText = cr.usedMode === 'Offline' ? 'Istemal ho chuka (Used Offline)' : (cr.usedMode === 'Online' ? 'Istemal ho chuka (Used Online)' : 'Istemal ho chuka (Used)');
+                }
+
                 div.innerHTML = `
-                    <b>मोबाइल:</b> ${cr.customerPhone}<br>
-                    <b>कूपन कोड:</b> <b style="color:var(--primary);">${cr.couponCode}</b><br>
-                    <b>राशि:</b> ₹${cr.amount} (${cr.type})<br>
-                    <b>स्थिति:</b> <span style="color: ${cr.isUsed ? 'red' : 'green'}; font-weight: bold;">${cr.isUsed ? 'इस्तेमाल हो चुका (Used)' : 'उपलब्ध (Active)'}</span>
-                    ${!cr.isUsed ? `<div class="order-actions"><button class="btn-danger" style="background:#64748b;" onclick="markCreditAsUsed('${cr.id}')"><i class="fa-solid fa-check"></i> ऑफलाइन उपयोग हो गया (Mark Used)</button></div>` : ''}
+                    <b>Mobile:</b> ${cr.customerPhone}<br>
+                    <b>Coupon Code:</b> <b style="color:var(--primary);">${cr.couponCode}</b><br>
+                    <b>Raashi:</b> ₹${cr.amount} (${cr.type})<br>
+                    <b>Sthiti:</b> <span style="color: ${cr.isUsed ? 'red' : 'green'}; font-weight: bold;">${statusText}</span>
+                    ${!cr.isUsed ? `<div class="order-actions"><button class="btn-danger" style="background:#64748b;" onclick="markCreditAsUsed('${cr.id}')"><i class="fa-solid fa-check"></i> Offline upyog ho gaya (Mark Used)</button></div>` : ''}
                 `;
                 resContainer.appendChild(div);
             });
         }
 
         window.markCreditAsUsed = function(creditId) {
-            if (confirm("क्या आप इस कूपन को उपयोग किया हुआ मार्क करना चाहते हैं?")) {
-                update(ref(db, 'credits/' + creditId), { isUsed: true }).then(() => {
-                    showToast("कूपन उपयोग किया हुआ मार्क हो गया!");
+            if (confirm("Kya aap is coupon ko offline upyog kiya hua mark karna chahte hain?")) {
+                update(ref(db, 'credits/' + creditId), { isUsed: true, usedMode: 'Offline' }).then(() => {
+                    showToast("Coupon offline used mark ho gaya!");
                     searchAdminCredits();
                 });
             }
@@ -690,12 +699,12 @@
                 if (status === "Pending") {
                     pendingCount++;
                     div.innerHTML = `
-                        <b>समय:</b> ${ord.timestamp}<br>
-                        <b>ग्राहक:</b> ${ord.customerName} (${ord.customerPhone})<br>
-                        <b>आइटम:</b> ${ord.productName} - <b>₹${ord.productPrice}</b><br>
-                        <b>भुगतान:</b> ${ord.paymentType}<br>
-                        <b>पता:</b> ${ord.address}<br>
-                        <b>स्टेटस:</b> <span style="color: orange; font-weight: bold;">Pending</span>
+                        <b>Time:</b> ${ord.timestamp}<br>
+                        <b>Customer:</b> ${ord.customerName} (${ord.customerPhone})<br>
+                        <b>Item:</b> ${ord.productName} - <b>₹${ord.productPrice}</b><br>
+                        <b>Payment:</b> ${ord.paymentType}<br>
+                        <b>Address:</b> ${ord.address}<br>
+                        <b>Status:</b> <span style="color: orange; font-weight: bold;">Pending</span>
                         <div class="order-actions" style="display: ${isAdmin ? 'flex' : 'none'};">
                             <button class="btn-success" onclick="acceptOrderPrompt('${ord.id}')"><i class="fa-solid fa-check"></i> Accept & Deliver Time</button>
                             <button class="btn-danger" onclick="openRejectModal('${ord.id}')"><i class="fa-solid fa-xmark"></i> Cancel Order</button>
@@ -706,23 +715,23 @@
                     historyCount++;
                     let statusColor = status.includes("Confirmed") ? "green" : (status.includes("Accepted") ? "blue" : "red");
                     div.innerHTML = `
-                        <b>समय:</b> ${ord.timestamp}<br>
-                        <b>ग्राहक:</b> ${ord.customerName} (${ord.customerPhone})<br>
-                        <b>आइटम:</b> ${ord.productName} - <b>₹${ord.productPrice}</b><br>
-                        <b>अंतिम स्टेटस:</b> <span style="color: ${statusColor}; font-weight: bold;">${status}</span><br>
-                        ${ord.deliveryDateTime ? `<b>डिलीवरी तिथि व समय:</b> ${ord.deliveryDateTime}<br>` : ''}
-                        ${ord.reason ? `<b>कारण:</b> ${ord.reason}<br>` : ''}
+                        <b>Time:</b> ${ord.timestamp}<br>
+                        <b>Customer:</b> ${ord.customerName} (${ord.customerPhone})<br>
+                        <b>Item:</b> ${ord.productName} - <b>₹${ord.productPrice}</b><br>
+                        <b>Antim Status:</b> <span style="color: ${statusColor}; font-weight: bold;">${status}</span><br>
+                        ${ord.deliveryDateTime ? `<b>Delivery Date & Time:</b> ${ord.deliveryDateTime}<br>` : ''}
+                        ${ord.reason ? `<b>Kaaran:</b> ${ord.reason}<br>` : ''}
                         <div class="order-actions" style="display: ${isAdmin ? 'flex' : 'none'};">
-                            ${!status.includes("Admin Confirmed") ? `<button class="btn-success" onclick="markAdminDelivered('${ord.id}')"><i class="fa-solid fa-check-double"></i> Delivered टिक करें</button>` : ''}
-                            <button class="btn-danger" style="background: #64748b;" onclick="deleteOrderHistory('${ord.id}')"><i class="fa-solid fa-trash"></i> हिस्ट्री से डिलीट करें</button>
+                            ${!status.includes("Admin Confirmed") ? `<button class="btn-success" onclick="markAdminDelivered('${ord.id}')"><i class="fa-solid fa-check-double"></i> Delivered Tik Karein</button>` : ''}
+                            <button class="btn-danger" style="background: #64748b;" onclick="deleteOrderHistory('${ord.id}')"><i class="fa-solid fa-trash"></i> History se Delete Karein</button>
                         </div>
                     `;
                     historyContainer.appendChild(div);
                 }
             });
 
-            if (pendingCount === 0) liveContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">कोई लाइव पेंडिंग ऑर्डर नहीं है।</p>`;
-            if (historyCount === 0) historyContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">कोई आर्डर इतिहास नहीं है।</p>`;
+            if (pendingCount === 0) liveContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">Koi live pending order nahi hai.</p>`;
+            if (historyCount === 0) historyContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">Koi order history nahi hai.</p>`;
         }
 
         window.renderReturns = function() {
@@ -733,7 +742,7 @@
             let pendingReturns = allReturns.filter(r => r.status === "Pending Return Approval");
 
             if (pendingReturns.length === 0) {
-                retContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">कोई नया रिटर्न अनुरोध नहीं है।</p>`;
+                retContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">Koi naya return anurodh nahi hai.</p>`;
                 return;
             }
 
@@ -741,10 +750,10 @@
                 const div = document.createElement("div");
                 div.className = "order-item-box";
                 div.innerHTML = `
-                    <b>समय:</b> ${ret.timestamp}<br>
-                    <b>ग्राहक:</b> ${ret.customerName} (${ret.customerPhone})<br>
-                    <b>दवाई:</b> ${ret.productName} - <b>₹${ret.productPrice}</b><br>
-                    <b>अनुरोध प्रकार:</b> <b style="color: var(--primary);">${ret.returnType}</b><br>
+                    <b>Time:</b> ${ret.timestamp}<br>
+                    <b>Customer:</b> ${ret.customerName} (${ret.customerPhone})<br>
+                    <b>Dawai:</b> ${ret.productName} - <b>₹${ret.productPrice}</b><br>
+                    <b>Anurodh Type:</b> <b style="color: var(--primary);">${ret.returnType}</b><br>
                     <div class="order-actions">
                         <button class="btn-success" onclick="approveReturn('${ret.id}', '${ret.customerPhone}', ${ret.productPrice}, '${ret.returnType}')"><i class="fa-solid fa-check"></i> Accept Return & Generate Coupon</button>
                         <button class="btn-danger" onclick="rejectReturn('${ret.id}')"><i class="fa-solid fa-xmark"></i> Reject</button>
@@ -755,11 +764,11 @@
         }
 
         window.approveReturn = function(retId, phone, price, type) {
-            let finalReturnAmount = price;
+            let finalReturnAmount = parseFloat(price);
             let couponMsg = "";
             if (type === "Medicine for Cash") {
-                let deduction = price * 0.03;
-                finalReturnAmount = price - deduction;
+                let deduction = finalReturnAmount * 0.03;
+                finalReturnAmount = finalReturnAmount - deduction;
                 couponMsg = `Cash Return (3% ded.): ₹${finalReturnAmount.toFixed(2)}`;
             } else {
                 couponMsg = `Medicine Exchange Credit: ₹${finalReturnAmount}`;
@@ -778,7 +787,7 @@
                 update(ref(db, 'returns/' + retId), {
                     status: `Approved (${couponMsg})`
                 }).then(() => {
-                    showToast(`रिटर्न स्वीकार हो गया! कूपन कोड: ${couponCode}`);
+                    showToast(`Return swikaar ho gaya! Coupon: ${couponCode}`);
                     renderReturns();
                     searchAdminCredits();
                 });
@@ -789,7 +798,7 @@
             update(ref(db, 'returns/' + retId), {
                 status: "Rejected by Admin"
             }).then(() => {
-                showToast("रिटर्न अनुरोध अस्वीकार कर दिया गया।");
+                showToast("Return anurodh aswiikaar kar diya gaya.");
                 renderReturns();
             });
         }
@@ -798,18 +807,18 @@
             let ord = allOrders.find(o => o.id === orderId);
             let newStatus = ord.status.includes("Customer Confirmed") ? "Delivered & Confirmed (Both)" : "Accepted / Delivered (Admin Confirmed)";
             update(ref(db, 'orders/' + orderId), { status: newStatus }).then(() => {
-                showToast("आर्डर डिलीवर्ड मार्क कर दिया गया!");
+                showToast("Order delivered mark kar diya gaya!");
             });
         }
 
         window.acceptOrderPrompt = function(orderId) {
-            let deliveryDateTime = prompt("डिलीवरी की तिथि और समय दर्ज करें\n(जैसे: 30 मिनट में या 09/10/2026, शाम 5:00 बजे):", "30 मिनट में");
+            let deliveryDateTime = prompt("Delivery ki tithi aur samay darj karein\n(Jaise: 30 minat mein ya 09/10/2026, sham 5:00 baje):", "30 minat mein");
             if (deliveryDateTime !== null && deliveryDateTime.trim() !== "") {
                 update(ref(db, 'orders/' + orderId), { 
                     status: "Accepted / Out for Delivery",
                     deliveryDateTime: deliveryDateTime 
                 }).then(() => {
-                    showToast("आर्डर स्वीकार कर लिया गया और समय सेट हो गया!");
+                    showToast("Order swikaar ho gaya aur samay set ho gaya!");
                 });
             }
         }
@@ -833,23 +842,26 @@
             const selectVal = document.getElementById("reject-reason-select").value;
             let finalReason = selectVal;
             if (selectVal === "Other") {
-                finalReason = document.getElementById("custom-reason-input").value.trim() || "ग्राहक द्वारा रद्द किया गया";
+                finalReason = document.getElementById("custom-reason-input").value.trim() || "Customer dwara radd kiya gaya";
             }
 
             update(ref(db, 'orders/' + selectedOrderForCancel.id), {
                 status: "Cancelled",
                 reason: finalReason
             }).then(() => {
-                showToast("आर्डर सफलतापूर्वक रद्द कर दिया गया!");
+                showToast("Order safalpurvak radd kar diya gaya!");
                 closeRejectModal();
             });
         }
 
         window.deleteOrderHistory = function(orderId) {
-            if (confirm("क्या आप वाकई इस आर्डर हिस्ट्री को हमेशा के लिए डिलीट करना चाहते हैं?")) {
+            let pin = prompt("History delete karne ke liye Admin PIN dalein:");
+            if (pin === ADMIN_SECRET_PIN) {
                 remove(ref(db, 'orders/' + orderId)).then(() => {
-                    showToast("आर्डर हिस्ट्री डिलीट हो गई!");
+                    showToast("Order history delete ho gayi!");
                 });
+            } else if (pin !== null) {
+                alert("Galat PIN!");
             }
         }
 
@@ -867,7 +879,7 @@
                     <div class="product-details">
                         <div class="product-title">${p.name}</div>
                         <div class="product-price">₹${p.price}</div>
-                        <button class="btn-primary" onclick="openCheckoutModal('${p.name}', '${p.price}')">ऑर्डर करें</button>
+                        <button class="btn-primary" onclick="openCheckoutModal('${p.name}', '${p.price}')">Order Karein</button>
                     </div>
                 `;
                 container.appendChild(card);
@@ -890,8 +902,8 @@
             appliedCreditKey = null;
             document.getElementById("coupon-code-input").value = "";
             document.getElementById("coupon-msg").innerText = "";
-            document.getElementById("modal-product-info").innerText = `चुना गया आइटम: ${name} (मूल्य: ₹${price})`;
-            document.getElementById("final-payable-box").innerText = `कुल देय राशि: ₹${price}`;
+            document.getElementById("modal-product-info").innerText = `Chuna gaya item: ${name} (Mulya: ₹${price})`;
+            document.getElementById("final-payable-box").innerText = `Kul dey rashi: ₹${price}`;
             document.getElementById("checkout-modal").style.display = "flex";
         }
 
@@ -903,14 +915,14 @@
             let code = document.getElementById("coupon-code-input").value.trim();
             let msgEl = document.getElementById("coupon-msg");
             if (!code) {
-                alert("कृपया कूपन कोड दर्ज करें!");
+                alert("Kripya coupon code darj karein!");
                 return;
             }
 
             let foundCredit = allCredits.find(cr => cr.couponCode === code && !cr.isUsed);
             if (!foundCredit) {
                 msgEl.style.color = "#ef4444";
-                msgEl.innerText = "अमान्य या पहले से इस्तेमाल किया गया कूपन कोड!";
+                msgEl.innerText = "Amanya ya pehle se istemal kiya gaya coupon code!";
                 return;
             }
 
@@ -919,8 +931,8 @@
             let finalPrice = Math.max(0, selectedProductForOrder.price - appliedDiscountAmount);
 
             msgEl.style.color = "var(--accent)";
-            msgEl.innerText = `कूपन लागू हो गया! ₹${appliedDiscountAmount} की छूट मिली।`;
-            document.getElementById("final-payable-box").innerText = `छूट के बाद कुल देय राशि: ₹${finalPrice.toFixed(2)}`;
+            msgEl.innerText = `Coupon lagu ho gaya! ₹${appliedDiscountAmount} ki chhoot mili.`;
+            document.getElementById("final-payable-box").innerText = `Chhoot ke baad kul dey rashi: ₹${finalPrice.toFixed(2)}`;
         }
 
         window.submitOrder = function() {
@@ -930,11 +942,11 @@
             const payment = document.getElementById("payment-type").value;
             const timeStr = new Date().toLocaleString();
 
-            if (!name || !phone || !address) { alert("कृपया सभी जानकारी भरें!"); return; }
+            if (!name || !phone || !address) { alert("Kripya sabhi jaankari bharein!"); return; }
 
             let finalPrice = Math.max(0, selectedProductForOrder.price - appliedDiscountAmount);
 
-            showToast("आर्डर दर्ज हो रहा है...");
+            showToast("Order darj ho raha hai...");
             const ordersRef = ref(db, 'orders');
             push(ordersRef, {
                 customerName: name,
@@ -947,10 +959,10 @@
                 status: "Pending"
             }).then(() => {
                 if (appliedCreditKey) {
-                    update(ref(db, 'credits/' + appliedCreditKey), { isUsed: true });
+                    update(ref(db, 'credits/' + appliedCreditKey), { isUsed: true, usedMode: 'Online' });
                 }
 
-                showToast("आपका आर्डर सफलतापूर्वक सबमिट हो गया है!");
+                showToast("Aapka order safalpurvak submit ho gaya hai!");
                 closeCheckoutModal();
                 document.getElementById("cust-name").value = "";
                 document.getElementById("cust-phone").value = "";
