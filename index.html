@@ -86,7 +86,6 @@
 
         .container { max-width: 1200px; margin: 0 auto; padding: 25px 20px; width: 100%; flex: 1; }
 
-        /* Prescription Upload Section Banner */
         .rx-upload-banner {
             background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
             border: 2px dashed #0284c7;
@@ -196,7 +195,6 @@
 
     <div class="container">
         
-        <!-- Prescription Upload Banner Section -->
         <div class="rx-upload-banner">
             <div class="rx-badge"><i class="fa-solid fa-file-prescription"></i> Rx</div>
             <h3><i class="fa-solid fa-prescription-bottle-medical" style="color:var(--primary);"></i> Upload Doctor's Prescription (Rx)</h3>
@@ -322,15 +320,6 @@
         </div>
     </div>
 
-    <!-- Prescription Status View Modal for Customer -->
-    <div class="modal-overlay" id="rx-status-modal">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeRxStatusModal()">&times;</button>
-            <h3>Prescription Verification Status</h3>
-            <div id="rx-status-result" style="margin-top:15px;"></div>
-        </div>
-    </div>
-
     <!-- Terms & Conditions Modal -->
     <div class="modal-overlay" id="terms-modal">
         <div class="modal-content">
@@ -407,7 +396,7 @@
         </div>
     </div>
 
-    <!-- Checkout Modal with Quantity (1-5), MRP vs Paid Amount & Credit Option -->
+    <!-- Checkout Modal with Quantity (1-5) & UPI QR / Screenshot Upload -->
     <div class="modal-overlay" id="checkout-modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeCheckoutModal()">&times;</button>
@@ -448,15 +437,23 @@
             </div>
             <div class="form-group">
                 <label>Payment Type</label>
-                <select id="payment-type">
+                <select id="payment-type" onchange="togglePaymentSection()">
                     <option value="COD">Cash on Delivery (COD)</option>
-                    <option value="Online">Online Pay (UPI / QR)</option>
+                    <option value="Online">Online Pay (UPI QR)</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label>Paid Amount (Agar personal discount diya gaya hai)</label>
-                <input type="number" id="cust-paid-amount" placeholder="Customer kitna pay kar raha hai...">
+
+            <!-- UPI QR Code & Payment Screenshot Upload Container -->
+            <div id="upi-payment-container" style="display: none; background: #f0f9ff; padding: 12px; border-radius: 10px; border: 1px solid #bae6fd; margin-bottom: 15px; text-align: center;">
+                <p style="font-size: 0.8rem; font-weight: 600; color: #0369a1; margin-bottom: 8px;">Scan QR to Pay via UPI / Google Pay / PhonePe</p>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=7992308032@ptaxis&pn=NewVermaMedicals" alt="UPI QR Code" style="width: 130px; height: 130px; border-radius: 8px; margin-bottom: 8px;">
+                <p style="font-size: 0.75rem; color: #64748b; margin-bottom: 8px;">UPI ID: <b>7992308032@ptaxis</b></p>
+                <div class="form-group" style="text-align: left; margin-bottom: 0;">
+                    <label style="font-size: 0.75rem;">Payment Screenshot/Ref Link Upload Karein</label>
+                    <input type="text" id="payment-screenshot-url" placeholder="Screenshot image link yahan dalein..." style="font-size: 0.8rem; padding: 8px;">
+                </div>
             </div>
+
             <div id="final-payable-box" style="font-weight: 600; margin-bottom: 15px; color: var(--primary);"></div>
             <button class="btn-primary" style="width: 100%;" onclick="submitOrder()">Order Submit Karein (Admin Approval Required)</button>
         </div>
@@ -572,10 +569,6 @@
             });
         }
 
-        window.closeRxStatusModal = function() {
-            document.getElementById("rx-status-modal").style.display = "none";
-        }
-
         window.sendCustomerOTP = function() {
             const phone = document.getElementById("check-cust-phone").value.trim();
             if (phone.length < 10) {
@@ -644,8 +637,8 @@
                 div.innerHTML = `
                     <b>Order Time:</b> ${ord.timestamp}<br>
                     <b>Item:</b> ${ord.productName} (Qty: ${ord.quantity || 1})<br>
-                    <b>MRP Amount:</b> ₹${ord.mrpPrice} | <b>Paid Amount:</b> <b>₹${ord.productPrice}</b><br>
-                    <b>Payment:</b> ${ord.paymentType}<br>
+                    <b>Total Paid Amount:</b> <b>₹${ord.productPrice}</b><br>
+                    <b>Payment:</b> ${ord.paymentType} ${ord.paymentScreenshot ? `<br><a href="${ord.paymentScreenshot}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Payment Screenshot</a>` : ''}<br>
                     <b>Address:</b> ${ord.address}<br>
                     <b>Status:</b> <span style="color: ${statusColor}; font-weight: bold;">${ord.status}</span>
                     ${ord.deliveryDateTime ? `<br><b>📅 Delivery Date & Time:</b> <span style="color: #0284c7; font-weight: bold;">${ord.deliveryDateTime}</span>` : ''}
@@ -940,8 +933,8 @@
                         <b>Time:</b> ${ord.timestamp}<br>
                         <b>Customer:</b> ${ord.customerName} (${ord.customerPhone})<br>
                         <b>Item:</b> ${ord.productName} (Qty: ${ord.quantity || 1})<br>
-                        <b>MRP Amount:</b> ₹${ord.mrpPrice} | <b>Paid Amount:</b> <b>₹${ord.productPrice}</b><br>
-                        <b>Payment:</b> ${ord.paymentType}<br>
+                        <b>Paid Amount:</b> <b>₹${ord.productPrice}</b><br>
+                        <b>Payment:</b> ${ord.paymentType} ${ord.paymentScreenshot ? `<br><a href="${ord.paymentScreenshot}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Payment Screenshot</a>` : ''}<br>
                         <b>Address:</b> ${ord.address}<br>
                         <b>Status:</b> <span style="color: orange; font-weight: bold;">${status}</span>
                         <div class="order-actions" style="display: ${isAdmin ? 'flex' : 'none'};">
@@ -957,7 +950,7 @@
                         <b>Time:</b> ${ord.timestamp}<br>
                         <b>Customer:</b> ${ord.customerName} (${ord.customerPhone})<br>
                         <b>Item:</b> ${ord.productName} (Qty: ${ord.quantity || 1})<br>
-                        <b>MRP:</b> ₹${ord.mrpPrice} | <b>Paid:</b> ₹${ord.productPrice}<br>
+                        <b>Paid Amount:</b> ₹${ord.productPrice}<br>
                         <b>Antim Status:</b> <span style="color: ${statusColor}; font-weight: bold;">${status}</span><br>
                         ${ord.deliveryDateTime ? `<b>Delivery Date & Time:</b> ${ord.deliveryDateTime}<br>` : ''}
                         ${ord.reason ? `<b>Kaaran:</b> ${ord.reason}<br>` : ''}
@@ -1148,7 +1141,9 @@
             document.getElementById("order-quantity").value = "1";
             document.getElementById("coupon-code-input").value = "";
             document.getElementById("coupon-msg").innerText = "";
-            document.getElementById("cust-paid-amount").value = price;
+            document.getElementById("payment-type").value = "COD";
+            document.getElementById("upi-payment-container").style.display = "none";
+            document.getElementById("payment-screenshot-url").value = "";
             document.getElementById("modal-product-info").innerText = `Chuna gaya item: ${name} (Unit Price: ₹${price})`;
             updateTotalPriceCalculation();
             document.getElementById("checkout-modal").style.display = "flex";
@@ -1158,12 +1153,16 @@
             document.getElementById("checkout-modal").style.display = "none";
         }
 
+        window.togglePaymentSection = function() {
+            const payType = document.getElementById("payment-type").value;
+            document.getElementById("upi-payment-container").style.display = (payType === "Online") ? "block" : "none";
+        }
+
         window.updateTotalPriceCalculation = function() {
             let qty = parseInt(document.getElementById("order-quantity").value) || 1;
             let totalMRP = selectedProductForOrder.unitPrice * qty;
-            let currentPaid = Math.max(0, totalMRP - appliedDiscountAmount);
-            document.getElementById("cust-paid-amount").value = currentPaid.toFixed(2);
-            document.getElementById("final-payable-box").innerText = `Total MRP: ₹${totalMRP.toFixed(2)} | Dey (Paid) Amount: ₹${currentPaid.toFixed(2)}`;
+            let finalPayable = Math.max(0, totalMRP - appliedDiscountAmount);
+            document.getElementById("final-payable-box").innerText = `Kul dey rashi (Payable Amount): ₹${finalPayable.toFixed(2)}`;
         }
 
         window.applyCouponCode = function() {
@@ -1195,12 +1194,14 @@
             const address = document.getElementById("cust-address").value.trim();
             const payment = document.getElementById("payment-type").value;
             const qty = parseInt(document.getElementById("order-quantity").value) || 1;
-            const paidAmt = parseFloat(document.getElementById("cust-paid-amount").value) || 0;
+            const screenshot = document.getElementById("payment-screenshot-url").value.trim();
             const timeStr = new Date().toLocaleString();
 
             if (!name || !phone || !address) { alert("Kripya sabhi jaankari bharein!"); return; }
+            if (payment === "Online" && !screenshot) { alert("Kripya online payment ka screenshot/reference link dalein!"); return; }
 
             let totalMRP = selectedProductForOrder.unitPrice * qty;
+            let finalPayable = Math.max(0, totalMRP - appliedDiscountAmount);
 
             showToast("Order darj ho raha hai (Admin approval required)...");
             const ordersRef = ref(db, 'orders');
@@ -1209,10 +1210,10 @@
                 customerPhone: phone,
                 address: address,
                 paymentType: payment,
+                paymentScreenshot: screenshot || "",
                 productName: selectedProductForOrder.name,
                 quantity: qty,
-                mrpPrice: totalMRP.toFixed(2),
-                productPrice: paidAmt.toFixed(2),
+                productPrice: finalPayable.toFixed(2),
                 timestamp: timeStr,
                 status: "Pending Admin Approval"
             }).then(() => {
@@ -1225,6 +1226,7 @@
                 document.getElementById("cust-name").value = "";
                 document.getElementById("cust-phone").value = "";
                 document.getElementById("cust-address").value = "";
+                document.getElementById("payment-screenshot-url").value = "";
             });
         }
     </script>
