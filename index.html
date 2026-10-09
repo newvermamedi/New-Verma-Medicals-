@@ -185,6 +185,7 @@
 
     <header>
         <div class="header-buttons">
+            <button class="action-badge-btn" onclick="toggleDeliveryPartnerPortal()"><i class="fa-solid fa-motorcycle"></i> Delivery Portal</button>
             <button class="action-badge-btn" onclick="toggleCustomerOrdersModal()"><i class="fa-solid fa-box"></i> My Orders</button>
             <button class="action-badge-btn" onclick="toggleAdminMode()"><i class="fa-solid fa-lock" id="admin-icon"></i> Admin</button>
         </div>
@@ -247,7 +248,6 @@
                 <button class="btn-danger" id="cancel-edit-btn" onclick="resetAdminForm()" style="display: none;">Cancel Edit</button>
             </div>
 
-            <!-- Admin Search Customer Credit/Wallet Balance -->
             <div class="orders-section">
                 <h3><i class="fa-solid fa-magnifying-glass"></i> Search Customer Credits</h3>
                 <div class="form-group" style="margin-top: 10px;">
@@ -256,25 +256,21 @@
                 <div id="admin-search-credit-result"></div>
             </div>
 
-            <!-- Prescription Requests Section -->
             <div class="orders-section">
                 <h3><i class="fa-solid fa-file-prescription"></i> Prescription Verification Requests</h3>
                 <div id="admin-prescription-requests-list"></div>
             </div>
 
-            <!-- Live Orders Section -->
             <div class="orders-section">
                 <h3><i class="fa-solid fa-bell"></i> Live Pending Orders</h3>
                 <div id="admin-live-orders-list"></div>
             </div>
 
-            <!-- Return Requests Section -->
             <div class="orders-section">
                 <h3><i class="fa-solid fa-rotate-left"></i> Return & Exchange Requests</h3>
                 <div id="admin-return-requests-list"></div>
             </div>
 
-            <!-- Order History Log Section -->
             <div class="orders-section">
                 <h3><i class="fa-solid fa-clock-rotate-left"></i> Order History Log</h3>
                 <div id="admin-order-history-list"></div>
@@ -296,6 +292,16 @@
 
         <div class="products-grid" id="products-container"></div>
 
+    </div>
+
+    <!-- Delivery Partner Portal Modal (Accessible via top button) -->
+    <div class="modal-overlay" id="delivery-partner-modal">
+        <div class="modal-content" style="max-width: 650px;">
+            <button class="close-modal" onclick="toggleDeliveryPartnerPortal()">&times;</button>
+            <h3><i class="fa-solid fa-motorcycle" style="color:var(--primary);"></i> Delivery Partner Portal</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 15px;">Active delivery orders aur timing update karne ke liye:</p>
+            <div id="delivery-partner-orders-list"></div>
+        </div>
     </div>
 
     <!-- Prescription Upload Modal -->
@@ -396,7 +402,7 @@
         </div>
     </div>
 
-    <!-- Checkout Modal with Quantity (1-5) & UPI QR / Screenshot Upload -->
+    <!-- Checkout Modal -->
     <div class="modal-overlay" id="checkout-modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeCheckoutModal()">&times;</button>
@@ -443,7 +449,6 @@
                 </select>
             </div>
 
-            <!-- UPI QR Code & Payment Screenshot Upload Container -->
             <div id="upi-payment-container" style="display: none; background: #f0f9ff; padding: 12px; border-radius: 10px; border: 1px solid #bae6fd; margin-bottom: 15px; text-align: center;">
                 <p style="font-size: 0.8rem; font-weight: 600; color: #0369a1; margin-bottom: 8px;">Scan QR to Pay via UPI / Google Pay / PhonePe</p>
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=7992308032@ptaxis&pn=NewVermaMedicals" alt="UPI QR Code" style="width: 130px; height: 130px; border-radius: 8px; margin-bottom: 8px;">
@@ -520,6 +525,12 @@
                 renderProducts(allProducts);
                 showToast("Admin mode band ho gaya!");
             }
+        }
+
+        window.toggleDeliveryPartnerPortal = function() {
+            const modal = document.getElementById("delivery-partner-modal");
+            modal.style.display = modal.style.display === "flex" ? "none" : "flex";
+            renderDeliveryPartnerView();
         }
 
         window.toggleCustomerOrdersModal = function() {
@@ -796,6 +807,7 @@
                 Object.keys(data).reverse().forEach(key => allOrders.push({ id: key, ...data[key] }));
             }
             renderOrders();
+            renderDeliveryPartnerView();
             if (verifiedPhoneNum) refreshCustomerOrdersView();
         });
 
@@ -952,7 +964,7 @@
                         <b>Item:</b> ${ord.productName} (Qty: ${ord.quantity || 1})<br>
                         <b>Paid Amount:</b> ₹${ord.productPrice}<br>
                         <b>Antim Status:</b> <span style="color: ${statusColor}; font-weight: bold;">${status}</span><br>
-                        ${ord.deliveryDateTime ? `<b>Delivery Date & Time:</b> ${ord.deliveryDateTime}<br>` : ''}
+                        ${ord.deliveryDateTime ? `<b>Delivery Date & Time:</b> ${ord.deliveryDateTime} <button class="btn-warning" style="padding:2px 6px; font-size:0.7rem;" onclick="updateDeliveryTimePrompt('${ord.id}')">Badlein</button><br>` : ''}
                         ${ord.reason ? `<b>Kaaran:</b> ${ord.reason}<br>` : ''}
                         <div class="order-actions" style="display: ${isAdmin ? 'flex' : 'none'};">
                             ${!status.includes("Admin Confirmed") ? `<button class="btn-success" onclick="markAdminDelivered('${ord.id}')"><i class="fa-solid fa-check-double"></i> Delivered Tik Karein</button>` : ''}
@@ -965,6 +977,54 @@
 
             if (pendingCount === 0) liveContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">Koi live pending order nahi hai.</p>`;
             if (historyCount === 0) historyContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">Koi order history nahi hai.</p>`;
+        }
+
+        window.renderDeliveryPartnerView = function() {
+            const container = document.getElementById("delivery-partner-orders-list");
+            if (!container) return;
+            container.innerHTML = "";
+
+            let activeOrders = allOrders.filter(ord => !ord.status.includes("Delivered") && !ord.status.includes("Cancelled") && !ord.status.includes("Pending"));
+
+            if (activeOrders.length === 0) {
+                container.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">Delivery ke liye koi active order upalabdh nahi hai.</p>`;
+                return;
+            }
+
+            activeOrders.forEach(ord => {
+                const div = document.createElement("div");
+                div.className = "order-item-box";
+                div.style.background = "#f0fdf4";
+                div.innerHTML = `
+                    <b>Customer:</b> ${ord.customerName} (<a href="tel:${ord.customerPhone}" style="color:var(--primary)">${ord.customerPhone}</i>)</i><br>
+                    <b>Address:</b> ${ord.address}<br>
+                    <b>Item & Qty:</b> ${ord.productName} (Qty: ${ord.quantity || 1})<br>
+                    <b>Vasoolne Wala Amount (Paid):</b> <b style="color:var(--accent)">₹${ord.productPrice}</b> (${ord.paymentType})<br>
+                    ${ord.paymentScreenshot ? `<a href="${ord.paymentScreenshot}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Online Payment Screenshot</a><br>` : ''}
+                    <b>Delivery Time:</b> <span style="color:#0284c7; font-weight:bold;">${ord.deliveryDateTime || 'Tay nahi hua'}</span>
+                    <div class="order-actions" style="margin-top:10px;">
+                        <button class="btn-warning" onclick="updateDeliveryTimePrompt('${ord.id}')"><i class="fa-solid fa-clock"></i> Timing Update Karein</button>
+                        <button class="btn-success" onclick="markPartnerDelivered('${ord.id}')"><i class="fa-solid fa-check-double"></i> Delivered Mark Karein</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        window.updateDeliveryTimePrompt = function(orderId) {
+            let newTime = prompt("Naya delivery samay ya tithi darj karein:", "30 minat mein");
+            if (newTime !== null && newTime.trim() !== "") {
+                update(ref(db, 'orders/' + orderId), { deliveryDateTime: newTime }).then(() => {
+                    showToast("Delivery timing update ho gayi!");
+                });
+            }
+        }
+
+        window.markPartnerDelivered = function(orderId) {
+            update(ref(db, 'orders/' + orderId), { status: "Delivered & Confirmed (Partner)" }).then(() => {
+                showToast("Order delivered mark kar diya gaya!");
+                renderDeliveryPartnerView();
+            });
         }
 
         window.renderReturns = function() {
