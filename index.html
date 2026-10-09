@@ -124,6 +124,10 @@
         .btn-success:hover { background: #059669; }
         .btn-danger { background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; transition: 0.3s; }
         .btn-danger:hover { background: #dc2626; }
+        .btn-warning { background: #f59e0b; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; transition: 0.3s; }
+        .btn-warning:hover { background: #d97706; }
+
+        .admin-product-controls { margin-top: 10px; display: flex; gap: 8px; border-top: 1px dashed #cbd5e1; padding-top: 10px; }
 
         #admin-panel { display: none; background: white; padding: 25px; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 30px; border: 2px dashed var(--primary); animation: fadeInBody 0.4s ease; }
         .form-group { margin-bottom: 15px; }
@@ -184,7 +188,8 @@
 
         <!-- Admin Panel -->
         <div id="admin-panel">
-            <h2><i class="fa-solid fa-user-shield"></i> Admin Dashboard</h2>
+            <h2 id="admin-form-title"><i class="fa-solid fa-user-shield"></i> Admin Dashboard - Naya Product Jodein</h2>
+            <input type="hidden" id="editing-product-id" value="">
             
             <div class="form-group">
                 <label>Product Name</label>
@@ -206,7 +211,10 @@
                 <label>Product Image URL</label>
                 <input type="text" id="p-img" placeholder="Image link yahan dalein">
             </div>
-            <button class="btn-primary" onclick="saveAdminData()">Database mein save karein</button>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn-primary" id="save-product-btn" onclick="saveAdminData()">Database mein save karein</button>
+                <button class="btn-danger" id="cancel-edit-btn" onclick="resetAdminForm()" style="display: none;">Cancel Edit</button>
+            </div>
 
             <!-- Admin Search Customer Credit/Wallet Balance -->
             <div class="orders-section">
@@ -424,6 +432,7 @@
                 isAdmin = false;
                 document.getElementById("admin-panel").style.display = "none";
                 document.getElementById("admin-icon").className = "fa-solid fa-lock";
+                resetAdminForm();
                 renderProducts(allProducts);
                 showToast("Admin mode band ho gaya!");
             }
@@ -518,7 +527,6 @@
                     actionDiv.innerHTML += `<button class="btn-success" onclick="markCustomerDelivered('${ord.id}')"><i class="fa-solid fa-check-double"></i> Mujhe Mil Gaya (Delivered Confirm)</button>`;
                 } else if (ord.status.includes("Confirmed")) {
                     let existingReturn = allReturns.find(r => r.orderId === ord.id);
-                    // Bug Fix: If item price is 0 (purchased via full coupon), do not show return button!
                     if (parseFloat(ord.productPrice) <= 0) {
                         actionDiv.innerHTML += `<span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">(₹0 item par return lagu nahi hai)</span>`;
                     } else if (!existingReturn) {
@@ -572,22 +580,76 @@
             });
         }
 
+        // --- ADMIN PRODUCT ADD / EDIT / DELETE FUNCTIONS ---
         window.saveAdminData = function() {
             const name = document.getElementById("p-name").value.trim();
             const category = document.getElementById("p-category").value;
             const price = document.getElementById("p-price").value.trim();
             let img = document.getElementById("p-img").value.trim();
+            const editId = document.getElementById("editing-product-id").value;
 
-            if (name && price) {
-                if(!img) img = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80";
+            if (!name || !price) {
+                alert("Kripya product ka naam aur price darj karein!");
+                return;
+            }
+
+            if(!img) img = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80";
+
+            if (editId) {
+                // Update existing product
+                update(ref(db, 'products/' + editId), { name, category, price, img }).then(() => {
+                    showToast("Product update ho gaya!");
+                    resetAdminForm();
+                });
+            } else {
+                // Add new product
                 const productsRef = ref(db, 'products');
                 push(productsRef, { name, category, price, img }).then(() => {
-                    showToast("Product save ho gaya!");
-                    document.getElementById("p-name").value = "";
-                    document.getElementById("p-price").value = "";
-                    document.getElementById("p-img").value = "";
+                    showToast("Naya product save ho gaya!");
+                    resetAdminForm();
                 });
             }
+        }
+
+        window.editProduct = function(productId) {
+            const prod = allProducts.find(p => p.id === productId);
+            if (!prod) return;
+
+            document.getElementById("editing-product-id").value = prod.id;
+            document.getElementById("p-name").value = prod.name;
+            document.getElementById("p-category").value = prod.category;
+            document.getElementById("p-price").value = prod.price;
+            document.getElementById("p-img").value = prod.img;
+
+            document.getElementById("admin-form-title").innerHTML = `<i class="fa-solid fa-pen-to-square"></i> Admin Dashboard - Product Edit Karein`;
+            document.getElementById("save-product-btn").innerText = "Product Update Karein";
+            document.getElementById("cancel-edit-btn").style.display = "inline-block";
+
+            // Scroll up to admin panel smoothly
+            document.getElementById("admin-panel").scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.deleteProduct = function(productId) {
+            if (confirm("Kya aap sach mein is product ko Hamesha ke liye delete karna chahte hain?")) {
+                remove(ref(db, 'products/' + productId)).then(() => {
+                    showToast("Product delete ho gaya!");
+                    if (document.getElementById("editing-product-id").value === productId) {
+                        resetAdminForm();
+                    }
+                });
+            }
+        }
+
+        window.resetAdminForm = function() {
+            document.getElementById("editing-product-id").value = "";
+            document.getElementById("p-name").value = "";
+            document.getElementById("p-price").value = "";
+            document.getElementById("p-img").value = "";
+            document.getElementById("p-category").value = "Baby Care";
+
+            document.getElementById("admin-form-title").innerHTML = `<i class="fa-solid fa-user-shield"></i> Admin Dashboard - Naya Product Jodein`;
+            document.getElementById("save-product-btn").innerText = "Database mein save karein";
+            document.getElementById("cancel-edit-btn").style.display = "none";
         }
 
         const productsRef = ref(db, 'products');
@@ -654,7 +716,6 @@
                 div.className = "order-item-box";
                 div.style.background = cr.isUsed ? "#f1f5f9" : "#ecfdf5";
                 
-                // Detailed usage label mapping
                 let statusText = 'Upalabdh (Active)';
                 if(cr.isUsed) {
                     statusText = cr.usedMode === 'Offline' ? 'Istemal ho chuka (Used Offline)' : (cr.usedMode === 'Online' ? 'Istemal ho chuka (Used Online)' : 'Istemal ho chuka (Used)');
@@ -865,6 +926,7 @@
             }
         }
 
+        // Render products with dynamic Admin Edit/Delete Controls
         window.renderProducts = function(products) {
             const container = document.getElementById("products-container");
             container.innerHTML = "";
@@ -880,6 +942,12 @@
                         <div class="product-title">${p.name}</div>
                         <div class="product-price">₹${p.price}</div>
                         <button class="btn-primary" onclick="openCheckoutModal('${p.name}', '${p.price}')">Order Karein</button>
+                        
+                        <!-- Admin Edit & Delete Buttons -->
+                        <div class="admin-product-controls" style="display: ${isAdmin ? 'flex' : 'none'};">
+                            <button class="btn-warning" style="flex:1;" onclick="editProduct('${p.id}')"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
+                            <button class="btn-danger" style="flex:1;" onclick="deleteProduct('${p.id}')"><i class="fa-solid fa-trash"></i> Delete</button>
+                        </div>
                     </div>
                 `;
                 container.appendChild(card);
