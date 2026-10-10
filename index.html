@@ -304,7 +304,7 @@
         </div>
     </div>
 
-    <!-- Prescription Upload Modal -->
+    <!-- Prescription Upload Modal (Direct Gallery / Camera Upload) -->
     <div class="modal-overlay" id="prescription-modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closePrescriptionModal()">&times;</button>
@@ -319,8 +319,8 @@
                 <input type="tel" id="rx-cust-phone" placeholder="10 anko ka mobile number">
             </div>
             <div class="form-group">
-                <label>Prescription Photo Link (URL)</label>
-                <input type="text" id="rx-img-url" placeholder="Prescription image link yahan dalein...">
+                <label>Prescription Photo (Gallery ya Camera se chunein)</label>
+                <input type="file" id="rx-file-input" accept="image/*" style="padding: 8px; border: 1px solid #cbd5e1; border-radius: 10px; width: 100%; background: #f8fafc; cursor: pointer;">
             </div>
             <button class="btn-primary" style="width: 100%;" onclick="submitPrescription()">Prescription Bhejein</button>
         </div>
@@ -454,8 +454,8 @@
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=7992308032@ptaxis&pn=NewVermaMedicals" alt="UPI QR Code" style="width: 130px; height: 130px; border-radius: 8px; margin-bottom: 8px;">
                 <p style="font-size: 0.75rem; color: #64748b; margin-bottom: 8px;">UPI ID: <b>7992308032@ptaxis</b></p>
                 <div class="form-group" style="text-align: left; margin-bottom: 0;">
-                    <label style="font-size: 0.75rem;">Payment Screenshot/Ref Link Upload Karein</label>
-                    <input type="text" id="payment-screenshot-url" placeholder="Screenshot image link yahan dalein..." style="font-size: 0.8rem; padding: 8px;">
+                    <label style="font-size: 0.75rem;">Payment Screenshot (Gallery se chunein)</label>
+                    <input type="file" id="payment-file-input" accept="image/*" style="font-size: 0.8rem; padding: 6px; border: 1px solid #cbd5e1; border-radius: 8px; width: 100%; background: #fff;">
                 </div>
             </div>
 
@@ -557,27 +557,39 @@
         window.submitPrescription = function() {
             const name = document.getElementById("rx-cust-name").value.trim();
             const phone = document.getElementById("rx-cust-phone").value.trim();
-            const imgUrl = document.getElementById("rx-img-url").value.trim();
+            const fileInput = document.getElementById("rx-file-input");
 
-            if (!name || !phone || !imgUrl) {
-                alert("Kripya sabhi details aur photo link bharein!");
+            if (!name || !phone) {
+                alert("Kripya apna naam aur mobile number bharein!");
+                return;
+            }
+            if (fileInput.files.length === 0) {
+                alert("Kripya prescription ki photo (Gallery ya Camera se) chunein!");
                 return;
             }
 
-            const rxRef = ref(db, 'prescriptions');
-            push(rxRef, {
-                customerName: name,
-                customerPhone: phone,
-                imgUrl: imgUrl,
-                status: "Pending Verification",
-                timestamp: new Date().toLocaleString()
-            }).then(() => {
-                showToast("Prescription safalpurvak bhej diya gaya hai!");
-                closePrescriptionModal();
-                document.getElementById("rx-cust-name").value = "";
-                document.getElementById("rx-cust-phone").value = "";
-                document.getElementById("rx-img-url").value = "";
-            });
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            
+            showToast("Prescription upload ho raha hai...");
+            reader.onload = function(e) {
+                const base64Img = e.target.result;
+                const rxRef = ref(db, 'prescriptions');
+                push(rxRef, {
+                    customerName: name,
+                    customerPhone: phone,
+                    imgUrl: base64Img,
+                    status: "Pending Verification",
+                    timestamp: new Date().toLocaleString()
+                }).then(() => {
+                    showToast("Prescription safalpurvak bhej diya gaya hai!");
+                    closePrescriptionModal();
+                    document.getElementById("rx-cust-name").value = "";
+                    document.getElementById("rx-cust-phone").value = "";
+                    fileInput.value = "";
+                });
+            };
+            reader.readAsDataURL(file);
         }
 
         window.sendCustomerOTP = function() {
@@ -619,7 +631,7 @@
                 rxBox.style.background = "#fef3c7";
                 rxBox.innerHTML = `<b>🩺 Aapka Prescription Status:</b><br>`;
                 matchedRx.forEach(rx => {
-                    rxBox.innerHTML += `Time: ${rx.timestamp} | Status: <b style="color:${rx.status.includes('Accepted') ? 'green' : (rx.status.includes('Not') ? 'red' : 'orange')}">${rx.status}</b><br>`;
+                    rxBox.innerHTML += `Time: ${rx.timestamp} | Status: <b style="color:${rx.status.includes('Accepted') ? 'green' : (rx.status.includes('Not') ? 'red' : 'orange')}">${rx.status}</b><br><a href="${rx.imgUrl}" target="_blank" style="color:var(--primary); text-decoration:underline; font-size:0.75rem;">View Uploaded Photo</a><br>`;
                 });
                 container.appendChild(rxBox);
             }
@@ -859,7 +871,7 @@
                 div.innerHTML = `
                     <b>Time:</b> ${rx.timestamp}<br>
                     <b>Customer:</b> ${rx.customerName} (${rx.customerPhone})<br>
-                    <b>Prescription Image:</b> <a href="${rx.imgUrl}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Photo</a><br>
+                    <b>Prescription Photo:</b> <a href="${rx.imgUrl}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Photo</a><br>
                     <div class="order-actions">
                         <button class="btn-success" onclick="updateRxStatus('${rx.id}', 'Accepted (Available)')"><i class="fa-solid fa-check"></i> Accept (Available)</button>
                         <button class="btn-danger" onclick="updateRxStatus('${rx.id}', 'Denied (Not Available)')"><i class="fa-solid fa-xmark"></i> Deny (Not Available)</button>
@@ -1203,7 +1215,7 @@
             document.getElementById("coupon-msg").innerText = "";
             document.getElementById("payment-type").value = "COD";
             document.getElementById("upi-payment-container").style.display = "none";
-            document.getElementById("payment-screenshot-url").value = "";
+            document.getElementById("payment-file-input").value = "";
             document.getElementById("modal-product-info").innerText = `Chuna gaya item: ${name} (Unit Price: ₹${price})`;
             updateTotalPriceCalculation();
             document.getElementById("checkout-modal").style.display = "flex";
@@ -1254,40 +1266,52 @@
             const address = document.getElementById("cust-address").value.trim();
             const payment = document.getElementById("payment-type").value;
             const qty = parseInt(document.getElementById("order-quantity").value) || 1;
-            const screenshot = document.getElementById("payment-screenshot-url").value.trim();
+            const fileInput = document.getElementById("payment-file-input");
             const timeStr = new Date().toLocaleString();
 
             if (!name || !phone || !address) { alert("Kripya sabhi jaankari bharein!"); return; }
-            if (payment === "Online" && !screenshot) { alert("Kripya online payment ka screenshot/reference link dalein!"); return; }
+            if (payment === "Online" && fileInput.files.length === 0) { alert("Kripya online payment ka screenshot chunein!"); return; }
 
             let totalMRP = selectedProductForOrder.unitPrice * qty;
             let finalPayable = Math.max(0, totalMRP - appliedDiscountAmount);
 
-            showToast("Order darj ho raha hai (Admin approval required)...");
-            const ordersRef = ref(db, 'orders');
-            push(ordersRef, {
-                customerName: name,
-                customerPhone: phone,
-                address: address,
-                paymentType: payment,
-                paymentScreenshot: screenshot || "",
-                productName: selectedProductForOrder.name,
-                quantity: qty,
-                productPrice: finalPayable.toFixed(2),
-                timestamp: timeStr,
-                status: "Pending Admin Approval"
-            }).then(() => {
-                if (appliedCreditKey) {
-                    update(ref(db, 'credits/' + appliedCreditKey), { isUsed: true, usedMode: 'Online' });
-                }
+            function saveOrderData(screenshotBase64) {
+                showToast("Order darj ho raha hai (Admin approval required)...");
+                const ordersRef = ref(db, 'orders');
+                push(ordersRef, {
+                    customerName: name,
+                    customerPhone: phone,
+                    address: address,
+                    paymentType: payment,
+                    paymentScreenshot: screenshotBase64 || "",
+                    productName: selectedProductForOrder.name,
+                    quantity: qty,
+                    productPrice: finalPayable.toFixed(2),
+                    timestamp: timeStr,
+                    status: "Pending Admin Approval"
+                }).then(() => {
+                    if (appliedCreditKey) {
+                        update(ref(db, 'credits/' + appliedCreditKey), { isUsed: true, usedMode: 'Online' });
+                    }
 
-                showToast("Aapka order submit ho gaya! Admin dwara accept hone par confirm hoga.");
-                closeCheckoutModal();
-                document.getElementById("cust-name").value = "";
-                document.getElementById("cust-phone").value = "";
-                document.getElementById("cust-address").value = "";
-                document.getElementById("payment-screenshot-url").value = "";
-            });
+                    showToast("Aapka order submit ho gaya! Admin dwara accept hone par confirm hoga.");
+                    closeCheckoutModal();
+                    document.getElementById("cust-name").value = "";
+                    document.getElementById("cust-phone").value = "";
+                    document.getElementById("cust-address").value = "";
+                    fileInput.value = "";
+                });
+            }
+
+            if (payment === "Online" && fileInput.files.length > 0) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    saveOrderData(e.target.result);
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                saveOrderData("");
+            }
         }
     </script>
 </body>
