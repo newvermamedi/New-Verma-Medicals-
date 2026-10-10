@@ -362,7 +362,17 @@
 
         <!-- Product List Grid -->
         <section id="catalog" class="product-grid">
-            <!-- Dynamic Items loaded via Firebase & Static Items -->
+            <!-- Horlicks Mother's Plus (Fixed 1-Click Order Button) -->
+            <div class="product-card" data-category="Mother Care">
+                <div>
+                    <div class="product-title">Horlicks mother's plus</div>
+                    <div class="product-meta">Category: Mother Care</div>
+                </div>
+                <div>
+                    <div class="product-price">₹625</div>
+                    <button class="action-btn" onclick="openOrderModal('Horlicks mother\'s plus', 625)">Order Karein</button>
+                </div>
+            </div>
         </section>
 
         <!-- Admin Control Panel -->
@@ -452,7 +462,7 @@
         let currentItemPrice = 0;
         let currentItemName = "";
 
-        // Route Protection for Delivery Portal
+        // Route Protection for Delivery Portal Fix
         function openDeliveryPortal() {
             let session = sessionStorage.getItem("adminSession");
             if (session === "true") {
@@ -531,26 +541,10 @@
             }
         }
 
-        // Load Products from Firebase & Default Catalogs
+        // Load Products from Firebase
         function loadProducts() {
             const catalog = document.getElementById('catalog');
             database.ref('medicines').on('value', (snapshot) => {
-                catalog.innerHTML = '';
-                
-                // Add Fixed Mother Care Product (Horlicks Mother's Plus)
-                catalog.innerHTML += `
-                    <div class="product-card" data-category="Mother Care">
-                        <div>
-                            <div class="product-title">Horlicks mother's plus</div>
-                            <div class="product-meta">Category: Mother Care</div>
-                        </div>
-                        <div>
-                            <div class="product-price">₹625</div>
-                            <button class="action-btn" onclick="openOrderModal('Horlicks mother\\'s plus', 625)">Order Karein</button>
-                        </div>
-                    </div>
-                `;
-
                 const data = snapshot.val();
                 if (data) {
                     Object.keys(data).forEach(key => {
