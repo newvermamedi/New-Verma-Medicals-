@@ -79,15 +79,7 @@
         .tagline { font-size: 0.85rem; color: #34d399; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; }
 
         .header-buttons {
-            position: static;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            width: 100%;
-            margin: 0 auto 14px;
-            z-index: 10;
+            width:100%; display:flex; justify-content:center; align-items:center; gap:8px; flex-wrap:wrap; margin:0 auto 18px; position:relative; z-index:10;
         }
         .action-badge-btn {
             background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.3);
@@ -224,6 +216,18 @@
         .btn-primary:disabled, .btn-success:disabled, .btn-danger:disabled {
             opacity:.6; cursor:not-allowed; transform:none !important;
         }
+        .cart-bar { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 0 18px; padding:12px 14px; background:#fff; border:1px solid #dbeafe; border-radius:14px; box-shadow:var(--shadow); position:sticky; top:8px; z-index:20; }
+        .cart-summary { font-size:.85rem; color:#334155; }
+        .cart-count { display:inline-flex; min-width:26px; height:26px; align-items:center; justify-content:center; border-radius:999px; background:var(--primary); color:#fff; font-weight:700; margin-left:5px; }
+        .cart-list-item { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 0; border-bottom:1px solid #e2e8f0; }
+        .qty-controls { display:flex; align-items:center; gap:6px; }
+        .qty-controls button { width:30px; height:30px; border:1px solid #cbd5e1; background:#fff; border-radius:8px; cursor:pointer; font-weight:700; }
+        .tracking { display:grid; grid-template-columns:repeat(5,1fr); gap:5px; margin-top:12px; }
+        .track-step { text-align:center; font-size:.62rem; color:#94a3b8; }
+        .track-dot { width:22px; height:22px; border-radius:50%; margin:0 auto 4px; background:#e2e8f0; display:flex; align-items:center; justify-content:center; font-size:.65rem; }
+        .track-step.active { color:#0284c7; font-weight:700; }
+        .track-step.active .track-dot { background:#0284c7; color:#fff; }
+        @media (max-width:600px){ .cart-bar{top:4px;} .tracking{grid-template-columns:repeat(5, minmax(42px,1fr));} .track-step{font-size:.55rem;} }
         .loading-state { text-align:center; padding:28px; color:var(--text-muted); }
         .loading-state i { margin-right:7px; }
         .modal-content { border:1px solid rgba(148,163,184,.25); }
@@ -244,8 +248,8 @@
             font-size:.7rem; font-weight:600; background:#ecfdf5; color:#047857;
         }
         @media (max-width: 760px) {
-            header { padding: 1.5rem 1rem 1.35rem; }
-            .header-buttons { position:static; justify-content:center; margin-bottom:12px; }
+            header { padding: 1.35rem 1rem; }
+            .header-buttons { justify-content:center; margin-bottom:14px; }
             .action-badge-btn { font-size:.72rem; padding:6px 10px; }
             header h1 { font-size:1.55rem; }
             .container { padding:18px 12px; }
@@ -277,7 +281,7 @@
     <div id="notification-toast">Update ho gaya!</div>
 
     <header>
-<div class="header-inner">
+      <div class="header-inner">
         <div class="header-buttons">
             <button class="action-badge-btn" onclick="toggleDeliveryPartnerPortal()"><i class="fa-solid fa-motorcycle"></i> Delivery Portal</button>
             <button class="action-badge-btn" onclick="toggleCustomerOrdersModal()"><i class="fa-solid fa-box"></i> My Orders</button>
@@ -384,6 +388,11 @@
                 <button class="filter-btn" onclick="filterByCategory('Mother Care')">Mother Care</button>
                 <button class="filter-btn" onclick="filterByCategory('General')">General</button>
             </div>
+        </div>
+
+        <div class="cart-bar">
+            <div class="cart-summary"><i class="fa-solid fa-cart-shopping"></i> Cart mein <span class="cart-count" id="cart-count">0</span> items • Total <b id="cart-total">₹0.00</b></div>
+            <button class="btn-primary" type="button" onclick="openCartModal()"><i class="fa-solid fa-bag-shopping"></i> Cart Dekhein</button>
         </div>
 
         <div class="section-heading">
@@ -506,6 +515,32 @@
         </div>
     </div>
 
+    <!-- Cart Modal -->
+    <div class="modal-overlay" id="cart-modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeCartModal()">&times;</button>
+            <h3><i class="fa-solid fa-cart-shopping"></i> Aapka Cart</h3>
+            <div id="cart-items" style="margin-top:15px;"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:15px;padding-top:12px;border-top:2px solid #e2e8f0;"><b>Grand Total</b><b id="cart-modal-total" style="color:var(--primary);">₹0.00</b></div>
+            <button class="btn-primary" style="width:100%;margin-top:15px;" onclick="checkoutCart()"><i class="fa-solid fa-arrow-right"></i> Checkout Karein</button>
+        </div>
+    </div>
+
+    <!-- Multi-item Cart Checkout -->
+    <div class="modal-overlay" id="cart-checkout-modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeCartCheckout()">&times;</button>
+            <h3><i class="fa-solid fa-receipt"></i> Cart Checkout</h3>
+            <div id="cart-checkout-items" style="margin-top:12px;"></div>
+            <div class="form-group" style="margin-top:15px;"><label>Customer Name</label><input id="cart-cust-name" type="text" placeholder="Aapka naam"></div>
+            <div class="form-group"><label>Mobile Number</label><input id="cart-cust-phone" type="tel" inputmode="numeric" maxlength="10" placeholder="10 digit mobile"></div>
+            <div class="form-group"><label>Delivery Address</label><input id="cart-cust-address" type="text" placeholder="Pura address"></div>
+            <div class="form-group"><label>Payment</label><select id="cart-payment-type" onchange="document.getElementById('cart-upi-box').style.display=this.value==='Online'?'block':'none'"><option value="Cash on Delivery">Cash on Delivery</option><option value="Online">Online / UPI</option></select></div>
+            <div id="cart-upi-box" style="display:none;background:#f0f9ff;padding:10px;border-radius:10px;margin-bottom:12px;text-align:center;"><b>UPI: 7992308032@ptaxis</b><br><img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=upi://pay?pa=7992308032@ptaxis&pn=NewVermaMedicals" style="width:120px;margin:8px"><input id="cart-payment-file" type="file" accept="image/*" capture="environment" style="width:100%"></div>
+            <button id="cart-submit-btn" class="btn-primary" style="width:100%;" onclick="submitCartOrder()">Order Submit Karein</button>
+        </div>
+    </div>
+
     <!-- Checkout Modal -->
     <div class="modal-overlay" id="checkout-modal">
         <div class="modal-content">
@@ -565,7 +600,7 @@
             </div>
 
             <div id="final-payable-box" style="font-weight: 600; margin-bottom: 15px; color: var(--primary);"></div>
-            
+            <button class="btn-primary" style="width: 100%;" onclick="submitOrder()">Order Submit Karein (Admin Approval Required)</button>
         </div>
     </div>
 
@@ -602,6 +637,7 @@
         
         let generatedOtpCode = "1234";
         let verifiedPhoneNum = "";
+        let cartItems = JSON.parse(localStorage.getItem("newVermaCart") || "[]");
 
         function showToast(text) {
             const toast = document.getElementById("notification-toast");
@@ -765,6 +801,14 @@
             refreshCustomerOrdersView();
         }
 
+        function trackingHTML(status){
+            const steps=["Order Placed","Approved","Preparing","Out for Delivery","Delivered"]; let idx=0;
+            if((status||"").includes("Accepted")||status.includes("Admin Confirmed"))idx=1;
+            if(status.includes("Preparing"))idx=2; if(status.includes("Out for Delivery"))idx=3; if(status.includes("Delivered")||status.includes("Confirmed"))idx=4;
+            return `<div class="tracking">${steps.map((x,i)=>`<div class="track-step ${i<=idx?'active':''}"><div class="track-dot">${i<idx?'✓':i+1}</div>${x}</div>`).join("")}</div>`;
+        }
+        window.printOrderInvoice=function(orderId){ const o=allOrders.find(x=>x.id===orderId); if(!o)return; const items=o.items?.length?o.items.map(i=>`${i.productName} × ${i.quantity} — ₹${(Number(i.unitPrice)*Number(i.quantity)).toFixed(2)}`).join("<br>"):`${escapeHTML(o.productName||"")} × ${o.quantity||1}`; const w=window.open("","_blank"); if(!w)return; w.document.write(`<html><head><title>Invoice - New Verma Medicals</title><style>body{font-family:Arial;padding:30px;color:#222}h1{color:#0284c7}hr{border:0;border-top:1px solid #ddd}.total{font-size:20px;font-weight:bold;margin-top:20px}</style></head><body><h1>NEW VERMA MEDICALS</h1><p>Loharbarwa, Barwadda, Dhanbad, Jharkhand<br>Contact: +91 7992308032</p><hr><h2>Order Invoice</h2><p><b>Order ID:</b> ${o.id}<br><b>Date:</b> ${escapeHTML(o.timestamp||"")}<br><b>Customer:</b> ${escapeHTML(o.customerName||"")}<br><b>Mobile:</b> ${escapeHTML(o.customerPhone||"")}<br><b>Address:</b> ${escapeHTML(o.address||"")}</p><hr><p>${items}</p><p class="total">Total: ₹${Number(o.productPrice||0).toFixed(2)}</p><p>Payment: ${escapeHTML(o.paymentType||"")}</p><p>Thank you for choosing New Verma Medicals.</p><script>window.print();<\/script></body></html>`); w.document.close(); }
+
         window.refreshCustomerOrdersView = function() {
             const container = document.getElementById("customer-orders-result");
             container.innerHTML = "";
@@ -812,11 +856,13 @@
                     <b>Payment:</b> ${ord.paymentType} ${ord.paymentScreenshot ? `<br><a href="${ord.paymentScreenshot}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Payment Screenshot</a>` : ''}<br>
                     <b>Address:</b> ${ord.address}<br>
                     <b>Status:</b> <span style="color: ${statusColor}; font-weight: bold;">${ord.status}</span>
+                    ${trackingHTML(ord.status)}
                     ${ord.deliveryDateTime ? `<br><b>📅 Delivery Date & Time:</b> <span style="color: #0284c7; font-weight: bold;">${ord.deliveryDateTime}</span>` : ''}
                     ${ord.reason ? `<br><b>Kaaran:</b> ${ord.reason}` : ''}
                 `;
 
                 let actionDiv = document.createElement("div");
+                actionDiv.innerHTML = `<button class="btn-primary" onclick="printOrderInvoice('${ord.id}')"><i class="fa-solid fa-file-invoice"></i> Invoice Print</button>`;
                 actionDiv.style.marginTop = "10px";
                 actionDiv.style.display = "flex";
                 actionDiv.style.gap = "8px";
@@ -1371,9 +1417,14 @@
                             <div class="product-price">₹${safePrice.toFixed(2)}</div>
                             <span class="product-category-chip">${safeCategory}</span>
                         </div>
-                        <button class="btn-primary" style="width:100%;" onclick="openCheckoutModal(${JSON.stringify(String(p.name))}, ${safePrice})">
-                            <i class="fa-solid fa-cart-plus"></i> Order Karein
-                        </button>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;">
+                            <button class="btn-primary" type="button" onclick="addToCart(${JSON.stringify(String(p.name))}, ${safePrice}, ${JSON.stringify(String(p.img))}, ${JSON.stringify(String(p.category))})">
+                                <i class="fa-solid fa-cart-plus"></i> Cart
+                            </button>
+                            <button class="btn-success" type="button" style="padding:10px;" onclick="openCheckoutModal(${JSON.stringify(String(p.name))}, ${safePrice})">
+                                <i class="fa-solid fa-bolt"></i> Buy Now
+                            </button>
+                        </div>
                         <div class="admin-product-controls" style="display:${isAdmin ? 'flex' : 'none'};">
                             <button class="btn-warning" style="flex:1;" onclick="editProduct('${escapeHTML(p.id)}')"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
                             <button class="btn-danger" style="flex:1;" onclick="deleteProduct('${escapeHTML(p.id)}')"><i class="fa-solid fa-trash"></i> Delete</button>
@@ -1382,6 +1433,36 @@
                 container.appendChild(card);
             });
         }
+
+        function saveCart(){ localStorage.setItem("newVermaCart", JSON.stringify(cartItems)); updateCartUI(); }
+        function updateCartUI(){
+            const count=cartItems.reduce((a,i)=>a+i.qty,0), total=cartItems.reduce((a,i)=>a+i.price*i.qty,0);
+            const c=document.getElementById("cart-count"), t=document.getElementById("cart-total"), mt=document.getElementById("cart-modal-total");
+            if(c)c.textContent=count; if(t)t.textContent=`₹${total.toFixed(2)}`; if(mt)mt.textContent=`₹${total.toFixed(2)}`;
+        }
+        window.addToCart=function(name,price,img,category){
+            const item=cartItems.find(i=>i.name===name); if(item)item.qty++; else cartItems.push({name,price,img,category,qty:1});
+            saveCart(); showToast(`${name} cart mein add ho gaya.`);
+        }
+        window.changeCartQty=function(name,delta){ const item=cartItems.find(i=>i.name===name); if(!item)return; item.qty+=delta; if(item.qty<=0)cartItems=cartItems.filter(i=>i.name!==name); saveCart(); renderCart(); }
+        window.removeFromCart=function(name){ cartItems=cartItems.filter(i=>i.name!==name); saveCart(); renderCart(); }
+        function renderCart(){
+            const box=document.getElementById("cart-items"); if(!box)return; box.innerHTML="";
+            if(!cartItems.length){ box.innerHTML='<div class="empty-state" style="padding:25px"><i class="fa-solid fa-cart-shopping"></i><h3>Cart khaali hai</h3><p>Product par Cart button dabayein.</p></div>'; updateCartUI(); return; }
+            cartItems.forEach(i=>{ const row=document.createElement("div"); row.className="cart-list-item"; row.innerHTML=`<div style="flex:1"><b>${escapeHTML(i.name)}</b><br><small>₹${Number(i.price).toFixed(2)} × ${i.qty}</small></div><div class="qty-controls"><button onclick="changeCartQty(${JSON.stringify(i.name)},-1)">−</button><b>${i.qty}</b><button onclick="changeCartQty(${JSON.stringify(i.name)},1)">+</button><button class="btn-danger" style="padding:5px 8px" onclick="removeFromCart(${JSON.stringify(i.name)})">×</button></div>`; box.appendChild(row); }); updateCartUI();
+        }
+        window.openCartModal=function(){ renderCart(); document.getElementById("cart-modal").style.display="flex"; }
+        window.closeCartModal=function(){ document.getElementById("cart-modal").style.display="none"; }
+        window.checkoutCart=function(){ if(!cartItems.length){showToast("Cart khaali hai.");return;} closeCartModal(); document.getElementById("cart-checkout-modal").style.display="flex"; renderCartCheckout(); }
+        function renderCartCheckout(){ const box=document.getElementById("cart-checkout-items"); const total=cartItems.reduce((a,i)=>a+i.price*i.qty,0); box.innerHTML=cartItems.map(i=>`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #e2e8f0;padding:7px 0"><span>${escapeHTML(i.name)} × ${i.qty}</span><b>₹${(i.price*i.qty).toFixed(2)}</b></div>`).join("")+`<div style="text-align:right;margin-top:10px;font-size:1.05rem"><b>Total: ₹${total.toFixed(2)}</b></div>`; }
+        window.closeCartCheckout=function(){document.getElementById("cart-checkout-modal").style.display="none";}
+        window.submitCartOrder=async function(){
+            if(!cartItems.length){showToast("Cart khaali hai.");return;}
+            const name=document.getElementById("cart-cust-name").value.trim(), phone=document.getElementById("cart-cust-phone").value.trim().replace(/\s+/g,""), address=document.getElementById("cart-cust-address").value.trim(), payment=document.getElementById("cart-payment-type").value, file=document.getElementById("cart-payment-file");
+            if(!name||!validPhone(phone)||!address){alert("Naam, valid mobile number aur address bharna zaroori hai.");return;}
+            if(payment==="Online" && (!file.files.length)){alert("Online payment ke liye payment screenshot upload karein.");return;}
+            const btn=document.getElementById("cart-submit-btn"); setButtonLoading(btn,true,"Order save ho raha hai...");
+            try{ let screenshot=""; if(payment==="Online"&&file.files.length)screenshot=await compressImage(file.files[0],1400,.72); const total=cartItems.reduce((a,i)=>a+i.price*i.qty,0); const items=cartItems.map(i=>({productName:i.name,quantity:i.qty,unitPrice:Number(i.price).toFixed(2),category:i.category||""})); const timeStr=new Date().toLocaleString("en-IN"); const orderRef=await push(ref(db,"orders"),{customerName:name,customerPhone:phone,address,paymentType:payment,paymentScreenshot:screenshot,items,productName:items.map(i=>`${i.productName} × ${i.quantity}`).join(", "),quantity:items.reduce((a,i)=>a+i.quantity,0),unitPrice:"Multiple",productPrice:total.toFixed(2),discountAmount:"0.00",timestamp:timeStr,status:"Pending Admin Approval"}); cartItems=[]; saveCart(); document.getElementById("cart-cust-name").value="";document.getElementById("cart-cust-phone").value="";document.getElementById("cart-cust-address").value="";file.value="";closeCartCheckout(); showToast("Multi-medicine order submit ho gaya! Order ID: "+orderRef.key.slice(-6).toUpperCase()); }catch(e){console.error(e);alert("Order save nahi ho saka. Firebase/Internet check karein.");}finally{setButtonLoading(btn,false);} }
 
         window.filterByCategory = function(category) {
             activeCategory = category;
@@ -1546,6 +1627,8 @@
                 setButtonLoading(submitBtn, false);
             }
         }
+
+        updateCartUI();
 
         window.addEventListener("error", (event) => {
             console.error("Application error:", event.error || event.message);
