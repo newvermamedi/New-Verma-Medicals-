@@ -79,7 +79,15 @@
         .tagline { font-size: 0.85rem; color: #34d399; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; }
 
         .header-buttons {
-            position: absolute; right: 15px; top: 20px; display: flex; gap: 8px; z-index: 10;
+            position: static;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            width: 100%;
+            margin: 0 auto 14px;
+            z-index: 10;
         }
         .action-badge-btn {
             background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.3);
@@ -236,8 +244,8 @@
             font-size:.7rem; font-weight:600; background:#ecfdf5; color:#047857;
         }
         @media (max-width: 760px) {
-            header { padding: 5.2rem 1rem 1.35rem; }
-            .header-buttons { left:10px; right:10px; top:10px; justify-content:center; }
+            header { padding: 1.5rem 1rem 1.35rem; }
+            .header-buttons { position:static; justify-content:center; margin-bottom:12px; }
             .action-badge-btn { font-size:.72rem; padding:6px 10px; }
             header h1 { font-size:1.55rem; }
             .container { padding:18px 12px; }
@@ -263,39 +271,13 @@
         }
 
     </style>
-<style>
-/* Clean shop header: no Delivery Portal / My Orders / Admin buttons beside the shop name */
-header .header-actions:empty,
-header .nav-actions:empty { display:none !important; }
-</style>
-
-<style>
-.top-header-actions button{
-  border:1px solid rgba(0,0,0,.12);
-  background:#fff;
-  color:inherit;
-  cursor:pointer;
-  font-weight:600;
-}
-.top-header-actions button:hover{transform:translateY(-1px);}
-@media (max-width:600px){
-  .top-header-actions{justify-content:center !important;margin-bottom:8px !important;}
-  .top-header-actions button{font-size:12px;padding:7px 9px !important;}
-}
-</style>
 </head>
 <body>
 
     <div id="notification-toast">Update ho gaya!</div>
 
     <header>
-<div class="top-header-actions" style="display:flex;justify-content:flex-end;align-items:center;gap:8px;flex-wrap:wrap;width:100%;margin-bottom:10px;">
-  <button type="button" onclick="showDelivery()" style="padding:8px 12px;border-radius:8px;">Delivery Portal</button>
-  <button type="button" onclick="showMyOrders()" style="padding:8px 12px;border-radius:8px;">My Orders</button>
-  <button type="button" onclick="showAdmin()" style="padding:8px 12px;border-radius:8px;">Admin</button>
-</div>
-
-      <div class="header-inner">
+<div class="header-inner">
         <div class="header-buttons">
             <button class="action-badge-btn" onclick="toggleDeliveryPartnerPortal()"><i class="fa-solid fa-motorcycle"></i> Delivery Portal</button>
             <button class="action-badge-btn" onclick="toggleCustomerOrdersModal()"><i class="fa-solid fa-box"></i> My Orders</button>
