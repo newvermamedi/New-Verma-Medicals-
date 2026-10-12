@@ -2,7 +2,10 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="description" content="New Verma Medicals - medicines, healthcare products, prescription upload and local delivery in Barwadda, Dhanbad.">
+    <meta name="color-scheme" content="light">
     <title>New Verma Medicals - Trusted Pharmacy & Healthcare</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -177,13 +180,122 @@
         footer span { color: #38bdf8; }
         .terms-link { color: #38bdf8; text-decoration: underline; cursor: pointer; margin-left: 5px; }
         .terms-link:hover { color: #ffffff; }
+
+        /* ===== Modern UX upgrades ===== */
+        html { scroll-behavior: smooth; }
+        body { overflow-x: hidden; }
+        button, input, select { -webkit-tap-highlight-color: transparent; }
+        button:focus-visible, input:focus-visible, select:focus-visible {
+            outline: 3px solid rgba(14,165,233,.25);
+            outline-offset: 2px;
+        }
+        .header-inner { max-width: 1200px; margin: 0 auto; position: relative; }
+        .header-buttons { flex-wrap: wrap; justify-content: flex-end; }
+        .action-badge-btn { min-height: 38px; backdrop-filter: blur(10px); }
+        .hero-note {
+            max-width: 760px; margin: 16px auto 0; padding: 10px 14px;
+            background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+            border-radius: 12px; color: #cbd5e1; font-size: .78rem;
+        }
+        .section-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin: 8px 0 14px; }
+        .section-heading h2 { font-size: 1.15rem; }
+        .result-count { color: var(--text-muted); font-size:.8rem; }
+        .empty-state {
+            grid-column: 1/-1; padding: 42px 20px; text-align:center;
+            background:#fff; border:1px dashed #cbd5e1; border-radius:var(--radius);
+            color:var(--text-muted);
+        }
+        .empty-state i { font-size:2rem; margin-bottom:10px; color:#94a3b8; }
+        .product-card { position:relative; }
+        .product-price-row { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:14px; }
+        .product-price { margin-bottom:0; }
+        .product-category-chip {
+            font-size:.68rem; padding:4px 8px; border-radius:999px;
+            background:#f0f9ff; color:#0369a1; font-weight:600;
+        }
+        .btn-primary:disabled, .btn-success:disabled, .btn-danger:disabled {
+            opacity:.6; cursor:not-allowed; transform:none !important;
+        }
+        .loading-state { text-align:center; padding:28px; color:var(--text-muted); }
+        .loading-state i { margin-right:7px; }
+        .modal-content { border:1px solid rgba(148,163,184,.25); }
+        .form-group input:invalid:not(:placeholder-shown) { border-color:#fca5a5; }
+        .file-help { font-size:.72rem; color:#64748b; margin-top:5px; }
+        .security-note {
+            margin-top:10px; padding:10px 12px; border-radius:10px;
+            background:#f8fafc; border:1px solid #e2e8f0; color:#64748b; font-size:.72rem;
+        }
+        .admin-stats {
+            display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:15px 0 20px;
+        }
+        .stat-card { padding:13px; border-radius:12px; background:linear-gradient(135deg,#f8fafc,#eef6ff); border:1px solid #e2e8f0; }
+        .stat-card strong { display:block; font-size:1.35rem; color:#0369a1; }
+        .stat-card span { font-size:.72rem; color:#64748b; }
+        .offline-badge {
+            display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px;
+            font-size:.7rem; font-weight:600; background:#ecfdf5; color:#047857;
+        }
+        @media (max-width: 760px) {
+            header { padding: 5.2rem 1rem 1.35rem; }
+            .header-buttons { left:10px; right:10px; top:10px; justify-content:center; }
+            .action-badge-btn { font-size:.72rem; padding:6px 10px; }
+            header h1 { font-size:1.55rem; }
+            .container { padding:18px 12px; }
+            .banner-grid { grid-template-columns:1fr; gap:14px; }
+            .category-card { height:145px; }
+            .products-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+            .product-img-container { height:135px; }
+            .product-details { padding:12px; }
+            .product-title { font-size:.9rem; }
+            .product-price { font-size:1rem; }
+            .filter-bar { align-items:stretch; }
+            .search-box { min-width:100%; }
+            .filter-buttons { width:100%; }
+            .admin-stats { grid-template-columns:repeat(2,1fr); }
+            #notification-toast { left:12px; right:12px; bottom:14px; text-align:center; }
+        }
+        @media (max-width: 390px) {
+            .products-grid { grid-template-columns:1fr; }
+            .product-img-container { height:160px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important; }
+        }
+
     </style>
+<style>
+/* Clean shop header: no Delivery Portal / My Orders / Admin buttons beside the shop name */
+header .header-actions:empty,
+header .nav-actions:empty { display:none !important; }
+</style>
+
+<style>
+.top-header-actions button{
+  border:1px solid rgba(0,0,0,.12);
+  background:#fff;
+  color:inherit;
+  cursor:pointer;
+  font-weight:600;
+}
+.top-header-actions button:hover{transform:translateY(-1px);}
+@media (max-width:600px){
+  .top-header-actions{justify-content:center !important;margin-bottom:8px !important;}
+  .top-header-actions button{font-size:12px;padding:7px 9px !important;}
+}
+</style>
 </head>
 <body>
 
     <div id="notification-toast">Update ho gaya!</div>
 
     <header>
+<div class="top-header-actions" style="display:flex;justify-content:flex-end;align-items:center;gap:8px;flex-wrap:wrap;width:100%;margin-bottom:10px;">
+  <button type="button" onclick="showDelivery()" style="padding:8px 12px;border-radius:8px;">Delivery Portal</button>
+  <button type="button" onclick="showMyOrders()" style="padding:8px 12px;border-radius:8px;">My Orders</button>
+  <button type="button" onclick="showAdmin()" style="padding:8px 12px;border-radius:8px;">Admin</button>
+</div>
+
+      <div class="header-inner">
         <div class="header-buttons">
             <button class="action-badge-btn" onclick="toggleDeliveryPartnerPortal()"><i class="fa-solid fa-motorcycle"></i> Delivery Portal</button>
             <button class="action-badge-btn" onclick="toggleCustomerOrdersModal()"><i class="fa-solid fa-box"></i> My Orders</button>
@@ -192,6 +304,8 @@
         <h1>NEW VERMA MEDICALS</h1>
         <p>Loharbarwa, Barwadda, Dhanbad, Jharkhand | Sampark: +91 7992308032</p>
         <div class="tagline">Your Health, Our Priority</div>
+        <div class="hero-note"><i class="fa-solid fa-shield-heart"></i> Genuine medicines • Local delivery • Prescription verification</div>
+      </div>
     </header>
 
     <div class="container">
@@ -280,7 +394,7 @@
         <div class="filter-bar">
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="search-input" placeholder="Dawaiyan ya products khojein..." onkeyup="searchProducts()">
+                <input aria-label="Search products" type="text" id="search-input" placeholder="Dawaiyan ya products khojein..." onkeyup="searchProducts()">
             </div>
             <div class="filter-buttons">
                 <button class="filter-btn active" onclick="filterByCategory('All')">Sabhi</button>
@@ -290,7 +404,13 @@
             </div>
         </div>
 
-        <div class="products-grid" id="products-container"></div>
+        <div class="section-heading">
+            <h2><i class="fa-solid fa-pills" style="color:var(--primary);"></i> Available Products</h2>
+            <span class="result-count" id="result-count">0 products</span>
+        </div>
+        <div class="products-grid" id="products-container">
+            <div class="loading-state"><i class="fa-solid fa-spinner fa-spin"></i> Products load ho rahe hain...</div>
+        </div>
 
     </div>
 
@@ -316,11 +436,12 @@
             </div>
             <div class="form-group">
                 <label>Mobile Number</label>
-                <input type="tel" id="rx-cust-phone" placeholder="10 anko ka mobile number">
+                <input inputmode="numeric" maxlength="10" aria-label="Prescription customer mobile number" type="tel" id="rx-cust-phone" placeholder="10 anko ka mobile number">
             </div>
             <div class="form-group">
                 <label>Prescription Photo (Gallery ya Camera se chunein)</label>
-                <input type="file" id="rx-file-input" accept="image/*" style="padding: 8px; border: 1px solid #cbd5e1; border-radius: 10px; width: 100%; background: #f8fafc; cursor: pointer;">
+                <input type="file" id="rx-file-input" accept="image/*" capture="environment" style="padding: 8px; border: 1px solid #cbd5e1; border-radius: 10px; width: 100%; background: #f8fafc; cursor: pointer;">
+                <div class="file-help">JPG/PNG/WebP • maximum 5 MB. Photo automatically compress hogi.</div>
             </div>
             <button class="btn-primary" style="width: 100%;" onclick="submitPrescription()">Prescription Bhejein</button>
         </div>
@@ -349,7 +470,7 @@
             
             <div class="form-group" id="otp-phone-group">
                 <label>Registered Mobile Number</label>
-                <input type="tel" id="check-cust-phone" placeholder="10 anko ka mobile number...">
+                <input inputmode="numeric" maxlength="10" aria-label="Registered mobile number" type="tel" id="check-cust-phone" placeholder="10 anko ka mobile number...">
                 <button class="btn-primary" style="width: 100%; margin-top: 10px;" onclick="sendCustomerOTP()">OTP Bhejein</button>
             </div>
 
@@ -357,6 +478,7 @@
                 <label>Enter 4-digit OTP (Demo OTP: <b style="color:var(--primary);" id="display-demo-otp">1234</b>)</label>
                 <input type="text" id="entered-otp" placeholder="OTP yahan likhein">
                 <button class="btn-success" style="width: 100%; margin-top: 10px;" onclick="verifyCustomerOTP()">Verify OTP & View Details</button>
+                <div class="security-note"><i class="fa-solid fa-circle-info"></i> Current website uses a demo OTP in the browser. For real SMS OTP, Firebase Phone Authentication should be enabled.</div>
             </div>
 
             <div id="customer-orders-result" style="margin-top: 15px;"></div>
@@ -435,7 +557,7 @@
             </div>
             <div class="form-group">
                 <label>Mobile Number</label>
-                <input type="tel" id="cust-phone" placeholder="10 anko ka mobile number">
+                <input inputmode="numeric" maxlength="10" aria-label="Customer mobile number" type="tel" id="cust-phone" placeholder="10 anko ka mobile number">
             </div>
             <div class="form-group">
                 <label>Pata (Address)</label>
@@ -455,12 +577,13 @@
                 <p style="font-size: 0.75rem; color: #64748b; margin-bottom: 8px;">UPI ID: <b>7992308032@ptaxis</b></p>
                 <div class="form-group" style="text-align: left; margin-bottom: 0;">
                     <label style="font-size: 0.75rem;">Payment Screenshot (Gallery se chunein)</label>
-                    <input type="file" id="payment-file-input" accept="image/*" style="font-size: 0.8rem; padding: 6px; border: 1px solid #cbd5e1; border-radius: 8px; width: 100%; background: #fff;">
+                    <input type="file" id="payment-file-input" accept="image/*" capture="environment" style="font-size: 0.8rem; padding: 6px; border: 1px solid #cbd5e1; border-radius: 8px; width: 100%; background: #fff;">
+                    <div class="file-help">JPG/PNG/WebP • maximum 5 MB.</div>
                 </div>
             </div>
 
             <div id="final-payable-box" style="font-weight: 600; margin-bottom: 15px; color: var(--primary);"></div>
-            <button class="btn-primary" style="width: 100%;" onclick="submitOrder()">Order Submit Karein (Admin Approval Required)</button>
+            
         </div>
     </div>
 
@@ -491,6 +614,8 @@
         let selectedOrderForReturn = null;
         let appliedDiscountAmount = 0;
         let appliedCreditKey = null;
+        let activeCategory = "All";
+        let isSubmittingOrder = false;
         const ADMIN_SECRET_PIN = "Verma@Med#2026";
         
         let generatedOtpCode = "1234";
@@ -503,6 +628,47 @@
             setTimeout(() => { toast.style.display = "none"; }, 3000);
         }
 
+        const escapeHTML = (value) => String(value ?? "")
+            .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;").replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+        const validPhone = (phone) => /^[6-9]\d{9}$/.test(String(phone).replace(/\s+/g, ""));
+
+        function setButtonLoading(button, loading, loadingText = "Please wait...") {
+            if (!button) return;
+            if (loading) {
+                button.dataset.originalText = button.innerHTML;
+                button.disabled = true;
+                button.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ${loadingText}`;
+            } else {
+                button.disabled = false;
+                if (button.dataset.originalText) button.innerHTML = button.dataset.originalText;
+            }
+        }
+
+        function updateAdminStats() {
+            const set = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
+            set("stat-products", allProducts.length);
+            set("stat-pending", allOrders.filter(o => (o.status || "").includes("Pending")).length);
+            set("stat-rx", allPrescriptions.filter(r => r.status === "Pending Verification").length);
+            set("stat-returns", allReturns.filter(r => r.status === "Pending Return Approval").length);
+        }
+
+        async function compressImage(file, maxSize = 1400, quality = 0.72) {
+            if (!file || !file.type.startsWith("image/")) throw new Error("Please select an image.");
+            if (file.size > 5 * 1024 * 1024) throw new Error("Image 5 MB se chhoti honi chahiye.");
+            const bitmap = await createImageBitmap(file);
+            const scale = Math.min(1, maxSize / Math.max(bitmap.width, bitmap.height));
+            const canvas = document.createElement("canvas");
+            canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+            canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+            const ctx = canvas.getContext("2d", { alpha: false });
+            ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+            bitmap.close();
+            return canvas.toDataURL("image/jpeg", quality);
+        }
+
         window.toggleAdminMode = function() {
             if (!isAdmin) {
                 let pin = prompt("Surakshit Admin Password darj karein:");
@@ -510,7 +676,7 @@
                     isAdmin = true;
                     document.getElementById("admin-panel").style.display = "block";
                     document.getElementById("admin-icon").className = "fa-solid fa-unlock";
-                    renderProducts(allProducts);
+                    renderProducts();
                     renderOrders();
                     renderReturns();
                     renderPrescriptionRequests();
@@ -522,7 +688,7 @@
                 document.getElementById("admin-panel").style.display = "none";
                 document.getElementById("admin-icon").className = "fa-solid fa-lock";
                 resetAdminForm();
-                renderProducts(allProducts);
+                renderProducts();
                 showToast("Admin mode band ho gaya!");
             }
         }
@@ -594,8 +760,8 @@
 
         window.sendCustomerOTP = function() {
             const phone = document.getElementById("check-cust-phone").value.trim();
-            if (phone.length < 10) {
-                alert("Kripya vaid 10 anko ka mobile number darj karein!");
+            if (!validPhone(phone)) {
+                alert("Kripya valid 10 anko ka Indian mobile number darj karein.");
                 return;
             }
             verifiedPhoneNum = phone;
@@ -808,7 +974,8 @@
             if (data) {
                 Object.keys(data).forEach(key => allProducts.push({ id: key, ...data[key] }));
             }
-            renderProducts(allProducts);
+            renderProducts();
+            updateAdminStats();
         });
 
         const ordersRef = ref(db, 'orders');
@@ -819,6 +986,7 @@
                 Object.keys(data).reverse().forEach(key => allOrders.push({ id: key, ...data[key] }));
             }
             renderOrders();
+            updateAdminStats();
             renderDeliveryPartnerView();
             if (verifiedPhoneNum) refreshCustomerOrdersView();
         });
@@ -831,6 +999,7 @@
                 Object.keys(data).reverse().forEach(key => allReturns.push({ id: key, ...data[key] }));
             }
             if (isAdmin) renderReturns();
+            updateAdminStats();
             if (verifiedPhoneNum) refreshCustomerOrdersView();
         });
 
@@ -852,6 +1021,7 @@
                 Object.keys(data).reverse().forEach(key => allPrescriptions.push({ id: key, ...data[key] }));
             }
             if (isAdmin) renderPrescriptionRequests();
+            updateAdminStats();
         });
 
         window.renderPrescriptionRequests = function() {
@@ -899,7 +1069,10 @@
                 return;
             }
 
-            const matched = allCredits.filter(cr => cr.customerPhone.toLowerCase().includes(query) || cr.couponCode.toLowerCase().includes(query));
+            const matched = allCredits.filter(cr =>
+                String(cr.customerPhone || "").toLowerCase().includes(query) ||
+                String(cr.couponCode || "").toLowerCase().includes(query)
+            );
             if (matched.length === 0) {
                 resContainer.innerHTML = `<p style="color: #ef4444; font-size: 0.85rem;">Koi record nahi mila.</p>`;
                 return;
@@ -1170,40 +1343,74 @@
             }
         }
 
-        window.renderProducts = function(products) {
+        function getVisibleProducts() {
+            const query = document.getElementById("search-input").value.trim().toLowerCase();
+            return allProducts.filter(p => {
+                const categoryMatch = activeCategory === "All" || p.category === activeCategory;
+                const text = `${p.name || ""} ${p.category || ""}`.toLowerCase();
+                return categoryMatch && (!query || text.includes(query));
+            });
+        }
+
+        window.renderProducts = function() {
             const container = document.getElementById("products-container");
+            const visible = getVisibleProducts();
             container.innerHTML = "";
-            products.forEach(p => {
+
+            const countEl = document.getElementById("result-count");
+            if (countEl) countEl.textContent = `${visible.length} product${visible.length === 1 ? "" : "s"}`;
+
+            if (!visible.length) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fa-solid fa-box-open"></i>
+                        <h3>Koi product nahi mila</h3>
+                        <p>Search ya category filter badal kar dekhein.</p>
+                    </div>`;
+                return;
+            }
+
+            visible.forEach(p => {
                 const card = document.createElement("div");
                 card.className = "product-card";
+                const safeName = escapeHTML(p.name);
+                const safeCategory = escapeHTML(p.category);
+                const safeImg = escapeHTML(p.img);
+                const safePrice = Number.parseFloat(p.price) || 0;
                 card.innerHTML = `
                     <div class="product-img-container">
-                        <span class="product-tag">${p.category}</span>
-                        <img src="${p.img}">
+                        <span class="product-tag">${safeCategory}</span>
+                        <img src="${safeImg}" alt="${safeName}" loading="lazy"
+                             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80';">
                     </div>
                     <div class="product-details">
-                        <div class="product-title">${p.name}</div>
-                        <div class="product-price">₹${p.price}</div>
-                        <button class="btn-primary" onclick="openCheckoutModal('${p.name}', '${p.price}')">Order Karein</button>
-                        
-                        <div class="admin-product-controls" style="display: ${isAdmin ? 'flex' : 'none'};">
-                            <button class="btn-warning" style="flex:1;" onclick="editProduct('${p.id}')"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
-                            <button class="btn-danger" style="flex:1;" onclick="deleteProduct('${p.id}')"><i class="fa-solid fa-trash"></i> Delete</button>
+                        <div class="product-title">${safeName}</div>
+                        <div class="product-price-row">
+                            <div class="product-price">₹${safePrice.toFixed(2)}</div>
+                            <span class="product-category-chip">${safeCategory}</span>
                         </div>
-                    </div>
-                `;
+                        <button class="btn-primary" style="width:100%;" onclick="openCheckoutModal(${JSON.stringify(String(p.name))}, ${safePrice})">
+                            <i class="fa-solid fa-cart-plus"></i> Order Karein
+                        </button>
+                        <div class="admin-product-controls" style="display:${isAdmin ? 'flex' : 'none'};">
+                            <button class="btn-warning" style="flex:1;" onclick="editProduct('${escapeHTML(p.id)}')"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
+                            <button class="btn-danger" style="flex:1;" onclick="deleteProduct('${escapeHTML(p.id)}')"><i class="fa-solid fa-trash"></i> Delete</button>
+                        </div>
+                    </div>`;
                 container.appendChild(card);
             });
         }
 
         window.filterByCategory = function(category) {
-            if (category === 'All') renderProducts(allProducts);
-            else renderProducts(allProducts.filter(p => p.category === category));
+            activeCategory = category;
+            document.querySelectorAll(".filter-btn").forEach(btn => {
+                btn.classList.toggle("active", btn.textContent.trim() === (category === "All" ? "Sabhi" : category));
+            });
+            renderProducts();
         }
 
         window.searchProducts = function() {
-            const query = document.getElementById("search-input").value.toLowerCase();
-            renderProducts(allProducts.filter(p => p.name.toLowerCase().includes(query)));
+            renderProducts();
         }
 
         window.openCheckoutModal = function(name, price) {
@@ -1245,14 +1452,27 @@
                 return;
             }
 
-            let foundCredit = allCredits.find(cr => cr.couponCode === code && !cr.isUsed);
-            if (!foundCredit) {
+            const phone = document.getElementById("cust-phone").value.trim();
+            if (!validPhone(phone)) {
                 msgEl.style.color = "#ef4444";
-                msgEl.innerText = "Amanya ya pehle se istemal kiya gaya coupon code!";
+                msgEl.innerText = "Pehle valid customer mobile number bharein.";
                 return;
             }
 
-            appliedDiscountAmount = foundCredit.amount;
+            let foundCredit = allCredits.find(cr =>
+                String(cr.couponCode || "").toUpperCase() === code.toUpperCase() &&
+                !cr.isUsed &&
+                String(cr.customerPhone || "") === phone
+            );
+            if (!foundCredit) {
+                msgEl.style.color = "#ef4444";
+                msgEl.innerText = "Coupon invalid hai, used hai, ya is mobile number se linked nahi hai.";
+                return;
+            }
+
+            const currentQty = parseInt(document.getElementById("order-quantity").value) || 1;
+            const orderTotal = selectedProductForOrder.unitPrice * currentQty;
+            appliedDiscountAmount = Math.min(parseFloat(foundCredit.amount) || 0, orderTotal);
             appliedCreditKey = foundCredit.id;
             updateTotalPriceCalculation();
 
@@ -1260,59 +1480,97 @@
             msgEl.innerText = `Coupon lagu ho gaya! ₹${appliedDiscountAmount} ki chhoot mili.`;
         }
 
-        window.submitOrder = function() {
+        window.submitOrder = async function() {
+            if (isSubmittingOrder) return;
+
             const name = document.getElementById("cust-name").value.trim();
             const phone = document.getElementById("cust-phone").value.trim();
             const address = document.getElementById("cust-address").value.trim();
             const payment = document.getElementById("payment-type").value;
-            const qty = parseInt(document.getElementById("order-quantity").value) || 1;
+            const qty = Math.min(5, Math.max(1, parseInt(document.getElementById("order-quantity").value) || 1));
             const fileInput = document.getElementById("payment-file-input");
+            const submitBtn = document.querySelector('#checkout-modal .btn-primary:last-child');
+
+            if (!name || !phone || !address) {
+                alert("Kripya naam, mobile aur address bharein!");
+                return;
+            }
+            if (!validPhone(phone)) {
+                alert("Kripya valid 10 anko ka Indian mobile number darj karein.");
+                return;
+            }
+            if (!selectedProductForOrder || !Number.isFinite(selectedProductForOrder.unitPrice)) {
+                alert("Product selection invalid hai. Dobara try karein.");
+                return;
+            }
+            if (payment === "Online" && fileInput.files.length === 0) {
+                alert("Kripya online payment ka screenshot chunein!");
+                return;
+            }
+            if (fileInput.files.length > 0 && fileInput.files[0].size > 5 * 1024 * 1024) {
+                alert("Payment screenshot 5 MB se chhota hona chahiye.");
+                return;
+            }
+
+            const totalMRP = selectedProductForOrder.unitPrice * qty;
+            const finalPayable = Math.max(0, totalMRP - Math.min(appliedDiscountAmount, totalMRP));
             const timeStr = new Date().toLocaleString();
 
-            if (!name || !phone || !address) { alert("Kripya sabhi jaankari bharein!"); return; }
-            if (payment === "Online" && fileInput.files.length === 0) { alert("Kripya online payment ka screenshot chunein!"); return; }
+            isSubmittingOrder = true;
+            setButtonLoading(submitBtn, true, "Order save ho raha hai...");
 
-            let totalMRP = selectedProductForOrder.unitPrice * qty;
-            let finalPayable = Math.max(0, totalMRP - appliedDiscountAmount);
+            try {
+                let screenshotBase64 = "";
+                if (payment === "Online" && fileInput.files.length > 0) {
+                    screenshotBase64 = await compressImage(fileInput.files[0], 1400, 0.72);
+                }
 
-            function saveOrderData(screenshotBase64) {
-                showToast("Order darj ho raha hai (Admin approval required)...");
-                const ordersRef = ref(db, 'orders');
-                push(ordersRef, {
+                const orderRef = await push(ref(db, 'orders'), {
                     customerName: name,
                     customerPhone: phone,
                     address: address,
                     paymentType: payment,
-                    paymentScreenshot: screenshotBase64 || "",
+                    paymentScreenshot: screenshotBase64,
                     productName: selectedProductForOrder.name,
                     quantity: qty,
+                    unitPrice: selectedProductForOrder.unitPrice.toFixed(2),
                     productPrice: finalPayable.toFixed(2),
+                    couponCode: appliedCreditKey ? (allCredits.find(c => c.id === appliedCreditKey)?.couponCode || "") : "",
+                    discountAmount: Math.min(appliedDiscountAmount, totalMRP).toFixed(2),
                     timestamp: timeStr,
                     status: "Pending Admin Approval"
-                }).then(() => {
-                    if (appliedCreditKey) {
-                        update(ref(db, 'credits/' + appliedCreditKey), { isUsed: true, usedMode: 'Online' });
-                    }
-
-                    showToast("Aapka order submit ho gaya! Admin dwara accept hone par confirm hoga.");
-                    closeCheckoutModal();
-                    document.getElementById("cust-name").value = "";
-                    document.getElementById("cust-phone").value = "";
-                    document.getElementById("cust-address").value = "";
-                    fileInput.value = "";
                 });
-            }
 
-            if (payment === "Online" && fileInput.files.length > 0) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    saveOrderData(e.target.result);
-                };
-                reader.readAsDataURL(fileInput.files[0]);
-            } else {
-                saveOrderData("");
+                if (appliedCreditKey) {
+                    await update(ref(db, 'credits/' + appliedCreditKey), {
+                        isUsed: true,
+                        usedMode: 'Online',
+                        usedOrderId: orderRef.key,
+                        usedAt: timeStr
+                    });
+                }
+
+                showToast("Order submit ho gaya! Admin approval ka wait karein.");
+                closeCheckoutModal();
+                ["cust-name", "cust-phone", "cust-address"].forEach(id => document.getElementById(id).value = "");
+                fileInput.value = "";
+                appliedDiscountAmount = 0;
+                appliedCreditKey = null;
+            } catch (err) {
+                console.error(err);
+                alert("Order save nahi ho saka. Internet connection aur Firebase settings check karein.");
+            } finally {
+                isSubmittingOrder = false;
+                setButtonLoading(submitBtn, false);
             }
         }
+
+        window.addEventListener("error", (event) => {
+            console.error("Application error:", event.error || event.message);
+        });
+        window.addEventListener("unhandledrejection", (event) => {
+            console.error("Unhandled promise rejection:", event.reason);
+        });
     </script>
 </body>
 </html>
