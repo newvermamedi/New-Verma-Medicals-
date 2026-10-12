@@ -95,8 +95,9 @@
         .action-badge-btn {
             background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.25);
             color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 500; cursor: pointer; transition: 0.3s;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
         }
-        .action-badge-btn:hover { background: #0284c7; transform: scale(1.05); }
+        .action-badge-btn:hover { background: #0284c7; transform: scale(1.05); color: white; }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 25px 20px; width: 100%; flex: 1; }
 
@@ -310,6 +311,10 @@
         <div class="header-buttons">
             <button class="action-badge-btn" onclick="toggleDeliveryPartnerPortal()"><i class="fa-solid fa-motorcycle"></i> Delivery Portal</button>
             <button class="action-badge-btn" onclick="toggleCustomerOrdersModal()"><i class="fa-solid fa-box"></i> My Orders</button>
+            <!-- Maps Option Added in Header -->
+            <a href="https://maps.google.com/?q=Loharbarwa+Barwadda+Dhanbad+Jharkhand" target="_blank" class="action-badge-btn">
+                <i class="fa-solid fa-map-marker-alt"></i> Maps
+            </a>
             <button class="action-badge-btn" onclick="toggleAdminMode()"><i class="fa-solid fa-lock" id="admin-icon"></i> Admin</button>
         </div>
         <h1>NEW VERMA MEDICALS</h1>
@@ -456,7 +461,8 @@
             </div>
             <div class="form-group">
                 <label>Prescription Photo (Gallery ya Camera se chunein)</label>
-                <input type="file" id="rx-file-input" accept="image/*" capture="environment" style="padding: 8px; border: 1px solid #cbd5e1; border-radius: 10px; width: 100%; background: #f8fafc; cursor: pointer;">
+                <!-- capture attribute removed to allow both Gallery and Camera -->
+                <input type="file" id="rx-file-input" accept="image/*" style="padding: 8px; border: 1px solid #cbd5e1; border-radius: 10px; width: 100%; background: #f8fafc; cursor: pointer;">
                 <div class="file-help">JPG/PNG/WebP • maximum 5 MB. Photo automatically compress hogi.</div>
             </div>
             <button class="btn-primary" style="width: 100%;" onclick="submitPrescription()">Prescription Bhejein</button>
@@ -561,7 +567,7 @@
             <div class="form-group"><label>Mobile Number</label><input id="cart-cust-phone" type="tel" inputmode="numeric" maxlength="10" placeholder="10 digit mobile"></div>
             <div class="form-group"><label>Delivery Address</label><input id="cart-cust-address" type="text" placeholder="Pura address"></div>
             <div class="form-group"><label>Payment</label><select id="cart-payment-type" onchange="document.getElementById('cart-upi-box').style.display=this.value==='Online'?'block':'none'"><option value="Cash on Delivery">Cash on Delivery</option><option value="Online">Online / UPI</option></select></div>
-            <div id="cart-upi-box" style="display:none;background:#f0f9ff;padding:10px;border-radius:10px;margin-bottom:12px;text-align:center;"><b>UPI: 7992308032@ptaxis</b><br><img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=upi://pay?pa=7992308032@ptaxis&pn=NewVermaMedicals" style="width:120px;margin:8px"><input id="cart-payment-file" type="file" accept="image/*" capture="environment" style="width:100%"></div>
+            <div id="cart-upi-box" style="display:none;background:#f0f9ff;padding:10px;border-radius:10px;margin-bottom:12px;text-align:center;"><b>UPI: 7992308032@ptaxis</b><br><img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=upi://pay?pa=7992308032@ptaxis&pn=NewVermaMedicals" style="width:120px;margin:8px"><!-- capture attribute removed --> <input id="cart-payment-file" type="file" accept="image/*" style="width:100%"></div>
             <button id="cart-submit-btn" class="btn-primary" style="width:100%;" onclick="submitCartOrder()">Order Submit Karein</button>
         </div>
     </div>
@@ -619,7 +625,8 @@
                 <p style="font-size: 0.75rem; color: #64748b; margin-bottom: 8px;">UPI ID: <b>7992308032@ptaxis</b></p>
                 <div class="form-group" style="text-align: left; margin-bottom: 0;">
                     <label style="font-size: 0.75rem;">Payment Screenshot (Gallery se chunein)</label>
-                    <input type="file" id="payment-file-input" accept="image/*" capture="environment" style="font-size: 0.8rem; padding: 6px; border: 1px solid #cbd5e1; border-radius: 8px; width: 100%; background: #fff;">
+                    <!-- capture attribute removed -->
+                    <input type="file" id="payment-file-input" accept="image/*" style="font-size: 0.8rem; padding: 6px; border: 1px solid #cbd5e1; border-radius: 8px; width: 100%; background: #fff;">
                     <div class="file-help">JPG/PNG/WebP • maximum 5 MB.</div>
                 </div>
             </div>
