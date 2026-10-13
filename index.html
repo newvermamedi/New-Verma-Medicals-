@@ -72,7 +72,7 @@
         header {
             background: linear-gradient(135deg, #020617, #0f172a, #1e1b4b);
             color: white; padding: 2rem 1rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            position: sticky; top: 0; z-index: 100; overflow: hidden;
+            position: relative; z-index: 10; overflow: hidden;
             border-bottom: 3px solid #38bdf8;
         }
 
@@ -300,7 +300,23 @@
             .products-grid { grid-template-columns:1fr; }
             .product-img-container { height:160px; }
         }
-    </style>
+    
+/* MOBILE HEADER SCROLL FIX */
+header{position:relative !important; top:auto !important; z-index:10 !important;}
+@media(max-width:760px){
+  header{padding:12px 10px 16px !important;}
+  .header-buttons{margin-bottom:10px !important; gap:6px !important;}
+  .action-badge-btn{min-height:34px !important; padding:5px 8px !important; font-size:.67rem !important;}
+  header h1{font-size:1.42rem !important; margin-bottom:4px !important;}
+  header p{font-size:.76rem !important; margin-bottom:4px !important;}
+  .tagline{font-size:.72rem !important; letter-spacing:1.3px !important;}
+  .hero-note{font-size:.68rem !important; padding:7px 9px !important; margin-top:8px !important;}
+  .store-hours{font-size:.68rem !important; padding:6px 10px !important; margin-top:7px !important;}
+  .header-security-strip{margin-top:8px !important; gap:4px !important;}
+  .header-security-badge{font-size:.59rem !important; padding:5px 7px !important;}
+  .header-graphic{opacity:.06 !important;}
+}
+</style>
 </head>
 <body>
 
@@ -672,10 +688,13 @@
         // IMPORTANT: Paste the complete Firebase Web App config from
         // Firebase Console > Project settings > Your apps here.
         const firebaseAuthConfig = {
+            // Firebase Console → Project settings → Your apps → Web app
+            // Paste the REAL values here. Without these, SMS cannot be sent.
             apiKey: "PASTE_YOUR_FIREBASE_WEB_API_KEY",
             authDomain: "new-verma-medicals.firebaseapp.com",
             projectId: "new-verma-medicals",
-            appId: "PASTE_YOUR_FIREBASE_WEB_APP_ID"
+            appId: "PASTE_YOUR_FIREBASE_WEB_APP_ID",
+            messagingSenderId: "PASTE_YOUR_FIREBASE_MESSAGING_SENDER_ID"
         };
         const hasRealSmsConfig = !firebaseAuthConfig.apiKey.startsWith("PASTE_") && !firebaseAuthConfig.appId.startsWith("PASTE_");
         let auth = null;
@@ -920,7 +939,7 @@
                 return;
             }
             if (!auth) {
-                alert("Real SMS OTP abhi configure nahi hua hai. Firebase Web App config (apiKey + appId), Phone Sign-in aur SMS region policy enable karna zaroori hai.");
+                alert("SMS OTP abhi LIVE nahi hai. Is file mein Firebase Web App ka apiKey + appId + messagingSenderId paste karein, phir Firebase Authentication → Phone Sign-in ON, India SMS region allow aur deployed domain Authorized Domains mein add karein.");
                 return;
             }
             try {
