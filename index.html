@@ -68,7 +68,6 @@
             100% { border-color: #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.6), 0 0 30px rgba(2, 132, 199, 0.4); }
         }
 
-        /* Updated Header Styling: Premium Dark Navy Gradient Background */
         header {
             background: linear-gradient(135deg, #020617, #0f172a, #1e1b4b);
             color: white; padding: 2rem 1rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
@@ -243,7 +242,6 @@
         .cart-summary { font-size:.85rem; color:#334155; }
         .cart-count { display:inline-flex; min-width:26px; height:26px; align-items:center; justify-content:center; border-radius:999px; background:var(--primary); color:#fff; font-weight:700; margin-left:5px; }
         
-        /* Fixed Cart List Items & Delete Button Style */
         .cart-list-item { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 0; border-bottom:1px solid #e2e8f0; }
         .qty-controls { display:flex; align-items:center; gap:8px; }
         .qty-controls button { width:32px; height:32px; border:1px solid #cbd5e1; background:#fff; border-radius:8px; cursor:pointer; font-weight:700; color:#1e293b; display:flex; align-items:center; justify-content:center; }
@@ -301,7 +299,6 @@
             .product-img-container { height:160px; }
         }
     
-/* MOBILE HEADER SCROLL FIX */
 header{position:relative !important; top:auto !important; z-index:10 !important;}
 @media(max-width:760px){
   header{padding:12px 10px 16px !important;}
@@ -327,7 +324,6 @@ header{position:relative !important; top:auto !important; z-index:10 !important;
         <div class="header-buttons">
             <button class="action-badge-btn" onclick="toggleDeliveryPartnerPortal()"><i class="fa-solid fa-motorcycle"></i> Delivery Portal</button>
             <button class="action-badge-btn" onclick="toggleCustomerOrdersModal()"><i class="fa-solid fa-box"></i> My Orders</button>
-            <!-- Maps Option Added in Header -->
             <a href="https://maps.google.com/?q=Loharbarwa+Barwadda+Dhanbad+Jharkhand" target="_blank" class="action-badge-btn">
                 <i class="fa-solid fa-map-marker-alt"></i> Maps
             </a>
@@ -373,7 +369,6 @@ header{position:relative !important; top:auto !important; z-index:10 !important;
             </div>
         </div>
 
-        <!-- Admin Panel -->
         <div id="admin-panel">
             <h2 id="admin-form-title"><i class="fa-solid fa-user-shield"></i> Admin Dashboard - Naya Product Jodein</h2>
             <div class="security-note security-card">
@@ -465,7 +460,6 @@ header{position:relative !important; top:auto !important; z-index:10 !important;
 
     </div>
 
-    <!-- Delivery Partner Portal Modal -->
     <div class="modal-overlay" id="delivery-partner-modal">
         <div class="modal-content" style="max-width: 650px;">
             <button class="close-modal" onclick="toggleDeliveryPartnerPortal()">&times;</button>
@@ -475,7 +469,6 @@ header{position:relative !important; top:auto !important; z-index:10 !important;
         </div>
     </div>
 
-    <!-- Prescription Upload Modal -->
     <div class="modal-overlay" id="prescription-modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closePrescriptionModal()">&times;</button>
@@ -491,7 +484,6 @@ header{position:relative !important; top:auto !important; z-index:10 !important;
             </div>
             <div class="form-group">
                 <label>Prescription Photo (Gallery ya Camera se chunein)</label>
-                <!-- capture attribute removed to allow both Gallery and Camera -->
                 <input type="file" id="rx-file-input" accept="image/*" style="padding: 8px; border: 1px solid #cbd5e1; border-radius: 10px; width: 100%; background: #f8fafc; cursor: pointer;">
                 <div class="file-help">JPG/PNG/WebP • maximum 5 MB. Photo automatically compress hogi.</div>
             </div>
@@ -499,7 +491,6 @@ header{position:relative !important; top:auto !important; z-index:10 !important;
         </div>
     </div>
 
-    <!-- Terms & Conditions Modal -->
     <div class="modal-overlay" id="terms-modal">
         <div class="modal-content">
             <button class="close-modal" onclick="toggleTermsModal()">&times;</button>
@@ -513,7 +504,6 @@ header{position:relative !important; top:auto !important; z-index:10 !important;
         </div>
     </div>
 
-    <!-- Customer 'My Orders' Modal -->
     <div class="modal-overlay" id="customer-orders-modal">
         <div class="modal-content">
             <button class="close-modal" onclick="toggleCustomerOrdersModal()">&times;</button>
@@ -531,6 +521,7 @@ header{position:relative !important; top:auto !important; z-index:10 !important;
                 <label>SMS se mila 6-digit OTP</label>
                 <input inputmode="numeric" maxlength="6" autocomplete="one-time-code" type="text" id="entered-otp" placeholder="6-digit OTP yahan likhein">
                 <button class="btn-success" id="verify-otp-btn" style="width: 100%; margin-top: 10px;" onclick="verifyCustomerOTP()">Verify OTP & View Details</button>
+                <button class="btn-primary" id="resend-otp-btn" style="width: 100%; margin-top: 8px;" onclick="resendCustomerOTP()">Dobara SMS OTP Bhejein</button>
                 <div class="security-note"><i class="fa-solid fa-shield-halved"></i> Real SMS OTP Firebase Phone Authentication + reCAPTCHA se verify hota hai. OTP website par display nahi kiya jayega.</div>
             </div>
 
@@ -538,7 +529,6 @@ header{position:relative !important; top:auto !important; z-index:10 !important;
         </div>
     </div>
 
-    <!-- Rejection/Cancellation Reason Modal -->
     <div class="modal-overlay" id="reject-modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeRejectModal()">&times;</button>
@@ -560,7 +550,6 @@ header{position:relative !important; top:auto !important; z-index:10 !important;
         </div>
     </div>
 
-    <!-- Return Request Modal for Customer -->
     <div class="modal-overlay" id="return-modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeReturnModal()">&times;</button>
@@ -577,7 +566,6 @@ header{position:relative !important; top:auto !important; z-index:10 !important;
         </div>
     </div>
 
-    <!-- Cart Modal -->
     <div class="modal-overlay" id="cart-modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeCartModal()">&times;</button>
@@ -588,7 +576,6 @@ header{position:relative !important; top:auto !important; z-index:10 !important;
         </div>
     </div>
 
-    <!-- Multi-item Cart Checkout -->
     <div class="modal-overlay" id="cart-checkout-modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeCartCheckout()">&times;</button>
@@ -598,12 +585,11 @@ header{position:relative !important; top:auto !important; z-index:10 !important;
             <div class="form-group"><label>Mobile Number</label><input id="cart-cust-phone" type="tel" inputmode="numeric" maxlength="10" placeholder="10 digit mobile"></div>
             <div class="form-group"><label>Delivery Address</label><input id="cart-cust-address" type="text" placeholder="Pura address"></div>
             <div class="form-group"><label>Payment</label><select id="cart-payment-type" onchange="document.getElementById('cart-upi-box').style.display=this.value==='Online'?'block':'none'"><option value="Cash on Delivery">Cash on Delivery</option><option value="Online">Online / UPI</option></select></div>
-            <div id="cart-upi-box" style="display:none;background:#f0f9ff;padding:10px;border-radius:10px;margin-bottom:12px;text-align:center;"><b>UPI: 7992308032@ptaxis</b><br><img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=upi://pay?pa=7992308032@ptaxis&pn=NewVermaMedicals" style="width:120px;margin:8px"><!-- capture attribute removed --> <input id="cart-payment-file" type="file" accept="image/*" style="width:100%"></div>
+            <div id="cart-upi-box" style="display:none;background:#f0f9ff;padding:10px;border-radius:10px;margin-bottom:12px;text-align:center;"><b>UPI: 7992308032@ptaxis</b><br><img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=upi://pay?pa=7992308032@ptaxis&pn=NewVermaMedicals" style="width:120px;margin:8px"><input id="cart-payment-file" type="file" accept="image/*" style="width:100%"></div>
             <button id="cart-submit-btn" class="btn-primary" style="width:100%;" onclick="submitCartOrder()">Order Submit Karein</button>
         </div>
     </div>
 
-    <!-- Checkout Modal -->
     <div class="modal-overlay" id="checkout-modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeCheckoutModal()">&times;</button>
@@ -656,7 +642,6 @@ header{position:relative !important; top:auto !important; z-index:10 !important;
                 <p style="font-size: 0.75rem; color: #64748b; margin-bottom: 8px;">UPI ID: <b>7992308032@ptaxis</b></p>
                 <div class="form-group" style="text-align: left; margin-bottom: 0;">
                     <label style="font-size: 0.75rem;">Payment Screenshot (Gallery se chunein)</label>
-                    <!-- capture attribute removed -->
                     <input type="file" id="payment-file-input" accept="image/*" style="font-size: 0.8rem; padding: 6px; border: 1px solid #cbd5e1; border-radius: 8px; width: 100%; background: #fff;">
                     <div class="file-help">JPG/PNG/WebP • maximum 5 MB.</div>
                 </div>
@@ -678,40 +663,24 @@ header{position:relative !important; top:auto !important; z-index:10 !important;
         import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
         const firebaseConfig = {
-            databaseURL: "https://new-verma-medicals-default-rtdb.firebaseio.com/"
+            apiKey: "AIzaSyBWOUjLOY2dnmr_zYoxRvO5jSI0I47_raY",
+            authDomain: "new-verma-medicals.firebaseapp.com",
+            databaseURL: "https://new-verma-medicals-default-rtdb.firebaseio.com",
+            projectId: "new-verma-medicals",
+            storageBucket: "new-verma-medicals.firebasestorage.app",
+            messagingSenderId: "353970256570",
+            appId: "1:353970256570:web:e139f11fe228f41edea083",
+            measurementId: "G-EYWL6VHH01"
         };
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // REAL SMS OTP (Firebase Phone Authentication)
-        // IMPORTANT: Paste the complete Firebase Web App config from
-        // Firebase Console > Project settings > Your apps here.
-        const firebaseAuthConfig = {
-            // Firebase Console → Project settings → Your apps → Web app
-            // Paste the REAL values here. Without these, SMS cannot be sent.
-            apiKey: "PASTE_YOUR_FIREBASE_WEB_API_KEY",
-            authDomain: "new-verma-medicals.firebaseapp.com",
-            projectId: "new-verma-medicals",
-            appId: "PASTE_YOUR_FIREBASE_WEB_APP_ID",
-            messagingSenderId: "PASTE_YOUR_FIREBASE_MESSAGING_SENDER_ID"
-        };
-        const hasRealSmsConfig = !firebaseAuthConfig.apiKey.startsWith("PASTE_") && !firebaseAuthConfig.appId.startsWith("PASTE_");
-        let auth = null;
+        const auth = getAuth(app);
+        auth.languageCode = "en";
         let recaptchaVerifier = null;
         let confirmationResult = null;
-        if (hasRealSmsConfig) {
-            const authApp = initializeApp({ ...firebaseConfig, ...firebaseAuthConfig }, "newVermaAuth");
-            auth = getAuth(authApp);
-        }
 
-
-        if (!hasRealSmsConfig) {
-            setTimeout(() => {
-                const note = document.querySelector("#customer-orders-modal .security-note");
-                if (note) note.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Real SMS OTP code integrated hai, lekin Firebase Web App config abhi fill nahi hua. Firebase Console mein Phone Sign-in + SMS region policy + Authorized domain enable karke config paste karein.';
-            }, 0);
-        }
         let isAdmin = false;
         let allProducts = [];
         let allOrders = [];
@@ -726,7 +695,6 @@ header{position:relative !important; top:auto !important; z-index:10 !important;
         let activeCategory = "All";
         let isSubmittingOrder = false;
         const ADMIN_SECRET_PIN = "Verma@Med#2026";
-        // Client-side hardening layer. Real protection must also be enforced by Firebase Authentication + Database Rules.
         const ADMIN_MAX_ATTEMPTS = 5;
         const ADMIN_LOCKOUT_MS = 10 * 60 * 1000;
         const ADMIN_SESSION_MS = 20 * 60 * 1000;
@@ -756,7 +724,6 @@ header{position:relative !important; top:auto !important; z-index:10 !important;
                 sessionStorage.setItem("nvm_admin_locked_until", String(adminLockedUntil));
             }
         }
-
         
         let verifiedPhoneNum = "";
         let cartItems = JSON.parse(localStorage.getItem("newVermaCart") || "[]");
@@ -920,15 +887,15 @@ header{position:relative !important; top:auto !important; z-index:10 !important;
             reader.readAsDataURL(file);
         }
 
-        function ensureRecaptcha() {
-            if (!auth) return false;
-            if (recaptchaVerifier) return true;
+        async function ensureRecaptcha() {
+            if (recaptchaVerifier) return recaptchaVerifier;
             recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-container", {
                 size: "normal",
                 callback: () => showToast("reCAPTCHA verified. Ab SMS OTP bheja ja sakta hai."),
                 "expired-callback": () => showToast("reCAPTCHA expire ho gaya. Dobara verify karein.")
             });
-            return true;
+            await recaptchaVerifier.render();
+            return recaptchaVerifier;
         }
 
         window.sendCustomerOTP = async function() {
@@ -938,15 +905,11 @@ header{position:relative !important; top:auto !important; z-index:10 !important;
                 alert("Kripya valid 10 anko ka Indian mobile number darj karein.");
                 return;
             }
-            if (!auth) {
-                alert("SMS OTP abhi LIVE nahi hai. Is file mein Firebase Web App ka apiKey + appId + messagingSenderId paste karein, phir Firebase Authentication → Phone Sign-in ON, India SMS region allow aur deployed domain Authorized Domains mein add karein.");
-                return;
-            }
             try {
                 setButtonLoading(btn, true, "SMS OTP bheja ja raha hai...");
-                ensureRecaptcha();
+                const appVerifier = await ensureRecaptcha();
                 const phoneNumber = "+91" + phone;
-                confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, recaptchaVerifier);
+                confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
                 verifiedPhoneNum = phone;
                 document.getElementById("otp-phone-group").style.display = "none";
                 document.getElementById("otp-verify-group").style.display = "block";
@@ -955,9 +918,27 @@ header{position:relative !important; top:auto !important; z-index:10 !important;
                 console.error("Firebase SMS OTP error:", error);
                 try { if (recaptchaVerifier) recaptchaVerifier.clear(); } catch(e) {}
                 recaptchaVerifier = null;
-                alert("SMS OTP bhejne mein dikkat hui: " + (error?.message || "Unknown error") + "\n\nFirebase Console mein Phone provider, SMS region policy aur Authorized domain check karein.");
+                const code = error?.code ? "\nError code: " + error.code : "";
+                alert("SMS OTP bhejne mein dikkat hui: " + (error?.message || "Unknown error") + code);
             } finally {
                 setButtonLoading(btn, false);
+            }
+        }
+
+        window.resendCustomerOTP = async function() {
+            const phone = document.getElementById("check-cust-phone").value.trim().replace(/\s+/g, "");
+            if (!validPhone(phone)) { alert("Kripya valid 10 anko ka Indian mobile number darj karein."); return; }
+            try {
+                if (recaptchaVerifier) { try { recaptchaVerifier.clear(); } catch(e) {} recaptchaVerifier = null; }
+                const appVerifier = await ensureRecaptcha();
+                confirmationResult = await signInWithPhoneNumber(auth, "+91" + phone, appVerifier);
+                verifiedPhoneNum = phone;
+                showToast("Naya SMS OTP bhej diya gaya hai.");
+            } catch (error) {
+                console.error("Firebase resend OTP error:", error);
+                try { if (recaptchaVerifier) recaptchaVerifier.clear(); } catch(e) {}
+                recaptchaVerifier = null;
+                alert("OTP dobara bhejne mein dikkat hui: " + (error?.message || "Unknown error"));
             }
         }
 
@@ -991,112 +972,16 @@ header{position:relative !important; top:auto !important; z-index:10 !important;
             if(status.includes("Preparing"))idx=2; if(status.includes("Out for Delivery"))idx=3; if(status.includes("Delivered")||status.includes("Confirmed"))idx=4;
             return `<div class="tracking">${steps.map((x,i)=>`<div class="track-step ${i<=idx?'active':''}"><div class="track-dot">${i<idx?'✓':i+1}</div>${x}</div>`).join("")}</div>`;
         }
-        window.printOrderInvoice=function(orderId){ const o=allOrders.find(x=>x.id===orderId); if(!o)return; const items=o.items?.length?o.items.map(i=>`${i.productName} × ${i.quantity} — ₹${(Number(i.unitPrice)*Number(i.quantity)).toFixed(2)}`).join("<br>"):`${escapeHTML(o.productName||"")} × ${o.quantity||1}`; const w=window.open("","_blank"); if(!w)return; w.document.write(`<html><head><title>Invoice - New Verma Medicals</title><style>body{font-family:Arial;padding:30px;color:#222}h1{color:#0284c7}hr{border:0;border-top:1px solid #ddd}.total{font-size:20px;font-weight:bold;margin-top:20px}</style>
-<style id="final-visibility-polish">
-/* FINAL VISUAL UPDATE — cream header + charcoal foreground */
-header{
-    background:
-      radial-gradient(circle at 12% 22%, rgba(56,189,248,.12), transparent 24%),
-      radial-gradient(circle at 88% 28%, rgba(16,185,129,.10), transparent 24%),
-      linear-gradient(135deg,#fffaf0 0%,#fff7e8 52%,#f7f1e4 100%) !important;
-    color:#17202a !important;
-    border-bottom:3px solid #0ea5e9 !important;
-    box-shadow:0 10px 30px rgba(15,23,42,.12) !important;
-}
-header h1{
-    color:#0284c7 !important;
-    text-shadow:0 0 15px rgba(56,189,248,.45),0 0 28px rgba(16,185,129,.20) !important;
-}
-header p,.hero-note,.store-hours{
-    color:#252b31 !important;
-}
-.tagline{
-    color:#087f5b !important;
-}
-.hero-note{
-    background:rgba(255,255,255,.72) !important;
-    border:1px solid rgba(55,65,81,.20) !important;
-    font-weight:800 !important;
-    text-shadow:none !important;
-    box-shadow:0 5px 16px rgba(15,23,42,.06);
-}
-.hero-note i{color:#087f5b !important;}
-.store-hours{
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-    margin:10px auto 0;
-    padding:8px 14px;
-    border:1px solid rgba(55,65,81,.20);
-    border-radius:999px;
-    background:rgba(255,255,255,.82);
-    font-weight:800;
-    font-size:.82rem;
-    box-shadow:0 4px 12px rgba(15,23,42,.06);
-}
-.store-hours i{color:#0f766e;}
-.header-security-strip{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:8px;
-    margin:14px auto 0;
-    max-width:980px;
-}
-.header-security-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-    padding:7px 11px;
-    border-radius:999px;
-    background:rgba(255,255,255,.86);
-    border:1px solid rgba(14,116,144,.18);
-    color:#20262d;
-    font-size:.72rem;
-    font-weight:800;
-    box-shadow:0 4px 12px rgba(15,23,42,.05);
-}
-.header-security-badge i{color:#0284c7;}
-.header-security-badge.secure i{color:#087f5b;}
-.header-graphic{
-    position:absolute;
-    pointer-events:none;
-    opacity:.10;
-    z-index:0;
-}
-.header-graphic.shield{right:3%;top:24%;font-size:6rem;color:#0ea5e9;animation:securityFloat 5s ease-in-out infinite;}
-.header-graphic.pill{left:3%;bottom:12%;font-size:4rem;color:#10b981;transform:rotate(-22deg);animation:securityFloat 6s ease-in-out infinite reverse;}
-@keyframes securityFloat{
-    0%,100%{transform:translateY(0) rotate(0deg);}
-    50%{transform:translateY(-8px) rotate(3deg);}
-}
-.header-graphic.pill{transform:rotate(-22deg);}
-.category-card{position:relative;overflow:hidden;}
-.category-card img{width:100% !important;height:100% !important;object-fit:cover !important;}
-.category-card .content{
-    position:absolute;inset:auto 0 0 0;z-index:2;color:#fff;
-    background:linear-gradient(to top,rgba(0,0,0,.78),rgba(0,0,0,.38),transparent);
-    padding:34px 22px 20px !important;
-}
-.category-card .content h3,.category-card .content p{
-    color:#fff !important;text-shadow:0 1px 3px rgba(0,0,0,.65);
-}
-.security-card{
-    border:1px solid #dbeafe;
-    background:linear-gradient(135deg,#ffffff,#f8fbff);
-    box-shadow:0 8px 22px rgba(15,23,42,.06);
-}
-.security-card i{color:#087f5b;}
-@media(max-width:760px){
-    .header-security-strip{gap:6px;}
-    .header-security-badge{font-size:.66rem;padding:6px 9px;}
-    .header-graphic.shield{font-size:4rem;right:1%;top:31%;}
-    .header-graphic.pill{font-size:2.8rem;left:1%;}
-    .store-hours{font-size:.74rem;}
-}
-</style>
-</head><body><h1>NEW VERMA MEDICALS</h1><p>Loharbarwa, Barwadda, Dhanbad, Jharkhand<br>Contact: +91 7992308032</p><hr><h2>Order Invoice</h2><p><b>Order ID:</b> ${o.id}<br><b>Date:</b> ${escapeHTML(o.timestamp||"")}<br><b>Customer:</b> ${escapeHTML(o.customerName||"")}<br><b>Mobile:</b> ${escapeHTML(o.customerPhone||"")}<br><b>Address:</b> ${escapeHTML(o.address||"")}</p><hr><p>${items}</p><p class="total">Total: ₹${Number(o.productPrice||0).toFixed(2)}</p><p>Payment: ${escapeHTML(o.paymentType||"")}</p><p>Thank you for choosing New Verma Medicals.</p><script>window.print();<\/script></body></html>`); w.document.close(); }
+        
+        window.printOrderInvoice=function(orderId){ 
+            const o=allOrders.find(x=>x.id===orderId); 
+            if(!o)return; 
+            const items=o.items?.length?o.items.map(i=>`${escapeHTML(i.productName)} × ${i.quantity} — ₹${(Number(i.unitPrice)*Number(i.quantity)).toFixed(2)}`).join("<br>"):`${escapeHTML(o.productName||"")} × ${o.quantity||1}`; 
+            const w=window.open("","_blank"); 
+            if(!w)return; 
+            w.document.write(`<html><head><title>Invoice - New Verma Medicals</title><style>body{font-family:Arial;padding:30px;color:#222}h1{color:#0284c7}hr{border:0;border-top:1px solid #ddd}.total{font-size:20px;font-weight:bold;margin-top:20px}</style></head><body><h1>NEW VERMA MEDICALS</h1><p>Loharbarwa, Barwadda, Dhanbad, Jharkhand<br>Contact: +91 7992308032</p><hr><h2>Order Invoice</h2><p><b>Order ID:</b> ${escapeHTML(o.id)}<br><b>Date:</b> ${escapeHTML(o.timestamp||"")}<br><b>Customer:</b> ${escapeHTML(o.customerName||"")}<br><b>Mobile:</b> ${escapeHTML(o.customerPhone||"")}<br><b>Address:</b> ${escapeHTML(o.address||"")}</p><hr><p>${items}</p><p class="total">Total: ₹${Number(o.productPrice||0).toFixed(2)}</p><p>Payment: ${escapeHTML(o.paymentType||"")}</p><p>Thank you for choosing New Verma Medicals.</p><script>window.print();<\/script></body></html>`); 
+            w.document.close(); 
+        }
 
         window.refreshCustomerOrdersView = function() {
             const container = document.getElementById("customer-orders-result");
@@ -1112,7 +997,7 @@ header p,.hero-note,.store-hours{
                 rxBox.style.background = "#fef3c7";
                 rxBox.innerHTML = `<b>🩺 Aapka Prescription Status:</b><br>`;
                 matchedRx.forEach(rx => {
-                    rxBox.innerHTML += `Time: ${rx.timestamp} | Status: <b style="color:${rx.status.includes('Accepted') ? 'green' : (rx.status.includes('Not') ? 'red' : 'orange')}">${rx.status}</b><br><a href="${rx.imgUrl}" target="_blank" style="color:var(--primary); text-decoration:underline; font-size:0.75rem;">View Uploaded Photo</a><br>`;
+                    rxBox.innerHTML += `Time: ${escapeHTML(rx.timestamp)} | Status: <b style="color:${rx.status.includes('Accepted') ? 'green' : (rx.status.includes('Not') ? 'red' : 'orange')}">${escapeHTML(rx.status)}</b><br><a href="${escapeHTML(rx.imgUrl)}" target="_blank" style="color:var(--primary); text-decoration:underline; font-size:0.75rem;">View Uploaded Photo</a><br>`;
                 });
                 container.appendChild(rxBox);
             }
@@ -1123,7 +1008,7 @@ header p,.hero-note,.store-hours{
                 creditBox.style.background = "#e0f2fe";
                 creditBox.innerHTML = `<b>🏷️ Aapke Upalabdh Credit Coupons:</b><br>`;
                 matchedCredits.forEach(cr => {
-                    creditBox.innerHTML += `Code: <b style="color:var(--primary)">${cr.couponCode}</b> | Raashi: <b>₹${cr.amount}</b> (${cr.type})<br>`;
+                    creditBox.innerHTML += `Code: <b style="color:var(--primary)">${escapeHTML(cr.couponCode)}</b> | Raashi: <b>₹${escapeHTML(cr.amount)}</b> (${escapeHTML(cr.type)})<br>`;
                 });
                 container.appendChild(creditBox);
             }
@@ -1139,34 +1024,34 @@ header p,.hero-note,.store-hours{
                 div.className = "order-item-box";
                 
                 div.innerHTML = `
-                    <b>Order Time:</b> ${ord.timestamp}<br>
-                    <b>Item:</b> ${ord.productName} (Qty: ${ord.quantity || 1})<br>
-                    <b>Total Paid Amount:</b> <b>₹${ord.productPrice}</b><br>
-                    <b>Payment:</b> ${ord.paymentType} ${ord.paymentScreenshot ? `<br><a href="${ord.paymentScreenshot}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Payment Screenshot</a>` : ''}<br>
-                    <b>Address:</b> ${ord.address}<br>
-                    <b>Status:</b> <span style="color: ${statusColor}; font-weight: bold;">${ord.status}</span>
+                    <b>Order Time:</b> ${escapeHTML(ord.timestamp)}<br>
+                    <b>Item:</b> ${escapeHTML(ord.productName)} (Qty: ${escapeHTML(ord.quantity || 1)})<br>
+                    <b>Total Paid Amount:</b> <b>₹${escapeHTML(ord.productPrice)}</b><br>
+                    <b>Payment:</b> ${escapeHTML(ord.paymentType)} ${ord.paymentScreenshot ? `<br><a href="${escapeHTML(ord.paymentScreenshot)}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Payment Screenshot</a>` : ''}<br>
+                    <b>Address:</b> ${escapeHTML(ord.address)}<br>
+                    <b>Status:</b> <span style="color: ${statusColor}; font-weight: bold;">${escapeHTML(ord.status)}</span>
                     ${trackingHTML(ord.status)}
-                    ${ord.deliveryDateTime ? `<br><b>📅 Delivery Date & Time:</b> <span style="color: #0284c7; font-weight: bold;">${ord.deliveryDateTime}</span>` : ''}
-                    ${ord.reason ? `<br><b>Kaaran:</b> ${ord.reason}` : ''}
+                    ${ord.deliveryDateTime ? `<br><b>📅 Delivery Date & Time:</b> <span style="color: #0284c7; font-weight: bold;">${escapeHTML(ord.deliveryDateTime)}</span>` : ''}
+                    ${ord.reason ? `<br><b>Kaaran:</b> ${escapeHTML(ord.reason)}` : ''}
                 `;
 
                 let actionDiv = document.createElement("div");
-                actionDiv.innerHTML = `<button class="btn-primary" onclick="printOrderInvoice('${ord.id}')"><i class="fa-solid fa-file-invoice"></i> Invoice Print</button>`;
+                actionDiv.innerHTML = `<button class="btn-primary" onclick="printOrderInvoice('${escapeHTML(ord.id)}')"><i class="fa-solid fa-file-invoice"></i> Invoice Print</button>`;
                 actionDiv.style.marginTop = "10px";
                 actionDiv.style.display = "flex";
                 actionDiv.style.gap = "8px";
                 actionDiv.style.flexWrap = "wrap";
 
                 if (ord.status.includes("Pending")) {
-                    actionDiv.innerHTML += `<button class="btn-danger" onclick="openRejectModal('${ord.id}')"><i class="fa-solid fa-xmark"></i> Order Cancel Karein</button>`;
+                    actionDiv.innerHTML += `<button class="btn-danger" onclick="openRejectModal('${escapeHTML(ord.id)}')"><i class="fa-solid fa-xmark"></i> Order Cancel Karein</button>`;
                 } else if (ord.status.includes("Accepted") && !ord.status.includes("Customer Confirmed")) {
-                    actionDiv.innerHTML += `<button class="btn-success" onclick="markCustomerDelivered('${ord.id}')"><i class="fa-solid fa-check-double"></i> Mujhe Mil Gaya (Delivered Confirm)</button>`;
+                    actionDiv.innerHTML += `<button class="btn-success" onclick="markCustomerDelivered('${escapeHTML(ord.id)}')"><i class="fa-solid fa-check-double"></i> Mujhe Mil Gaya (Delivered Confirm)</button>`;
                 } else if (ord.status.includes("Confirmed")) {
                     let existingReturn = allReturns.find(r => r.orderId === ord.id);
                     if (parseFloat(ord.productPrice) <= 0) {
                         actionDiv.innerHTML += `<span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">(₹0 item par return lagu nahi hai)</span>`;
                     } else if (!existingReturn) {
-                        actionDiv.innerHTML += `<button class="btn-danger" style="background:#d97706;" onclick="openReturnModal('${ord.id}')"><i class="fa-solid fa-rotate-left"></i> Dawai Return Karein</button>`;
+                        actionDiv.innerHTML += `<button class="btn-danger" style="background:#d97706;" onclick="openReturnModal('${escapeHTML(ord.id)}')"><i class="fa-solid fa-rotate-left"></i> Dawai Return Karein</button>`;
                     } else {
                         actionDiv.innerHTML += `<span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">(Return anurodh submit ho chuka hai)</span>`;
                     }
@@ -1356,12 +1241,12 @@ header p,.hero-note,.store-hours{
                 const div = document.createElement("div");
                 div.className = "order-item-box";
                 div.innerHTML = `
-                    <b>Time:</b> ${rx.timestamp}<br>
-                    <b>Customer:</b> ${rx.customerName} (${rx.customerPhone})<br>
-                    <b>Prescription Photo:</b> <a href="${rx.imgUrl}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Photo</a><br>
+                    <b>Time:</b> ${escapeHTML(rx.timestamp)}<br>
+                    <b>Customer:</b> ${escapeHTML(rx.customerName)} (${escapeHTML(rx.customerPhone)})<br>
+                    <b>Prescription Photo:</b> <a href="${escapeHTML(rx.imgUrl)}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Photo</a><br>
                     <div class="order-actions">
-                        <button class="btn-success" onclick="updateRxStatus('${rx.id}', 'Accepted (Available)')"><i class="fa-solid fa-check"></i> Accept (Available)</button>
-                        <button class="btn-danger" onclick="updateRxStatus('${rx.id}', 'Denied (Not Available)')"><i class="fa-solid fa-xmark"></i> Deny (Not Available)</button>
+                        <button class="btn-success" onclick="updateRxStatus('${escapeHTML(rx.id)}', 'Accepted (Available)')"><i class="fa-solid fa-check"></i> Accept (Available)</button>
+                        <button class="btn-danger" onclick="updateRxStatus('${escapeHTML(rx.id)}', 'Denied (Not Available)')"><i class="fa-solid fa-xmark"></i> Deny (Not Available)</button>
                     </div>
                 `;
                 container.appendChild(div);
@@ -1406,11 +1291,11 @@ header p,.hero-note,.store-hours{
                 }
 
                 div.innerHTML = `
-                    <b>Mobile:</b> ${cr.customerPhone}<br>
-                    <b>Coupon Code:</b> <b style="color:var(--primary);">${cr.couponCode}</b><br>
-                    <b>Raashi:</b> ₹${cr.amount} (${cr.type})<br>
+                    <b>Mobile:</b> ${escapeHTML(cr.customerPhone)}<br>
+                    <b>Coupon Code:</b> <b style="color:var(--primary);">${escapeHTML(cr.couponCode)}</b><br>
+                    <b>Raashi:</b> ₹${escapeHTML(cr.amount)} (${escapeHTML(cr.type)})<br>
                     <b>Sthiti:</b> <span style="color: ${cr.isUsed ? 'red' : 'green'}; font-weight: bold;">${statusText}</span>
-                    ${!cr.isUsed ? `<div class="order-actions"><button class="btn-danger" style="background:#64748b;" onclick="markCreditAsUsed('${cr.id}')"><i class="fa-solid fa-check"></i> Offline upyog ho gaya (Mark Used)</button></div>` : ''}
+                    ${!cr.isUsed ? `<div class="order-actions"><button class="btn-danger" style="background:#64748b;" onclick="markCreditAsUsed('${escapeHTML(cr.id)}')"><i class="fa-solid fa-check"></i> Offline upyog ho gaya (Mark Used)</button></div>` : ''}
                 `;
                 resContainer.appendChild(div);
             });
@@ -1444,16 +1329,16 @@ header p,.hero-note,.store-hours{
                 if (status.includes("Pending")) {
                     pendingCount++;
                     div.innerHTML = `
-                        <b>Time:</b> ${ord.timestamp}<br>
-                        <b>Customer:</b> ${ord.customerName} (${ord.customerPhone})<br>
-                        <b>Item:</b> ${ord.productName} (Qty: ${ord.quantity || 1})<br>
-                        <b>Paid Amount:</b> <b>₹${ord.productPrice}</b><br>
-                        <b>Payment:</b> ${ord.paymentType} ${ord.paymentScreenshot ? `<br><a href="${ord.paymentScreenshot}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Payment Screenshot</a>` : ''}<br>
-                        <b>Address:</b> ${ord.address}<br>
-                        <b>Status:</b> <span style="color: orange; font-weight: bold;">${status}</span>
+                        <b>Time:</b> ${escapeHTML(ord.timestamp)}<br>
+                        <b>Customer:</b> ${escapeHTML(ord.customerName)} (${escapeHTML(ord.customerPhone)})<br>
+                        <b>Item:</b> ${escapeHTML(ord.productName)} (Qty: ${escapeHTML(ord.quantity || 1)})<br>
+                        <b>Paid Amount:</b> <b>₹${escapeHTML(ord.productPrice)}</b><br>
+                        <b>Payment:</b> ${escapeHTML(ord.paymentType)} ${ord.paymentScreenshot ? `<br><a href="${escapeHTML(ord.paymentScreenshot)}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Payment Screenshot</a>` : ''}<br>
+                        <b>Address:</b> ${escapeHTML(ord.address)}<br>
+                        <b>Status:</b> <span style="color: orange; font-weight: bold;">${escapeHTML(status)}</span>
                         <div class="order-actions" style="display: ${isAdmin ? 'flex' : 'none'};">
-                            <button class="btn-success" onclick="acceptOrderPrompt('${ord.id}')"><i class="fa-solid fa-check"></i> Accept & Set Time</button>
-                            <button class="btn-danger" onclick="openRejectModal('${ord.id}')"><i class="fa-solid fa-xmark"></i> Reject / Cancel</button>
+                            <button class="btn-success" onclick="acceptOrderPrompt('${escapeHTML(ord.id)}')"><i class="fa-solid fa-check"></i> Accept & Set Time</button>
+                            <button class="btn-danger" onclick="openRejectModal('${escapeHTML(ord.id)}')"><i class="fa-solid fa-xmark"></i> Reject / Cancel</button>
                         </div>
                     `;
                     liveContainer.appendChild(div);
@@ -1461,16 +1346,16 @@ header p,.hero-note,.store-hours{
                     historyCount++;
                     let statusColor = status.includes("Confirmed") ? "green" : (status.includes("Accepted") ? "blue" : "red");
                     div.innerHTML = `
-                        <b>Time:</b> ${ord.timestamp}<br>
-                        <b>Customer:</b> ${ord.customerName} (${ord.customerPhone})<br>
-                        <b>Item:</b> ${ord.productName} (Qty: ${ord.quantity || 1})<br>
-                        <b>Paid Amount:</b> ₹${ord.productPrice}<br>
-                        <b>Antim Status:</b> <span style="color: ${statusColor}; font-weight: bold;">${status}</span><br>
-                        ${ord.deliveryDateTime ? `<b>Delivery Date & Time:</b> ${ord.deliveryDateTime} <button class="btn-warning" style="padding:2px 6px; font-size:0.7rem;" onclick="updateDeliveryTimePrompt('${ord.id}')">Badlein</button><br>` : ''}
-                        ${ord.reason ? `<b>Kaaran:</b> ${ord.reason}<br>` : ''}
+                        <b>Time:</b> ${escapeHTML(ord.timestamp)}<br>
+                        <b>Customer:</b> ${escapeHTML(ord.customerName)} (${escapeHTML(ord.customerPhone)})<br>
+                        <b>Item:</b> ${escapeHTML(ord.productName)} (Qty: ${escapeHTML(ord.quantity || 1)})<br>
+                        <b>Paid Amount:</b> ₹${escapeHTML(ord.productPrice)}<br>
+                        <b>Antim Status:</b> <span style="color: ${statusColor}; font-weight: bold;">${escapeHTML(status)}</span><br>
+                        ${ord.deliveryDateTime ? `<b>Delivery Date & Time:</b> ${escapeHTML(ord.deliveryDateTime)} <button class="btn-warning" style="padding:2px 6px; font-size:0.7rem;" onclick="updateDeliveryTimePrompt('${escapeHTML(ord.id)}')">Badlein</button><br>` : ''}
+                        ${ord.reason ? `<b>Kaaran:</b> ${escapeHTML(ord.reason)}<br>` : ''}
                         <div class="order-actions" style="display: ${isAdmin ? 'flex' : 'none'};">
-                            ${!status.includes("Admin Confirmed") ? `<button class="btn-success" onclick="markAdminDelivered('${ord.id}')"><i class="fa-solid fa-check-double"></i> Delivered Tik Karein</button>` : ''}
-                            <button class="btn-danger" style="background: #64748b;" onclick="deleteOrderHistory('${ord.id}')"><i class="fa-solid fa-trash"></i> History se Delete Karein</button>
+                            ${!status.includes("Admin Confirmed") ? `<button class="btn-success" onclick="markAdminDelivered('${escapeHTML(ord.id)}')"><i class="fa-solid fa-check-double"></i> Delivered Tik Karein</button>` : ''}
+                            <button class="btn-danger" style="background: #64748b;" onclick="deleteOrderHistory('${escapeHTML(ord.id)}')"><i class="fa-solid fa-trash"></i> History se Delete Karein</button>
                         </div>
                     `;
                     historyContainer.appendChild(div);
@@ -1498,15 +1383,15 @@ header p,.hero-note,.store-hours{
                 div.className = "order-item-box";
                 div.style.background = "#f0fdf4";
                 div.innerHTML = `
-                    <b>Customer:</b> ${ord.customerName} (<a href="tel:${ord.customerPhone}" style="color:var(--primary)">${ord.customerPhone}</i>)</i><br>
-                    <b>Address:</b> ${ord.address}<br>
-                    <b>Item & Qty:</b> ${ord.productName} (Qty: ${ord.quantity || 1})<br>
-                    <b>Vasoolne Wala Amount (Paid):</b> <b style="color:var(--accent)">₹${ord.productPrice}</b> (${ord.paymentType})<br>
-                    ${ord.paymentScreenshot ? `<a href="${ord.paymentScreenshot}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Online Payment Screenshot</a><br>` : ''}
-                    <b>Delivery Time:</b> <span style="color:#0284c7; font-weight:bold;">${ord.deliveryDateTime || 'Tay nahi hua'}</span>
+                    <b>Customer:</b> ${escapeHTML(ord.customerName)} (<a href="tel:${escapeHTML(ord.customerPhone)}" style="color:var(--primary)">${escapeHTML(ord.customerPhone)}</a>)<br>
+                    <b>Address:</b> ${escapeHTML(ord.address)}<br>
+                    <b>Item & Qty:</b> ${escapeHTML(ord.productName)} (Qty: ${escapeHTML(ord.quantity || 1)})<br>
+                    <b>Vasoolne Wala Amount (Paid):</b> <b style="color:var(--accent)">₹${escapeHTML(ord.productPrice)}</b> (${escapeHTML(ord.paymentType)})<br>
+                    ${ord.paymentScreenshot ? `<a href="${escapeHTML(ord.paymentScreenshot)}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Online Payment Screenshot</a><br>` : ''}
+                    <b>Delivery Time:</b> <span style="color:#0284c7; font-weight:bold;">${escapeHTML(ord.deliveryDateTime || 'Tay nahi hua')}</span>
                     <div class="order-actions" style="margin-top:10px;">
-                        <button class="btn-warning" onclick="updateDeliveryTimePrompt('${ord.id}')"><i class="fa-solid fa-clock"></i> Timing Update Karein</button>
-                        <button class="btn-success" onclick="markPartnerDelivered('${ord.id}')"><i class="fa-solid fa-check-double"></i> Delivered Mark Karein</button>
+                        <button class="btn-warning" onclick="updateDeliveryTimePrompt('${escapeHTML(ord.id)}')"><i class="fa-solid fa-clock"></i> Timing Update Karein</button>
+                        <button class="btn-success" onclick="markPartnerDelivered('${escapeHTML(ord.id)}')"><i class="fa-solid fa-check-double"></i> Delivered Mark Karein</button>
                     </div>
                 `;
                 container.appendChild(div);
@@ -1545,13 +1430,13 @@ header p,.hero-note,.store-hours{
                 const div = document.createElement("div");
                 div.className = "order-item-box";
                 div.innerHTML = `
-                    <b>Time:</b> ${ret.timestamp}<br>
-                    <b>Customer:</b> ${ret.customerName} (${ret.customerPhone})<br>
-                    <b>Dawai:</b> ${ret.productName} - <b>₹${ret.productPrice}</b><br>
-                    <b>Anurodh Type:</b> <b style="color: var(--primary);">${ret.returnType}</b><br>
+                    <b>Time:</b> ${escapeHTML(ret.timestamp)}<br>
+                    <b>Customer:</b> ${escapeHTML(ret.customerName)} (${escapeHTML(ret.customerPhone)})<br>
+                    <b>Dawai:</b> ${escapeHTML(ret.productName)} - <b>₹${escapeHTML(ret.productPrice)}</b><br>
+                    <b>Anurodh Type:</b> <b style="color: var(--primary);">${escapeHTML(ret.returnType)}</b><br>
                     <div class="order-actions">
-                        <button class="btn-success" onclick="approveReturn('${ret.id}', '${ret.customerPhone}', ${ret.productPrice}, '${ret.returnType}')"><i class="fa-solid fa-check"></i> Accept Return & Generate Coupon</button>
-                        <button class="btn-danger" onclick="rejectReturn('${ret.id}')"><i class="fa-solid fa-xmark"></i> Reject</button>
+                        <button class="btn-success" onclick="approveReturn('${escapeHTML(ret.id)}', '${escapeHTML(ret.customerPhone)}', ${escapeHTML(ret.productPrice)}, '${escapeHTML(ret.returnType)}')"><i class="fa-solid fa-check"></i> Accept Return & Generate Coupon</button>
+                        <button class="btn-danger" onclick="rejectReturn('${escapeHTML(ret.id)}')"><i class="fa-solid fa-xmark"></i> Reject</button>
                     </div>
                 `;
                 retContainer.appendChild(div);
@@ -1737,7 +1622,6 @@ header p,.hero-note,.store-hours{
         window.changeCartQty=function(name,delta){ const item=cartItems.find(i=>i.name===name); if(!item)return; item.qty+=delta; if(item.qty<=0)cartItems=cartItems.filter(i=>i.name!==name); saveCart(); renderCart(); }
         window.removeFromCart=function(name){ cartItems=cartItems.filter(i=>i.name!==name); saveCart(); renderCart(); }
         
-        /* Updated renderCart to ensure visible red remove button */
         function renderCart(){
             const box=document.getElementById("cart-items"); if(!box)return; box.innerHTML="";
             if(!cartItems.length){ box.innerHTML='<div class="empty-state" style="padding:25px"><i class="fa-solid fa-cart-shopping"></i><h3>Cart khaali hai</h3><p>Product par Cart button dabayein.</p></div>'; updateCartUI(); return; }
@@ -1765,13 +1649,49 @@ header p,.hero-note,.store-hours{
         window.checkoutCart=function(){ if(!cartItems.length){showToast("Cart khaali hai.");return;} closeCartModal(); document.getElementById("cart-checkout-modal").style.display="flex"; renderCartCheckout(); }
         function renderCartCheckout(){ const box=document.getElementById("cart-checkout-items"); const total=cartItems.reduce((a,i)=>a+i.price*i.qty,0); box.innerHTML=cartItems.map(i=>`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #e2e8f0;padding:7px 0"><span>${escapeHTML(i.name)} × ${i.qty}</span><b>₹${(i.price*i.qty).toFixed(2)}</b></div>`).join("")+`<div style="text-align:right;margin-top:10px;font-size:1.05rem"><b>Total: ₹${total.toFixed(2)}</b></div>`; }
         window.closeCartCheckout=function(){document.getElementById("cart-checkout-modal").style.display="none";}
+        
         window.submitCartOrder=async function(){
             if(!cartItems.length){showToast("Cart khaali hai.");return;}
             const name=document.getElementById("cart-cust-name").value.trim(), phone=document.getElementById("cart-cust-phone").value.trim().replace(/\s+/g,""), address=document.getElementById("cart-cust-address").value.trim(), payment=document.getElementById("cart-payment-type").value, file=document.getElementById("cart-payment-file");
             if(!name||!validPhone(phone)||!address){alert("Naam, valid mobile number aur address bharna zaroori hai.");return;}
             if(payment==="Online" && (!file.files.length)){alert("Online payment ke liye payment screenshot upload karein.");return;}
             const btn=document.getElementById("cart-submit-btn"); setButtonLoading(btn,true,"Order save ho raha hai...");
-            try{ let screenshot=""; if(payment==="Online"&&file.files.length)screenshot=await compressImage(file.files[0],1400,.72); const total=cartItems.reduce((a,i)=>a+i.price*i.qty,0); const items=cartItems.map(i=>({productName:i.name,quantity:i.qty,unitPrice:Number(i.price).toFixed(2),category:i.category||""})); const timeStr=new Date().toLocaleString("en-IN"); const orderRef=await push(ref(db,"orders"),{customerName:name,customerPhone:phone,address,paymentType:payment,paymentScreenshot:screenshot,items,productName:items.map(i=>`${i.productName} × ${i.quantity}`).join(", "),quantity:items.reduce((a,i)=>a+i.quantity,0),unitPrice:"Multiple",productPrice:total.toFixed(2),discountAmount:"0.00",timestamp:timeStr,status:"Pending Admin Approval"}); cartItems=[]; saveCart(); document.getElementById("cart-cust-name").value="";document.getElementById("cart-cust-phone").value="";document.getElementById("cart-cust-address").value="";file.value="";closeCartCheckout(); showToast("Multi-medicine order submit ho gaya! Order ID: "+orderRef.key.slice(-6).toUpperCase()); }catch(e){console.error(e);alert("Order save nahi ho saka. Firebase/Internet check karein.");}finally{setButtonLoading(btn,false);} }
+            try{ 
+                let screenshot=""; 
+                if(payment==="Online"&&file.files.length) screenshot=await compressImage(file.files[0],1400,.72); 
+                const total=cartItems.reduce((a,i)=>a+i.price*i.qty,0); 
+                const items=cartItems.map(i=>({productName:i.name,quantity:i.qty,unitPrice:Number(i.price).toFixed(2),category:i.category||""})); 
+                const timeStr=new Date().toLocaleString("en-IN"); 
+                const orderRef=await push(ref(db,"orders"),{
+                    customerName:name,
+                    customerPhone:phone,
+                    address,
+                    paymentType:payment,
+                    paymentScreenshot:screenshot,
+                    items,
+                    productName:items.map(i=>`${i.productName} × ${i.quantity}`).join(", "),
+                    quantity:items.reduce((a,i)=>a+i.quantity,0),
+                    unitPrice:"Multiple",
+                    productPrice:total.toFixed(2),
+                    discountAmount:"0.00",
+                    timestamp:timeStr,
+                    status:"Pending Admin Approval"
+                }); 
+                cartItems=[]; 
+                saveCart(); 
+                document.getElementById("cart-cust-name").value="";
+                document.getElementById("cart-cust-phone").value="";
+                document.getElementById("cart-cust-address").value="";
+                file.value="";
+                closeCartCheckout(); 
+                showToast("Multi-medicine order submit ho gaya! Order ID: "+orderRef.key.slice(-6).toUpperCase()); 
+            }catch(e){
+                console.error(e);
+                alert("Order save nahi ho saka. Firebase/Internet check karein.");
+            }finally{
+                setButtonLoading(btn,false);
+            } 
+        }
 
         window.filterByCategory = function(category) {
             activeCategory = category;
