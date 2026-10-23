@@ -460,6 +460,7 @@ header p,.hero-note,.store-hours{
       <div class="header-inner">
         <div class="header-buttons">
             <button class="action-badge-btn" onclick="toggleDeliveryPartnerPortal()"><i class="fa-solid fa-motorcycle"></i> Delivery Portal</button>
+            <button class="action-badge-btn" id="customer-login-header-btn" onclick="openCustomerLogin()"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
             <button class="action-badge-btn" onclick="toggleCustomerOrdersModal()"><i class="fa-solid fa-box"></i> My Orders</button>
             <a href="https://maps.google.com/?q=Loharbarwa+Barwadda+Dhanbad+Jharkhand" target="_blank" class="action-badge-btn">
                 <i class="fa-solid fa-map-marker-alt"></i> Maps
@@ -649,25 +650,20 @@ header p,.hero-note,.store-hours{
     <div class="modal-overlay" id="customer-orders-modal">
         <div class="modal-content">
             <button class="close-modal" onclick="toggleCustomerOrdersModal()">&times;</button>
-            <h3><i class="fa-solid fa-bag-shopping"></i> My Orders & Prescription Status</h3>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">Suraksha ke liye, pehle mobile number par OTP praapt karein:</p>
-            
-            <div class="form-group" id="otp-phone-group">
-                <label>Registered Mobile Number</label>
-                <input inputmode="numeric" maxlength="10" aria-label="Registered mobile number" type="tel" id="check-cust-phone" placeholder="10 anko ka mobile number...">
-                <button class="btn-primary" id="send-otp-btn" style="width: 100%; margin-top: 10px;" onclick="sendCustomerOTP()"><i class="fa-solid fa-comment-sms"></i> SMS OTP Bhejein</button>
-                <div id="recaptcha-container" style="margin-top:10px;"></div>
+            <h3 id="customer-orders-title"><i class="fa-solid fa-bag-shopping"></i> My Orders & Prescription Status</h3>
+            <div id="customer-login-required" style="display:none;margin:0 0 14px;padding:12px;border-radius:10px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-size:.86rem;font-weight:600;"><i class="fa-solid fa-lock"></i> Please login first to place your order.</div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:15px;">Apne orders aur prescription status dekhne ke liye login karein.</p>
+            <div id="customer-login-box">
+                <div class="form-group"><label>Email ID</label><input type="email" id="customer-login-email" autocomplete="email" placeholder="yourname@gmail.com"></div>
+                <div class="form-group"><label>Password</label><input type="password" id="customer-login-password" autocomplete="current-password" placeholder="Password"></div>
+                <button class="btn-primary" id="customer-email-login-btn" style="width:100%;margin-top:5px;" onclick="customerEmailLogin()"><i class="fa-solid fa-right-to-bracket"></i> Login with Email</button>
+                <button class="btn-success" id="customer-create-account-btn" style="width:100%;margin-top:8px;" onclick="customerCreateAccount()"><i class="fa-solid fa-user-plus"></i> Create Account</button>
+                <div style="display:flex;align-items:center;gap:10px;margin:14px 0;color:#94a3b8;font-size:.75rem;"><span style="height:1px;background:#e2e8f0;flex:1"></span><span>OR</span><span style="height:1px;background:#e2e8f0;flex:1"></span></div>
+                <button class="btn-primary" id="customer-google-login-btn" style="width:100%;background:#fff;color:#1e293b;border:1px solid #cbd5e1;" onclick="customerGoogleLogin()"><i class="fa-brands fa-google"></i> Continue with Google</button>
+                <div class="security-note" style="margin-top:12px;"><i class="fa-solid fa-shield-halved"></i> Login session browser mein saved rahega.</div>
             </div>
-
-            <div class="form-group" id="otp-verify-group" style="display: none;">
-                <label>SMS se mila 6-digit OTP</label>
-                <input inputmode="numeric" maxlength="6" autocomplete="one-time-code" type="text" id="entered-otp" placeholder="6-digit OTP yahan likhein">
-                <button class="btn-success" id="verify-otp-btn" style="width: 100%; margin-top: 10px;" onclick="verifyCustomerOTP()">Verify OTP & View Details</button>
-                <button class="btn-primary" id="resend-otp-btn" style="width: 100%; margin-top: 8px;" onclick="resendCustomerOTP()">Dobara SMS OTP Bhejein</button>
-                <div class="security-note"><i class="fa-solid fa-shield-halved"></i> Real SMS OTP Firebase Phone Authentication + reCAPTCHA se verify hota hai. OTP website par display nahi kiya jayega.</div>
-            </div>
-
-            <div id="customer-orders-result" style="margin-top: 15px;"></div>
+            <div id="customer-account-box" style="display:none;"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;"><div style="min-width:0"><div style="font-size:.72rem;color:#64748b">Logged in as</div><div id="customer-account-label" style="font-weight:700;word-break:break-all"></div></div><button class="btn-danger" onclick="customerLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button></div></div>
+            <div id="customer-orders-result" style="margin-top:15px"></div>
         </div>
     </div>
 
@@ -807,7 +803,7 @@ header p,.hero-note,.store-hours{
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, ref, set, push, onValue, remove, update } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-        import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
         // Splash screen auto-dismiss script
         const splashVideo = document.getElementById('splash-video');
@@ -838,8 +834,10 @@ header p,.hero-note,.store-hours{
 
         const auth = getAuth(app);
         auth.languageCode = "en";
-        let recaptchaVerifier = null;
-        let confirmationResult = null;
+        const googleProvider = new GoogleAuthProvider();
+        googleProvider.setCustomParameters({ prompt: "select_account" });
+        const authPersistenceReady = setPersistence(auth, browserLocalPersistence);
+        let currentCustomerUser = null;
 
         let isAdmin = false;
         let allProducts = [];
@@ -986,16 +984,50 @@ header p,.hero-note,.store-hours{
 
         window.toggleCustomerOrdersModal = function() {
             const modal = document.getElementById("customer-orders-modal");
+            const notice = document.getElementById("customer-login-required");
+            const title = document.getElementById("customer-orders-title");
             modal.style.display = modal.style.display === "flex" ? "none" : "flex";
-            document.getElementById("otp-phone-group").style.display = "block";
-            document.getElementById("otp-verify-group").style.display = "none";
-            document.getElementById("customer-orders-result").innerHTML = "";
-            document.getElementById("check-cust-phone").value = "";
-            document.getElementById("entered-otp").value = "";
-            verifiedPhoneNum = "";
-            confirmationResult = null;
-            if (recaptchaVerifier) { try { recaptchaVerifier.clear(); } catch(e) {} recaptchaVerifier = null; }
+            if (modal.style.display === "flex") {
+                if(notice) notice.style.display="none";
+                if(title) title.innerHTML='<i class="fa-solid fa-bag-shopping"></i> My Orders & Prescription Status';
+                renderCustomerAuthState();
+            }
         }
+
+        async function customerEmailLogin() {
+            const email=document.getElementById("customer-login-email").value.trim(); const password=document.getElementById("customer-login-password").value; const btn=document.getElementById("customer-email-login-btn");
+            if(!email||!password){alert("Kripya email aur password bharein.");return;}
+            try{setButtonLoading(btn,true,"Login ho raha hai...");await authPersistenceReady;await signInWithEmailAndPassword(auth,email,password);showToast("Login successful!");}catch(e){console.error(e);alert("Login nahi hua: "+(e?.message||"Email ya password check karein."));}finally{setButtonLoading(btn,false);}
+        }
+        window.customerEmailLogin=customerEmailLogin;
+        window.customerCreateAccount=async function(){
+            const email=document.getElementById("customer-login-email").value.trim(); const password=document.getElementById("customer-login-password").value; const btn=document.getElementById("customer-create-account-btn");
+            if(!email||!password){alert("Email aur password bharein.");return;} if(password.length<6){alert("Password kam se kam 6 characters ka hona chahiye.");return;}
+            try{setButtonLoading(btn,true,"Account ban raha hai...");await authPersistenceReady;await createUserWithEmailAndPassword(auth,email,password);showToast("Account create ho gaya!");}catch(e){console.error(e);alert("Account nahi bana: "+(e?.message||"Details check karein."));}finally{setButtonLoading(btn,false);}
+        };
+        window.customerGoogleLogin=async function(){const btn=document.getElementById("customer-google-login-btn");try{setButtonLoading(btn,true,"Google login ho raha hai...");await authPersistenceReady;await signInWithPopup(auth,googleProvider);showToast("Google login successful!");}catch(e){console.error(e);alert("Google login nahi hua: "+(e?.message||"Dobara try karein."));}finally{setButtonLoading(btn,false);}};
+        window.customerLogout=async function(){try{await signOut(auth);showToast("Logout ho gaya.");}catch(e){alert("Logout nahi ho saka.");}};
+        function renderCustomerAuthState(){const user=currentCustomerUser||auth.currentUser;const l=document.getElementById("customer-login-box"),a=document.getElementById("customer-account-box"),x=document.getElementById("customer-account-label"),hb=document.getElementById("customer-login-header-btn");if(!l||!a)return;if(user){l.style.display="none";a.style.display="block";if(x)x.textContent=user.email||user.displayName||"Logged in";if(hb)hb.innerHTML='<i class="fa-solid fa-user-check"></i> Account';refreshCustomerOrdersView();}else{l.style.display="block";a.style.display="none";if(hb)hb.innerHTML='<i class="fa-solid fa-right-to-bracket"></i> Login';document.getElementById("customer-orders-result").innerHTML="";}}
+        window.openCustomerLogin=function(){
+            const modal=document.getElementById("customer-orders-modal");
+            const notice=document.getElementById("customer-login-required");
+            const title=document.getElementById("customer-orders-title");
+            if(modal){modal.style.display="flex"; renderCustomerAuthState();}
+            if(notice)notice.style.display="none";
+            if(title)title.innerHTML='<i class="fa-solid fa-right-to-bracket"></i> Login to Continue';
+        };
+        window.requireCustomerLogin=function(){
+            if(auth.currentUser)return true;
+            const modal=document.getElementById("customer-orders-modal");
+            const notice=document.getElementById("customer-login-required");
+            const title=document.getElementById("customer-orders-title");
+            if(modal)modal.style.display="flex";
+            if(notice)notice.style.display="block";
+            if(title)title.innerHTML='<i class="fa-solid fa-lock"></i> Login to Continue';
+            renderCustomerAuthState();
+            return false;
+        };
+        onAuthStateChanged(auth,user=>{currentCustomerUser=user||null;renderCustomerAuthState();});
 
         window.toggleTermsModal = function() {
             const modal = document.getElementById("terms-modal");
@@ -1033,6 +1065,8 @@ header p,.hero-note,.store-hours{
                 push(rxRef, {
                     customerName: name,
                     customerPhone: phone,
+                    customerUid: auth.currentUser?.uid || "",
+                    customerEmail: auth.currentUser?.email || "",
                     imgUrl: base64Img,
                     status: "Pending Verification",
                     timestamp: new Date().toLocaleString()
@@ -1045,86 +1079,6 @@ header p,.hero-note,.store-hours{
                 });
             };
             reader.readAsDataURL(file);
-        }
-
-        async function ensureRecaptcha() {
-            if (recaptchaVerifier) return recaptchaVerifier;
-            recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-container", {
-                size: "normal",
-                callback: () => showToast("reCAPTCHA verified. Ab SMS OTP bheja ja sakta hai."),
-                "expired-callback": () => showToast("reCAPTCHA expire ho gaya. Dobara verify karein.")
-            });
-            await recaptchaVerifier.render();
-            return recaptchaVerifier;
-        }
-
-        window.sendCustomerOTP = async function() {
-            const phone = document.getElementById("check-cust-phone").value.trim().replace(/\s+/g, "");
-            const btn = document.getElementById("send-otp-btn");
-            if (!validPhone(phone)) {
-                alert("Kripya valid 10 anko ka Indian mobile number darj karein.");
-                return;
-            }
-            try {
-                setButtonLoading(btn, true, "SMS OTP bheja ja raha hai...");
-                const appVerifier = await ensureRecaptcha();
-                const phoneNumber = "+91" + phone;
-                confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
-                verifiedPhoneNum = phone;
-                document.getElementById("otp-phone-group").style.display = "none";
-                document.getElementById("otp-verify-group").style.display = "block";
-                showToast("SMS OTP aapke mobile par bhej diya gaya hai.");
-            } catch (error) {
-                console.error("Firebase SMS OTP error:", error);
-                try { if (recaptchaVerifier) recaptchaVerifier.clear(); } catch(e) {}
-                recaptchaVerifier = null;
-                const code = error?.code ? "\nError code: " + error.code : "";
-                alert("SMS OTP bhejne mein dikkat hui: " + (error?.message || "Unknown error") + code);
-            } finally {
-                setButtonLoading(btn, false);
-            }
-        }
-
-        window.resendCustomerOTP = async function() {
-            const phone = document.getElementById("check-cust-phone").value.trim().replace(/\s+/g, "");
-            if (!validPhone(phone)) { alert("Kripya valid 10 anko ka Indian mobile number darj karein."); return; }
-            try {
-                if (recaptchaVerifier) { try { recaptchaVerifier.clear(); } catch(e) {} recaptchaVerifier = null; }
-                const appVerifier = await ensureRecaptcha();
-                confirmationResult = await signInWithPhoneNumber(auth, "+91" + phone, appVerifier);
-                verifiedPhoneNum = phone;
-                showToast("Naya SMS OTP bhej diya gaya hai.");
-            } catch (error) {
-                console.error("Firebase resend OTP error:", error);
-                try { if (recaptchaVerifier) recaptchaVerifier.clear(); } catch(e) {}
-                recaptchaVerifier = null;
-                const code = error?.code ? "\nError code: " + error.code : "";
-                alert("OTP dobara bhejne mein dikkat hui: " + (error?.message || "Unknown error") + code);
-            }
-        }
-
-        window.verifyCustomerOTP = async function() {
-            const entered = document.getElementById("entered-otp").value.trim();
-            const btn = document.getElementById("verify-otp-btn");
-            if (!confirmationResult) {
-                alert("Pehle SMS OTP bhejein.");
-                return;
-            }
-            if (!/^\d{6}$/.test(entered)) {
-                alert("Kripya 6-digit SMS OTP darj karein.");
-                return;
-            }
-            try {
-                setButtonLoading(btn, true, "OTP verify ho raha hai...");
-                await confirmationResult.confirm(entered);
-                showToast("SMS OTP successfully verify ho gaya!");
-                refreshCustomerOrdersView();
-            } catch (error) {
-                console.error("Firebase OTP verification error:", error);
-                alert("OTP verify nahi hua. Kripya sahi 6-digit OTP darj karein.");
-            } finally {
-                setButtonLoading(btn, false);
-            }
         }
 
         function trackingHTML(status){
@@ -1140,9 +1094,12 @@ header p,.hero-note,.store-hours{
             const container = document.getElementById("customer-orders-result");
             container.innerHTML = "";
 
-            const matchedOrders = allOrders.filter(ord => ord.customerPhone === verifiedPhoneNum);
-            const matchedCredits = allCredits.filter(cr => cr.customerPhone === verifiedPhoneNum && !cr.isUsed);
-            const matchedRx = allPrescriptions.filter(rx => rx.customerPhone === verifiedPhoneNum);
+            const user = currentCustomerUser || auth.currentUser;
+            if (!user) { container.innerHTML = "<p>Please login first.</p>"; return; }
+            const owns = r => (r.customerUid && r.customerUid === user.uid) || (r.customerEmail && String(r.customerEmail).toLowerCase() === String(user.email||"").toLowerCase());
+            const matchedOrders = allOrders.filter(owns);
+            const matchedCredits = allCredits.filter(cr => owns(cr) && !cr.isUsed);
+            const matchedRx = allPrescriptions.filter(owns);
 
             if (matchedRx.length > 0) {
                 let rxBox = document.createElement("div");
@@ -1804,11 +1761,12 @@ header p,.hero-note,.store-hours{
         window.closeCartCheckout=function(){document.getElementById("cart-checkout-modal").style.display="none";}
         window.submitCartOrder=async function(){
             if(!cartItems.length){showToast("Cart khaali hai.");return;}
+            if(!requireCustomerLogin()) return;
             const name=document.getElementById("cart-cust-name").value.trim(), phone=document.getElementById("cart-cust-phone").value.trim().replace(/\s+/g,""), address=document.getElementById("cart-cust-address").value.trim(), payment=document.getElementById("cart-payment-type").value, file=document.getElementById("cart-payment-file");
             if(!name||!validPhone(phone)||!address){alert("Naam, valid mobile number aur address bharna zaroori hai.");return;}
             if(payment==="Online" && (!file.files.length)){alert("Online payment ke liye payment screenshot upload karein.");return;}
             const btn=document.getElementById("cart-submit-btn"); setButtonLoading(btn,true,"Order save ho raha hai...");
-            try{ let screenshot=""; if(payment==="Online"&&file.files.length)screenshot=await compressImage(file.files[0],1400,.72); const total=cartItems.reduce((a,i)=>a+i.price*i.qty,0); const items=cartItems.map(i=>({productName:i.name,quantity:i.qty,unitPrice:Number(i.price).toFixed(2),category:i.category||""})); const timeStr=new Date().toLocaleString("en-IN"); const orderRef=await push(ref(db,"orders"),{customerName:name,customerPhone:phone,address,paymentType:payment,paymentScreenshot:screenshot,items,productName:items.map(i=>`${i.productName} × ${i.quantity}`).join(", "),quantity:items.reduce((a,i)=>a+i.quantity,0),unitPrice:"Multiple",productPrice:total.toFixed(2),discountAmount:"0.00",timestamp:timeStr,status:"Pending Admin Approval"}); cartItems=[]; saveCart(); document.getElementById("cart-cust-name").value="";document.getElementById("cart-cust-phone").value="";document.getElementById("cart-cust-address").value="";file.value="";closeCartCheckout(); showToast("Multi-medicine order submit ho gaya! Order ID: "+orderRef.key.slice(-6).toUpperCase()); }catch(e){console.error(e);alert("Order save nahi ho saka. Firebase/Internet check karein.");}finally{setButtonLoading(btn,false);} }
+            try{ let screenshot=""; if(payment==="Online"&&file.files.length)screenshot=await compressImage(file.files[0],1400,.72); const total=cartItems.reduce((a,i)=>a+i.price*i.qty,0); const items=cartItems.map(i=>({productName:i.name,quantity:i.qty,unitPrice:Number(i.price).toFixed(2),category:i.category||""})); const timeStr=new Date().toLocaleString("en-IN"); const orderRef=await push(ref(db,"orders"),{customerName:name,customerPhone:phone,customerUid:auth.currentUser?.uid||"",customerEmail:auth.currentUser?.email||"",address,paymentType:payment,paymentScreenshot:screenshot,items,productName:items.map(i=>`${i.productName} × ${i.quantity}`).join(", "),quantity:items.reduce((a,i)=>a+i.quantity,0),unitPrice:"Multiple",productPrice:total.toFixed(2),discountAmount:"0.00",timestamp:timeStr,status:"Pending Admin Approval"}); cartItems=[]; saveCart(); document.getElementById("cart-cust-name").value="";document.getElementById("cart-cust-phone").value="";document.getElementById("cart-cust-address").value="";file.value="";closeCartCheckout(); showToast("Multi-medicine order submit ho gaya! Order ID: "+orderRef.key.slice(-6).toUpperCase()); }catch(e){console.error(e);alert("Order save nahi ho saka. Firebase/Internet check karein.");}finally{setButtonLoading(btn,false);} }
 
         window.filterByCategory = function(category) {
             activeCategory = category;
@@ -1890,6 +1848,7 @@ header p,.hero-note,.store-hours{
         }
 
         window.submitOrder = async function() {
+            if (!requireCustomerLogin()) return;
             if (isSubmittingOrder) return;
 
             const name = document.getElementById("cust-name").value.trim();
@@ -1937,6 +1896,8 @@ header p,.hero-note,.store-hours{
                 const orderRef = await push(ref(db, 'orders'), {
                     customerName: name,
                     customerPhone: phone,
+                    customerUid: auth.currentUser?.uid || "",
+                    customerEmail: auth.currentUser?.email || "",
                     address: address,
                     paymentType: payment,
                     paymentScreenshot: screenshotBase64,
