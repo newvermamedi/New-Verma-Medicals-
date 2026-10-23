@@ -10,132 +10,35 @@
 <link href="[https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap](https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap)" rel="stylesheet">
 <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
 <style>
-:root {
---primary: #0284c7;
---primary-dark: #0369a1;
---accent: #10b981;
---bg-color: #f8fafc;
---card-bg: #ffffff;
---text-main: #1e293b;
---text-muted: #64748b;
---shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
---radius: 16px;
---heading-font: 'Montserrat', sans-serif;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; animation: fadeInBody 0.8s ease-in-out; }
-/* Splash Screen Overlay Styles */
-#splash-screen {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100vh;
-background-color: #0f172a;
-display: flex;
-justify-content: center;
-align-items: center;
-z-index: 99999;
-transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-#splash-screen video {
-width: 100%;
-height: 100%;
-object-fit: cover;
-}
-#splash-screen.hidden {
-opacity: 0;
-visibility: hidden;
-pointer-events: none;
-}
-@keyframes fadeInBody {
-from { opacity: 0; transform: translateY(10px); }
-to { opacity: 1; transform: translateY(0); }
-}
-@keyframes floatCard {
-0% { transform: translateY(0px); }
-50% { transform: translateY(-6px); }
-100% { transform: translateY(0px); }
-}
-@keyframes titleGlowPulse {
-0% { transform: scale(1); text-shadow: 0 0 15px rgba(56, 189, 248, 0.6), 0 0 30px rgba(16, 185, 129, 0.4); }
-50% { transform: scale(1.02); text-shadow: 0 0 25px rgba(56, 189, 248, 0.9), 0 0 40px rgba(16, 185, 129, 0.7); }
-100% { transform: scale(1); text-shadow: 0 0 15px rgba(56, 189, 248, 0.6), 0 0 30px rgba(16, 185, 129, 0.4); }
-}
-@keyframes borderLightAnimation {
-0% { border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 0 5px rgba(56, 189, 248, 0.2); }
-50% { border-color: rgba(16, 185, 129, 0.9); box-shadow: 0 0 20px rgba(16, 185, 129, 0.6); }
-100% { border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 0 5px rgba(56, 189, 248, 0.2); }
-}
-@keyframes rxHighlight1 {
-0% { border-color: #0284c7; box-shadow: 0 0 10px rgba(2, 132, 199, 0.3); }
-50% { border-color: #10b981; box-shadow: 0 0 25px rgba(16, 185, 129, 0.6); }
-100% { border-color: #0284c7; box-shadow: 0 0 10px rgba(2, 132, 199, 0.3); }
-}
-@keyframes rxHighlight2 {
-0% { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); }
-50% { background: linear-gradient(135deg, #ecfdf5, #d1fae5); }
-100% { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); }
-}
-@keyframes colorfulGlow {
-0% { border-color: #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.6), 0 0 30px rgba(2, 132, 199, 0.4); }
-33% { border-color: #10b981; box-shadow: 0 0 15px rgba(16, 185, 129, 0.6), 0 0 30px rgba(5, 150, 105, 0.4); }
-66% { border-color: #f43f5e; box-shadow: 0 0 15px rgba(244, 63, 94, 0.6), 0 0 30px rgba(225, 29, 72, 0.4); }
-100% { border-color: #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.6), 0 0 30px rgba(2, 132, 199, 0.4); }
-}
+:root { --primary: #0284c7; --primary-dark: #0369a1; --accent: #10b981; --bg-color: #f8fafc; --card-bg: #ffffff; --text-main: #1e293b; --text-muted: #64748b; --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08); --radius: 16px; --heading-font: 'Montserrat', sans-serif; }
+ * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+   body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; animation: fadeInBody 0.8s ease-in-out; }
+/* Splash Screen Overlay Styles - Updated to 5 seconds */
+#splash-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: #0f172a; display: flex; justify-content: center; align-items: center; z-index: 99999; transition: opacity 0.5s ease, visibility 0.5s ease; }
+#splash-screen video { width: 100%; height: 100%; object-fit: cover; }
+#splash-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+@keyframes fadeInBody { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes floatCard { 0% { transform: translateY(0px); } 50% { transform: translateY(-6px); } 100% { transform: translateY(0px); } }
+@keyframes titleGlowPulse { 0% { transform: scale(1); text-shadow: 0 0 15px rgba(56, 189, 248, 0.6), 0 0 30px rgba(16, 185, 129, 0.4); } 50% { transform: scale(1.02); text-shadow: 0 0 25px rgba(56, 189, 248, 0.9), 0 0 40px rgba(16, 185, 129, 0.7); } 100% { transform: scale(1); text-shadow: 0 0 15px rgba(56, 189, 248, 0.6), 0 0 30px rgba(16, 185, 129, 0.4); } }
+@keyframes borderLightAnimation { 0% { border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 0 5px rgba(56, 189, 248, 0.2); } 50% { border-color: rgba(16, 185, 129, 0.9); box-shadow: 0 0 20px rgba(16, 185, 129, 0.6); } 100% { border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 0 5px rgba(56, 189, 248, 0.2); } }
+@keyframes rxHighlight1 { 0% { border-color: #0284c7; box-shadow: 0 0 10px rgba(2, 132, 199, 0.3); } 50% { border-color: #10b981; box-shadow: 0 0 25px rgba(16, 185, 129, 0.6); } 100% { border-color: #0284c7; box-shadow: 0 0 10px rgba(2, 132, 199, 0.3); } }
+@keyframes rxHighlight2 { 0% { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); } 50% { background: linear-gradient(135deg, #ecfdf5, #d1fae5); } 100% { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); } }
+@keyframes colorfulGlow { 0% { border-color: #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.6), 0 0 30px rgba(2, 132, 199, 0.4); } 33% { border-color: #10b981; box-shadow: 0 0 15px rgba(16, 185, 129, 0.6), 0 0 30px rgba(5, 150, 105, 0.4); } 66% { border-color: #f43f5e; box-shadow: 0 0 15px rgba(244, 63, 94, 0.6), 0 0 30px rgba(225, 29, 72, 0.4); } 100% { border-color: #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.6), 0 0 30px rgba(2, 132, 199, 0.4); } }
 /* Header Styling */
-header {
-background: linear-gradient(135deg, #020617, #0f172a, #1e1b4b);
-color: white; padding: 2rem 1rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-position: relative; z-index: 10; overflow: hidden;
-border-bottom: 3px solid #38bdf8;
-}
-header h1 {
-font-family: var(--heading-font);
-font-size: 2.2rem;
-font-weight: 900;
-letter-spacing: 1px;
-color: #38bdf8;
-margin-bottom: 0.4rem;
-animation: titleGlowPulse 3s ease-in-out infinite;
-display: inline-block;
-}
+header { background: linear-gradient(135deg, #020617, #0f172a, #1e1b4b); color: white; padding: 2rem 1rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); position: relative; z-index: 10; overflow: hidden; border-bottom: 3px solid #38bdf8; }
+header h1 { font-family: var(--heading-font); font-size: 2.2rem; font-weight: 900; letter-spacing: 1px; color: #38bdf8; margin-bottom: 0.4rem; animation: titleGlowPulse 3s ease-in-out infinite; display: inline-block; }
 header p { font-size: 0.9rem; color: #cbd5e1; margin-bottom: 6px; font-weight: 500; }
 .tagline { font-family: var(--heading-font); font-size: 0.85rem; color: #34d399; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
-.header-buttons {
-width:100%; display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap; margin:0 auto 18px; position:relative; z-index:10;
-}
-.action-badge-btn {
-background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.25);
-color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 500; cursor: pointer; transition: 0.3s;
-text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
-}
+.header-buttons { width:100%; display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap; margin:0 auto 18px; position:relative; z-index:10; }
+.action-badge-btn { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.25); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 500; cursor: pointer; transition: 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
 .action-badge-btn:hover { background: #0284c7; transform: scale(1.05); color: white; }
 .container { max-width: 1200px; margin: 0 auto; padding: 25px 20px; width: 100%; flex: 1; }
-.rx-upload-banner {
-background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
-border: 2px dashed #0284c7;
-border-radius: var(--radius);
-padding: 20px;
-margin-bottom: 30px;
-box-shadow: var(--shadow);
-animation: rxHighlight1 4s infinite, rxHighlight2 6s infinite;
-text-align: center;
-position: relative;
-overflow: hidden;
-}
+.rx-upload-banner { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border: 2px dashed #0284c7; border-radius: var(--radius); padding: 20px; margin-bottom: 30px; box-shadow: var(--shadow); animation: rxHighlight1 4s infinite, rxHighlight2 6s infinite; text-align: center; position: relative; overflow: hidden; }
 .rx-upload-banner h3 { font-family: var(--heading-font); color: #0369a1; font-size: 1.3rem; margin-bottom: 8px; font-weight: 700; }
 .rx-upload-banner p { font-size: 0.85rem; color: #334155; line-height: 1.5; margin-bottom: 12px; }
-.rx-upload-banner .rx-badge {
-position: absolute; right: 15px; top: 15px; font-size: 2.5rem; color: rgba(2, 132, 199, 0.15); font-weight: 900; pointer-events: none;
-}
+.rx-upload-banner .rx-badge { position: absolute; right: 15px; top: 15px; font-size: 2.5rem; color: rgba(2, 132, 199, 0.15); font-weight: 900; pointer-events: none; }
 .banner-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 30px; }
-.category-card {
-border-radius: var(--radius); overflow: hidden; position: relative; height: 170px;
-box-shadow: var(--shadow); cursor: pointer; transition: transform 0.4s ease;
-animation: floatCard 4s ease-in-out infinite, borderLightAnimation 3s infinite;
-border: 2px solid #38bdf8;
-}
+.category-card { border-radius: var(--radius); overflow: hidden; position: relative; height: 170px; box-shadow: var(--shadow); cursor: pointer; transition: transform 0.4s ease; animation: floatCard 4s ease-in-out infinite, borderLightAnimation 3s infinite; border: 2px solid #38bdf8; }
 .category-card:nth-child(1) { animation-delay: 0s, 0s; }
 .category-card:nth-child(2) { animation-delay: 1s, 0.5s; border-color: #10b981; }
 .category-card:nth-child(3) { animation-delay: 2s, 1s; border-color: #f43f5e; }
@@ -154,22 +57,8 @@ border: 2px solid #38bdf8;
 .filter-btn { padding: 8px 18px; border-radius: 20px; border: 1px solid #cbd5e1; background: white; cursor: pointer; white-space: nowrap; transition: 0.3s; font-weight: 500; }
 .filter-btn.active, .filter-btn:hover { background: var(--primary); color: white; border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2); }
 .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 20px; margin-bottom: 40px; }
-.product-card {
-background: var(--card-bg);
-border-radius: var(--radius);
-overflow: hidden;
-box-shadow: var(--shadow);
-display: flex;
-flex-direction: column;
-border: 2px solid #e2e8f0;
-transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
-animation: fadeInBody 0.6s ease;
-position: relative;
-}
-.product-card:hover, .product-card:active {
-transform: translateY(-8px) scale(1.02);
-animation: colorfulGlow 2.5s infinite;
-}
+.product-card { background: var(--card-bg); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; border: 2px solid #e2e8f0; transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; animation: fadeInBody 0.6s ease; position: relative; }
+.product-card:hover, .product-card:active { transform: translateY(-8px) scale(1.02); animation: colorfulGlow 2.5s infinite; }
 .product-img-container { height: 160px; width: 100%; background: #e2e8f0; position: relative; overflow: hidden; }
 .product-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
 .product-card:hover .product-img-container img { transform: scale(1.1); }
@@ -197,11 +86,7 @@ animation: colorfulGlow 2.5s infinite;
 .modal-content { background: white; padding: 25px; border-radius: var(--radius); width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; animation: fadeInBody 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
 .close-modal { float: right; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-muted); }
 .close-modal:hover { color: var(--text-main); }
-#notification-toast {
-position: fixed; bottom: 25px; right: 25px; background: #0f172a; color: white; padding: 14px 22px;
-border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); z-index: 2000; display: none; font-size: 0.9rem;
-animation: fadeInBody 0.3s ease; border-left: 4px solid var(--accent);
-}
+#notification-toast { position: fixed; bottom: 25px; right: 25px; background: #0f172a; color: white; padding: 14px 22px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); z-index: 2000; display: none; font-size: 0.9rem; animation: fadeInBody 0.3s ease; border-left: 4px solid var(--accent); }
 footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 25px 20px; font-size: 0.85rem; margin-top: auto; border-top: 1px solid #1e293b; }
 footer span { color: #38bdf8; font-family: var(--heading-font); font-weight: 700; }
 .terms-link { color: #38bdf8; text-decoration: underline; cursor: pointer; margin-left: 5px; }
@@ -209,54 +94,26 @@ footer span { color: #38bdf8; font-family: var(--heading-font); font-weight: 700
 html { scroll-behavior: smooth; }
 body { overflow-x: hidden; }
 button, input, select { -webkit-tap-highlight-color: transparent; }
-button:focus-visible, input:focus-visible, select:focus-visible {
-outline: 3px solid rgba(14,165,233,.25);
-outline-offset: 2px;
-}
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid rgba(14,165,233,.25); outline-offset: 2px; }
 .header-inner { max-width: 1200px; margin: 0 auto; position: relative; }
 .header-buttons { flex-wrap: wrap; justify-content: flex-end; }
 .action-badge-btn { min-height: 38px; backdrop-filter: blur(10px); }
-.hero-note {
-max-width: 760px; margin: 16px auto 0; padding: 10px 14px;
-background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
-border-radius: 12px; color: #cbd5e1; font-size: .78rem;
-}
+.hero-note { max-width: 760px; margin: 16px auto 0; padding: 10px 14px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; color: #cbd5e1; font-size: .78rem; }
 .section-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin: 8px 0 14px; }
 .section-heading h2 { font-family: var(--heading-font); font-size: 1.25rem; font-weight: 700; }
 .result-count { color: var(--text-muted); font-size:.8rem; }
-.empty-state {
-grid-column: 1/-1; padding: 42px 20px; text-align:center;
-background:#fff; border:1px dashed #cbd5e1; border-radius:var(--radius);
-color:var(--text-muted);
-}
+.empty-state { grid-column: 1/-1; padding: 42px 20px; text-align:center; background:#fff; border:1px dashed #cbd5e1; border-radius:var(--radius); color:var(--text-muted); }
 .empty-state i { font-size:2rem; margin-bottom:10px; color:#94a3b8; }
 .product-price-row { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:14px; }
 .product-price { margin-bottom:0; }
-.product-category-chip {
-font-size:.68rem; padding:4px 8px; border-radius:999px;
-background:#f0f9ff; color:#0369a1; font-weight:600;
-}
+.product-category-chip { font-size:.68rem; padding:4px 8px; border-radius:999px; background:#f0f9ff; color:#0369a1; font-weight:600; }
 .cart-bar { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 0 18px; padding:12px 14px; background:#fff; border:1px solid #dbeafe; border-radius:14px; box-shadow:var(--shadow); position:sticky; top:8px; z-index:20; }
 .cart-summary { font-size:.85rem; color:#334155; }
 .cart-count { display:inline-flex; min-width:26px; height:26px; align-items:center; justify-content:center; border-radius:999px; background:var(--primary); color:#fff; font-weight:700; margin-left:5px; }
 .cart-list-item { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 0; border-bottom:1px solid #e2e8f0; }
 .qty-controls { display:flex; align-items:center; gap:8px; }
 .qty-controls button { width:32px; height:32px; border:1px solid #cbd5e1; background:#fff; border-radius:8px; cursor:pointer; font-weight:700; color:#1e293b; display:flex; align-items:center; justify-content:center; }
-.btn-remove-cart {
-background-color: #ef4444 !important;
-color: #ffffff !important;
-border: none !important;
-width: 32px !important;
-height: 32px !important;
-border-radius: 8px !important;
-cursor: pointer !important;
-font-weight: 700 !important;
-font-size: 1.1rem !important;
-display: flex !important;
-align-items: center !important;
-justify-content: center !important;
-box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3) !important;
-}
+.btn-remove-cart { background-color: #ef4444 !important; color: #ffffff !important; border: none !important; width: 32px !important; height: 32px !important; border-radius: 8px !important; cursor: pointer !important; font-weight: 700 !important; font-size: 1.1rem !important; display: flex !important; align-items: center !important; justify-content: center !important; box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3) !important; }
 .btn-remove-cart:hover { background-color: #dc2626 !important; }
 .tracking { display:grid; grid-template-columns:repeat(5,1fr); gap:5px; margin-top:12px; }
 .track-step { text-align:center; font-size:.62rem; color:#94a3b8; }
@@ -267,10 +124,7 @@ box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3) !important;
 .loading-state { text-align:center; padding:28px; color:var(--text-muted); }
 .loading-state i { margin-right:7px; }
 .file-help { font-size:.72rem; color:#64748b; margin-top:5px; }
-.security-note {
-margin-top:10px; padding:10px 12px; border-radius:10px;
-background:#f8fafc; border:1px solid #e2e8f0; color:#64748b; font-size:.72rem;
-}
+.security-note { margin-top:10px; padding:10px 12px; border-radius:10px; background:#f8fafc; border:1px solid #e2e8f0; color:#64748b; font-size:.72rem; }
 @media (max-width: 760px) {
 header { padding: 1.5rem 1rem; }
 .header-buttons { justify-content:center; margin-bottom:14px; }
@@ -289,10 +143,7 @@ header h1 { font-size:1.65rem; }
 .filter-buttons { width:100%; }
 #notification-toast { left:12px; right:12px; bottom:14px; text-align:center; }
 }
-@media (max-width: 390px) {
-.products-grid { grid-template-columns:1fr; }
-.product-img-container { height:160px; }
-}
+@media (max-width: 390px) { .products-grid { grid-template-columns:1fr; } .product-img-container { height:160px; } }
 header{position:relative !important; top:auto !important; z-index:10 !important;}
 @media(max-width:760px){
 header{padding:12px 10px 16px !important;}
@@ -308,99 +159,28 @@ header p{font-size:.76rem !important; margin-bottom:4px !important;}
 .header-graphic{opacity:.06 !important;}
 }
 <style id="final-visibility-polish">
-header{
-background:
-radial-gradient(circle at 12% 22%, rgba(56,189,248,.12), transparent 24%),
-radial-gradient(circle at 88% 28%, rgba(16,185,129,.10), transparent 24%),
-linear-gradient(135deg,#fffaf0 0%,#fff7e8 52%,#f7f1e4 100%) !important;
-color:#17202a !important;
-border-bottom:3px solid #0ea5e9 !important;
-box-shadow:0 10px 30px rgba(15,23,42,.12) !important;
-}
-header h1{
-color:#0284c7 !important;
-text-shadow:0 0 15px rgba(56,189,248,.45),0 0 28px rgba(16,185,129,.20) !important;
-}
-header p,.hero-note,.store-hours{
-color:#252b31 !important;
-}
-.tagline{
-color:#087f5b !important;
-}
-.hero-note{
-background:rgba(255,255,255,.72) !important;
-border:1px solid rgba(55,65,81,.20) !important;
-font-weight:800 !important;
-text-shadow:none !important;
-box-shadow:0 5px 16px rgba(15,23,42,.06);
-}
+header{ background: radial-gradient(circle at 12% 22%, rgba(56,189,248,.12), transparent 24%), radial-gradient(circle at 88% 28%, rgba(16,185,129,.10), transparent 24%), linear-gradient(135deg,#fffaf0 0%,#fff7e8 52%,#f7f1e4 100%) !important; color:#17202a !important; border-bottom:3px solid #0ea5e9 !important; box-shadow:0 10px 30px rgba(15,23,42,.12) !important; }
+header h1{ color:#0284c7 !important; text-shadow:0 0 15px rgba(56,189,248,.45),0 0 28px rgba(16,185,129,.20) !important; }
+header p,.hero-note,.store-hours{ color:#252b31 !important; }
+.tagline{ color:#087f5b !important; }
+.hero-note{ background:rgba(255,255,255,.72) !important; border:1px solid rgba(55,65,81,.20) !important; font-weight:800 !important; text-shadow:none !important; box-shadow:0 5px 16px rgba(15,23,42,.06); }
 .hero-note i{color:#087f5b !important;}
-.store-hours{
-display:inline-flex;
-align-items:center;
-gap:7px;
-margin:10px auto 0;
-padding:8px 14px;
-border:1px solid rgba(55,65,81,.20);
-border-radius:999px;
-background:rgba(255,255,255,.82);
-font-weight:800;
-font-size:.82rem;
-box-shadow:0 4px 12px rgba(15,23,42,.06);
-}
+.store-hours{ display:inline-flex; align-items:center; gap:7px; margin:10px auto 0; padding:8px 14px; border:1px solid rgba(55,65,81,.20); border-radius:999px; background:rgba(255,255,255,.82); font-weight:800; font-size:.82rem; box-shadow:0 4px 12px rgba(15,23,42,.06); }
 .store-hours i{color:#0f766e;}
-.header-security-strip{
-display:flex;
-justify-content:center;
-align-items:center;
-flex-wrap:wrap;
-gap:8px;
-margin:14px auto 0;
-max-width:980px;
-}
-.header-security-badge{
-display:inline-flex;
-align-items:center;
-gap:7px;
-padding:7px 11px;
-border-radius:999px;
-background:rgba(255,255,255,.86);
-border:1px solid rgba(14,116,144,.18);
-color:#20262d;
-font-size:.72rem;
-font-weight:800;
-box-shadow:0 4px 12px rgba(15,23,42,.05);
-}
+.header-security-strip{ display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:8px; margin:14px auto 0; max-width:980px; }
+.header-security-badge{ display:inline-flex; align-items:center; gap:7px; padding:7px 11px; border-radius:999px; background:rgba(255,255,255,.86); border:1px solid rgba(14,116,144,.18); color:#20262d; font-size:.72rem; font-weight:800; box-shadow:0 4px 12px rgba(15,23,42,.05); }
 .header-security-badge i{color:#0284c7;}
 .header-security-badge.secure i{color:#087f5b;}
-.header-graphic{
-position:absolute;
-pointer-events:none;
-opacity:.10;
-z-index:0;
-}
+.header-graphic{ position:absolute; pointer-events:none; opacity:.10; z-index:0; }
 .header-graphic.shield{right:3%;top:24%;font-size:6rem;color:#0ea5e9;animation:securityFloat 5s ease-in-out infinite;}
 .header-graphic.pill{left:3%;bottom:12%;font-size:4rem;color:#10b981;transform:rotate(-22deg);animation:securityFloat 6s ease-in-out infinite reverse;}
-@keyframes securityFloat{
-0%,100%{transform:translateY(0) rotate(0deg);}
-50%{transform:translateY(-8px) rotate(3deg);}
-}
+@keyframes securityFloat{ 0%,100%{transform:translateY(0) rotate(0deg);} 50%{transform:translateY(-8px) rotate(3deg);} }
 .header-graphic.pill{transform:rotate(-22deg);}
 .category-card{position:relative;overflow:hidden;}
 .category-card img{width:100% !important;height:100% !important;object-fit:cover !important;}
-.category-card .content{
-position:absolute;inset:auto 0 0 0;z-index:2;color:#fff;
-background:linear-gradient(to top,rgba(0,0,0,.78),rgba(0,0,0,.38),transparent);
-padding:34px 22px 20px !important;
-}
-.category-card .content h3,.category-card .content p{
-color:#fff !important;text-shadow:0 1px 3px rgba(0,0,0,.65);
-}
-.security-card{
-border:1px solid #dbeafe;
-background:linear-gradient(135deg,#ffffff,#f8fbff);
-box-shadow:0 8px 22px rgba(15,23,42,.06);
-}
+.category-card .content{ position:absolute;inset:auto 0 0 0;z-index:2;color:#fff; background:linear-gradient(to top,rgba(0,0,0,.78),rgba(0,0,0,.38),transparent); padding:34px 22px 20px !important; }
+.category-card .content h3,.category-card .content p{ color:#fff !important;text-shadow:0 1px 3px rgba(0,0,0,.65); }
+.security-card{ border:1px solid #dbeafe; background:linear-gradient(135deg,#ffffff,#f8fbff); box-shadow:0 8px 22px rgba(15,23,42,.06); }
 .security-card i{color:#087f5b;}
 @media(max-width:760px){
 .header-security-strip{gap:6px;}
@@ -471,9 +251,7 @@ Aapka browser video element support nahi karta.
 <div id="admin-panel">
 <h2 id="admin-form-title"><i class="fa-solid fa-user-shield"></i> Admin Dashboard - Naya Product Jodein</h2>
 <div class="security-note security-card">
-<i class="fa-solid fa-shield-halved"></i>
-<b>Security Hardening:</b> failed-login lockout aur automatic admin-session timeout enabled.
-<small>Production protection ke liye Firebase Authentication + Realtime Database Rules bhi required hain.</small>
+<i class="fa-solid fa-shield-halved"></i> <b>Security Hardening:</b> failed-login lockout aur automatic admin-session timeout enabled. <small>Production protection ke liye Firebase Authentication + Realtime Database Rules bhi required hain.</small>
 </div>
 <input type="hidden" id="editing-product-id" value="">
 <div class="form-group">
@@ -586,11 +364,8 @@ Aapka browser video element support nahi karta.
 <h3><i class="fa-solid fa-file-contract"></i> Terms & Conditions</h3>
 <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 15px; line-height: 1.6;">
 <p><b>1. Orders:</b> New Verma Medicals par diye gaye sabhi order upalabdhata ke adheen hain.</p>
-
 <p><b>2. Pricing & Payment:</b> Sabhi dawaiyon ke mulya sthaniye bazaar daro ke anusaar hain. Payment COD ya online upalabdh hai.</p>
-
 <p><b>3. Delivery & Cancellation:</b> Barwadda aur Loharbarwa kshetra ke bheetar samay par delivery ka prayas kiya jata hai.</p>
-
 <p><b>4. Return & Refund Policy:</b> Dawai return karne par cash refund chunne par 3% ki koti ki jayegi. Exchange chunne par 0% deduction aur credit coupon milega.</p>
 </div>
 </div>
@@ -672,8 +447,7 @@ Aapka browser video element support nahi karta.
 <div class="form-group"><label>Mobile Number</label><input id="cart-cust-phone" type="tel" inputmode="numeric" maxlength="10" placeholder="10 digit mobile"></div>
 <div class="form-group"><label>Delivery Address</label><input id="cart-cust-address" type="text" placeholder="Pura address"></div>
 <div class="form-group"><label>Payment</label><select id="cart-payment-type" onchange="document.getElementById('cart-upi-box').style.display=this.value==='Online'?'block':'none'"><option value="Cash on Delivery">Cash on Delivery</option><option value="Online">Online / UPI</option></select></div>
-<div id="cart-upi-box" style="display:none;background:#f0f9ff;padding:10px;border-radius:10px;margin-bottom:12px;text-align:center;"><b>UPI: 7992308032@ptaxis</b>
-<img src="[https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=upi://pay?pa=7992308032@ptaxis&pn=NewVermaMedicals](https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=upi://pay?pa=7992308032@ptaxis&pn=NewVermaMedicals)" style="width:120px;margin:8px"> <input id="cart-payment-file" type="file" accept="image/*" style="width:100%"></div>
+<div id="cart-upi-box" style="display:none;background:#f0f9ff;padding:10px;border-radius:10px;margin-bottom:12px;text-align:center;"><b>UPI: Q183938591@ybl</b> <img src="[https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=upi://pay?pa=Q183938591@ybl&pn=NewVermaMedicals](https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=upi://pay?pa=Q183938591@ybl&pn=NewVermaMedicals)" style="width:120px;margin:8px"> <input id="cart-payment-file" type="file" accept="image/*" style="width:100%"></div>
 <button id="cart-submit-btn" class="btn-primary" style="width:100%;" onclick="submitCartOrder()">Order Submit Karein</button>
 </div>
 </div>
@@ -722,7 +496,7 @@ Aapka browser video element support nahi karta.
 </div>
 <div id="upi-payment-container" style="display: none; background: #f0f9ff; padding: 12px; border-radius: 10px; border: 1px solid #bae6fd; margin-bottom: 15px; text-align: center;">
 <p style="font-size: 0.8rem; font-weight: 600; color: #0369a1; margin-bottom: 8px;">Scan QR to Pay via UPI / Google Pay / PhonePe</p>
-<img src="[https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=Q183938591@ybl&pn=NewVermaMedicals](https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=7992308032@ptaxis&pn=NewVermaMedicals)" alt="UPI QR Code" style="width: 130px; height: 130px; border-radius: 8px; margin-bottom: 8px;">
+<img src="[https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=Q183938591@ybl&pn=NewVermaMedicals](https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=Q183938591@ybl&pn=NewVermaMedicals)" alt="UPI QR Code" style="width: 130px; height: 130px; border-radius: 8px; margin-bottom: 8px;">
 <p style="font-size: 0.75rem; color: #64748b; margin-bottom: 8px;">UPI ID: <b>Q183938591@ybl</b></p>
 <div class="form-group" style="text-align: left; margin-bottom: 0;">
 <label style="font-size: 0.75rem;">Payment Screenshot (Gallery se chunein)</label>
@@ -735,15 +509,13 @@ Aapka browser video element support nahi karta.
 </div>
 </div>
 <footer>
-<p>© 2026 <span>NEW VERMA MEDICALS</span>. All Rights Reserved. | Barwadda, Dhanbad
-
-<span class="terms-link" onclick="toggleTermsModal()">Terms & Conditions (Niyam aur Shartein)</span></p>
+<p>© 2026 <span>NEW VERMA MEDICALS</span>. All Rights Reserved. | Barwadda, Dhanbad <span class="terms-link" onclick="toggleTermsModal()">Terms & Conditions (Niyam aur Shartein)</span></p>
 </footer>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getDatabase, ref, set, push, onValue, remove, update } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-// Splash screen auto-dismiss script
+// Splash screen auto-dismiss script (5 seconds timeout adjusted)
 const splashVideo = document.getElementById('splash-video');
 const splashScreen = document.getElementById('splash-screen');
 if (splashVideo && splashScreen) {
@@ -754,16 +526,7 @@ setTimeout(() => {
 splashScreen.classList.add('hidden');
 }, 5200);
 }
-const firebaseConfig = {
-apiKey: "AIzaSyBWOUjLOY2dnmr_zYoxRvO5jSI0I47_raY",
-authDomain: "new-verma-medicals.firebaseapp.com",
-databaseURL: "https://new-verma-medicals-default-rtdb.firebaseio.com",
-projectId: "new-verma-medicals",
-storageBucket: "new-verma-medicals.firebasestorage.app",
-messagingSenderId: "353970256570",
-appId: "1:353970256570:web:e139f11fe228f41edea083",
-measurementId: "G-EYWL6VHH01"
-};
+const firebaseConfig = { apiKey: "AIzaSyBWOUjLOY2dnmr_zYoxRvO5jSI0I47_raY", authDomain: "new-verma-medicals.firebaseapp.com", databaseURL: "https://new-verma-medicals-default-rtdb.firebaseio.com", projectId: "new-verma-medicals", storageBucket: "new-verma-medicals.firebasestorage.app", messagingSenderId: "353970256570", appId: "1:353970256570:web:e139f11fe228f41edea083", measurementId: "G-EYWL6VHH01" };
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth(app);
@@ -821,10 +584,7 @@ toast.innerText = text;
 toast.style.display = "block";
 setTimeout(() => { toast.style.display = "none"; }, 3000);
 }
-const escapeHTML = (value) => String(value ?? "")
-.replace(/&/g, "&").replace(/</g, "<")
-.replace(/>/g, ">").replace(/"/g, """)
-.replace(/'/g, "'");
+const escapeHTML = (value) => String(value ?? "").replace(/&/g, "&").replace(/</g, "<").replace(/>/g, ">").replace(/"/g, """).replace(/'/g, "'");
 const validPhone = (phone) => /^[6-9]\d{9}$/.test(String(phone).replace(/\s+/g, ""));
 function setButtonLoading(button, loading, loadingText = "Please wait...") {
 if (!button) return;
@@ -914,39 +674,106 @@ renderCustomerAuthState();
 }
 }
 async function customerEmailLogin() {
-const email=document.getElementById("customer-login-email").value.trim(); const password=document.getElementById("customer-login-password").value; const btn=document.getElementById("customer-email-login-btn");
-if(!email||!password){alert("Kripya email aur password bharein.");return;}
-try{setButtonLoading(btn,true,"Login ho raha hai...");await authPersistenceReady;await signInWithEmailAndPassword(auth,email,password);showToast("Login successful!");}catch(e){console.error(e);alert("Login nahi hua: "+(e?.message||"Email ya password check karein."));}finally{setButtonLoading(btn,false);}
+const email = document.getElementById("customer-login-email").value.trim();
+const password = document.getElementById("customer-login-password").value;
+const btn = document.getElementById("customer-email-login-btn");
+if(!email || !password){ alert("Kripya email aur password bharein."); return; }
+try {
+setButtonLoading(btn, true, "Login ho raha hai...");
+await authPersistenceReady;
+await signInWithEmailAndPassword(auth, email, password);
+showToast("Login successful!");
+} catch(e) {
+console.error(e);
+alert("Login nahi hua: " + (e?.message || "Email ya password check karein."));
+} finally {
+setButtonLoading(btn, false);
 }
-window.customerEmailLogin=customerEmailLogin;
-window.customerCreateAccount=async function(){
-const email=document.getElementById("customer-login-email").value.trim(); const password=document.getElementById("customer-login-password").value; const btn=document.getElementById("customer-create-account-btn");
-if(!email||!password){alert("Email aur password bharein.");return;} if(password.length<6){alert("Password kam se kam 6 characters ka hona chahiye.");return;}
-try{setButtonLoading(btn,true,"Account ban raha hai...");await authPersistenceReady;await createUserWithEmailAndPassword(auth,email,password);showToast("Account create ho gaya!");}catch(e){console.error(e);alert("Account nahi bana: "+(e?.message||"Details check karein."));}finally{setButtonLoading(btn,false);}
+}
+window.customerEmailLogin = customerEmailLogin;
+window.customerCreateAccount = async function() {
+const email = document.getElementById("customer-login-email").value.trim();
+const password = document.getElementById("customer-login-password").value;
+const btn = document.getElementById("customer-create-account-btn");
+if(!email || !password){ alert("Email aur password bharein."); return; }
+if(password.length < 6){ alert("Password kam se kam 6 characters ka hona chahiye."); return; }
+try {
+setButtonLoading(btn, true, "Account ban raha hai...");
+await authPersistenceReady;
+await createUserWithEmailAndPassword(auth, email, password);
+showToast("Account create ho gaya!");
+} catch(e) {
+console.error(e);
+alert("Account nahi bana: " + (e?.message || "Details check karein."));
+} finally {
+setButtonLoading(btn, false);
+}
 };
-window.customerGoogleLogin=async function(){const btn=document.getElementById("customer-google-login-btn");try{setButtonLoading(btn,true,"Google login ho raha hai...");await authPersistenceReady;await signInWithPopup(auth,googleProvider);showToast("Google login successful!");}catch(e){console.error(e);alert("Google login nahi hua: "+(e?.message||"Dobara try karein."));}finally{setButtonLoading(btn,false);}};
-window.customerLogout=async function(){try{await signOut(auth);showToast("Logout ho gaya.");}catch(e){alert("Logout nahi ho saka.");}};
-function renderCustomerAuthState(){const user=currentCustomerUser||auth.currentUser;const l=document.getElementById("customer-login-box"),a=document.getElementById("customer-account-box"),x=document.getElementById("customer-account-label"),hb=document.getElementById("customer-login-header-btn");if(!l||!a)return;if(user){l.style.display="none";a.style.display="block";if(x)x.textContent=user.email||user.displayName||"Logged in";if(hb)hb.innerHTML='<i class="fa-solid fa-user-check"></i> Account';refreshCustomerOrdersView();}else{l.style.display="block";a.style.display="none";if(hb)hb.innerHTML='<i class="fa-solid fa-right-to-bracket"></i> Login';document.getElementById("customer-orders-result").innerHTML="";}}
-window.openCustomerLogin=function(){
-const modal=document.getElementById("customer-orders-modal");
-const notice=document.getElementById("customer-login-required");
-const title=document.getElementById("customer-orders-title");
-if(modal){modal.style.display="flex"; renderCustomerAuthState();}
-if(notice)notice.style.display="none";
-if(title)title.innerHTML='<i class="fa-solid fa-right-to-bracket"></i> Login to Continue';
+window.customerGoogleLogin = async function() {
+const btn = document.getElementById("customer-google-login-btn");
+try {
+setButtonLoading(btn, true, "Google login ho raha hai...");
+await authPersistenceReady;
+await signInWithPopup(auth, googleProvider);
+showToast("Google login successful!");
+} catch(e) {
+console.error(e);
+alert("Google login nahi hua: " + (e?.message || "Dobara try karein."));
+} finally {
+setButtonLoading(btn, false);
+}
 };
-window.requireCustomerLogin=function(){
-if(auth.currentUser)return true;
-const modal=document.getElementById("customer-orders-modal");
-const notice=document.getElementById("customer-login-required");
-const title=document.getElementById("customer-orders-title");
-if(modal)modal.style.display="flex";
-if(notice)notice.style.display="block";
-if(title)title.innerHTML='<i class="fa-solid fa-lock"></i> Login to Continue';
+window.customerLogout = async function() {
+try {
+await signOut(auth);
+showToast("Logout ho gaya.");
+} catch(e) {
+alert("Logout nahi ho saka.");
+}
+};
+function renderCustomerAuthState() {
+const user = currentCustomerUser || auth.currentUser;
+const l = document.getElementById("customer-login-box");
+const a = document.getElementById("customer-account-box");
+const x = document.getElementById("customer-account-label");
+const hb = document.getElementById("customer-login-header-btn");
+if(!l || !a) return;
+if(user) {
+l.style.display = "none";
+a.style.display = "block";
+if(x) x.textContent = user.email || user.displayName || "Logged in";
+if(hb) hb.innerHTML = '<i class="fa-solid fa-user-check"></i> Account';
+refreshCustomerOrdersView();
+} else {
+l.style.display = "block";
+a.style.display = "none";
+if(hb) hb.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Login';
+document.getElementById("customer-orders-result").innerHTML = "";
+}
+}
+window.openCustomerLogin = function() {
+const modal = document.getElementById("customer-orders-modal");
+const notice = document.getElementById("customer-login-required");
+const title = document.getElementById("customer-orders-title");
+if(modal) { modal.style.display = "flex"; renderCustomerAuthState(); }
+if(notice) notice.style.display = "none";
+if(title) title.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Login to Continue';
+};
+window.requireCustomerLogin = function() {
+if(auth.currentUser) return true;
+const modal = document.getElementById("customer-orders-modal");
+const notice = document.getElementById("customer-login-required");
+const title = document.getElementById("customer-orders-title");
+if(modal) modal.style.display = "flex";
+if(notice) notice.style.display = "block";
+if(title) title.innerHTML = '<i class="fa-solid fa-lock"></i> Login to Continue';
 renderCustomerAuthState();
 return false;
 };
-onAuthStateChanged(auth,user=>{currentCustomerUser=user||null;renderCustomerAuthState();});
+onAuthStateChanged(auth, user => {
+currentCustomerUser = user || null;
+renderCustomerAuthState();
+});
 window.toggleTermsModal = function() {
 const modal = document.getElementById("terms-modal");
 modal.style.display = modal.style.display === "flex" ? "none" : "flex";
@@ -961,14 +788,8 @@ window.submitPrescription = function() {
 const name = document.getElementById("rx-cust-name").value.trim();
 const phone = document.getElementById("rx-cust-phone").value.trim();
 const fileInput = document.getElementById("rx-file-input");
-if (!name || !phone) {
-alert("Kripya apna naam aur mobile number bharein!");
-return;
-}
-if (fileInput.files.length === 0) {
-alert("Kripya prescription ki photo (Gallery ya Camera se) chunein!");
-return;
-}
+if (!name || !phone) { alert("Kripya apna naam aur mobile number bharein!"); return; }
+if (fileInput.files.length === 0) { alert("Kripya prescription ki photo (Gallery ya Camera se) chunein!"); return; }
 const file = fileInput.files[0];
 const reader = new FileReader();
 showToast("Prescription upload ho raha hai...");
@@ -993,20 +814,30 @@ fileInput.value = "";
 };
 reader.readAsDataURL(file);
 }
-function trackingHTML(status){
-const steps=["Order Placed","Approved","Preparing","Out for Delivery","Delivered"]; let idx=0;
-if((status||"").includes("Accepted")||status.includes("Admin Confirmed"))idx=1;
-if(status.includes("Preparing"))idx=2; if(status.includes("Out for Delivery"))idx=3; if(status.includes("Delivered")||status.includes("Confirmed"))idx=4;
-return <div class="tracking">${steps.map((x,i)=><div class="track-step ${i<=idx?'active':''}"><div class="track-dot">{i<idx?'✓':i+1}</div>{x}</div>).join("")}</div>;
+function trackingHTML(status) {
+const steps = ["Order Placed", "Approved", "Preparing", "Out for Delivery", "Delivered"];
+let idx = 0;
+if ((status || "").includes("Accepted") || status.includes("Admin Confirmed")) idx = 1;
+if (status.includes("Preparing")) idx = 2;
+if (status.includes("Out for Delivery")) idx = 3;
+if (status.includes("Delivered") || status.includes("Confirmed")) idx = 4;
+return <div class="tracking">${steps.map((x, i) => <div class="track-step ${i <= idx ? 'active' : ''}"><div class="track-dot">{i < idx ? '✓' : i + 1}</div>{x}</div>).join("")}</div>;
 }
-window.printOrderInvoice=function(orderId){ const o=allOrders.find(x=>x.id===orderId); if(!o)return; const items=o.items?.length?o.items.map(i=>${i.productName} × ${i.quantity} — ₹${(Number(i.unitPrice)*Number(i.quantity)).toFixed(2)}).join("
-"):${escapeHTML(o.productName||"")} × ${o.quantity||1}; const w=window.open("","_blank"); if(!w)return; w.document.write(<html><head><title>Invoice - New Verma Medicals</title><style>body{font-family:Arial;padding:30px;color:#222}h1{color:#0284c7}hr{border:0;border-top:1px solid #ddd}.total{font-size:20px;font-weight:bold;margin-top:20px}</style></head><body><h1>NEW VERMA MEDICALS</h1><p>Loharbarwa, Barwadda, Dhanbad, Jharkhand<br>Contact: +91 7992308032</p><hr><h2>Order Invoice</h2><p><b>Order ID:</b> ${o.id}<br><b>Date:</b> ${escapeHTML(o.timestamp||"")}<br><b>Customer:</b> ${escapeHTML(o.customerName||"")}<br><b>Mobile:</b> ${escapeHTML(o.customerPhone||"")}<br><b>Address:</b> ${escapeHTML(o.address||"")}</p><hr><p>${items}</p><p class="total">Total: ₹${Number(o.productPrice||0).toFixed(2)}</p><p>Payment: ${escapeHTML(o.paymentType||"")}</p><p>Thank you for choosing New Verma Medicals.</p><script>window.print();<\/script></body></html>); w.document.close(); }
+window.printOrderInvoice = function(orderId) {
+const o = allOrders.find(x => x.id === orderId);
+if (!o) return;
+const items = o.items?.length ? o.items.map(i => ${i.productName} × ${i.quantity} — ₹${(Number(i.unitPrice) * Number(i.quantity)).toFixed(2)}).join(" ") : ${escapeHTML(o.productName || "")} × ${o.quantity || 1};
+const w = window.open("", "_blank");
+if (!w) return;
+w.document.write(<html><head><title>Invoice - New Verma Medicals</title><style>body{font-family:Arial;padding:30px;color:#222}h1{color:#0284c7}hr{border:0;border-top:1px solid #ddd}.total{font-size:20px;font-weight:bold;margin-top:20px}</style></head><body><h1>NEW VERMA MEDICALS</h1><p>Loharbarwa, Barwadda, Dhanbad, Jharkhand<br>Contact: +91 7992308032</p><hr><h2>Order Invoice</h2><p><b>Order ID:</b> ${o.id}<br><b>Date:</b> ${escapeHTML(o.timestamp || "")}<br><b>Customer:</b> ${escapeHTML(o.customerName || "")}<br><b>Mobile:</b> ${escapeHTML(o.customerPhone || "")}<br><b>Address:</b> ${escapeHTML(o.address || "")}</p><hr><p>${items}</p><p class="total">Total: ₹${Number(o.productPrice || 0).toFixed(2)}</p><p>Payment: ${escapeHTML(o.paymentType || "")}</p><p>Thank you for choosing New Verma Medicals.</p><script>window.print();<\/script></body></html>);
+w.document.close();
+}
 window.refreshCustomerOrdersView = function() {
 const container = document.getElementById("customer-orders-result");
 container.innerHTML = "";
 const user = currentCustomerUser || auth.currentUser;
 if (!user) { container.innerHTML = "<p>Please login first.</p>"; return; }
-const owns = r => (r.customerUid && r.customerUid === user.uid) || (r.customerEmail && String(r.customerEmail).toLowerCase() === String(user.email||"").toLowerCase());
+const owns = r => (r.customerUid && r.customerUid === user.uid) || (r.customerEmail && String(r.customerEmail).toLowerCase() === String(user.email || "").toLowerCase());
 const matchedOrders = allOrders.filter(owns);
 const matchedCredits = allCredits.filter(cr => owns(cr) && !cr.isUsed);
 const matchedRx = allPrescriptions.filter(owns);
@@ -1031,17 +862,14 @@ creditBox.innerHTML += Code: <b style="color:var(--primary)">${cr.couponCode}</b
 container.appendChild(creditBox);
 }
 if (matchedOrders.length === 0 && matchedCredits.length === 0 && matchedRx.length === 0) {
-container.innerHTML = <p style="color: #ef4444; font-size: 0.85rem; margin-top:10px;">Is number se koi data nahi mila hai.</p>;
+container.innerHTML = <p style="color: #ef4444; font-size: 0.85rem; margin-top:10px;">Is account se koi data nahi mila hai.</p>;
 return;
 }
 matchedOrders.forEach(ord => {
 let statusColor = ord.status.includes("Confirmed") ? "green" : (ord.status.includes("Pending") ? "orange" : "blue");
 const div = document.createElement("div");
 div.className = "order-item-box";
-div.innerHTML = <b>Order Time:</b> ${ord.timestamp}<br> <b>Item:</b> ${ord.productName} (Qty: ${ord.quantity || 1})<br> <b>Total Paid Amount:</b> <b>₹${ord.productPrice}</b><br> <b>Payment:</b> ${ord.paymentType} ${ord.paymentScreenshot ?
-<a href="${ord.paymentScreenshot}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Payment Screenshot</a>: ''}<br> <b>Address:</b> ${ord.address}<br> <b>Status:</b> <span style="color: ${statusColor}; font-weight: bold;">${ord.status}</span> ${trackingHTML(ord.status)} ${ord.deliveryDateTime ?
-<b>📅 Delivery Date & Time:</b> <span style="color: #0284c7; font-weight: bold;">${ord.deliveryDateTime}</span>: ''} ${ord.reason ?
-<b>Kaaran:</b> ${ord.reason}: ''};
+div.innerHTML = <b>Order Time:</b> ${ord.timestamp}<br> <b>Item:</b> ${ord.productName} (Qty: ${ord.quantity || 1})<br> <b>Total Paid Amount:</b> <b>₹${ord.productPrice}</b><br> <b>Payment:</b> ${ord.paymentType} ${ord.paymentScreenshot ? <a href="${ord.paymentScreenshot}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Payment Screenshot</a>: ''}<br> <b>Address:</b> ${ord.address}<br> <b>Status:</b> <span style="color: ${statusColor}; font-weight: bold;">${ord.status}</span> ${trackingHTML(ord.status)} ${ord.deliveryDateTime ?<b>📅 Delivery Date & Time:</b> <span style="color: #0284c7; font-weight: bold;">${ord.deliveryDateTime}</span>: ''} ${ord.reason ?<b>Kaaran:</b> ${ord.reason} : ''};
 let actionDiv = document.createElement("div");
 actionDiv.innerHTML = <button class="btn-primary" onclick="printOrderInvoice('${ord.id}')"><i class="fa-solid fa-file-invoice"></i> Invoice Print</button>;
 actionDiv.style.marginTop = "10px";
@@ -1106,10 +934,7 @@ const category = document.getElementById("p-category").value;
 const price = document.getElementById("p-price").value.trim();
 let img = document.getElementById("p-img").value.trim();
 const editId = document.getElementById("editing-product-id").value;
-if (!name || !price) {
-alert("Kripya product ka naam aur price darj karein!");
-return;
-}
+if (!name || !price) { alert("Kripya product ka naam aur price darj karein!"); return; }
 if(!img) img = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80";
 if (editId) {
 update(ref(db, 'products/' + editId), { name, category, price, img }).then(() => {
@@ -1177,7 +1002,7 @@ Object.keys(data).reverse().forEach(key => allOrders.push({ id: key, ...data[key
 renderOrders();
 updateAdminStats();
 renderDeliveryPartnerView();
-if (verifiedPhoneNum) refreshCustomerOrdersView();
+refreshCustomerOrdersView();
 });
 const returnsRef = ref(db, 'returns');
 onValue(returnsRef, (snapshot) => {
@@ -1188,7 +1013,7 @@ Object.keys(data).reverse().forEach(key => allReturns.push({ id: key, ...data[ke
 }
 if (isAdmin) renderReturns();
 updateAdminStats();
-if (verifiedPhoneNum) refreshCustomerOrdersView();
+refreshCustomerOrdersView();
 });
 const creditsRef = ref(db, 'credits');
 onValue(creditsRef, (snapshot) => {
@@ -1208,6 +1033,7 @@ Object.keys(data).reverse().forEach(key => allPrescriptions.push({ id: key, ...d
 }
 if (isAdmin) renderPrescriptionRequests();
 updateAdminStats();
+refreshCustomerOrdersView();
 });
 window.renderPrescriptionRequests = function() {
 const container = document.getElementById("admin-prescription-requests-list");
@@ -1240,10 +1066,7 @@ if (!query) {
 resContainer.innerHTML = <p style="color: var(--text-muted); font-size: 0.8rem;">Mobile number ya coupon code likhkar khojein...</p>;
 return;
 }
-const matched = allCredits.filter(cr =>
-String(cr.customerPhone || "").toLowerCase().includes(query) ||
-String(cr.couponCode || "").toLowerCase().includes(query)
-);
+const matched = allCredits.filter(cr => String(cr.customerPhone || "").toLowerCase().includes(query) || String(cr.couponCode || "").toLowerCase().includes(query));
 if (matched.length === 0) {
 resContainer.innerHTML = <p style="color: #ef4444; font-size: 0.85rem;">Koi record nahi mila.</p>;
 return;
@@ -1256,7 +1079,7 @@ let statusText = 'Upalabdh (Active)';
 if(cr.isUsed) {
 statusText = cr.usedMode === 'Offline' ? 'Istemal ho chuka (Used Offline)' : (cr.usedMode === 'Online' ? 'Istemal ho chuka (Used Online)' : 'Istemal ho chuka (Used)');
 }
-div.innerHTML = <b>Mobile:</b> ${cr.customerPhone}<br> <b>Coupon Code:</b> <b style="color:var(--primary);">${cr.couponCode}</b><br> <b>Raashi:</b> ₹${cr.amount} (${cr.type})<br> <b>Sthiti:</b> <span style="color: ${cr.isUsed ? 'red' : 'green'}; font-weight: bold;">${statusText}</span> ${!cr.isUsed ?<div class="order-actions"><button class="btn-danger" style="background:#64748b;" onclick="markCreditAsUsed('${cr.id}')"><i class="fa-solid fa-check"></i> Offline upyog ho gaya (Mark Used)</button></div>: ''};
+div.innerHTML = <b>Mobile:</b> ${cr.customerPhone}<br> <b>Coupon Code:</b> <b style="color:var(--primary);">${cr.couponCode}</b><br> <b>Raashi:</b> ₹${cr.amount} (${cr.type})<br> <b>Sthiti:</b> <span style="color: ${cr.isUsed ? 'red' : 'green'}; font-weight: bold;">${statusText}</span> ${!cr.isUsed ? <div class="order-actions"><button class="btn-danger" style="background:#64748b;" onclick="markCreditAsUsed('${cr.id}')"><i class="fa-solid fa-check"></i> Offline upyog ho gaya (Mark Used)</button></div> : ''};
 resContainer.appendChild(div);
 });
 }
@@ -1282,15 +1105,12 @@ const div = document.createElement("div");
 div.className = "order-item-box";
 if (status.includes("Pending")) {
 pendingCount++;
-div.innerHTML = <b>Time:</b> ${ord.timestamp}<br> <b>Customer:</b> ${ord.customerName} (${ord.customerPhone})<br> <b>Item:</b> ${ord.productName} (Qty: ${ord.quantity || 1})<br> <b>Paid Amount:</b> <b>₹${ord.productPrice}</b><br> <b>Payment:</b> ${ord.paymentType} ${ord.paymentScreenshot ?
-<a href="${ord.paymentScreenshot}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Payment Screenshot</a>: ''}<br> <b>Address:</b> ${ord.address}<br> <b>Status:</b> <span style="color: orange; font-weight: bold;">${status}</span> <div class="order-actions" style="display: ${isAdmin ? 'flex' : 'none'};"> <button class="btn-success" onclick="acceptOrderPrompt('${ord.id}')"><i class="fa-solid fa-check"></i> Accept & Set Time</button> <button class="btn-danger" onclick="openRejectModal('${ord.id}')"><i class="fa-solid fa-xmark"></i> Reject / Cancel</button> </div>;
+div.innerHTML = <b>Time:</b> ${ord.timestamp}<br> <b>Customer:</b> ${ord.customerName} (${ord.customerPhone})<br> <b>Item:</b> ${ord.productName} (Qty: ${ord.quantity || 1})<br> <b>Paid Amount:</b> <b>₹${ord.productPrice}</b><br> <b>Payment:</b> ${ord.paymentType} ${ord.paymentScreenshot ? <a href="${ord.paymentScreenshot}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Payment Screenshot</a> : ''}<br> <b>Address:</b> ${ord.address}<br> <b>Status:</b> <span style="color: orange; font-weight: bold;">${status}</span> <div class="order-actions" style="display: ${isAdmin ? 'flex' : 'none'};"> <button class="btn-success" onclick="acceptOrderPrompt('${ord.id}')"><i class="fa-solid fa-check"></i> Accept & Set Time</button> <button class="btn-danger" onclick="openRejectModal('${ord.id}')"><i class="fa-solid fa-xmark"></i> Reject / Cancel</button> </div>;
 liveContainer.appendChild(div);
 } else {
 historyCount++;
 let statusColor = status.includes("Confirmed") ? "green" : (status.includes("Accepted") ? "blue" : "red");
-div.innerHTML = <b>Time:</b> ${ord.timestamp}<br> <b>Customer:</b> ${ord.customerName} (${ord.customerPhone})<br> <b>Item:</b> ${ord.productName} (Qty: ${ord.quantity || 1})<br> <b>Paid Amount:</b> ₹${ord.productPrice}<br> <b>Antim Status:</b> <span style="color: ${statusColor}; font-weight: bold;">${status}</span><br> ${ord.deliveryDateTime ?<b>Delivery Date & Time:</b> ${ord.deliveryDateTime} <button class="btn-warning" style="padding:2px 6px; font-size:0.7rem;" onclick="updateDeliveryTimePrompt('${ord.id}')">Badlein</button>
-: ''} ${ord.reason ?<b>Kaaran:</b> ${ord.reason}
-: ''} <div class="order-actions" style="display: ${isAdmin ? 'flex' : 'none'};"> ${!status.includes("Admin Confirmed") ?<button class="btn-success" onclick="markAdminDelivered('${ord.id}')"><i class="fa-solid fa-check-double"></i> Delivered Tik Karein</button>: ''} <button class="btn-danger" style="background: #64748b;" onclick="deleteOrderHistory('${ord.id}')"><i class="fa-solid fa-trash"></i> History se Delete Karein</button> </div>;
+div.innerHTML = <b>Time:</b> ${ord.timestamp}<br> <b>Customer:</b> ${ord.customerName} (${ord.customerPhone})<br> <b>Item:</b> ${ord.productName} (Qty: ${ord.quantity || 1})<br> <b>Paid Amount:</b> ₹${ord.productPrice}<br> <b>Antim Status:</b> <span style="color: ${statusColor}; font-weight: bold;">${status}</span><br> ${ord.deliveryDateTime ? <b>Delivery Date & Time:</b> ${ord.deliveryDateTime} <button class="btn-warning" style="padding:2px 6px; font-size:0.7rem;" onclick="updateDeliveryTimePrompt('${ord.id}')">Badlein</button>: ''} ${ord.reason ?<b>Kaaran:</b> ${ord.reason}: ''} <div class="order-actions" style="display: ${isAdmin ? 'flex' : 'none'};"> ${!status.includes("Admin Confirmed") ?<button class="btn-success" onclick="markAdminDelivered('${ord.id}')"><i class="fa-solid fa-check-double"></i> Delivered Tik Karein</button> : ''} <button class="btn-danger" style="background: #64748b;" onclick="deleteOrderHistory('${ord.id}')"><i class="fa-solid fa-trash"></i> History se Delete Karein</button> </div>;
 historyContainer.appendChild(div);
 }
 });
@@ -1310,8 +1130,7 @@ activeOrders.forEach(ord => {
 const div = document.createElement("div");
 div.className = "order-item-box";
 div.style.background = "#f0fdf4";
-div.innerHTML = <b>Customer:</b> ${ord.customerName} (<a href="tel:${ord.customerPhone}" style="color:var(--primary)">${ord.customerPhone}</a>)<br> <b>Address:</b> ${ord.address}<br> <b>Item & Qty:</b> ${ord.productName} (Qty: ${ord.quantity || 1})<br> <b>Vasoolne Wala Amount (Paid):</b> <b style="color:var(--accent)">₹${ord.productPrice}</b> (${ord.paymentType})<br> ${ord.paymentScreenshot ?<a href="${ord.paymentScreenshot}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Online Payment Screenshot</a>
-: ''} <b>Delivery Time:</b> <span style="color:#0284c7; font-weight:bold;">${ord.deliveryDateTime || 'Tay nahi hua'}</span> <div class="order-actions" style="margin-top:10px;"> <button class="btn-warning" onclick="updateDeliveryTimePrompt('${ord.id}')"><i class="fa-solid fa-clock"></i> Timing Update Karein</button> <button class="btn-success" onclick="markPartnerDelivered('${ord.id}')"><i class="fa-solid fa-check-double"></i> Delivered Mark Karein</button> </div>;
+div.innerHTML = <b>Customer:</b> ${ord.customerName} (<a href="tel:${ord.customerPhone}" style="color:var(--primary)">${ord.customerPhone}</a>)<br> <b>Address:</b> ${ord.address}<br> <b>Item & Qty:</b> ${ord.productName} (Qty: ${ord.quantity || 1})<br> <b>Vasoolne Wala Amount (Paid):</b> <b style="color:var(--accent)">₹${ord.productPrice}</b> (${ord.paymentType})<br> ${ord.paymentScreenshot ? <a href="${ord.paymentScreenshot}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Online Payment Screenshot</a> : ''} <b>Delivery Time:</b> <span style="color:#0284c7; font-weight:bold;">${ord.deliveryDateTime || 'Tay nahi hua'}</span> <div class="order-actions" style="margin-top:10px;"> <button class="btn-warning" onclick="updateDeliveryTimePrompt('${ord.id}')"><i class="fa-solid fa-clock"></i> Timing Update Karein</button> <button class="btn-success" onclick="markPartnerDelivered('${ord.id}')"><i class="fa-solid fa-check-double"></i> Delivered Mark Karein</button> </div>;
 container.appendChild(div);
 });
 }
@@ -1364,9 +1183,7 @@ couponCode: couponCode,
 type: type,
 isUsed: false
 }).then(() => {
-update(ref(db, 'returns/' + retId), {
-status: Approved (${couponMsg})
-}).then(() => {
+update(ref(db, 'returns/' + retId), { status: Approved (${couponMsg}) }).then(() => {
 showToast(Return swikaar ho gaya! Coupon: ${couponCode});
 renderReturns();
 searchAdminCredits();
@@ -1374,9 +1191,7 @@ searchAdminCredits();
 });
 }
 window.rejectReturn = function(retId) {
-update(ref(db, 'returns/' + retId), {
-status: "Rejected by Admin"
-}).then(() => {
+update(ref(db, 'returns/' + retId), { status: "Rejected by Admin" }).then(() => {
 showToast("Return anurodh aswiikaar kar diya gaya.");
 renderReturns();
 });
@@ -1391,10 +1206,7 @@ showToast("Order delivered mark kar diya gaya!");
 window.acceptOrderPrompt = function(orderId) {
 let deliveryDateTime = prompt("Delivery ki tithi aur samay darj karein\n(Jaise: 30 minute mein ya 09/10/2026, sham 5:00 baje):", "30 minute mein");
 if (deliveryDateTime !== null && deliveryDateTime.trim() !== "") {
-update(ref(db, 'orders/' + orderId), {
-status: "Accepted / Out for Delivery",
-deliveryDateTime: deliveryDateTime
-}).then(() => {
+update(ref(db, 'orders/' + orderId), { status: "Accepted / Out for Delivery", deliveryDateTime: deliveryDateTime }).then(() => {
 showToast("Order swikaar ho gaya aur samay set ho gaya!");
 });
 }
@@ -1417,10 +1229,7 @@ let finalReason = selectVal;
 if (selectVal === "Other") {
 finalReason = document.getElementById("custom-reason-input").value.trim() || "Customer dwara radd kiya gaya";
 }
-update(ref(db, 'orders/' + selectedOrderForCancel.id), {
-status: "Cancelled",
-reason: finalReason
-}).then(() => {
+update(ref(db, 'orders/' + selectedOrderForCancel.id), { status: "Cancelled", reason: finalReason }).then(() => {
 showToast("Order safalpurvak radd kar diya gaya!");
 closeRejectModal();
 });
@@ -1450,7 +1259,7 @@ container.innerHTML = "";
 const countEl = document.getElementById("result-count");
 if (countEl) countEl.textContent = ${visible.length} product${visible.length === 1 ? "" : "s"};
 if (!visible.length) {
-container.innerHTML =  <div class="empty-state"> <i class="fa-solid fa-box-open"></i> <h3>Koi product nahi mila</h3> <p>Search ya category filter badal kar dekhein.</p> </div>;
+container.innerHTML = <div class="empty-state"> <i class="fa-solid fa-box-open"></i> <h3>Koi product nahi mila</h3> <p>Search ya category filter badal kar dekhein.</p> </div>;
 return;
 }
 visible.forEach(p => {
@@ -1460,7 +1269,7 @@ const safeName = escapeHTML(p.name);
 const safeCategory = escapeHTML(p.category);
 const safeImg = escapeHTML(p.img);
 const safePrice = Number.parseFloat(p.price) || 0;
-card.innerHTML =  <div class="product-img-container"> <span class="product-tag">${safeCategory}</span> <img src="${safeImg}" alt="${safeName}" loading="lazy" onerror="this.onerror=null;this.src='[https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80](https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80)';"> </div> <div class="product-details"> <div class="product-title">${safeName}</div> <div class="product-price-row"> <div class="product-price">₹${safePrice.toFixed(2)}</div> <span class="product-category-chip">${safeCategory}</span> </div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;"> <button class="btn-primary" type="button" onclick='addToCart(${JSON.stringify(String(p.name))}, ${safePrice}, ${JSON.stringify(String(p.img))}, ${JSON.stringify(String(p.category))})'> <i class="fa-solid fa-cart-plus"></i> Cart </button> <button class="btn-success" type="button" style="padding:10px;" onclick='openCheckoutModal(${JSON.stringify(String(p.name))}, ${safePrice})'> <i class="fa-solid fa-bolt"></i> Buy Now </button> </div> <div class="admin-product-controls" style="display:${isAdmin ? 'flex' : 'none'};"> <button class="btn-warning" style="flex:1;" onclick="editProduct('${escapeHTML(p.id)}')"><i class="fa-solid fa-pen-to-square"></i> Edit</button> <button class="btn-danger" style="flex:1;" onclick="deleteProduct('${escapeHTML(p.id)}')"><i class="fa-solid fa-trash"></i> Delete</button> </div> </div>;
+card.innerHTML = <div class="product-img-container"> <span class="product-tag">${safeCategory}</span> <img src="${safeImg}" alt="${safeName}" loading="lazy" onerror="this.onerror=null;this.src='[https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80](https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80)';"> </div> <div class="product-details"> <div class="product-title">${safeName}</div> <div class="product-price-row"> <div class="product-price">₹${safePrice.toFixed(2)}</div> <span class="product-category-chip">${safeCategory}</span> </div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;"> <button class="btn-primary" type="button" onclick='addToCart(${JSON.stringify(String(p.name))}, ${safePrice}, ${JSON.stringify(String(p.img))}, ${JSON.stringify(String(p.category))})'> <i class="fa-solid fa-cart-plus"></i> Cart </button> <button class="btn-success" type="button" style="padding:10px;" onclick='openCheckoutModal(${JSON.stringify(String(p.name))}, ${safePrice})'> <i class="fa-solid fa-bolt"></i> Buy Now </button> </div> <div class="admin-product-controls" style="display:${isAdmin ? 'flex' : 'none'};"> <button class="btn-warning" style="flex:1;" onclick="editProduct('${escapeHTML(p.id)}')"><i class="fa-solid fa-pen-to-square"></i> Edit</button> <button class="btn-danger" style="flex:1;" onclick="deleteProduct('${escapeHTML(p.id)}')"><i class="fa-solid fa-trash"></i> Delete</button> </div> </div>;
 container.appendChild(card);
 });
 }
@@ -1468,21 +1277,43 @@ function saveCart(){ localStorage.setItem("newVermaCart", JSON.stringify(cartIte
 function updateCartUI(){
 const count=cartItems.reduce((a,i)=>a+i.qty,0), total=cartItems.reduce((a,i)=>a+i.price*i.qty,0);
 const c=document.getElementById("cart-count"), t=document.getElementById("cart-total"), mt=document.getElementById("cart-modal-total");
-if(c)c.textContent=count; if(t)t.textContent=₹${total.toFixed(2)}; if(mt)mt.textContent=₹${total.toFixed(2)};
+if(c)c.textContent=count;
+if(t)t.textContent=₹${total.toFixed(2)};
+if(mt)mt.textContent=₹${total.toFixed(2)};
 }
 window.addToCart=function(name,price,img,category){
-const item=cartItems.find(i=>i.name=name); if(item)item.qty++; else cartItems.push({name,price,img,category,qty:1});
-saveCart(); showToast(${name} cart mein add ho gaya.);
+const item=cartItems.find(i=>i.name=name);
+if(item)item.qty++;
+else cartItems.push({name,price,img,category,qty:1});
+saveCart();
+showToast(${name} cart mein add ho gaya.);
 }
-window.changeCartQty=function(name,delta){ const item=cartItems.find(i=>i.name=name); if(!item)return; item.qty+=delta; if(item.qty<=0)cartItems=cartItems.filter(i=>i.name!==name); saveCart(); renderCart(); }
-window.removeFromCart=function(name){ cartItems=cartItems.filter(i=>i.name!==name); saveCart(); renderCart(); }
+window.changeCartQty=function(name,delta){
+const item=cartItems.find(i=>i.name=name);
+if(!item)return;
+item.qty+=delta;
+if(item.qty<=0)cartItems=cartItems.filter(i=>i.name!==name);
+saveCart();
+renderCart();
+}
+window.removeFromCart=function(name){
+cartItems=cartItems.filter(i=>i.name!==name);
+saveCart();
+renderCart();
+}
 function renderCart(){
-const box=document.getElementById("cart-items"); if(!box)return; box.innerHTML="";
-if(!cartItems.length){ box.innerHTML='<div class="empty-state" style="padding:25px"><i class="fa-solid fa-cart-shopping"></i><h3>Cart khaali hai</h3><p>Product par Cart button dabayein.</p></div>'; updateCartUI(); return; }
+const box=document.getElementById("cart-items");
+if(!box)return;
+box.innerHTML="";
+if(!cartItems.length){
+box.innerHTML='<div class="empty-state" style="padding:25px"><i class="fa-solid fa-cart-shopping"></i><h3>Cart khaali hai</h3><p>Product par Cart button dabayein.</p></div>';
+updateCartUI();
+return;
+}
 cartItems.forEach(i=>{
 const row=document.createElement("div");
 row.className="cart-list-item";
-row.innerHTML= <div style="flex:1"> <b style="font-family:var(--heading-font); color:#1e293b;">${escapeHTML(i.name)}</b><br> <small style="color:#64748b;">₹${Number(i.price).toFixed(2)} × ${i.qty}</small> </div> <div class="qty-controls"> <button onclick='changeCartQty(${JSON.stringify(i.name)},-1)'>−</button> <b style="min-width:16px; text-align:center;">${i.qty}</b> <button onclick='changeCartQty(${JSON.stringify(i.name)},1)'>+</button> <button class="btn-remove-cart" title="Remove Item" onclick='removeFromCart(${JSON.stringify(i.name)})'>&times;</button> </div>;
+row.innerHTML=<div style="flex:1"> <b style="font-family:var(--heading-font); color:#1e293b;">${escapeHTML(i.name)}</b><br> <small style="color:#64748b;">₹${Number(i.price).toFixed(2)} × ${i.qty}</small> </div> <div class="qty-controls"> <button onclick='changeCartQty(${JSON.stringify(i.name)},-1)'>−</button> <b style="min-width:16px; text-align:center;">${i.qty}</b> <button onclick='changeCartQty(${JSON.stringify(i.name)},1)'>+</button> <button class="btn-remove-cart" title="Remove Item" onclick='removeFromCart(${JSON.stringify(i.name)})'>&times;</button> </div>;
 box.appendChild(row);
 });
 updateCartUI();
@@ -1490,7 +1321,11 @@ updateCartUI();
 window.openCartModal=function(){ renderCart(); document.getElementById("cart-modal").style.display="flex"; }
 window.closeCartModal=function(){ document.getElementById("cart-modal").style.display="none"; }
 window.checkoutCart=function(){ if(!cartItems.length){showToast("Cart khaali hai.");return;} closeCartModal(); document.getElementById("cart-checkout-modal").style.display="flex"; renderCartCheckout(); }
-function renderCartCheckout(){ const box=document.getElementById("cart-checkout-items"); const total=cartItems.reduce((a,i)=>a+i.pricei.qty,0); box.innerHTML=cartItems.map(i=><div style="display:flex;justify-content:space-between;border-bottom:1px solid #e2e8f0;padding:7px 0"><span>${escapeHTML(i.name)} × ${i.qty}</span><b>₹${(i.price*i.qty).toFixed(2)}</b></div>).join("")+<div style="text-align:right;margin-top:10px;font-size:1.05rem"><b>Total: ₹${total.toFixed(2)}</b></div>; }
+function renderCartCheckout(){
+const box=document.getElementById("cart-checkout-items");
+const total=cartItems.reduce((a,i)=>a+i.pricei.qty,0);
+box.innerHTML=cartItems.map(i=><div style="display:flex;justify-content:space-between;border-bottom:1px solid #e2e8f0;padding:7px 0"><span>${escapeHTML(i.name)} × ${i.qty}</span><b>₹${(i.price*i.qty).toFixed(2)}</b></div>).join("")+<div style="text-align:right;margin-top:10px;font-size:1.05rem"><b>Total: ₹${total.toFixed(2)}</b></div>;
+}
 window.closeCartCheckout=function(){document.getElementById("cart-checkout-modal").style.display="none";}
 window.submitCartOrder=async function(){
 if(!cartItems.length){showToast("Cart khaali hai.");return;}
@@ -1498,8 +1333,21 @@ if(!requireCustomerLogin()) return;
 const name=document.getElementById("cart-cust-name").value.trim(), phone=document.getElementById("cart-cust-phone").value.trim().replace(/\s+/g,""), address=document.getElementById("cart-cust-address").value.trim(), payment=document.getElementById("cart-payment-type").value, file=document.getElementById("cart-payment-file");
 if(!name||!validPhone(phone)||!address){alert("Naam, valid mobile number aur address bharna zaroori hai.");return;}
 if(payment==="Online" && (!file.files.length)){alert("Online payment ke liye payment screenshot upload karein.");return;}
-const btn=document.getElementById("cart-submit-btn"); setButtonLoading(btn,true,"Order save ho raha hai...");
-try{ let screenshot=""; if(payment==="Online"&&file.files.length)screenshot=await compressImage(file.files[0],1400,.72); const total=cartItems.reduce((a,i)=>a+i.pricei.qty,0); const items=cartItems.map(i=>({productName:i.name,quantity:i.qty,unitPrice:Number(i.price).toFixed(2),category:i.category||""})); const timeStr=new Date().toLocaleString("en-IN"); const orderRef=await push(ref(db,"orders"),{customerName:name,customerPhone:phone,customerUid:auth.currentUser?.uid||"",customerEmail:auth.currentUser?.email||"",address,paymentType:payment,paymentScreenshot:screenshot,items,productName:items.map(i=>${i.productName} × ${i.quantity}).join(", "),quantity:items.reduce((a,i)=>a+i.quantity,0),unitPrice:"Multiple",productPrice:total.toFixed(2),discountAmount:"0.00",timestamp:timeStr,status:"Pending Admin Approval"}); cartItems=[]; saveCart(); document.getElementById("cart-cust-name").value="";document.getElementById("cart-cust-phone").value="";document.getElementById("cart-cust-address").value="";file.value="";closeCartCheckout(); showToast("Multi-medicine order submit ho gaya! Order ID: "+orderRef.key.slice(-6).toUpperCase()); }catch(e){console.error(e);alert("Order save nahi ho saka. Firebase/Internet check karein.");}finally{setButtonLoading(btn,false);} }
+const btn=document.getElementById("cart-submit-btn");
+setButtonLoading(btn,true,"Order save ho raha hai...");
+try{
+let screenshot="";
+if(payment==="Online"&&file.files.length)screenshot=await compressImage(file.files[0],1400,.72);
+const total=cartItems.reduce((a,i)=>a+i.pricei.qty,0);
+const items=cartItems.map(i=>({productName:i.name,quantity:i.qty,unitPrice:Number(i.price).toFixed(2),category:i.category||""}));
+const timeStr=new Date().toLocaleString("en-IN");
+const orderRef=await push(ref(db,"orders"),{customerName:name,customerPhone:phone,customerUid:auth.currentUser?.uid||"",customerEmail:auth.currentUser?.email||"",address,paymentType:payment,paymentScreenshot:screenshot,items,productName:items.map(i=>${i.productName} × ${i.quantity}).join(", "),quantity:items.reduce((a,i)=>a+i.quantity,0),unitPrice:"Multiple",productPrice:total.toFixed(2),discountAmount:"0.00",timestamp:timeStr,status:"Pending Admin Approval"});
+cartItems=[];
+saveCart();
+document.getElementById("cart-cust-name").value="";document.getElementById("cart-cust-phone").value="";document.getElementById("cart-cust-address").value="";file.value="";closeCartCheckout();
+showToast("Multi-medicine order submit ho gaya! Order ID: "+orderRef.key.slice(-6).toUpperCase());
+}catch(e){console.error(e);alert("Order save nahi ho saka. Firebase/Internet check karein.");}finally{setButtonLoading(btn,false);}
+}
 window.filterByCategory = function(category) {
 activeCategory = category;
 document.querySelectorAll(".filter-btn").forEach(btn => {
@@ -1507,9 +1355,7 @@ btn.classList.toggle("active", btn.textContent.trim() === (category === "All" ? 
 });
 renderProducts();
 }
-window.searchProducts = function() {
-renderProducts();
-}
+window.searchProducts = function() { renderProducts(); }
 window.openCheckoutModal = function(name, price) {
 selectedProductForOrder = { name, unitPrice: parseFloat(price) };
 appliedDiscountAmount = 0;
@@ -1524,9 +1370,7 @@ document.getElementById("modal-product-info").innerText = Chuna gaya item: ${nam
 updateTotalPriceCalculation();
 document.getElementById("checkout-modal").style.display = "flex";
 }
-window.closeCheckoutModal = function() {
-document.getElementById("checkout-modal").style.display = "none";
-}
+window.closeCheckoutModal = function() { document.getElementById("checkout-modal").style.display = "none"; }
 window.togglePaymentSection = function() {
 const payType = document.getElementById("payment-type").value;
 document.getElementById("upi-payment-container").style.display = (payType === "Online") ? "block" : "none";
@@ -1540,21 +1384,14 @@ document.getElementById("final-payable-box").innerText = Kul dey rashi (Payable 
 window.applyCouponCode = function() {
 let code = document.getElementById("coupon-code-input").value.trim();
 let msgEl = document.getElementById("coupon-msg");
-if (!code) {
-alert("Kripya coupon code darj karein!");
-return;
-}
+if (!code) { alert("Kripya coupon code darj karein!"); return; }
 const phone = document.getElementById("cust-phone").value.trim();
 if (!validPhone(phone)) {
 msgEl.style.color = "#ef4444";
 msgEl.innerText = "Pehle valid customer mobile number bharein.";
 return;
 }
-let foundCredit = allCredits.find(cr =>
-String(cr.couponCode || "").toUpperCase() === code.toUpperCase() &&
-!cr.isUsed &&
-String(cr.customerPhone || "") === phone
-);
+let foundCredit = allCredits.find(cr => String(cr.couponCode || "").toUpperCase() === code.toUpperCase() && !cr.isUsed && String(cr.customerPhone || "") === phone);
 if (!foundCredit) {
 msgEl.style.color = "#ef4444";
 msgEl.innerText = "Coupon invalid hai, used hai, ya is mobile number se linked nahi hai.";
@@ -1578,26 +1415,11 @@ const payment = document.getElementById("payment-type").value;
 const qty = Math.min(5, Math.max(1, parseInt(document.getElementById("order-quantity").value) || 1));
 const fileInput = document.getElementById("payment-file-input");
 const submitBtn = document.querySelector('#checkout-modal .btn-primary:last-child');
-if (!name || !phone || !address) {
-alert("Kripya naam, mobile aur address bharein!");
-return;
-}
-if (!validPhone(phone)) {
-alert("Kripya valid 10 anko ka Indian mobile number darj karein.");
-return;
-}
-if (!selectedProductForOrder || !Number.isFinite(selectedProductForOrder.unitPrice)) {
-alert("Product selection invalid hai. Dobara try karein.");
-return;
-}
-if (payment === "Online" && fileInput.files.length === 0) {
-alert("Kripya online payment ka screenshot chunein!");
-return;
-}
-if (fileInput.files.length > 0 && fileInput.files[0].size > 5 * 1024 * 1024) {
-alert("Payment screenshot 5 MB se chhota hona chahiye.");
-return;
-}
+if (!name || !phone || !address) { alert("Kripya naam, mobile aur address bharein!"); return; }
+if (!validPhone(phone)) { alert("Kripya valid 10 anko ka Indian mobile number darj karein."); return; }
+if (!selectedProductForOrder || !Number.isFinite(selectedProductForOrder.unitPrice)) { alert("Product selection invalid hai. Dobara try karein."); return; }
+if (payment === "Online" && fileInput.files.length === 0) { alert("Kripya online payment ka screenshot chunein!"); return; }
+if (fileInput.files.length > 0 && fileInput.files[0].size > 5 * 1024 * 1024) { alert("Payment screenshot 5 MB se chhota hona chahiye."); return; }
 const totalMRP = selectedProductForOrder.unitPrice * qty;
 const finalPayable = Math.max(0, totalMRP - Math.min(appliedDiscountAmount, totalMRP));
 const timeStr = new Date().toLocaleString();
@@ -1626,12 +1448,7 @@ timestamp: timeStr,
 status: "Pending Admin Approval"
 });
 if (appliedCreditKey) {
-await update(ref(db, 'credits/' + appliedCreditKey), {
-isUsed: true,
-usedMode: 'Online',
-usedOrderId: orderRef.key,
-usedAt: timeStr
-});
+await update(ref(db, 'credits/' + appliedCreditKey), { isUsed: true, usedMode: 'Online', usedOrderId: orderRef.key, usedAt: timeStr });
 }
 showToast("Order submit ho gaya! Admin approval ka wait karein.");
 closeCheckoutModal();
@@ -1648,12 +1465,8 @@ setButtonLoading(submitBtn, false);
 }
 }
 updateCartUI();
-window.addEventListener("error", (event) => {
-console.error("Application error:", event.error || event.message);
-});
-window.addEventListener("unhandledrejection", (event) => {
-console.error("Unhandled promise rejection:", event.reason);
-});
+window.addEventListener("error", (event) => { console.error("Application error:", event.error || event.message); });
+window.addEventListener("unhandledrejection", (event) => { console.error("Unhandled promise rejection:", event.reason); });
 </script>
 </body>
 </html>
