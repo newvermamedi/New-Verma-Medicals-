@@ -667,7 +667,7 @@ header p,.hero-note,.store-hours{
             <button class="close-modal" onclick="toggleCustomerOrdersModal()">&times;</button>
             <h3 id="customer-orders-title"><i class="fa-solid fa-bag-shopping"></i> My Orders & Prescription Status</h3>
             <div id="customer-login-required" style="display:none;margin:0 0 14px;padding:12px;border-radius:10px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-size:.86rem;font-weight:600;"><i class="fa-solid fa-lock"></i> Please login first to place your order.</div>
-            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:15px;">Apne orders aur prescription status dekhne ke liye login karein.</p>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:15px;">Apne orders, credit coupons aur prescription status dekhne ke liye login karein.</p>
             <div id="customer-login-box">
                 <div class="form-group"><label>Email ID</label><input type="email" id="customer-login-email" autocomplete="email" placeholder="yourname@gmail.com"></div>
                 <div class="form-group"><label>Password</label><input type="password" id="customer-login-password" autocomplete="current-password" placeholder="Password"></div>
@@ -1164,10 +1164,24 @@ header p,.hero-note,.store-hours{
 
             const user = currentCustomerUser || auth.currentUser;
             if (!user) { container.innerHTML = "<p>Please login first.</p>"; return; }
-            const owns = r => (r.customerUid && r.customerUid === user.uid) || (r.customerEmail && String(r.customerEmail).toLowerCase() === String(user.email||"").toLowerCase());
+            const userEmail = String(user.email || "").trim().toLowerCase();
+            const owns = r => (r.customerUid && r.customerUid === user.uid) || (userEmail && r.customerEmail && String(r.customerEmail).trim().toLowerCase() === userEmail);
+            
             const matchedOrders = allOrders.filter(owns);
             const matchedCredits = allCredits.filter(cr => owns(cr) && !cr.isUsed);
             const matchedRx = allPrescriptions.filter(owns);
+
+            if (matchedCredits.length > 0) {
+                let creditBox = document.createElement("div");
+                creditBox.className = "order-item-box";
+                creditBox.style.background = "#e0f2fe";
+                creditBox.style.border = "1px solid #bae6fd";
+                creditBox.innerHTML = `<b>🏷️ Aapke Upalabdh Credit Coupons:</b><br>`;
+                matchedCredits.forEach(cr => {
+                    creditBox.innerHTML += `<div style="margin-top:5px;">Code: <b style="color:var(--primary)">${cr.couponCode}</b> | Raashi: <b>₹${cr.amount}</b> (${cr.type || 'Exchange Credit'})</div>`;
+                });
+                container.appendChild(creditBox);
+            }
 
             if (matchedRx.length > 0) {
                 let rxBox = document.createElement("div");
@@ -1175,24 +1189,13 @@ header p,.hero-note,.store-hours{
                 rxBox.style.background = "#fef3c7";
                 rxBox.innerHTML = `<b>🩺 Aapka Prescription Status:</b><br>`;
                 matchedRx.forEach(rx => {
-                    rxBox.innerHTML += `Time: ${rx.timestamp} | Status: <b style="color:${rx.status.includes('Accepted') ? 'green' : (rx.status.includes('Not') ? 'red' : 'orange')}">${rx.status}</b><br><a href="${rx.imgUrl}" target="_blank" style="color:var(--primary); text-decoration:underline; font-size:0.75rem;">View Uploaded Photo</a><br>`;
+                    rxBox.innerHTML += `Time: ${rx.timestamp} | Status: <b style="color:${rx.status.includes('Accepted') ? 'green' : (rx.status.includes('Denied') ? 'red' : 'orange')}">${rx.status}</b><br><a href="${rx.imgUrl}" target="_blank" style="color:var(--primary); text-decoration:underline; font-size:0.75rem;">View Uploaded Photo</a><br>`;
                 });
                 container.appendChild(rxBox);
             }
-            
-            if (matchedCredits.length > 0) {
-                let creditBox = document.createElement("div");
-                creditBox.className = "order-item-box";
-                creditBox.style.background = "#e0f2fe";
-                creditBox.innerHTML = `<b>🏷️ Aapke Upalabdh Credit Coupons:</b><br>`;
-                matchedCredits.forEach(cr => {
-                    creditBox.innerHTML += `Code: <b style="color:var(--primary)">${cr.couponCode}</b> | Raashi: <b>₹${cr.amount}</b> (${cr.type})<br>`;
-                });
-                container.appendChild(creditBox);
-            }
 
             if (matchedOrders.length === 0 && matchedCredits.length === 0 && matchedRx.length === 0) {
-                container.innerHTML = `<p style="color: #ef4444; font-size: 0.85rem; margin-top:10px;">Is number se koi data nahi mila hai.</p>`;
+                container.innerHTML = `<p style="color: #ef4444; font-size: 0.85rem; margin-top:10px;">Is account se koi data nahi mila hai.</p>`;
                 return;
             }
 
@@ -1267,6 +1270,8 @@ header p,.hero-note,.store-hours{
                 orderId: selectedOrderForReturn.id,
                 customerName: selectedOrderForReturn.customerName,
                 customerPhone: selectedOrderForReturn.customerPhone,
+                customerUid: selectedOrderForReturn.customerUid || auth.currentUser?.uid || "",
+                customerEmail: selectedOrderForReturn.customerEmail || auth.currentUser?.email || "",
                 productName: selectedOrderForReturn.productName,
                 productPrice: selectedOrderForReturn.productPrice,
                 returnType: option,
@@ -1368,7 +1373,7 @@ header p,.hero-note,.store-hours{
             renderOrders();
             updateAdminStats();
             renderDeliveryPartnerView();
-            if (verifiedPhoneNum) refreshCustomerOrdersView();
+            if (auth.currentUser || currentCustomerUser) refreshCustomerOrdersView();
         });
 
         const returnsRef = ref(db, 'returns');
@@ -1380,7 +1385,7 @@ header p,.hero-note,.store-hours{
             }
             if (isAdmin) renderReturns();
             updateAdminStats();
-            if (verifiedPhoneNum) refreshCustomerOrdersView();
+            if (auth.currentUser || currentCustomerUser) refreshCustomerOrdersView();
         });
 
         const creditsRef = ref(db, 'credits');
@@ -1391,6 +1396,7 @@ header p,.hero-note,.store-hours{
                 Object.keys(data).forEach(key => allCredits.push({ id: key, ...data[key] }));
             }
             if (isAdmin) searchAdminCredits();
+            if (auth.currentUser || currentCustomerUser) refreshCustomerOrdersView();
         });
 
         const rxRef = ref(db, 'prescriptions');
@@ -1402,6 +1408,7 @@ header p,.hero-note,.store-hours{
             }
             if (isAdmin) renderPrescriptionRequests();
             updateAdminStats();
+            if (auth.currentUser || currentCustomerUser) refreshCustomerOrdersView();
         });
 
         window.renderPrescriptionRequests = function() {
@@ -1471,7 +1478,7 @@ header p,.hero-note,.store-hours{
                 div.innerHTML = `
                     <b>Mobile:</b> ${cr.customerPhone}<br>
                     <b>Coupon Code:</b> <b style="color:var(--primary);">${cr.couponCode}</b><br>
-                    <b>Raashi:</b> ₹${cr.amount} (${cr.type})<br>
+                    <b>Raashi:</b> ₹${cr.amount} (${cr.type || 'Credit'})<br>
                     <b>Sthiti:</b> <span style="color: ${cr.isUsed ? 'red' : 'green'}; font-weight: bold;">${statusText}</span>
                     ${!cr.isUsed ? `<div class="order-actions"><button class="btn-danger" style="background:#64748b;" onclick="markCreditAsUsed('${cr.id}')"><i class="fa-solid fa-check"></i> Offline upyog ho gaya (Mark Used)</button></div>` : ''}
                 `;
@@ -1632,23 +1639,38 @@ header p,.hero-note,.store-hours{
                 couponMsg = `Medicine Exchange Credit: ₹${finalReturnAmount}`;
             }
 
-            let couponCode = "VERMA-" + Math.floor(100000 + Math.random() * 900000);
+            const returnRecord = allReturns.find(r => r.id === retId) || {};
+            const linkedOrder = allOrders.find(o => o.id === returnRecord.orderId) || {};
+            const customerUid = returnRecord.customerUid || linkedOrder.customerUid || "";
+            const customerEmail = String(returnRecord.customerEmail || linkedOrder.customerEmail || "").trim().toLowerCase();
+            const couponCode = "VERMA-" + Math.floor(100000 + Math.random() * 900000);
+            const creditRef = ref(db, 'credits');
 
-            let creditRef = ref(db, 'credits');
             push(creditRef, {
-                customerPhone: phone,
+                customerPhone: phone || returnRecord.customerPhone || linkedOrder.customerPhone || "",
+                customerName: returnRecord.customerName || linkedOrder.customerName || "",
+                customerUid: customerUid,
+                customerEmail: customerEmail,
+                orderId: returnRecord.orderId || "",
                 amount: finalReturnAmount,
                 couponCode: couponCode,
                 type: type,
-                isUsed: false
+                isUsed: false,
+                createdAt: new Date().toISOString()
             }).then(() => {
-                update(ref(db, 'returns/' + retId), {
-                    status: `Approved (${couponMsg})`
-                }).then(() => {
-                    showToast(`Return swikaar ho gaya! Coupon: ${couponCode}`);
-                    renderReturns();
-                    searchAdminCredits();
+                return update(ref(db, 'returns/' + retId), {
+                    status: `Approved (${couponMsg})`,
+                    customerUid: customerUid,
+                    customerEmail: customerEmail
                 });
+            }).then(() => {
+                showToast(`Return swikaar ho gaya! Coupon: ${couponCode}`);
+                renderReturns();
+                searchAdminCredits();
+                if (auth.currentUser || currentCustomerUser) refreshCustomerOrdersView();
+            }).catch(err => {
+                console.error("Coupon create/return approval failed:", err);
+                alert("Coupon banane ya return approve karne mein dikkat hui. Firebase permissions aur connection check karein.");
             });
         }
 
