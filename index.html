@@ -242,6 +242,28 @@
         .security-card{ border:1px solid #dbeafe; background:linear-gradient(135deg,#ffffff,#f8fbff); box-shadow:0 8px 22px rgba(15,23,42,.06); }
         [data-theme="dark"] .security-card { background: linear-gradient(135deg, #1e293b, #0f172a); border-color: #334155; }
         .security-card i{color:#087f5b;}
+        /* Classic, compact shopping layout: two products per row on phones */
+        .products-grid { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+        .product-card { border: 1px solid #e2e8f0; border-radius: 10px; box-shadow: 0 2px 7px rgba(15,23,42,.07); transition: box-shadow .2s ease; animation: none; }
+        .product-card:hover, .product-card:active { transform: none; animation: none; box-shadow: 0 4px 12px rgba(15,23,42,.12); }
+        .product-img-container { height: 150px; background: #fff; }
+        .product-img-container img { object-fit: contain; padding: 8px; }
+        .product-card:hover .product-img-container img { transform: none; }
+        .product-details { padding: 12px; }
+        .product-title { font-size: .95rem; line-height: 1.35; }
+        .product-price { font-size: 1.05rem; margin-bottom: 10px; }
+        .btn-primary { border-radius: 7px; padding: 9px 8px; }
+        @media (max-width: 600px) {
+            .container { padding: 14px 10px; }
+            .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+            .product-card { min-width: 0; border-radius: 9px; }
+            .product-img-container { height: 125px; }
+            .product-details { padding: 9px; }
+            .product-title { font-size: .82rem; line-height: 1.3; margin-bottom: 5px; }
+            .product-price { font-size: .98rem; margin-bottom: 8px; }
+            .product-tag { top: 6px; left: 6px; padding: 3px 6px; font-size: .65rem; }
+            .btn-primary { font-size: .78rem; padding: 8px 5px; }
+        }
     </style>
 </head>
 <body data-theme="light">
@@ -735,35 +757,26 @@
         let appliedCreditKey = null;
         let activeCategory = "All";
         let isSubmittingOrder = false;
-        const ADMIN_SECRET_PIN = "Verma@Med#2026";
-        const ADMIN_MAX_ATTEMPTS = 5;
-        const ADMIN_LOCKOUT_MS = 10 * 60 * 1000;
+        // IMPORTANT: Paste the Firebase Authentication UID of your admin account here.
+        // This UID must match the admin UID allowed by your Realtime Database Rules.
+        // A UID is an identifier, not a password; database rules remain the real access control.
+        const ADMIN_UID = "15lquHYSSuXV7bB3stUhajzc0702";
         const ADMIN_SESSION_MS = 20 * 60 * 1000;
-        let adminFailedAttempts = Number(sessionStorage.getItem("nvm_admin_failed_attempts") || 0);
-        let adminLockedUntil = Number(sessionStorage.getItem("nvm_admin_locked_until") || 0);
         let adminSessionTimer = null;
 
         function startAdminSessionTimer() {
             clearTimeout(adminSessionTimer);
-            adminSessionTimer = setTimeout(() => {
+            adminSessionTimer = setTimeout(async () => {
                 if (isAdmin) {
+                    try { await signOut(auth); } catch (error) { console.error(error); }
                     isAdmin = false;
                     const panel = document.getElementById("admin-panel");
                     const icon = document.getElementById("admin-icon");
                     if (panel) panel.style.display = "none";
                     if (icon) icon.className = "fa-solid fa-lock";
-                    showToast("Security: Admin session automatically logged out.");
+                    showToast("Admin session timeout: logout ho gaya.");
                 }
             }, ADMIN_SESSION_MS);
-        }
-
-        function recordAdminFailure() {
-            adminFailedAttempts += 1;
-            sessionStorage.setItem("nvm_admin_failed_attempts", String(adminFailedAttempts));
-            if (adminFailedAttempts >= ADMIN_MAX_ATTEMPTS) {
-                adminLockedUntil = Date.now() + ADMIN_LOCKOUT_MS;
-                sessionStorage.setItem("nvm_admin_locked_until", String(adminLockedUntil));
-            }
         }
 
         let cartItems = JSON.parse(localStorage.getItem("newVermaCart") || "[]");
@@ -816,47 +829,48 @@
             return canvas.toDataURL("image/jpeg", quality);
         }
 
-        window.toggleAdminMode = function() {
-            const now = Date.now();
-            if (!isAdmin) {
-                if (adminLockedUntil > now) {
-                    const mins = Math.ceil((adminLockedUntil - now) / 60000);
-                    alert(`Security lock active. ${mins} minute baad Admin login try karein.`);
+        window.toggleAdminMode = async function() {
+            if (isAdmin) {
+                clearTimeout(adminSessionTimer);
+                try {
+                    await signOut(auth);
+                    showToast("Admin logout ho gaya.");
+                } catch (error) {
+                    console.error(error);
+                    alert("Logout nahi ho saka. Dobara try karein.");
+                }
+                return;
+            }
+
+            if (!ADMIN_UID || ADMIN_UID === "PASTE_ADMIN_FIREBASE_UID_HERE") {
+                alert("Pehle code mein ADMIN_UID ko Firebase Console > Authentication > Users se apne admin user ke UID se replace karein.");
+                return;
+            }
+
+            const email = prompt("Admin account ka registered email address darj karein:");
+            if (email === null) return;
+            const password = prompt("Admin account ka password darj karein:");
+            if (password === null) return;
+            if (!email.trim() || !password) {
+                alert("Admin email aur password dono zaroori hain.");
+                return;
+            }
+
+            try {
+                await authPersistenceReady;
+                const credential = await signInWithEmailAndPassword(auth, email.trim(), password);
+                if (credential.user.uid !== ADMIN_UID) {
+                    await signOut(auth);
+                    alert("Is account ko admin access nahi diya gaya hai.");
                     return;
                 }
-                let pin = prompt("Surakshit Admin Password darj karein:");
-                if (pin === null) return;
-
-                if (pin === ADMIN_SECRET_PIN) {
-                    adminFailedAttempts = 0;
-                    adminLockedUntil = 0;
-                    sessionStorage.removeItem("nvm_admin_failed_attempts");
-                    sessionStorage.removeItem("nvm_admin_locked_until");
-                    isAdmin = true;
-                    document.getElementById("admin-panel").style.display = "block";
-                    document.getElementById("admin-icon").className = "fa-solid fa-unlock";
-                    renderProducts();
-                    renderOrders();
-                    renderReturns();
-                    renderPrescriptionRequests();
-                    searchAdminCredits();
-                    startAdminSessionTimer();
-                    showToast("Admin mode on ho gaya — secure session active.");
-                } else {
-                    recordAdminFailure();
-                    const remaining = Math.max(0, ADMIN_MAX_ATTEMPTS - adminFailedAttempts);
-                    alert(remaining ? `Galat Password! ${remaining} attempts remaining.` : "Too many failed attempts. Admin login temporarily locked.");
-                }
-            } else {
-                clearTimeout(adminSessionTimer);
-                isAdmin = false;
-                document.getElementById("admin-panel").style.display = "none";
-                document.getElementById("admin-icon").className = "fa-solid fa-lock";
-                resetAdminForm();
-                renderProducts();
-                showToast("Admin mode band ho gaya.");
+                // onAuthStateChanged will open the dashboard after verifying the UID.
+                showToast("Admin login successful.");
+            } catch (error) {
+                console.error(error);
+                alert("Admin login nahi hua. Email/password check karein aur Firebase Authentication mein account enabled hona chahiye.");
             }
-        }
+        };
 
         window.toggleDeliveryPartnerPortal = function() {
             const modal = document.getElementById("delivery-partner-modal");
@@ -938,13 +952,31 @@
             finally{setButtonLoading(btn,false);}
         };
 
-        onAuthStateChanged(auth,user=>{
-            currentCustomerUser=user||null;
+        onAuthStateChanged(auth, user => {
+            currentCustomerUser = user || null;
+            isAdmin = !!(user && ADMIN_UID !== "PASTE_ADMIN_FIREBASE_UID_HERE" && user.uid === ADMIN_UID);
+
+            const panel = document.getElementById("admin-panel");
+            const icon = document.getElementById("admin-icon");
+            if (panel) panel.style.display = isAdmin ? "block" : "none";
+            if (icon) icon.className = isAdmin ? "fa-solid fa-unlock" : "fa-solid fa-lock";
+
+            if (isAdmin) {
+                renderProducts();
+                renderOrders();
+                renderReturns();
+                renderPrescriptionRequests();
+                searchAdminCredits();
+                startAdminSessionTimer();
+            } else {
+                clearTimeout(adminSessionTimer);
+            }
+
             renderCustomerAuthState();
-            if(user){
-                localStorage.setItem("newVermaLoginPromptSeen","1");
-                const modal=document.getElementById("first-visit-login-modal");
-                if(modal)modal.style.display="none";
+            if (user) {
+                localStorage.setItem("newVermaLoginPromptSeen", "1");
+                const modal = document.getElementById("first-visit-login-modal");
+                if (modal) modal.style.display = "none";
             }
         });
 
@@ -1595,14 +1627,17 @@
         }
 
         window.deleteOrderHistory = function(orderId) {
-            let pin = prompt("History delete karne ke liye Admin PIN dalein:");
-            if (pin === ADMIN_SECRET_PIN) {
-                remove(ref(db, 'orders/' + orderId)).then(() => {
-                    showToast("Order history delete ho gayi!");
-                });
-            } else if (pin !== null) {
-                alert("Galat PIN!");
+            if (!isAdmin || !auth.currentUser || auth.currentUser.uid !== ADMIN_UID) {
+                alert("Order history delete karne ke liye authorized admin login zaroori hai.");
+                return;
             }
+            if (!confirm("Kya aap is order history ko delete karna chahte hain?")) return;
+            remove(ref(db, "orders/" + orderId))
+                .then(() => showToast("Order history delete ho gayi!"))
+                .catch(error => {
+                    console.error(error);
+                    alert("Order history delete nahi hui. Firebase Database Rules check karein.");
+                });
         }
 
         function getVisibleProducts() {
