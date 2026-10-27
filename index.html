@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#0284c7">
     <meta name="description" content="New Verma Medicals - medicines, healthcare products, prescription upload and local delivery in Barwadda, Dhanbad.">
-    <meta name="color-scheme" content="light">
+    <meta name="color-scheme" content="light dark">
     <title>New Verma Medicals - Trusted Pharmacy & Healthcare | Secure SMS OTP</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -23,8 +23,42 @@
             --heading-font: 'Montserrat', sans-serif;
         }
 
+        [data-theme="dark"] {
+            --primary: #38bdf8;
+            --primary-dark: #0ea5e9;
+            --accent: #34d399;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; animation: fadeInBody 0.8s ease-in-out; }
+        body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; animation: fadeInBody 0.8s ease-in-out; transition: background-color 0.3s ease, color 0.3s ease; }
+
+        /* Announcement Ticker Bar */
+        .announcement-ticker {
+            background: linear-gradient(90deg, #0284c7, #10b981, #0284c7);
+            background-size: 200% auto;
+            color: white;
+            padding: 8px 12px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-align: center;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            z-index: 30;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            animation: gradientShift 6s linear infinite;
+        }
+        .announcement-ticker marquee { width: 100%; }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
 
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: #0f172a;
@@ -63,8 +97,11 @@
         .rx-upload-banner {
             background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border: 2px dashed #0284c7; border-radius: var(--radius); padding: 20px; margin-bottom: 30px; box-shadow: var(--shadow); animation: rxHighlight1 4s infinite, rxHighlight2 6s infinite; text-align: center; position: relative; overflow: hidden;
         }
+        [data-theme="dark"] .rx-upload-banner { background: linear-gradient(135deg, #1e293b, #0f172a); border-color: #38bdf8; }
         .rx-upload-banner h3 { font-family: var(--heading-font); color: #0369a1; font-size: 1.3rem; margin-bottom: 8px; font-weight: 700; }
+        [data-theme="dark"] .rx-upload-banner h3 { color: #38bdf8; }
         .rx-upload-banner p { font-size: 0.85rem; color: #334155; line-height: 1.5; margin-bottom: 12px; }
+        [data-theme="dark"] .rx-upload-banner p { color: #cbd5e1; }
         .rx-upload-banner .rx-badge { position: absolute; right: 15px; top: 15px; font-size: 2.5rem; color: rgba(2, 132, 199, 0.15); font-weight: 900; pointer-events: none; }
 
         .banner-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 30px; }
@@ -83,16 +120,17 @@
 
         .filter-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px; }
         .search-box { position: relative; flex: 1; min-width: 250px; }
-        .search-box input { width: 100%; padding: 12px 20px 12px 45px; border-radius: 30px; border: 1px solid #cbd5e1; outline: none; transition: 0.3s; background: white; }
+        .search-box input { width: 100%; padding: 12px 20px 12px 45px; border-radius: 30px; border: 1px solid #cbd5e1; outline: none; transition: 0.3s; background: var(--card-bg); color: var(--text-main); }
         .search-box input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15); }
         .search-box i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
 
         .filter-buttons { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; }
-        .filter-btn { padding: 8px 18px; border-radius: 20px; border: 1px solid #cbd5e1; background: white; cursor: pointer; white-space: nowrap; transition: 0.3s; font-weight: 500; }
+        .filter-btn { padding: 8px 18px; border-radius: 20px; border: 1px solid #cbd5e1; background: var(--card-bg); color: var(--text-main); cursor: pointer; white-space: nowrap; transition: 0.3s; font-weight: 500; }
         .filter-btn.active, .filter-btn:hover { background: var(--primary); color: white; border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2); }
 
         .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 20px; margin-bottom: 40px; }
         .product-card { background: var(--card-bg); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; border: 2px solid #e2e8f0; transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; animation: fadeInBody 0.6s ease; position: relative; }
+        [data-theme="dark"] .product-card { border-color: #334155; }
         .product-card:hover, .product-card:active { transform: translateY(-8px) scale(1.02); animation: colorfulGlow 2.5s infinite; }
 
         .product-img-container { height: 160px; width: 100%; background: #e2e8f0; position: relative; overflow: hidden; }
@@ -113,17 +151,20 @@
         .btn-warning:hover { background: #d97706; }
 
         .admin-product-controls { margin-top: 10px; display: flex; gap: 8px; border-top: 1px dashed #cbd5e1; padding-top: 10px; }
-        #admin-panel { display: none; background: white; padding: 25px; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 30px; border: 2px dashed var(--primary); animation: fadeInBody 0.4s ease; }
+        #admin-panel { display: none; background: var(--card-bg); padding: 25px; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 30px; border: 2px dashed var(--primary); animation: fadeInBody 0.4s ease; }
         .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 5px; }
-        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 5px; color: var(--text-main); }
+        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; background: var(--card-bg); color: var(--text-main); }
+        [data-theme="dark"] .form-group input, [data-theme="dark"] .form-group select { border-color: #475569; }
 
         .orders-section { margin-top: 25px; border-top: 1px solid #e2e8f0; padding-top: 20px; }
-        .order-item-box { background: #f8fafc; border: 1px solid #cbd5e1; padding: 15px; border-radius: 10px; margin-bottom: 12px; font-size: 0.85rem; animation: fadeInBody 0.3s ease; }
+        [data-theme="dark"] .orders-section { border-color: #334155; }
+        .order-item-box { background: var(--card-bg); border: 1px solid #cbd5e1; padding: 15px; border-radius: 10px; margin-bottom: 12px; font-size: 0.85rem; animation: fadeInBody 0.3s ease; color: var(--text-main); }
+        [data-theme="dark"] .order-item-box { border-color: #475569; }
         .order-actions { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
 
         .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px; animation: fadeInBody 0.3s ease; backdrop-filter: blur(4px); }
-        .modal-content { background: white; padding: 25px; border-radius: var(--radius); width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; animation: fadeInBody 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+        .modal-content { background: var(--card-bg); color: var(--text-main); padding: 25px; border-radius: var(--radius); width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; animation: fadeInBody 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
         .close-modal { float: right; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-muted); }
         .close-modal:hover { color: var(--text-main); }
 
@@ -152,71 +193,37 @@
         .section-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin: 8px 0 14px; }
         .section-heading h2 { font-family: var(--heading-font); font-size: 1.25rem; font-weight: 700; }
         .result-count { color: var(--text-muted); font-size:.8rem; }
-        .empty-state { grid-column: 1/-1; padding: 42px 20px; text-align:center; background:#fff; border:1px dashed #cbd5e1; border-radius:var(--radius); color:var(--text-muted); }
+        .empty-state { grid-column: 1/-1; padding: 42px 20px; text-align:center; background:var(--card-bg); border:1px dashed #cbd5e1; border-radius:var(--radius); color:var(--text-muted); }
         .empty-state i { font-size:2rem; margin-bottom:10px; color:#94a3b8; }
         .product-price-row { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:14px; }
         .product-price { margin-bottom:0; }
         .product-category-chip { font-size:.68rem; padding:4px 8px; border-radius:999px; background:#f0f9ff; color:#0369a1; font-weight:600; }
-        .cart-bar { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 0 18px; padding:12px 14px; background:#fff; border:1px solid #dbeafe; border-radius:14px; box-shadow:var(--shadow); position:sticky; top:8px; z-index:20; }
-        .cart-summary { font-size:.85rem; color:#334155; }
+        [data-theme="dark"] .product-category-chip { background: #0369a1; color: #f0f9ff; }
+        .cart-bar { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 0 18px; padding:12px 14px; background:var(--card-bg); border:1px solid #dbeafe; border-radius:14px; box-shadow:var(--shadow); position:sticky; top:8px; z-index:20; }
+        [data-theme="dark"] .cart-bar { border-color: #334155; }
+        .cart-summary { font-size:.85rem; color:var(--text-main); }
         .cart-count { display:inline-flex; min-width:26px; height:26px; align-items:center; justify-content:center; border-radius:999px; background:var(--primary); color:#fff; font-weight:700; margin-left:5px; }
         
         .cart-list-item { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 0; border-bottom:1px solid #e2e8f0; }
+        [data-theme="dark"] .cart-list-item { border-color: #334155; }
         .qty-controls { display:flex; align-items:center; gap:8px; }
-        .qty-controls button { width:32px; height:32px; border:1px solid #cbd5e1; background:#fff; border-radius:8px; cursor:pointer; font-weight:700; color:#1e293b; display:flex; align-items:center; justify-content:center; }
+        .qty-controls button { width:32px; height:32px; border:1px solid #cbd5e1; background:var(--card-bg); border-radius:8px; cursor:pointer; font-weight:700; color:var(--text-main); display:flex; align-items:center; justify-content:center; }
         .btn-remove-cart {
             background-color: #ef4444 !important; color: #ffffff !important; border: none !important; width: 32px !important; height: 32px !important; border-radius: 8px !important; cursor: pointer !important; font-weight: 700 !important; font-size: 1.1rem !important; display: flex !important; align-items: center !important; justify-content: center !important; box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3) !important;
         }
-        .btn-remove-cart:hover { background-color: #dc2626 !important; }
 
         .tracking { display:grid; grid-template-columns:repeat(5,1fr); gap:5px; margin-top:12px; }
         .track-step { text-align:center; font-size:.62rem; color:#94a3b8; }
         .track-dot { width:22px; height:22px; border-radius:50%; margin:0 auto 4px; background:#e2e8f0; display:flex; align-items:center; justify-content:center; font-size:.65rem; }
+        [data-theme="dark"] .track-dot { background: #334155; color: #cbd5e1; }
         .track-step.active { color:#0284c7; font-weight:700; }
         .track-step.active .track-dot { background:#0284c7; color:#fff; }
         @media (max-width:600px){ .cart-bar{top:4px;} .tracking{grid-template-columns:repeat(5, minmax(42px,1fr));} .track-step{font-size:.55rem;} }
         .loading-state { text-align:center; padding:28px; color:var(--text-muted); }
         .loading-state i { margin-right:7px; }
         .file-help { font-size:.72rem; color:#64748b; margin-top:5px; }
-        .security-note { margin-top:10px; padding:10px 12px; border-radius:10px; background:#f8fafc; border:1px solid #e2e8f0; color:#64748b; font-size:.72rem; }
-
-        @media (max-width: 760px) {
-            header { padding: 1.5rem 1rem; }
-            .header-buttons { justify-content:center; margin-bottom:14px; }
-            .action-badge-btn { font-size:.72rem; padding:6px 10px; }
-            header h1 { font-size:1.65rem; }
-            .container { padding:18px 12px; }
-            .banner-grid { grid-template-columns:1fr; gap:14px; }
-            .category-card { height:145px; }
-            .products-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
-            .product-img-container { height:135px; }
-            .product-details { padding:12px; }
-            .product-title { font-size:.9rem; }
-            .product-price { font-size:1rem; }
-            .filter-bar { align-items:stretch; }
-            .search-box { min-width:100%; }
-            .filter-buttons { width:100%; }
-            #notification-toast { left:12px; right:12px; bottom:14px; text-align:center; }
-        }
-        @media (max-width: 390px) {
-            .products-grid { grid-template-columns:1fr; }
-            .product-img-container { height:160px; }
-        }
-
-        header{position:relative !important; top:auto !important; z-index:10 !important;}
-        @media(max-width:760px){
-          header{padding:12px 10px 16px !important;}
-          .header-buttons{margin-bottom:10px !important; gap:6px !important;}
-          .action-badge-btn{min-height:34px !important; padding:5px 8px !important; font-size:.67rem !important;}
-          header h1{font-size:1.42rem !important; margin-bottom:4px !important;}
-          header p{font-size:.76rem !important; margin-bottom:4px !important;}
-          .tagline{font-size:.72rem !important; letter-spacing:1.3px !important;}
-          .hero-note{font-size:.68rem !important; padding:7px 9px !important; margin-top:8px !important;}
-          .store-hours{font-size:.68rem !important; padding:6px 10px !important; margin-top:7px !important;}
-          .header-security-strip{margin-top:8px !important; gap:4px !important;}
-          .header-security-badge{font-size:.59rem !important; padding:5px 7px !important;}
-          .header-graphic{opacity:.06 !important;}
-        }
+        .security-note { margin-top:10px; padding:10px 12px; border-radius:10px; background:var(--card-bg); border:1px solid #e2e8f0; color:var(--text-muted); font-size:.72rem; }
+        [data-theme="dark"] .security-note { border-color: #334155; }
 
         .store-hours{ display:inline-flex; align-items:center; gap:7px; margin:10px auto 0; padding:8px 14px; border:1px solid rgba(255,255,255,0.25); border-radius:999px; background:rgba(255,255,255,0.12); font-weight:600; font-size:.82rem; color: #ffffff; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
         .store-hours i{color:#34d399;}
@@ -233,17 +240,16 @@
         .category-card .content{ position:absolute;inset:auto 0 0 0;z-index:2;color:#fff; background:linear-gradient(to top,rgba(0,0,0,.78),rgba(0,0,0,.38),transparent); padding:34px 22px 20px !important; }
         .category-card .content h3,.category-card .content p{ color:#fff !important;text-shadow:0 1px 3px rgba(0,0,0,.65); }
         .security-card{ border:1px solid #dbeafe; background:linear-gradient(135deg,#ffffff,#f8fbff); box-shadow:0 8px 22px rgba(15,23,42,.06); }
+        [data-theme="dark"] .security-card { background: linear-gradient(135deg, #1e293b, #0f172a); border-color: #334155; }
         .security-card i{color:#087f5b;}
-        @media(max-width:760px){
-            .header-security-strip{gap:6px;}
-            .header-security-badge{font-size:.66rem;padding:6px 9px;}
-            .header-graphic.shield{font-size:4rem;right:1%;top:31%;}
-            .header-graphic.pill{font-size:2.8rem;left:1%;}
-            .store-hours{font-size:.74rem;}
-        }
     </style>
 </head>
-<body>
+<body data-theme="light">
+
+    <!-- Floating Offer / Announcement Ticker Bar -->
+    <div class="announcement-ticker">
+        <marquee scrollamount="5">⚡ Special Offer: Barwadda aur Loharbarwa mein sabhi orders par Free Local Delivery! | 🩺 Genuine Medicines Guaranteed | 📞 Sampark Karein: +91 7992308032</marquee>
+    </div>
 
     <div id="splash-screen">
         <video id="splash-video" autoplay muted playsinline>
@@ -268,6 +274,8 @@
     <header>
       <div class="header-inner">
         <div class="header-buttons">
+            <!-- Dark / Light Mode Toggle Button -->
+            <button class="action-badge-btn" onclick="toggleThemeMode()" id="theme-toggle-btn"><i class="fa-solid fa-moon" id="theme-icon"></i> <span id="theme-text">Dark Mode</span></button>
             <button class="action-badge-btn" onclick="toggleDeliveryPartnerPortal()"><i class="fa-solid fa-motorcycle"></i> Delivery Portal</button>
             <button class="action-badge-btn" id="customer-login-header-btn" onclick="openCustomerLogin()"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
             <button class="action-badge-btn" onclick="toggleCustomerOrdersModal()"><i class="fa-solid fa-box"></i> My Orders</button>
@@ -441,7 +449,7 @@
             </div>
             <div class="form-group">
                 <label>Prescription Photo (Gallery ya Camera se chunein)</label>
-                <input type="file" id="rx-file-input" accept="image/*" style="padding: 8px; border: 1px solid #cbd5e1; border-radius: 10px; width: 100%; background: #f8fafc; cursor: pointer;">
+                <input type="file" id="rx-file-input" accept="image/*" style="padding: 8px; border: 1px solid #cbd5e1; border-radius: 10px; width: 100%; background: var(--card-bg); color: var(--text-main); cursor: pointer;">
                 <div class="file-help">JPG/PNG/WebP • maximum 5 MB. Photo automatically compress hogi.</div>
             </div>
             <button class="btn-primary" style="width: 100%;" onclick="submitPrescription()">Prescription Bhejein</button>
@@ -537,7 +545,7 @@
             <div class="form-group"><label>Mobile Number</label><input id="cart-cust-phone" type="tel" inputmode="numeric" maxlength="10" placeholder="10 digit mobile"></div>
             <div class="form-group"><label>Delivery Address</label><input id="cart-cust-address" type="text" placeholder="Pura address"></div>
             <div class="form-group"><label>Payment</label><select id="cart-payment-type" onchange="document.getElementById('cart-upi-box').style.display=this.value==='Online'?'block':'none'"><option value="Cash on Delivery">Cash on Delivery</option><option value="Online">Online / UPI</option></select></div>
-            <div id="cart-upi-box" style="display:none;background:#f0f9ff;padding:10px;border-radius:10px;margin-bottom:12px;text-align:center;"><b>UPI: Q183938591@ybl</b><br><img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=upi://pay?pa=Q183938591@ybl&pn=NewVermaMedicals" style="width:120px;margin:8px"> <input id="cart-payment-file" type="file" accept="image/*" style="width:100%"></div>
+            <div id="cart-upi-box" style="display:none;background:#f0f9ff;padding:10px;border-radius:10px;margin-bottom:12px;text-align:center;"><b>UPI: Q183938591@ybl</b><br><img id="cart-dynamic-upi-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=upi://pay?pa=Q183938591@ybl&pn=NewVermaMedicals" style="width:120px;margin:8px"> <input id="cart-payment-file" type="file" accept="image/*" style="width:100%"></div>
             <button id="cart-submit-btn" class="btn-primary" style="width:100%;" onclick="submitCartOrder()">Order Submit Karein</button>
         </div>
     </div>
@@ -594,7 +602,7 @@
                 <p style="font-size: 0.75rem; color: #64748b; margin-bottom: 8px;">UPI ID: <b>Q183938591@ybl</b></p>
                 <div class="form-group" style="text-align: left; margin-bottom: 0;">
                     <label style="font-size: 0.75rem;">Payment Screenshot (Gallery se chunein)</label>
-                    <input type="file" id="payment-file-input" accept="image/*" style="font-size: 0.8rem; padding: 6px; border: 1px solid #cbd5e1; border-radius: 8px; width: 100%; background: #fff;">
+                    <input type="file" id="payment-file-input" accept="image/*" style="font-size: 0.8rem; padding: 6px; border: 1px solid #cbd5e1; border-radius: 8px; width: 100%; background: var(--card-bg); color: var(--text-main);">
                     <div class="file-help">JPG/PNG/WebP • maximum 5 MB.</div>
                 </div>
                 <div class="form-group" style="text-align:left;margin-top:12px;margin-bottom:0;">
@@ -625,6 +633,37 @@
         import { getDatabase, ref, set, push, onValue, remove, update } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
         import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
+        // Dark / Light Mode Toggle Logic
+        window.toggleThemeMode = function() {
+            const body = document.body;
+            const currentTheme = body.getAttribute("data-theme");
+            const newTheme = currentTheme === "dark" ? "light" : "dark";
+            body.setAttribute("data-theme", newTheme);
+            localStorage.setItem("newVermaTheme", newTheme);
+
+            const icon = document.getElementById("theme-icon");
+            const text = document.getElementById("theme-text");
+            if (newTheme === "dark") {
+                icon.className = "fa-solid fa-sun";
+                text.textContent = "Light Mode";
+            } else {
+                icon.className = "fa-solid fa-moon";
+                text.textContent = "Dark Mode";
+            }
+        };
+
+        // Load saved theme preference
+        const savedTheme = localStorage.getItem("newVermaTheme") || "light";
+        document.body.setAttribute("data-theme", savedTheme);
+        if (savedTheme === "dark") {
+            window.addEventListener("DOMContentLoaded", () => {
+                const icon = document.getElementById("theme-icon");
+                const text = document.getElementById("theme-text");
+                if(icon) icon.className = "fa-solid fa-sun";
+                if(text) text.textContent = "Light Mode";
+            });
+        }
+
         const splashVideo = document.getElementById('splash-video');
         const splashScreen = document.getElementById('splash-screen');
 
@@ -648,15 +687,19 @@
         const db = getDatabase(app);
 
         const upiQrImage = document.getElementById("dynamic-upi-qr");
+        const cartUpiQrImage = document.getElementById("cart-dynamic-upi-qr");
         const adminQrInput = document.getElementById("admin-upi-qr-input");
         const saveQrButton = document.getElementById("save-qr-btn");
+        
         onValue(ref(db, "settings/upiQrUrl"), (snapshot) => {
             const savedUrl = snapshot.val();
             if (typeof savedUrl === "string" && /^https:\/\//i.test(savedUrl)) {
                 if (upiQrImage) upiQrImage.src = savedUrl;
+                if (cartUpiQrImage) cartUpiQrImage.src = savedUrl;
                 if (adminQrInput && document.activeElement !== adminQrInput) adminQrInput.value = savedUrl;
             }
         });
+
         if (saveQrButton) {
             saveQrButton.addEventListener("click", async () => {
                 if (!isAdmin) { alert("QR settings badalne ke liye Admin login karein."); return; }
@@ -1647,8 +1690,8 @@
                 row.className="cart-list-item"; 
                 row.innerHTML=`
                     <div style="flex:1">
-                        <b style="font-family:var(--heading-font); color:#1e293b;">${escapeHTML(i.name)}</b><br>
-                        <small style="color:#64748b;">₹${Number(i.price).toFixed(2)} × ${i.qty}</small>
+                        <b style="font-family:var(--heading-font); color:var(--text-main);">${escapeHTML(i.name)}</b><br>
+                        <small style="color:var(--text-muted);">₹${Number(i.price).toFixed(2)} × ${i.qty}</small>
                     </div>
                     <div class="qty-controls">
                         <button onclick='changeCartQty(${JSON.stringify(i.name)},-1)'>−</button>
