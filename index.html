@@ -21,6 +21,10 @@
             --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
             --radius: 16px;
             --heading-font: 'Montserrat', sans-serif;
+            --body-font: 'Poppins', sans-serif;
+            --font-size-base: 1.05rem; /* Bada font size accessibility ke liye */
+            --font-size-small: 0.9rem;
+            --font-size-large: 1.25rem;
         }
 
         [data-theme="dark"] {
@@ -34,16 +38,16 @@
             --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; animation: fadeInBody 0.8s ease-in-out; transition: background-color 0.3s ease, color 0.3s ease; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--body-font); }
+        body { background-color: var(--bg-color); color: var(--text-main); font-size: var(--font-size-base); min-height: 100vh; display: flex; flex-direction: column; animation: fadeInBody 0.8s ease-in-out; transition: background-color 0.3s ease, color 0.3s ease; }
 
         /* Announcement Ticker Bar */
         .announcement-ticker {
             background: linear-gradient(90deg, #0284c7, #10b981, #0284c7);
             background-size: 200% auto;
             color: white;
-            padding: 8px 12px;
-            font-size: 0.82rem;
+            padding: 10px 14px;
+            font-size: 0.9rem;
             font-weight: 600;
             text-align: center;
             overflow: hidden;
@@ -78,35 +82,37 @@
 
         header {
             background: linear-gradient(135deg, #020617, #0f172a, #1e1b4b);
-            color: white; padding: 2rem 1rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            color: white; padding: 2.5rem 1rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             position: relative; z-index: 10; overflow: hidden; border-bottom: 3px solid #38bdf8;
         }
         header h1 { 
-            font-family: var(--heading-font); font-size: 2.2rem; font-weight: 900; letter-spacing: 1px; color: #38bdf8; margin-bottom: 0.4rem; animation: titleGlowPulse 3s ease-in-out infinite; display: inline-block;
+            font-family: var(--heading-font); font-size: 2.8rem; font-weight: 900; letter-spacing: 1.5px; color: #38bdf8; margin-bottom: 0.5rem; animation: titleGlowPulse 3s ease-in-out infinite; display: inline-block;
         }
-        header p { font-size: 0.9rem; color: #cbd5e1; margin-bottom: 6px; font-weight: 500; }
-        .tagline { font-family: var(--heading-font); font-size: 0.85rem; color: #34d399; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+        header p { font-size: 1.05rem; color: #cbd5e1; margin-bottom: 8px; font-weight: 500; }
+        .tagline { font-family: var(--heading-font); font-size: 1rem; color: #34d399; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
 
-        .header-buttons { width:100%; display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap; margin:0 auto 18px; position:relative; z-index:10; }
+        .header-buttons { width:100%; display:flex; justify-content:center; align-items:center; gap:12px; flex-wrap:wrap; margin:0 auto 20px; position:relative; z-index:10; }
         .action-badge-btn {
-            background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.25); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 500; cursor: pointer; transition: 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(255, 255, 255, 0.15); border: 1.5px solid rgba(255, 255, 255, 0.35); color: white; padding: 11px 20px; border-radius: 25px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
         }
-        .action-badge-btn:hover { background: #0284c7; transform: scale(1.05); color: white; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 25px 20px; width: 100%; flex: 1; }
+        .action-badge-btn i { font-size: 1.2rem; }
+        .action-badge-btn:hover { background: #0284c7; transform: scale(1.06); color: white; border-color: #38bdf8; }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px 20px; width: 100%; flex: 1; }
 
         .rx-upload-banner {
-            background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border: 2px dashed #0284c7; border-radius: var(--radius); padding: 20px; margin-bottom: 30px; box-shadow: var(--shadow); animation: rxHighlight1 4s infinite, rxHighlight2 6s infinite; text-align: center; position: relative; overflow: hidden;
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border: 2px dashed #0284c7; border-radius: var(--radius); padding: 25px; margin-bottom: 30px; box-shadow: var(--shadow); animation: rxHighlight1 4s infinite, rxHighlight2 6s infinite; text-align: center; position: relative; overflow: hidden;
         }
         [data-theme="dark"] .rx-upload-banner { background: linear-gradient(135deg, #1e293b, #0f172a); border-color: #38bdf8; }
-        .rx-upload-banner h3 { font-family: var(--heading-font); color: #0369a1; font-size: 1.3rem; margin-bottom: 8px; font-weight: 700; }
+        .rx-upload-banner h3 { font-family: var(--heading-font); color: #0369a1; font-size: 1.5rem; margin-bottom: 8px; font-weight: 700; }
         [data-theme="dark"] .rx-upload-banner h3 { color: #38bdf8; }
-        .rx-upload-banner p { font-size: 0.85rem; color: #334155; line-height: 1.5; margin-bottom: 12px; }
+        .rx-upload-banner p { font-size: 1rem; color: #334155; line-height: 1.5; margin-bottom: 16px; }
         [data-theme="dark"] .rx-upload-banner p { color: #cbd5e1; }
-        .rx-upload-banner .rx-badge { position: absolute; right: 15px; top: 15px; font-size: 2.5rem; color: rgba(2, 132, 199, 0.15); font-weight: 900; pointer-events: none; }
+        .rx-upload-banner .rx-badge { position: absolute; right: 20px; top: 15px; font-size: 3rem; color: rgba(2, 132, 199, 0.15); font-weight: 900; pointer-events: none; }
 
         .banner-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 30px; }
         .category-card { 
-            border-radius: var(--radius); overflow: hidden; position: relative; height: 170px; box-shadow: var(--shadow); cursor: pointer; transition: transform 0.4s ease; animation: floatCard 4s ease-in-out infinite, borderLightAnimation 3s infinite; border: 2px solid #38bdf8;
+            border-radius: var(--radius); overflow: hidden; position: relative; height: 180px; box-shadow: var(--shadow); cursor: pointer; transition: transform 0.4s ease; animation: floatCard 4s ease-in-out infinite, borderLightAnimation 3s infinite; border: 2px solid #38bdf8;
         }
         .category-card:nth-child(1) { animation-delay: 0s, 0s; }
         .category-card:nth-child(2) { animation-delay: 1s, 0.5s; border-color: #10b981; }
@@ -114,155 +120,149 @@
         .category-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 15px 30px rgba(2, 132, 199, 0.3); }
         .category-card img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.7); transition: 0.5s; }
         .category-card:hover img { filter: brightness(0.9); }
-        .category-card .content { position: absolute; bottom: 0; left: 0; right: 0; padding: 15px; color: white; background: linear-gradient(transparent, rgba(0,0,0,0.85)); }
-        .category-card h3 { font-family: var(--heading-font); font-size: 1.1rem; color: #38bdf8; text-shadow: 0 2px 4px rgba(0,0,0,0.5); font-weight: 700; }
-        .category-card p { font-size: 0.8rem; color: #e2e8f0; }
+        .category-card .content { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px; color: white; background: linear-gradient(transparent, rgba(0,0,0,0.85)); }
+        .category-card h3 { font-family: var(--heading-font); font-size: 1.2rem; color: #38bdf8; text-shadow: 0 2px 4px rgba(0,0,0,0.5); font-weight: 700; }
+        .category-card p { font-size: 0.9rem; color: #e2e8f0; }
 
         .filter-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px; }
         .search-box { position: relative; flex: 1; min-width: 250px; }
-        .search-box input { width: 100%; padding: 12px 20px 12px 45px; border-radius: 30px; border: 1px solid #cbd5e1; outline: none; transition: 0.3s; background: var(--card-bg); color: var(--text-main); }
+        .search-box input { width: 100%; padding: 14px 20px 14px 45px; border-radius: 30px; border: 1px solid #cbd5e1; outline: none; transition: 0.3s; background: var(--card-bg); color: var(--text-main); font-size: 1rem; }
         .search-box input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15); }
-        .search-box i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+        .search-box i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 1.1rem; }
 
-        .filter-buttons { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; }
-        .filter-btn { padding: 8px 18px; border-radius: 20px; border: 1px solid #cbd5e1; background: var(--card-bg); color: var(--text-main); cursor: pointer; white-space: nowrap; transition: 0.3s; font-weight: 500; }
+        .filter-buttons { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 5px; }
+        .filter-btn { padding: 10px 20px; border-radius: 20px; border: 1px solid #cbd5e1; background: var(--card-bg); color: var(--text-main); cursor: pointer; white-space: nowrap; transition: 0.3s; font-weight: 600; font-size: 0.95rem; }
         .filter-btn.active, .filter-btn:hover { background: var(--primary); color: white; border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2); }
 
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; margin-bottom: 40px; }
         .product-card { background: var(--card-bg); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; border: 2px solid #e2e8f0; transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; animation: fadeInBody 0.6s ease; position: relative; }
         [data-theme="dark"] .product-card { border-color: #334155; }
         .product-card:hover, .product-card:active { transform: translateY(-8px) scale(1.02); animation: colorfulGlow 2.5s infinite; }
 
-        .product-img-container { height: 160px; width: 100%; background: #e2e8f0; position: relative; overflow: hidden; }
-        .product-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .product-img-container { height: 170px; width: 100%; background: #fff; position: relative; overflow: hidden; display:flex; align-items:center; justify-content:center; }
+        .product-img-container img { width: 100%; height: 100%; object-fit: contain; padding: 6px; transition: 0.5s; }
         .product-card:hover .product-img-container img { transform: scale(1.1); }
-        .product-tag { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); color: white; padding: 4px 10px; font-size: 0.75rem; border-radius: 6px; font-weight: 500; }
-        .product-details { padding: 16px; display: flex; flex-direction: column; flex: 1; }
-        .product-title { font-family: var(--heading-font); font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; color: var(--text-main); }
-        .product-price { font-size: 1.15rem; font-weight: 700; color: var(--accent); margin-bottom: 14px; }
+        .product-tag { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); color: white; padding: 5px 12px; font-size: 0.8rem; border-radius: 6px; font-weight: 600; z-index: 2; }
+        .product-details { padding: 18px; display: flex; flex-direction: column; flex: 1; }
+        .product-title { font-family: var(--heading-font); font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); line-height: 1.4; }
+        .product-price { font-size: 1.25rem; font-weight: 700; color: var(--accent); margin-bottom: 14px; }
 
-        .btn-primary { background: var(--primary); color: white; border: none; padding: 10px; border-radius: 10px; font-weight: 500; cursor: pointer; transition: 0.3s; }
+        .btn-primary { background: var(--primary); color: white; border: none; padding: 12px; border-radius: 10px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: 0.3s; }
         .btn-primary:hover { background: var(--primary-dark); transform: scale(1.02); box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3); }
-        .btn-success { background: #10b981; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; transition: 0.3s; }
+        .btn-success { background: #10b981; color: white; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: 0.3s; }
         .btn-success:hover { background: #059669; }
-        .btn-danger { background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; transition: 0.3s; }
+        .btn-danger { background: #ef4444; color: white; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: 0.3s; }
         .btn-danger:hover { background: #dc2626; }
-        .btn-warning { background: #f59e0b; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; transition: 0.3s; }
+        .btn-warning { background: #f59e0b; color: white; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: 0.3s; }
         .btn-warning:hover { background: #d97706; }
 
-        .admin-product-controls { margin-top: 10px; display: flex; gap: 8px; border-top: 1px dashed #cbd5e1; padding-top: 10px; }
+        .admin-product-controls { margin-top: 12px; display: flex; gap: 8px; border-top: 1px dashed #cbd5e1; padding-top: 12px; }
         #admin-panel { display: none; background: var(--card-bg); padding: 25px; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 30px; border: 2px dashed var(--primary); animation: fadeInBody 0.4s ease; }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 5px; color: var(--text-main); }
-        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; background: var(--card-bg); color: var(--text-main); }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; color: var(--text-main); }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; background: var(--card-bg); color: var(--text-main); font-size: 1rem; }
         [data-theme="dark"] .form-group input, [data-theme="dark"] .form-group select { border-color: #475569; }
 
         .orders-section { margin-top: 25px; border-top: 1px solid #e2e8f0; padding-top: 20px; }
         [data-theme="dark"] .orders-section { border-color: #334155; }
-        .order-item-box { background: var(--card-bg); border: 1px solid #cbd5e1; padding: 15px; border-radius: 10px; margin-bottom: 12px; font-size: 0.85rem; animation: fadeInBody 0.3s ease; color: var(--text-main); }
+        .order-item-box { background: var(--card-bg); border: 1px solid #cbd5e1; padding: 16px; border-radius: 10px; margin-bottom: 12px; font-size: 0.95rem; animation: fadeInBody 0.3s ease; color: var(--text-main); line-height: 1.5; }
         [data-theme="dark"] .order-item-box { border-color: #475569; }
-        .order-actions { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .order-actions { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
 
         .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px; animation: fadeInBody 0.3s ease; backdrop-filter: blur(4px); }
-        .modal-content { background: var(--card-bg); color: var(--text-main); padding: 25px; border-radius: var(--radius); width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; animation: fadeInBody 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
-        .close-modal { float: right; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-muted); }
+        .modal-content { background: var(--card-bg); color: var(--text-main); padding: 30px; border-radius: var(--radius); width: 100%; max-width: 500px; max-height: 90vh; overflow-y: auto; animation: fadeInBody 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+        .close-modal { float: right; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); }
         .close-modal:hover { color: var(--text-main); }
 
         #notification-toast {
-            position: fixed; bottom: 25px; right: 25px; background: #0f172a; color: white; padding: 14px 22px;
-            border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); z-index: 2000; display: none; font-size: 0.9rem;
+            position: fixed; bottom: 25px; right: 25px; background: #0f172a; color: white; padding: 16px 24px;
+            border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); z-index: 2000; display: none; font-size: 1rem; font-weight: 500;
             animation: fadeInBody 0.3s ease; border-left: 4px solid var(--accent);
         }
 
         #first-visit-login-modal .modal-content{border:1px solid #dbeafe;box-shadow:0 25px 60px rgba(15,23,42,.25);}
-        .checkout-login-gate{display:none;background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:12px;margin-bottom:10px;font-size:.82rem;color:#9a3412;}
+        .checkout-login-gate{display:none;background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:14px;margin-bottom:12px;font-size:.9rem;color:#9a3412;font-weight: 500;}
 
-        footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 25px 20px; font-size: 0.85rem; margin-top: auto; border-top: 1px solid #1e293b; }
+        footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 30px 20px; font-size: 0.95rem; margin-top: auto; border-top: 1px solid #1e293b; }
         footer span { color: #38bdf8; font-family: var(--heading-font); font-weight: 700; }
-        .terms-link { color: #38bdf8; text-decoration: underline; cursor: pointer; margin-left: 5px; }
+        .terms-link { color: #38bdf8; text-decoration: underline; cursor: pointer; margin-left: 5px; font-weight: 500; }
         .terms-link:hover { color: #ffffff; }
 
         html { scroll-behavior: smooth; }
         body { overflow-x: hidden; }
         button, input, select { -webkit-tap-highlight-color: transparent; }
         button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid rgba(14,165,233,.25); outline-offset: 2px; }
-        .header-inner { max-width: 1200px; margin: 0 auto; position: relative; }
-        .header-buttons { flex-wrap: wrap; justify-content: flex-end; }
-        .action-badge-btn { min-height: 38px; backdrop-filter: blur(10px); }
-        .hero-note { max-width: 760px; margin: 16px auto 0; padding: 10px 14px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; color: #cbd5e1; font-size: .78rem; }
-        .section-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin: 8px 0 14px; }
-        .section-heading h2 { font-family: var(--heading-font); font-size: 1.25rem; font-weight: 700; }
-        .result-count { color: var(--text-muted); font-size:.8rem; }
-        .empty-state { grid-column: 1/-1; padding: 42px 20px; text-align:center; background:var(--card-bg); border:1px dashed #cbd5e1; border-radius:var(--radius); color:var(--text-muted); }
-        .empty-state i { font-size:2rem; margin-bottom:10px; color:#94a3b8; }
+        .header-inner { max-width: 1200px; margin: 0 auto; position: relative; text-align: center; }
+        .header-buttons { justify-content: center !important; align-items: center; }
+        
+        .hero-note { max-width: 760px; margin: 16px auto 0; padding: 12px 16px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; color: #cbd5e1; font-size: .95rem; font-weight: 500; }
+        .section-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin: 12px 0 16px; }
+        .section-heading h2 { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 700; }
+        .result-count { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
+        .empty-state { grid-column: 1/-1; padding: 45px 20px; text-align:center; background:var(--card-bg); border:1px dashed #cbd5e1; border-radius:var(--radius); color:var(--text-muted); font-size: 1rem; }
+        .empty-state i { font-size:2.2rem; margin-bottom:10px; color:#94a3b8; }
         .product-price-row { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:14px; }
         .product-price { margin-bottom:0; }
-        .product-category-chip { font-size:.68rem; padding:4px 8px; border-radius:999px; background:#f0f9ff; color:#0369a1; font-weight:600; }
+        .product-category-chip { font-size: 0.75rem; padding: 5px 10px; border-radius: 999px; background: #f0f9ff; color: #0369a1; font-weight: 600; }
         [data-theme="dark"] .product-category-chip { background: #0369a1; color: #f0f9ff; }
-        .cart-bar { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 0 18px; padding:12px 14px; background:var(--card-bg); border:1px solid #dbeafe; border-radius:14px; box-shadow:var(--shadow); position:sticky; top:8px; z-index:20; }
+        .cart-bar { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 0 20px; padding:14px 18px; background:var(--card-bg); border:1px solid #dbeafe; border-radius:14px; box-shadow:var(--shadow); position:sticky; top:8px; z-index:20; }
         [data-theme="dark"] .cart-bar { border-color: #334155; }
-        .cart-summary { font-size:.85rem; color:var(--text-main); }
-        .cart-count { display:inline-flex; min-width:26px; height:26px; align-items:center; justify-content:center; border-radius:999px; background:var(--primary); color:#fff; font-weight:700; margin-left:5px; }
+        .cart-summary { font-size: 0.95rem; color:var(--text-main); font-weight: 500; }
+        .cart-count { display:inline-flex; min-width:28px; height:28px; align-items:center; justify-content:center; border-radius:999px; background:var(--primary); color:#fff; font-weight:700; margin-left:6px; font-size:0.9rem; }
         
-        .cart-list-item { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 0; border-bottom:1px solid #e2e8f0; }
+        .cart-list-item { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 0; border-bottom:1px solid #e2e8f0; font-size: 0.95rem; }
         [data-theme="dark"] .cart-list-item { border-color: #334155; }
         .qty-controls { display:flex; align-items:center; gap:8px; }
-        .qty-controls button { width:32px; height:32px; border:1px solid #cbd5e1; background:var(--card-bg); border-radius:8px; cursor:pointer; font-weight:700; color:var(--text-main); display:flex; align-items:center; justify-content:center; }
+        .qty-controls button { width:34px; height:34px; border:1px solid #cbd5e1; background:var(--card-bg); border-radius:8px; cursor:pointer; font-weight:700; color:var(--text-main); display:flex; align-items:center; justify-content:center; font-size:1rem; }
         .btn-remove-cart {
-            background-color: #ef4444 !important; color: #ffffff !important; border: none !important; width: 32px !important; height: 32px !important; border-radius: 8px !important; cursor: pointer !important; font-weight: 700 !important; font-size: 1.1rem !important; display: flex !important; align-items: center !important; justify-content: center !important; box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3) !important;
+            background-color: #ef4444 !important; color: #ffffff !important; border: none !important; width: 34px !important; height: 34px !important; border-radius: 8px !important; cursor: pointer !important; font-weight: 700 !important; font-size: 1.1rem !important; display: flex !important; align-items: center !important; justify-content: center !important; box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3) !important;
         }
 
-        .tracking { display:grid; grid-template-columns:repeat(5,1fr); gap:5px; margin-top:12px; }
-        .track-step { text-align:center; font-size:.62rem; color:#94a3b8; }
-        .track-dot { width:22px; height:22px; border-radius:50%; margin:0 auto 4px; background:#e2e8f0; display:flex; align-items:center; justify-content:center; font-size:.65rem; }
+        .tracking { display:grid; grid-template-columns:repeat(5,1fr); gap:5px; margin-top:14px; }
+        .track-step { text-align:center; font-size: 0.7rem; color:#94a3b8; font-weight: 500; }
+        .track-dot { width:24px; height:24px; border-radius:50%; margin:0 auto 5px; background:#e2e8f0; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; }
         [data-theme="dark"] .track-dot { background: #334155; color: #cbd5e1; }
         .track-step.active { color:#0284c7; font-weight:700; }
         .track-step.active .track-dot { background:#0284c7; color:#fff; }
-        @media (max-width:600px){ .cart-bar{top:4px;} .tracking{grid-template-columns:repeat(5, minmax(42px,1fr));} .track-step{font-size:.55rem;} }
-        .loading-state { text-align:center; padding:28px; color:var(--text-muted); }
-        .loading-state i { margin-right:7px; }
-        .file-help { font-size:.72rem; color:#64748b; margin-top:5px; }
-        .security-note { margin-top:10px; padding:10px 12px; border-radius:10px; background:var(--card-bg); border:1px solid #e2e8f0; color:var(--text-muted); font-size:.72rem; }
+        .loading-state { text-align:center; padding:30px; color:var(--text-muted); font-size: 1rem; }
+        .loading-state i { margin-right:8px; }
+        .file-help { font-size: 0.8rem; color:#64748b; margin-top:6px; font-weight: 500; }
+        .security-note { margin-top:12px; padding:12px 14px; border-radius:10px; background:var(--card-bg); border:1px solid #e2e8f0; color:var(--text-muted); font-size: 0.8rem; }
         [data-theme="dark"] .security-note { border-color: #334155; }
 
-        .store-hours{ display:inline-flex; align-items:center; gap:7px; margin:10px auto 0; padding:8px 14px; border:1px solid rgba(255,255,255,0.25); border-radius:999px; background:rgba(255,255,255,0.12); font-weight:600; font-size:.82rem; color: #ffffff; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
-        .store-hours i{color:#34d399;}
-        .header-security-strip{ display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:8px; margin:14px auto 0; max-width:980px; }
-        .header-security-badge{ display:inline-flex; align-items:center; gap:7px; padding:7px 11px; border-radius:999px; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.25); color:#ffffff; font-size:.72rem; font-weight:600; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
-        .header-security-badge i{color:#38bdf8;}
+        .store-hours{ display:inline-flex; align-items:center; gap:8px; margin:16px auto 0; padding:12px 20px; border:1px solid rgba(255,255,255,0.3); border-radius:999px; background:rgba(255,255,255,0.15); font-weight:700; font-size: 1rem; color: #ffffff; box-shadow:0 4px 15px rgba(0,0,0,0.15); }
+        .store-hours i{color:#34d399; font-size:1.2rem;}
+        
+        .header-security-strip{ display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:12px; margin:18px auto 0; max-width:980px; }
+        .header-security-badge{ display:inline-flex; align-items:center; gap:8px; padding:9px 16px; border-radius:999px; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); color:#ffffff; font-size: 0.85rem; font-weight:600; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+        .header-security-badge i{color:#38bdf8; font-size:1rem;}
         .header-security-badge.secure i{color:#34d399;}
-        .header-graphic{ position:absolute; pointer-events:none; opacity:.10; z-index:0; }
-        .header-graphic.shield{right:3%;top:24%;font-size:6rem;color:#38bdf8;animation:securityFloat 5s ease-in-out infinite;}
-        .header-graphic.pill{left:3%;bottom:12%;font-size:4rem;color:#34d399;transform:rotate(-22deg);animation:securityFloat 6s ease-in-out infinite reverse;}
+        
+        .header-graphic{ position:absolute; pointer-events:none; opacity:.12; z-index:0; }
+        .header-graphic.shield{right:5%;top:20%;font-size:7rem;color:#38bdf8;animation:securityFloat 5s ease-in-out infinite;}
+        .header-graphic.pill{left:5%;bottom:10%;font-size:5rem;color:#34d399;transform:rotate(-22deg);animation:securityFloat 6s ease-in-out infinite reverse;}
         @keyframes securityFloat{ 0%,100%{transform:translateY(0) rotate(0deg);} 50%{transform:translateY(-8px) rotate(3deg);} }
-        .category-card{position:relative;overflow:hidden;}
-        .category-card img{width:100% !important;height:100% !important;object-fit:cover !important;}
-        .category-card .content{ position:absolute;inset:auto 0 0 0;z-index:2;color:#fff; background:linear-gradient(to top,rgba(0,0,0,.78),rgba(0,0,0,.38),transparent); padding:34px 22px 20px !important; }
-        .category-card .content h3,.category-card .content p{ color:#fff !important;text-shadow:0 1px 3px rgba(0,0,0,.65); }
+
         .security-card{ border:1px solid #dbeafe; background:linear-gradient(135deg,#ffffff,#f8fbff); box-shadow:0 8px 22px rgba(15,23,42,.06); }
         [data-theme="dark"] .security-card { background: linear-gradient(135deg, #1e293b, #0f172a); border-color: #334155; }
         .security-card i{color:#087f5b;}
-        /* Classic, compact shopping layout: two products per row on phones */
-        .products-grid { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
-        .product-card { border: 1px solid #e2e8f0; border-radius: 10px; box-shadow: 0 2px 7px rgba(15,23,42,.07); transition: box-shadow .2s ease; animation: none; }
-        .product-card:hover, .product-card:active { transform: none; animation: none; box-shadow: 0 4px 12px rgba(15,23,42,.12); }
-        .product-img-container { height: 150px; background: #fff; }
-        .product-img-container img { object-fit: contain; padding: 8px; }
-        .product-card:hover .product-img-container img { transform: none; }
-        .product-details { padding: 12px; }
-        .product-title { font-size: .95rem; line-height: 1.35; }
-        .product-price { font-size: 1.05rem; margin-bottom: 10px; }
-        .btn-primary { border-radius: 7px; padding: 9px 8px; }
+
         @media (max-width: 600px) {
-            .container { padding: 14px 10px; }
-            .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-            .product-card { min-width: 0; border-radius: 9px; }
-            .product-img-container { height: 125px; }
-            .product-details { padding: 9px; }
-            .product-title { font-size: .82rem; line-height: 1.3; margin-bottom: 5px; }
-            .product-price { font-size: .98rem; margin-bottom: 8px; }
-            .product-tag { top: 6px; left: 6px; padding: 3px 6px; font-size: .65rem; }
-            .btn-primary { font-size: .78rem; padding: 8px 5px; }
+            header { padding: 20px 12px 25px; }
+            .header-buttons { display:grid !important; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px; max-width:440px; margin:0 auto 15px; }
+            .header-buttons .action-badge-btn { width:100%; justify-content:center; padding:10px 10px; font-size: 0.9rem; }
+            header h1 { font-size: clamp(1.5rem, 6vw, 2rem); letter-spacing: 0.5px; margin: 0 auto 6px; display:block; }
+            header p { font-size: 0.85rem; line-height: 1.4; }
+            .tagline { font-size: 0.85rem; margin-bottom: 10px; }
+            .store-hours { font-size: 0.85rem; padding: 10px 14px; }
+            .header-security-strip { gap: 8px; }
+            .header-security-badge { font-size: 0.75rem; padding: 7px 12px; }
+            .container { padding: 16px 12px; }
+            .banner-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+            .category-card { height: 140px; }
+            .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 12px; }
+            .product-img-container { height: 135px; }
+            .product-title { font-size: 0.95rem; min-height: 2.4em; }
         }
     </style>
 </head>
@@ -287,16 +287,15 @@
             <button class="close-modal" onclick="closeFirstVisitLogin()" aria-label="Close login">&times;</button>
             <div style="width:64px;height:64px;border-radius:50%;margin:0 auto 14px;background:#eff6ff;display:flex;align-items:center;justify-content:center;color:#4285f4;font-size:1.8rem;"><i class="fa-brands fa-google"></i></div>
             <h3 style="margin-bottom:8px;">Login to Continue</h3>
-            <p style="font-size:.82rem;color:var(--text-muted);line-height:1.5;margin-bottom:16px;">Login with your Google account for a faster and secure order experience.</p>
-            <button class="btn-success" id="first-visit-google-btn" style="width:100%;padding:11px;background:#4285f4;" onclick="signInWithGoogleFromFirstVisit()"><i class="fa-brands fa-google"></i> Continue with Google</button>
-            <button type="button" style="margin-top:10px;background:none;border:none;color:#64748b;font-size:.78rem;cursor:pointer;" onclick="closeFirstVisitLogin()">Continue without login</button>
+            <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.5;margin-bottom:16px;">Login with your Google account for a faster and secure order experience.</p>
+            <button class="btn-success" id="first-visit-google-btn" style="width:100%;padding:12px;background:#4285f4;font-size:1rem;" onclick="signInWithGoogleFromFirstVisit()"><i class="fa-brands fa-google"></i> Continue with Google</button>
+            <button type="button" style="margin-top:12px;background:none;border:none;color:#64748b;font-size:0.85rem;cursor:pointer;" onclick="closeFirstVisitLogin()">Continue without login</button>
         </div>
     </div>
 
     <header>
       <div class="header-inner">
         <div class="header-buttons">
-            <!-- Dark / Light Mode Toggle Button -->
             <button class="action-badge-btn" onclick="toggleThemeMode()" id="theme-toggle-btn"><i class="fa-solid fa-moon" id="theme-icon"></i> <span id="theme-text">Dark Mode</span></button>
             <button class="action-badge-btn" onclick="toggleDeliveryPartnerPortal()"><i class="fa-solid fa-motorcycle"></i> Delivery Portal</button>
             <button class="action-badge-btn" id="customer-login-header-btn" onclick="openCustomerLogin()"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
@@ -306,17 +305,23 @@
             </a>
             <button class="action-badge-btn" onclick="toggleAdminMode()"><i class="fa-solid fa-lock" id="admin-icon"></i> Admin</button>
         </div>
+
         <h1>NEW VERMA MEDICALS</h1>
         <p>Loharbarwa, Barwadda, Dhanbad, Jharkhand | Sampark: +91 7992308032</p>
+        <div class="tagline">Your Health, Our Priority</div>
+
         <i class="fa-solid fa-shield-halved header-graphic shield" aria-hidden="true"></i>
         <i class="fa-solid fa-capsules header-graphic pill" aria-hidden="true"></i>
-        <div class="tagline">Your Health, Our Priority</div>
+
         <div class="hero-note"><i class="fa-solid fa-shield-heart"></i> Genuine medicines • Local delivery • Prescription verification</div>
+        
+        <!-- Store Hours & Security Highlights Restored -->
         <div class="store-hours"><i class="fa-regular fa-clock"></i> दुकान का समय: सुबह 8:00 बजे से रात 12:00 बजे तक</div>
+        
         <div class="header-security-strip" aria-label="Security and service highlights">
           <span class="header-security-badge secure"><i class="fa-solid fa-shield-halved"></i> Secure Pharmacy</span>
           <span class="header-security-badge"><i class="fa-solid fa-lock"></i> Protected Orders</span>
-          <span class="header-security-badge"><i class="fa-solid fa-truck-fast"></i> Local Delivery</span>
+          <span class="header-security-badge"><i class="fa-solid fa-truck-fast"></i> Free Local Delivery</span>
           <span class="header-security-badge"><i class="fa-solid fa-file-prescription"></i> Prescription Verified</span>
         </div>
       </div>
@@ -324,6 +329,7 @@
 
     <div class="container">
         
+        <!-- Rx Upload Banner Restored with image compression hint -->
         <div class="rx-upload-banner">
             <div class="rx-badge"><i class="fa-solid fa-file-prescription"></i> Rx</div>
             <h3><i class="fa-solid fa-prescription-bottle-medical" style="color:var(--primary);"></i> Upload Doctor's Prescription (Rx)</h3>
@@ -351,7 +357,6 @@
             <div class="security-note security-card">
               <i class="fa-solid fa-shield-halved"></i>
               <b>Security Hardening:</b> failed-login lockout aur automatic admin-session timeout enabled.
-              <small>Production protection ke liye Firebase Authentication + Realtime Database Rules bhi required hain.</small>
             </div>
             <input type="hidden" id="editing-product-id" value="">
             
@@ -385,7 +390,6 @@
                 <div class="form-group" style="margin-top:10px;">
                     <label for="admin-upi-qr-input">UPI QR Code Image URL</label>
                     <input type="url" id="admin-upi-qr-input" placeholder="https://... QR image link paste karein">
-                    <small class="file-help">HTTPS image URL daalein. Save karne par checkout mein customer ko naya QR dikhega.</small>
                 </div>
                 <button type="button" id="save-qr-btn" class="btn-primary">QR Code Save Karein</button>
             </div>
@@ -451,7 +455,7 @@
         <div class="modal-content" style="max-width: 650px;">
             <button class="close-modal" onclick="toggleDeliveryPartnerPortal()">&times;</button>
             <h3><i class="fa-solid fa-motorcycle" style="color:var(--primary);"></i> Delivery Partner Portal</h3>
-            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 15px;">Active delivery orders aur timing update karne ke liye:</p>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">Active delivery orders aur timing update karne ke liye:</p>
             <div id="delivery-partner-orders-list"></div>
         </div>
     </div>
@@ -460,7 +464,7 @@
         <div class="modal-content">
             <button class="close-modal" onclick="closePrescriptionModal()">&times;</button>
             <h3><i class="fa-solid fa-prescription"></i> Upload Prescription</h3>
-            <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:12px;">Dhanbad region doctor prescription only (Child illness / Delivery care).</p>
+            <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:14px;">Dhanbad region doctor prescription only (Child illness / Delivery care).</p>
             <div class="form-group">
                 <label>Aapka Naam</label>
                 <input type="text" id="rx-cust-name" placeholder="Pura naam likhein">
@@ -471,10 +475,10 @@
             </div>
             <div class="form-group">
                 <label>Prescription Photo (Gallery ya Camera se chunein)</label>
-                <input type="file" id="rx-file-input" accept="image/*" style="padding: 8px; border: 1px solid #cbd5e1; border-radius: 10px; width: 100%; background: var(--card-bg); color: var(--text-main); cursor: pointer;">
-                <div class="file-help">JPG/PNG/WebP • maximum 5 MB. Photo automatically compress hogi.</div>
+                <input type="file" id="rx-file-input" accept="image/*" style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 10px; width: 100%; background: var(--card-bg); color: var(--text-main); cursor: pointer;">
+                <div class="file-help">JPG/PNG/WebP • maximum 5 MB. <b>Photo automatically compress hogi taaki tezi se upload ho.</b></div>
             </div>
-            <button class="btn-primary" style="width: 100%;" onclick="submitPrescription()">Prescription Bhejein</button>
+            <button class="btn-primary" style="width: 100%; margin-top: 5px;" onclick="submitPrescription()">Prescription Bhejein</button>
         </div>
     </div>
 
@@ -482,11 +486,11 @@
         <div class="modal-content">
             <button class="close-modal" onclick="toggleTermsModal()">&times;</button>
             <h3><i class="fa-solid fa-file-contract"></i> Terms & Conditions</h3>
-            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 15px; line-height: 1.6;">
+            <div style="font-size: 0.95rem; color: var(--text-muted); margin-top: 15px; line-height: 1.6;">
                 <p><b>1. Orders:</b> New Verma Medicals par diye gaye sabhi order upalabdhata ke adheen hain.</p><br>
-                <p><b>2. Pricing & Payment:</b> Sabhi dawaiyon ke mulya sthaniye bazaar daro ke anusaar hain. Payment COD ya online upalabdh hai.</p><br>
+                <p><b>2. Pricing & Payment:</b> Sabhi dawaiyon ke mulya sthaniye bazaar daro ke anusaar hain.</p><br>
                 <p><b>3. Delivery & Cancellation:</b> Barwadda aur Loharbarwa kshetra ke bheetar samay par delivery ka prayas kiya jata hai.</p><br>
-                <p><b>4. Return & Refund Policy:</b> Dawai return karne par cash refund chunne par 3% ki koti ki jayegi. Exchange chunne par 0% deduction aur credit coupon milega.</p>
+                <p><b>4. Return & Refund Policy:</b> Dawai return karne par cash refund chunne par 3% ki koti ki jayegi.</p>
             </div>
         </div>
     </div>
@@ -495,18 +499,17 @@
         <div class="modal-content">
             <button class="close-modal" onclick="toggleCustomerOrdersModal()">&times;</button>
             <h3 id="customer-orders-title"><i class="fa-solid fa-bag-shopping"></i> My Orders & Prescription Status</h3>
-            <div id="customer-login-required" style="display:none;margin:0 0 14px;padding:12px;border-radius:10px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-size:.86rem;font-weight:600;"><i class="fa-solid fa-lock"></i> Please login first to place your order.</div>
-            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:15px;">Apne orders, credit coupons aur prescription status dekhne ke liye login karein.</p>
+            <div id="customer-login-required" style="display:none;margin:0 0 14px;padding:12px;border-radius:10px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-size:.9rem;font-weight:600;"><i class="fa-solid fa-lock"></i> Please login first to place your order.</div>
+            <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:15px;">Apne orders, credit coupons aur prescription status dekhne ke liye login karein.</p>
             <div id="customer-login-box">
                 <div class="form-group"><label>Email ID</label><input type="email" id="customer-login-email" autocomplete="email" placeholder="yourname@gmail.com"></div>
                 <div class="form-group"><label>Password</label><input type="password" id="customer-login-password" autocomplete="current-password" placeholder="Password"></div>
                 <button class="btn-primary" id="customer-email-login-btn" style="width:100%;margin-top:5px;" onclick="customerEmailLogin()"><i class="fa-solid fa-right-to-bracket"></i> Login with Email</button>
                 <button class="btn-success" id="customer-create-account-btn" style="width:100%;margin-top:8px;" onclick="customerCreateAccount()"><i class="fa-solid fa-user-plus"></i> Create Account</button>
-                <div style="display:flex;align-items:center;gap:10px;margin:14px 0;color:#94a3b8;font-size:.75rem;"><span style="height:1px;background:#e2e8f0;flex:1"></span><span>OR</span><span style="height:1px;background:#e2e8f0;flex:1"></span></div>
+                <div style="display:flex;align-items:center;gap:10px;margin:14px 0;color:#94a3b8;font-size:.8rem;"><span style="height:1px;background:#e2e8f0;flex:1"></span><span>OR</span><span style="height:1px;background:#e2e8f0;flex:1"></span></div>
                 <button class="btn-primary" id="customer-google-login-btn" style="width:100%;background:#fff;color:#1e293b;border:1px solid #cbd5e1;" onclick="customerGoogleLogin()"><i class="fa-brands fa-google"></i> Continue with Google</button>
-                <div class="security-note" style="margin-top:12px;"><i class="fa-solid fa-shield-halved"></i> Login session browser mein saved rahega.</div>
             </div>
-            <div id="customer-account-box" style="display:none;"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;"><div style="min-width:0"><div style="font-size:.72rem;color:#64748b">Logged in as</div><div id="customer-account-label" style="font-weight:700;word-break:break-all"></div></div><button class="btn-danger" onclick="customerLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button></div></div>
+            <div id="customer-account-box" style="display:none;"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;"><div style="min-width:0"><div style="font-size:.8rem;color:#64748b">Logged in as</div><div id="customer-account-label" style="font-weight:700;word-break:break-all"></div></div><button class="btn-danger" onclick="customerLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button></div></div>
             <div id="customer-orders-result" style="margin-top:15px"></div>
         </div>
     </div>
@@ -515,7 +518,7 @@
         <div class="modal-content">
             <button class="close-modal" onclick="closeRejectModal()">&times;</button>
             <h3>Order Cancel karne ka kaaran chunein</h3>
-            <div class="form-group">
+            <div class="form-group" style="margin-top: 15px;">
                 <label>Select Reason</label>
                 <select id="reject-reason-select" onchange="toggleCustomReasonInput()">
                     <option value="Changed my mind / Not needed">Changed my mind / Not needed</option>
@@ -528,7 +531,7 @@
                 <label>Custom Reason</label>
                 <input type="text" id="custom-reason-input" placeholder="Kaaran yahan likhein...">
             </div>
-            <button class="btn-danger" style="width: 100%; padding: 10px;" onclick="confirmOrderCancellation()">Order Cancel Karein</button>
+            <button class="btn-danger" style="width: 100%; padding: 12px; margin-top: 5px;" onclick="confirmOrderCancellation()">Order Cancel Karein</button>
         </div>
     </div>
 
@@ -536,15 +539,14 @@
         <div class="modal-content">
             <button class="close-modal" onclick="closeReturnModal()">&times;</button>
             <h3>Dawai Return / Exchange Anurodh</h3>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">Apna return vikalp chunein:</p>
-            <div class="form-group">
+            <div class="form-group" style="margin-top: 15px;">
                 <label>Select Option</label>
                 <select id="return-option-select">
                     <option value="Medicine for Medicine">Medicine for medicine (0% deduction)</option>
                     <option value="Medicine for Cash">Medicine for cash / Money (3% deduction)</option>
                 </select>
             </div>
-            <button class="btn-primary" style="width: 100%; padding: 10px;" onclick="submitReturnRequest()">Return Anurodh Bhejein</button>
+            <button class="btn-primary" style="width: 100%; padding: 12px; margin-top: 5px;" onclick="submitReturnRequest()">Return Anurodh Bhejein</button>
         </div>
     </div>
 
@@ -553,8 +555,8 @@
             <button class="close-modal" onclick="closeCartModal()">&times;</button>
             <h3><i class="fa-solid fa-cart-shopping"></i> Aapka Cart</h3>
             <div id="cart-items" style="margin-top:15px;"></div>
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:15px;padding-top:12px;border-top:2px solid #e2e8f0;"><b>Grand Total</b><b id="cart-modal-total" style="color:var(--primary);">₹0.00</b></div>
-            <button class="btn-primary" style="width:100%;margin-top:15px;" onclick="checkoutCart()"><i class="fa-solid fa-arrow-right"></i> Checkout Karein</button>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:14px;border-top:2px solid #e2e8f0;font-size:1.1rem;"><b>Grand Total</b><b id="cart-modal-total" style="color:var(--primary);">₹0.00</b></div>
+            <button class="btn-primary" style="width:100%;margin-top:18px;" onclick="checkoutCart()"><i class="fa-solid fa-arrow-right"></i> Checkout Karein</button>
         </div>
     </div>
 
@@ -567,7 +569,7 @@
             <div class="form-group"><label>Mobile Number</label><input id="cart-cust-phone" type="tel" inputmode="numeric" maxlength="10" placeholder="10 digit mobile"></div>
             <div class="form-group"><label>Delivery Address</label><input id="cart-cust-address" type="text" placeholder="Pura address"></div>
             <div class="form-group"><label>Payment</label><select id="cart-payment-type" onchange="document.getElementById('cart-upi-box').style.display=this.value==='Online'?'block':'none'"><option value="Cash on Delivery">Cash on Delivery</option><option value="Online">Online / UPI</option></select></div>
-            <div id="cart-upi-box" style="display:none;background:#f0f9ff;padding:10px;border-radius:10px;margin-bottom:12px;text-align:center;"><b>UPI: Q183938591@ybl</b><br><img id="cart-dynamic-upi-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=upi://pay?pa=Q183938591@ybl&pn=NewVermaMedicals" style="width:120px;margin:8px"> <input id="cart-payment-file" type="file" accept="image/*" style="width:100%"></div>
+            <div id="cart-upi-box" style="display:none;background:#f0f9ff;padding:12px;border-radius:10px;margin-bottom:15px;text-align:center;"><b>UPI: Q183938591@ybl</b><br><img id="cart-dynamic-upi-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=upi://pay?pa=Q183938591@ybl&pn=NewVermaMedicals" style="width:120px;margin:8px"> <input id="cart-payment-file" type="file" accept="image/*" style="width:100%; padding:8px;"></div>
             <button id="cart-submit-btn" class="btn-primary" style="width:100%;" onclick="submitCartOrder()">Order Submit Karein</button>
         </div>
     </div>
@@ -576,64 +578,43 @@
         <div class="modal-content">
             <button class="close-modal" onclick="closeCheckoutModal()">&times;</button>
             <h3>Order Confirm Karein</h3>
-            <p id="modal-product-info" style="font-size: 0.9rem; margin-bottom: 10px; color: var(--text-muted);"></p>
+            <p id="modal-product-info" style="font-size: 0.95rem; margin-bottom: 12px; color: var(--text-muted);"></p>
             
             <div class="form-group">
                 <label>Quantity Chunein (1 se 5)</label>
                 <select id="order-quantity" onchange="updateTotalPriceCalculation()">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
+                    <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label>Credit Coupon Code (Agar pichhla balance hai)</label>
+                <label>Credit Coupon Code</label>
                 <div style="display: flex; gap: 8px;">
                     <input type="text" id="coupon-code-input" placeholder="Coupon code yahan likhein...">
                     <button class="btn-success" type="button" onclick="applyCouponCode()" style="white-space: nowrap;">Laagu Karein</button>
                 </div>
-                <small id="coupon-msg" style="color: var(--accent); font-weight: 500;"></small>
+                <small id="coupon-msg" style="color: var(--accent); font-weight: 600;"></small>
             </div>
 
-            <div class="form-group">
-                <label>Aapka Naam</label>
-                <input type="text" id="cust-name" placeholder="Apna pura naam likhein">
-            </div>
-            <div class="form-group">
-                <label>Mobile Number</label>
-                <input inputmode="numeric" maxlength="10" aria-label="Customer mobile number" type="tel" id="cust-phone" placeholder="10 anko ka mobile number">
-            </div>
-            <div class="form-group">
-                <label>Pata (Address)</label>
-                <input type="text" id="cust-address" placeholder="Loharbarwa, Barwadda ya aaspaas...">
-            </div>
-            <div class="form-group">
-                <label>Payment Type</label>
-                <select id="payment-type" onchange="togglePaymentSection()">
-                    <option value="COD">Cash on Delivery (COD)</option>
-                    <option value="Online">Online Pay (UPI QR)</option>
-                </select>
-            </div>
+            <div class="form-group"><label>Aapka Naam</label><input type="text" id="cust-name" placeholder="Apna pura naam likhein"></div>
+            <div class="form-group"><label>Mobile Number</label><input inputmode="numeric" maxlength="10" type="tel" id="cust-phone" placeholder="10 anko ka mobile number"></div>
+            <div class="form-group"><label>Pata (Address)</label><input type="text" id="cust-address" placeholder="Loharbarwa, Barwadda ya aaspaas..."></div>
+            <div class="form-group"><label>Payment Type</label><select id="payment-type" onchange="togglePaymentSection()"><option value="COD">Cash on Delivery (COD)</option><option value="Online">Online Pay (UPI QR)</option></select></div>
 
-            <div id="upi-payment-container" style="display: none; background: #f0f9ff; padding: 12px; border-radius: 10px; border: 1px solid #bae6fd; margin-bottom: 15px; text-align: center;">
-                <p style="font-size: 0.8rem; font-weight: 600; color: #0369a1; margin-bottom: 8px;">Scan QR to Pay via UPI / Google Pay / PhonePe</p>
-                <img id="dynamic-upi-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=Q183938591@ybl&pn=NewVermaMedicals" alt="UPI Payment QR Code" style="width: 130px; height: 130px; object-fit:contain; background:#fff; border-radius: 8px; margin-bottom: 8px;">
-                <p style="font-size: 0.75rem; color: #64748b; margin-bottom: 8px;">UPI ID: <b>Q183938591@ybl</b></p>
+            <div id="upi-payment-container" style="display: none; background: #f0f9ff; padding: 14px; border-radius: 10px; border: 1px solid #bae6fd; margin-bottom: 16px; text-align: center;">
+                <p style="font-size: 0.85rem; font-weight: 600; color: #0369a1; margin-bottom: 8px;">Scan QR to Pay via UPI</p>
+                <img id="dynamic-upi-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=Q183938591@ybl&pn=NewVermaMedicals" style="width: 130px; height: 130px; object-fit:contain; background:#fff; border-radius: 8px; margin-bottom: 8px;">
                 <div class="form-group" style="text-align: left; margin-bottom: 0;">
-                    <label style="font-size: 0.75rem;">Payment Screenshot (Gallery se chunein)</label>
-                    <input type="file" id="payment-file-input" accept="image/*" style="font-size: 0.8rem; padding: 6px; border: 1px solid #cbd5e1; border-radius: 8px; width: 100%; background: var(--card-bg); color: var(--text-main);">
-                    <div class="file-help">JPG/PNG/WebP • maximum 5 MB.</div>
+                    <label style="font-size: 0.8rem;">Payment Screenshot (Auto Compressed)</label>
+                    <input type="file" id="payment-file-input" accept="image/*" style="font-size: 0.85rem; padding: 8px; border: 1px solid #cbd5e1; border-radius: 8px; width: 100%; background: var(--card-bg); color: var(--text-main);">
                 </div>
-                <div class="form-group" style="text-align:left;margin-top:12px;margin-bottom:0;">
+                <div class="form-group" style="text-align:left;margin-top:14px;margin-bottom:0;">
                     <label for="payment-utr">Transaction ID / UTR (12 digits)</label>
-                    <input type="text" id="payment-utr" inputmode="numeric" maxlength="12" placeholder="12 digit UTR number" autocomplete="off">
+                    <input type="text" id="payment-utr" inputmode="numeric" maxlength="12" placeholder="12 digit UTR number">
                 </div>
             </div>
 
-            <div id="final-payable-box" style="font-weight: 600; margin-bottom: 15px; color: var(--primary);"></div>
+            <div id="final-payable-box" style="font-weight: 700; font-size: 1.1rem; margin-bottom: 16px; color: var(--primary);"></div>
             <div class="checkout-login-gate" id="checkout-login-gate">
                 <b>Please login first to place your order.</b>
                 <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;">
@@ -641,7 +622,7 @@
                     <button class="btn-success" type="button" onclick="signInWithGoogle()"><i class="fa-brands fa-google"></i> Continue with Google</button>
                 </div>
             </div>
-            <button class="btn-primary" style="width: 100%;" onclick="submitOrder()">Order Submit Karein (Admin Approval Required)</button>
+            <button class="btn-primary" style="width: 100%; padding: 12px;" onclick="submitOrder()">Order Submit Karein (Admin Approval Required)</button>
         </div>
     </div>
 
@@ -655,14 +636,12 @@
         import { getDatabase, ref, set, push, onValue, remove, update } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
         import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        // Dark / Light Mode Toggle Logic
         window.toggleThemeMode = function() {
             const body = document.body;
             const currentTheme = body.getAttribute("data-theme");
             const newTheme = currentTheme === "dark" ? "light" : "dark";
             body.setAttribute("data-theme", newTheme);
             localStorage.setItem("newVermaTheme", newTheme);
-
             const icon = document.getElementById("theme-icon");
             const text = document.getElementById("theme-text");
             if (newTheme === "dark") {
@@ -674,7 +653,6 @@
             }
         };
 
-        // Load saved theme preference
         const savedTheme = localStorage.getItem("newVermaTheme") || "light";
         document.body.setAttribute("data-theme", savedTheme);
         if (savedTheme === "dark") {
@@ -688,7 +666,6 @@
 
         const splashVideo = document.getElementById('splash-video');
         const splashScreen = document.getElementById('splash-screen');
-
         if (splashVideo && splashScreen) {
             splashVideo.addEventListener('ended', () => { splashScreen.classList.add('hidden'); });
             setTimeout(() => { splashScreen.classList.add('hidden'); }, 5000);
@@ -701,42 +678,11 @@
             projectId: "new-verma-medicals",
             storageBucket: "new-verma-medicals.firebasestorage.app",
             messagingSenderId: "353970256570",
-            appId: "1:353970256570:web:e139f11fe228f41edea083",
-            measurementId: "G-EYWL6VHH01"
+            appId: "1:353970256570:web:e139f11fe228f41edea083"
         };
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
-
-        const upiQrImage = document.getElementById("dynamic-upi-qr");
-        const cartUpiQrImage = document.getElementById("cart-dynamic-upi-qr");
-        const adminQrInput = document.getElementById("admin-upi-qr-input");
-        const saveQrButton = document.getElementById("save-qr-btn");
-        
-        onValue(ref(db, "settings/upiQrUrl"), (snapshot) => {
-            const savedUrl = snapshot.val();
-            if (typeof savedUrl === "string" && /^https:\/\//i.test(savedUrl)) {
-                if (upiQrImage) upiQrImage.src = savedUrl;
-                if (cartUpiQrImage) cartUpiQrImage.src = savedUrl;
-                if (adminQrInput && document.activeElement !== adminQrInput) adminQrInput.value = savedUrl;
-            }
-        });
-
-        if (saveQrButton) {
-            saveQrButton.addEventListener("click", async () => {
-                if (!isAdmin) { alert("QR settings badalne ke liye Admin login karein."); return; }
-                const url = (adminQrInput?.value || "").trim();
-                if (!/^https:\/\//i.test(url)) { alert("Kripya valid HTTPS QR image URL daalein."); return; }
-                try {
-                    await set(ref(db, "settings/upiQrUrl"), url);
-                    showToast("Payment QR Code update ho gaya.");
-                } catch (error) {
-                    console.error(error);
-                    alert("QR URL save nahi hua. Firebase Database Rules check karein.");
-                }
-            });
-        }
-
         const auth = getAuth(app);
         auth.languageCode = "en";
         const googleProvider = new GoogleAuthProvider();
@@ -756,10 +702,6 @@
         let appliedDiscountAmount = 0;
         let appliedCreditKey = null;
         let activeCategory = "All";
-        let isSubmittingOrder = false;
-        // IMPORTANT: Paste the Firebase Authentication UID of your admin account here.
-        // This UID must match the admin UID allowed by your Realtime Database Rules.
-        // A UID is an identifier, not a password; database rules remain the real access control.
         const ADMIN_UID = "15lquHYSSuXV7bB3stUhajzc0702";
         const ADMIN_SESSION_MS = 20 * 60 * 1000;
         let adminSessionTimer = null;
@@ -815,9 +757,10 @@
             set("stat-returns", allReturns.filter(r => r.status === "Pending Return Approval").length);
         }
 
-        async function compressImage(file, maxSize = 1400, quality = 0.72) {
+        // Optimized Image Compression to fix upload latency
+        async function compressImage(file, maxSize = 1200, quality = 0.7) {
             if (!file || !file.type.startsWith("image/")) throw new Error("Please select an image.");
-            if (file.size > 5 * 1024 * 1024) throw new Error("Image 5 MB se chhoti honi chahiye.");
+            if (file.size > 8 * 1024 * 1024) throw new Error("Image 8 MB se chhoti honi chahiye.");
             const bitmap = await createImageBitmap(file);
             const scale = Math.min(1, maxSize / Math.max(bitmap.width, bitmap.height));
             const canvas = document.createElement("canvas");
@@ -835,27 +778,13 @@
                 try {
                     await signOut(auth);
                     showToast("Admin logout ho gaya.");
-                } catch (error) {
-                    console.error(error);
-                    alert("Logout nahi ho saka. Dobara try karein.");
-                }
+                } catch (error) { console.error(error); }
                 return;
             }
-
-            if (!ADMIN_UID || ADMIN_UID === "PASTE_ADMIN_FIREBASE_UID_HERE") {
-                alert("Pehle code mein ADMIN_UID ko Firebase Console > Authentication > Users se apne admin user ke UID se replace karein.");
-                return;
-            }
-
             const email = prompt("Admin account ka registered email address darj karein:");
             if (email === null) return;
             const password = prompt("Admin account ka password darj karein:");
             if (password === null) return;
-            if (!email.trim() || !password) {
-                alert("Admin email aur password dono zaroori hain.");
-                return;
-            }
-
             try {
                 await authPersistenceReady;
                 const credential = await signInWithEmailAndPassword(auth, email.trim(), password);
@@ -864,11 +793,10 @@
                     alert("Is account ko admin access nahi diya gaya hai.");
                     return;
                 }
-                // onAuthStateChanged will open the dashboard after verifying the UID.
                 showToast("Admin login successful.");
             } catch (error) {
                 console.error(error);
-                alert("Admin login nahi hua. Email/password check karein aur Firebase Authentication mein account enabled hona chahiye.");
+                alert("Admin login nahi hua. Email/password check karein.");
             }
         };
 
@@ -893,16 +821,16 @@
         async function customerEmailLogin() {
             const email=document.getElementById("customer-login-email").value.trim(); const password=document.getElementById("customer-login-password").value; const btn=document.getElementById("customer-email-login-btn");
             if(!email||!password){alert("Kripya email aur password bharein.");return;}
-            try{setButtonLoading(btn,true,"Login ho raha hai...");await authPersistenceReady;await signInWithEmailAndPassword(auth,email,password);showToast("Login successful!");}catch(e){console.error(e);alert("Login nahi hua: "+(e?.message||"Email ya password check karein."));}finally{setButtonLoading(btn,false);}
+            try{setButtonLoading(btn,true,"Login ho raha hai...");await authPersistenceReady;await signInWithEmailAndPassword(auth,email,password);showToast("Login successful!");}catch(e){alert("Login nahi hua.");}finally{setButtonLoading(btn,false);}
         }
         window.customerEmailLogin=customerEmailLogin;
         window.customerCreateAccount=async function(){
             const email=document.getElementById("customer-login-email").value.trim(); const password=document.getElementById("customer-login-password").value; const btn=document.getElementById("customer-create-account-btn");
-            if(!email||!password){alert("Email aur password bharein.");return;} if(password.length<6){alert("Password kam se kam 6 characters ka hona chahiye.");return;}
-            try{setButtonLoading(btn,true,"Account ban raha hai...");await authPersistenceReady;await createUserWithEmailAndPassword(auth,email,password);showToast("Account create ho gaya!");}catch(e){console.error(e);alert("Account nahi bana: "+(e?.message||"Details check karein."));}finally{setButtonLoading(btn,false);}
+            if(!email||!password){alert("Email aur password bharein.");return;}
+            try{setButtonLoading(btn,true,"Account ban raha hai...");await authPersistenceReady;await createUserWithEmailAndPassword(auth,email,password);showToast("Account create ho gaya!");}catch(e){alert("Account nahi bana.");}finally{setButtonLoading(btn,false);}
         };
-        window.customerGoogleLogin=async function(){const btn=document.getElementById("customer-google-login-btn");try{setButtonLoading(btn,true,"Google login ho raha hai...");await authPersistenceReady;await signInWithPopup(auth,googleProvider);showToast("Google login successful!");}catch(e){console.error(e);alert("Google login nahi hua: "+(e?.message||"Dobara try karein."));}finally{setButtonLoading(btn,false);}};
-        window.customerLogout=async function(){try{await signOut(auth);showToast("Logout ho gaya.");}catch(e){alert("Logout nahi ho saka.");}};
+        window.customerGoogleLogin=async function(){const btn=document.getElementById("customer-google-login-btn");try{setButtonLoading(btn,true,"Google login ho raha hai...");await authPersistenceReady;await signInWithPopup(auth,googleProvider);showToast("Google login successful!");}catch(e){alert("Google login nahi hua.");}finally{setButtonLoading(btn,false);}};
+        window.customerLogout=async function(){try{await signOut(auth);showToast("Logout ho gaya.");}catch(e){}};
         function renderCustomerAuthState(){const user=currentCustomerUser||auth.currentUser;const l=document.getElementById("customer-login-box"),a=document.getElementById("customer-account-box"),x=document.getElementById("customer-account-label"),hb=document.getElementById("customer-login-header-btn");if(!l||!a)return;if(user){l.style.display="none";a.style.display="block";if(x)x.textContent=user.email||user.displayName||"Logged in";if(hb)hb.innerHTML='<i class="fa-solid fa-user-check"></i> Account';refreshCustomerOrdersView();}else{l.style.display="block";a.style.display="none";if(hb)hb.innerHTML='<i class="fa-solid fa-right-to-bracket"></i> Login';document.getElementById("customer-orders-result").innerHTML="";}}
         window.openCustomerLogin=function(){
             const modal=document.getElementById("customer-orders-modal");
@@ -928,7 +856,7 @@
                 const gate=document.getElementById("checkout-login-gate");
                 if(gate)gate.style.display="none";
                 showToast("Google login successful!");
-            }catch(e){console.error(e);alert("Google login nahi hua: "+(e?.message||"Dobara try karein."));}
+            }catch(e){alert("Google login nahi hua.");}
         };
 
         function closeFirstVisitLogin(){
@@ -948,30 +876,20 @@
                 const modal=document.getElementById("first-visit-login-modal");
                 if(modal)modal.style.display="none";
                 showToast("Google login successful!");
-            }catch(e){console.error(e);alert("Google login nahi hua: "+(e?.message||"Dobara try karein."));}
+            }catch(e){alert("Google login nahi hua.");}
             finally{setButtonLoading(btn,false);}
         };
 
         onAuthStateChanged(auth, user => {
             currentCustomerUser = user || null;
             isAdmin = !!(user && ADMIN_UID !== "PASTE_ADMIN_FIREBASE_UID_HERE" && user.uid === ADMIN_UID);
-
             const panel = document.getElementById("admin-panel");
             const icon = document.getElementById("admin-icon");
             if (panel) panel.style.display = isAdmin ? "block" : "none";
             if (icon) icon.className = isAdmin ? "fa-solid fa-unlock" : "fa-solid fa-lock";
-
             if (isAdmin) {
-                renderProducts();
-                renderOrders();
-                renderReturns();
-                renderPrescriptionRequests();
-                searchAdminCredits();
-                startAdminSessionTimer();
-            } else {
-                clearTimeout(adminSessionTimer);
-            }
-
+                renderProducts(); renderOrders(); renderReturns(); renderPrescriptionRequests(); searchAdminCredits(); startAdminSessionTimer();
+            } else { clearTimeout(adminSessionTimer); }
             renderCustomerAuthState();
             if (user) {
                 localStorage.setItem("newVermaLoginPromptSeen", "1");
@@ -980,65 +898,44 @@
             }
         });
 
-        function maybeShowFirstVisitLogin(){
-            if(auth.currentUser)return;
-            if(localStorage.getItem("newVermaLoginPromptSeen"))return;
-            const modal=document.getElementById("first-visit-login-modal");
-            if(modal)modal.style.display="flex";
-        }
-
-        setTimeout(maybeShowFirstVisitLogin,5000);
+        setTimeout(()=>{
+            if(!auth.currentUser && !localStorage.getItem("newVermaLoginPromptSeen")){
+                const modal=document.getElementById("first-visit-login-modal");
+                if(modal)modal.style.display="flex";
+            }
+        }, 5000);
 
         window.toggleTermsModal = function() {
             const modal = document.getElementById("terms-modal");
             modal.style.display = modal.style.display === "flex" ? "none" : "flex";
         }
 
-        window.openPrescriptionModal = function() {
-            document.getElementById("prescription-modal").style.display = "flex";
-        }
-        window.closePrescriptionModal = function() {
-            document.getElementById("prescription-modal").style.display = "none";
-        }
+        window.openPrescriptionModal = function() { document.getElementById("prescription-modal").style.display = "flex"; }
+        window.closePrescriptionModal = function() { document.getElementById("prescription-modal").style.display = "none"; }
 
-        window.submitPrescription = function() {
+        window.submitPrescription = async function() {
             const name = document.getElementById("rx-cust-name").value.trim();
             const phone = document.getElementById("rx-cust-phone").value.trim();
             const fileInput = document.getElementById("rx-file-input");
-
-            if (!name || !phone) {
-                alert("Kripya apna naam aur mobile number bharein!");
-                return;
-            }
-            if (fileInput.files.length === 0) {
-                alert("Kripya prescription ki photo (Gallery ya Camera se) chunein!");
-                return;
-            }
-
-            const file = fileInput.files[0];
-            const reader = new FileReader();
+            if (!name || !phone) { alert("Kripya apna naam aur mobile number bharein!"); return; }
+            if (fileInput.files.length === 0) { alert("Kripya prescription ki photo chunein!"); return; }
             
-            showToast("Prescription upload ho raha hai...");
-            reader.onload = function(e) {
-                const base64Img = e.target.result;
-                const rxRef = ref(db, 'prescriptions');
-                push(rxRef, {
-                    customerName: name,
-                    customerPhone: phone,
-                    customerUid: auth.currentUser?.uid || "",
-                    customerEmail: auth.currentUser?.email || "",
-                    imgUrl: base64Img,
-                    status: "Pending Verification",
-                    timestamp: new Date().toLocaleString()
-                }).then(() => {
-                    showToast("Prescription safalpurvak bhej diya gaya hai!");
-                    closePrescriptionModal();
-                    document.getElementById("rx-cust-name").value = "";
-                    document.getElementById("rx-cust-phone").value = "";
-                    fileInput.value = "";
+            showToast("Prescription compress aur upload ho raha hai...");
+            try {
+                const base64Img = await compressImage(fileInput.files[0], 1200, 0.7);
+                await push(ref(db, 'prescriptions'), {
+                    customerName: name, customerPhone: phone,
+                    customerUid: auth.currentUser?.uid || "", customerEmail: auth.currentUser?.email || "",
+                    imgUrl: base64Img, status: "Pending Verification", timestamp: new Date().toLocaleString()
                 });
-            };
-            reader.readAsDataURL(file);
+                showToast("Prescription safalpurvak bhej diya gaya hai!");
+                closePrescriptionModal();
+                document.getElementById("rx-cust-name").value = "";
+                document.getElementById("rx-cust-phone").value = "";
+                fileInput.value = "";
+            } catch (err) {
+                alert(err.message || "Upload error.");
+            }
         }
 
         function trackingHTML(status){
@@ -1048,12 +945,17 @@
             return `<div class="tracking">${steps.map((x,i)=>`<div class="track-step ${i<=idx?'active':''}"><div class="track-dot">${i<idx?'✓':i+1}</div>${x}</div>`).join("")}</div>`;
         }
 
-        window.printOrderInvoice=function(orderId){ const o=allOrders.find(x=>x.id===orderId); if(!o)return; const items=o.items?.length?o.items.map(i=>`${i.productName} × ${i.quantity} — ₹${(Number(i.unitPrice)*Number(i.quantity)).toFixed(2)}`).join("<br>"):`${escapeHTML(o.productName||"")} × ${o.quantity||1}`; const w=window.open("","_blank"); if(!w)return; w.document.write(`<html><head><title>Invoice - New Verma Medicals</title><style>body{font-family:Arial;padding:30px;color:#222}h1{color:#0284c7}hr{border:0;border-top:1px solid #ddd}.total{font-size:20px;font-weight:bold;margin-top:20px}</style></head><body><h1>NEW VERMA MEDICALS</h1><p>Loharbarwa, Barwadda, Dhanbad, Jharkhand<br>Contact: +91 7992308032</p><hr><h2>Order Invoice</h2><p><b>Order ID:</b> ${o.id}<br><b>Date:</b> ${escapeHTML(o.timestamp||"")}<br><b>Customer:</b> ${escapeHTML(o.customerName||"")}<br><b>Mobile:</b> ${escapeHTML(o.customerPhone||"")}<br><b>Address:</b> ${escapeHTML(o.address||"")}</p><hr><p>${items}</p><p class="total">Total: ₹${Number(o.productPrice||0).toFixed(2)}</p><p>Payment: ${escapeHTML(o.paymentType||"")}</p><p>Thank you for choosing New Verma Medicals.</p><script>window.print();<\/script></body></html>`); w.document.close(); }
+        window.printOrderInvoice=function(orderId){
+            const o=allOrders.find(x=>x.id===orderId); if(!o)return;
+            const items=o.items?.length?o.items.map(i=>`${i.productName} × ${i.quantity} — ₹${(Number(i.unitPrice)*Number(i.quantity)).toFixed(2)}`).join("<br>"):`${escapeHTML(o.productName||"")} × ${o.quantity||1}`;
+            const w=window.open("","_blank"); if(!w)return;
+            w.document.write(`<html><head><title>Invoice - New Verma Medicals</title><style>body{font-family:Arial;padding:30px;color:#222}h1{color:#0284c7}hr{border:0;border-top:1px solid #ddd}.total{font-size:20px;font-weight:bold;margin-top:20px}</style></head><body><h1>NEW VERMA MEDICALS</h1><p>Loharbarwa, Barwadda, Dhanbad, Jharkhand<br>Contact: +91 7992308032</p><hr><h2>Order Invoice</h2><p><b>Order ID:</b> ${o.id}<br><b>Date:</b> ${escapeHTML(o.timestamp||"")}<br><b>Customer:</b> ${escapeHTML(o.customerName||"")}<br><b>Mobile:</b> ${escapeHTML(o.customerPhone||"")}<br><b>Address:</b> ${escapeHTML(o.address||"")}</p><hr><p>${items}</p><p class="total">Total: ₹${Number(o.productPrice||0).toFixed(2)}</p><p>Payment: ${escapeHTML(o.paymentType||"")}</p><p>Thank you for choosing New Verma Medicals.</p><script>window.print();<\/script></body></html>`);
+            w.document.close();
+        }
 
         window.refreshCustomerOrdersView = function() {
             const container = document.getElementById("customer-orders-result");
             container.innerHTML = "";
-
             const user = currentCustomerUser || auth.currentUser;
             if (!user) { container.innerHTML = "<p>Please login first.</p>"; return; }
             const userEmail = String(user.email || "").trim().toLowerCase();
@@ -1081,13 +983,13 @@
                 rxBox.style.background = "#fef3c7";
                 rxBox.innerHTML = `<b>🩺 Aapka Prescription Status:</b><br>`;
                 matchedRx.forEach(rx => {
-                    rxBox.innerHTML += `Time: ${rx.timestamp} | Status: <b style="color:${rx.status.includes('Accepted') ? 'green' : (rx.status.includes('Denied') ? 'red' : 'orange')}">${rx.status}</b><br><a href="${rx.imgUrl}" target="_blank" style="color:var(--primary); text-decoration:underline; font-size:0.75rem;">View Uploaded Photo</a><br>`;
+                    rxBox.innerHTML += `Time: ${rx.timestamp} | Status: <b style="color:${rx.status.includes('Accepted') ? 'green' : (rx.status.includes('Denied') ? 'red' : 'orange')}">${rx.status}</b><br><a href="${rx.imgUrl}" target="_blank" style="color:var(--primary); text-decoration:underline; font-size:0.8rem;">View Uploaded Photo</a><br>`;
                 });
                 container.appendChild(rxBox);
             }
 
             if (matchedOrders.length === 0 && matchedCredits.length === 0 && matchedRx.length === 0) {
-                container.innerHTML = `<p style="color: #ef4444; font-size: 0.85rem; margin-top:10px;">Is account se koi data nahi mila hai.</p>`;
+                container.innerHTML = `<p style="color: #ef4444; font-size: 0.9rem; margin-top:10px;">Is account se koi data nahi mila hai.</p>`;
                 return;
             }
 
@@ -1095,19 +997,17 @@
                 let statusColor = ord.status.includes("Confirmed") ? "green" : (ord.status.includes("Pending") ? "orange" : "blue");
                 const div = document.createElement("div");
                 div.className = "order-item-box";
-                
                 div.innerHTML = `
                     <b>Order Time:</b> ${ord.timestamp}<br>
                     <b>Item:</b> ${ord.productName} (Qty: ${ord.quantity || 1})<br>
                     <b>Total Paid Amount:</b> <b>₹${ord.productPrice}</b><br>
-                    <b>Payment:</b> ${ord.paymentType} ${ord.paymentScreenshot ? `<br><a href="${ord.paymentScreenshot}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Payment Screenshot</a>` : ''}<br>
+                    <b>Payment:</b> ${ord.paymentType} ${ord.paymentScreenshot ? `<br><a href="${ord.paymentScreenshot}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Screenshot</a>` : ''}<br>
                     <b>Address:</b> ${ord.address}<br>
                     <b>Status:</b> <span style="color: ${statusColor}; font-weight: bold;">${ord.status}</span>
                     ${trackingHTML(ord.status)}
                     ${ord.deliveryDateTime ? `<br><b>📅 Delivery Date & Time:</b> <span style="color: #0284c7; font-weight: bold;">${ord.deliveryDateTime}</span>` : ''}
                     ${ord.reason ? `<br><b>Kaaran:</b> ${ord.reason}` : ''}
                 `;
-
                 let actionDiv = document.createElement("div");
                 actionDiv.innerHTML = `<button class="btn-primary" onclick="printOrderInvoice('${ord.id}')"><i class="fa-solid fa-file-invoice"></i> Invoice Print</button>`;
                 actionDiv.style.marginTop = "10px";
@@ -1116,20 +1016,15 @@
                 actionDiv.style.flexWrap = "wrap";
 
                 if (ord.status.includes("Pending")) {
-                    actionDiv.innerHTML += `<button class="btn-danger" onclick="openRejectModal('${ord.id}')"><i class="fa-solid fa-xmark"></i> Order Cancel Karein</button>`;
+                    actionDiv.innerHTML += `<button class="btn-danger" onclick="openRejectModal('${ord.id}')"><i class="fa-solid fa-xmark"></i> Cancel</button>`;
                 } else if (ord.status.includes("Accepted") && !ord.status.includes("Customer Confirmed")) {
-                    actionDiv.innerHTML += `<button class="btn-success" onclick="markCustomerDelivered('${ord.id}')"><i class="fa-solid fa-check-double"></i> Mujhe Mil Gaya (Delivered Confirm)</button>`;
+                    actionDiv.innerHTML += `<button class="btn-success" onclick="markCustomerDelivered('${ord.id}')"><i class="fa-solid fa-check-double"></i> Mujhe Mil Gaya</button>`;
                 } else if (ord.status.includes("Confirmed")) {
                     let existingReturn = allReturns.find(r => r.orderId === ord.id);
-                    if (parseFloat(ord.productPrice) <= 0) {
-                        actionDiv.innerHTML += `<span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">(₹0 item par return lagu nahi hai)</span>`;
-                    } else if (!existingReturn) {
-                        actionDiv.innerHTML += `<button class="btn-danger" style="background:#d97706;" onclick="openReturnModal('${ord.id}')"><i class="fa-solid fa-rotate-left"></i> Dawai Return Karein</button>`;
-                    } else {
-                        actionDiv.innerHTML += `<span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">(Return anurodh submit ho chuka hai)</span>`;
+                    if (parseFloat(ord.productPrice) > 0 && !existingReturn) {
+                        actionDiv.innerHTML += `<button class="btn-danger" style="background:#d97706;" onclick="openReturnModal('${ord.id}')"><i class="fa-solid fa-rotate-left"></i> Return</button>`;
                     }
                 }
-
                 div.appendChild(actionDiv);
                 container.appendChild(div);
             });
@@ -1148,27 +1043,16 @@
             selectedOrderForReturn = allOrders.find(o => o.id === orderId);
             document.getElementById("return-modal").style.display = "flex";
         }
-
-        window.closeReturnModal = function() {
-            document.getElementById("return-modal").style.display = "none";
-        }
-
+        window.closeReturnModal = function() { document.getElementById("return-modal").style.display = "none"; }
         window.submitReturnRequest = function() {
             if (!selectedOrderForReturn) return;
             const option = document.getElementById("return-option-select").value;
-            
-            let returnRef = ref(db, 'returns');
-            push(returnRef, {
-                orderId: selectedOrderForReturn.id,
-                customerName: selectedOrderForReturn.customerName,
-                customerPhone: selectedOrderForReturn.customerPhone,
-                customerUid: selectedOrderForReturn.customerUid || auth.currentUser?.uid || "",
+            push(ref(db, 'returns'), {
+                orderId: selectedOrderForReturn.id, customerName: selectedOrderForReturn.customerName,
+                customerPhone: selectedOrderForReturn.customerPhone, customerUid: selectedOrderForReturn.customerUid || auth.currentUser?.uid || "",
                 customerEmail: selectedOrderForReturn.customerEmail || auth.currentUser?.email || "",
-                productName: selectedOrderForReturn.productName,
-                productPrice: selectedOrderForReturn.productPrice,
-                returnType: option,
-                status: "Pending Return Approval",
-                timestamp: new Date().toLocaleString()
+                productName: selectedOrderForReturn.productName, productPrice: selectedOrderForReturn.productPrice,
+                returnType: option, status: "Pending Return Approval", timestamp: new Date().toLocaleString()
             }).then(() => {
                 showToast("Return anurodh submit ho gaya hai!");
                 closeReturnModal();
@@ -1182,24 +1066,16 @@
             const price = document.getElementById("p-price").value.trim();
             let img = document.getElementById("p-img").value.trim();
             const editId = document.getElementById("editing-product-id").value;
-
-            if (!name || !price) {
-                alert("Kripya product ka naam aur price darj karein!");
-                return;
-            }
-
+            if (!name || !price) { alert("Kripya product ka naam aur price darj karein!"); return; }
             if(!img) img = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80";
 
             if (editId) {
                 update(ref(db, 'products/' + editId), { name, category, price, img }).then(() => {
-                    showToast("Product update ho gaya!");
-                    resetAdminForm();
+                    showToast("Product update ho gaya!"); resetAdminForm();
                 });
             } else {
-                const productsRef = ref(db, 'products');
-                push(productsRef, { name, category, price, img }).then(() => {
-                    showToast("Naya product save ho gaya!");
-                    resetAdminForm();
+                push(ref(db, 'products'), { name, category, price, img }).then(() => {
+                    showToast("Naya product save ho gaya!"); resetAdminForm();
                 });
             }
         }
@@ -1207,123 +1083,79 @@
         window.editProduct = function(productId) {
             const prod = allProducts.find(p => p.id === productId);
             if (!prod) return;
-
             document.getElementById("editing-product-id").value = prod.id;
             document.getElementById("p-name").value = prod.name;
             document.getElementById("p-category").value = prod.category;
             document.getElementById("p-price").value = prod.price;
             document.getElementById("p-img").value = prod.img;
-
             document.getElementById("admin-form-title").innerHTML = `<i class="fa-solid fa-pen-to-square"></i> Admin Dashboard - Product Edit Karein`;
             document.getElementById("save-product-btn").innerText = "Product Update Karein";
             document.getElementById("cancel-edit-btn").style.display = "inline-block";
-
             document.getElementById("admin-panel").scrollIntoView({ behavior: 'smooth' });
         }
 
         window.deleteProduct = function(productId) {
-            if (confirm("Kya aap sach mein is product ko Hamesha ke liye delete karna chahte hain?")) {
+            if (confirm("Kya aap sach mein is product ko delete karna chahte hain?")) {
                 remove(ref(db, 'products/' + productId)).then(() => {
                     showToast("Product delete ho gaya!");
-                    if (document.getElementById("editing-product-id").value === productId) {
-                        resetAdminForm();
-                    }
                 });
             }
         }
 
         window.resetAdminForm = function() {
             document.getElementById("editing-product-id").value = "";
-            document.getElementById("p-name").value = "";
-            document.getElementById("p-price").value = "";
-            document.getElementById("p-img").value = "";
-            document.getElementById("p-category").value = "Baby Care";
-
+            document.getElementById("p-name").value = ""; document.getElementById("p-price").value = "";
+            document.getElementById("p-img").value = ""; document.getElementById("p-category").value = "Baby Care";
             document.getElementById("admin-form-title").innerHTML = `<i class="fa-solid fa-user-shield"></i> Admin Dashboard - Naya Product Jodein`;
             document.getElementById("save-product-btn").innerText = "Database mein save karein";
             document.getElementById("cancel-edit-btn").style.display = "none";
         }
 
-        const productsRef = ref(db, 'products');
-        onValue(productsRef, (snapshot) => {
-            const data = snapshot.val();
-            allProducts = [];
-            if (data) {
-                Object.keys(data).forEach(key => allProducts.push({ id: key, ...data[key] }));
-            }
-            renderProducts();
-            updateAdminStats();
+        onValue(ref(db, 'products'), (snapshot) => {
+            const data = snapshot.val(); allProducts = [];
+            if (data) { Object.keys(data).forEach(key => allProducts.push({ id: key, ...data[key] })); }
+            renderProducts(); updateAdminStats();
         });
 
-        const ordersRef = ref(db, 'orders');
-        onValue(ordersRef, (snapshot) => {
-            const data = snapshot.val();
-            allOrders = [];
-            if (data) {
-                Object.keys(data).reverse().forEach(key => allOrders.push({ id: key, ...data[key] }));
-            }
-            renderOrders();
-            updateAdminStats();
-            renderDeliveryPartnerView();
+        onValue(ref(db, 'orders'), (snapshot) => {
+            const data = snapshot.val(); allOrders = [];
+            if (data) { Object.keys(data).reverse().forEach(key => allOrders.push({ id: key, ...data[key] })); }
+            renderOrders(); updateAdminStats(); renderDeliveryPartnerView();
             if (auth.currentUser || currentCustomerUser) refreshCustomerOrdersView();
         });
 
-        const returnsRef = ref(db, 'returns');
-        onValue(returnsRef, (snapshot) => {
-            const data = snapshot.val();
-            allReturns = [];
-            if (data) {
-                Object.keys(data).reverse().forEach(key => allReturns.push({ id: key, ...data[key] }));
-            }
-            if (isAdmin) renderReturns();
-            updateAdminStats();
-            if (auth.currentUser || currentCustomerUser) refreshCustomerOrdersView();
+        onValue(ref(db, 'returns'), (snapshot) => {
+            const data = snapshot.val(); allReturns = [];
+            if (data) { Object.keys(data).reverse().forEach(key => allReturns.push({ id: key, ...data[key] })); }
+            if (isAdmin) renderReturns(); updateAdminStats();
         });
 
-        const creditsRef = ref(db, 'credits');
-        onValue(creditsRef, (snapshot) => {
-            const data = snapshot.val();
-            allCredits = [];
-            if (data) {
-                Object.keys(data).forEach(key => allCredits.push({ id: key, ...data[key] }));
-            }
+        onValue(ref(db, 'credits'), (snapshot) => {
+            const data = snapshot.val(); allCredits = [];
+            if (data) { Object.keys(data).forEach(key => allCredits.push({ id: key, ...data[key] })); }
             if (isAdmin) searchAdminCredits();
-            if (auth.currentUser || currentCustomerUser) refreshCustomerOrdersView();
         });
 
-        const rxRef = ref(db, 'prescriptions');
-        onValue(rxRef, (snapshot) => {
-            const data = snapshot.val();
-            allPrescriptions = [];
-            if (data) {
-                Object.keys(data).reverse().forEach(key => allPrescriptions.push({ id: key, ...data[key] }));
-            }
-            if (isAdmin) renderPrescriptionRequests();
-            updateAdminStats();
-            if (auth.currentUser || currentCustomerUser) refreshCustomerOrdersView();
+        onValue(ref(db, 'prescriptions'), (snapshot) => {
+            const data = snapshot.val(); allPrescriptions = [];
+            if (data) { Object.keys(data).reverse().forEach(key => allPrescriptions.push({ id: key, ...data[key] })); }
+            if (isAdmin) renderPrescriptionRequests(); updateAdminStats();
         });
 
         window.renderPrescriptionRequests = function() {
             const container = document.getElementById("admin-prescription-requests-list");
-            if (!container) return;
-            container.innerHTML = "";
-
+            if (!container) return; container.innerHTML = "";
             let pendingRx = allPrescriptions.filter(r => r.status === "Pending Verification");
-            if (pendingRx.length === 0) {
-                container.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">Koi naya prescription anurodh nahi hai.</p>`;
-                return;
-            }
-
+            if (pendingRx.length === 0) { container.innerHTML = `<p style="color: var(--text-muted); font-size: 0.9rem;">Koi naya prescription anurodh nahi hai.</p>`; return; }
             pendingRx.forEach(rx => {
                 const div = document.createElement("div");
                 div.className = "order-item-box";
                 div.innerHTML = `
-                    <b>Time:</b> ${rx.timestamp}<br>
-                    <b>Customer:</b> ${rx.customerName} (${rx.customerPhone})<br>
+                    <b>Time:</b> ${rx.timestamp}<br><b>Customer:</b> ${rx.customerName} (${rx.customerPhone})<br>
                     <b>Prescription Photo:</b> <a href="${rx.imgUrl}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Photo</a><br>
                     <div class="order-actions">
-                        <button class="btn-success" onclick="updateRxStatus('${rx.id}', 'Accepted (Available)')"><i class="fa-solid fa-check"></i> Accept (Available)</button>
-                        <button class="btn-danger" onclick="updateRxStatus('${rx.id}', 'Denied (Not Available)')"><i class="fa-solid fa-xmark"></i> Deny (Not Available)</button>
+                        <button class="btn-success" onclick="updateRxStatus('${rx.id}', 'Accepted (Available)')"><i class="fa-solid fa-check"></i> Accept</button>
+                        <button class="btn-danger" onclick="updateRxStatus('${rx.id}', 'Denied (Not Available)')"><i class="fa-solid fa-xmark"></i> Deny</button>
                     </div>
                 `;
                 container.appendChild(div);
@@ -1332,312 +1164,106 @@
 
         window.updateRxStatus = function(rxId, statusText) {
             update(ref(db, 'prescriptions/' + rxId), { status: statusText }).then(() => {
-                showToast("Prescription status update ho gaya!");
-                renderPrescriptionRequests();
+                showToast("Prescription status update ho gaya!"); renderPrescriptionRequests();
             });
         }
 
         window.searchAdminCredits = function() {
             const query = document.getElementById("admin-search-credit-input").value.trim().toLowerCase();
             const resContainer = document.getElementById("admin-search-credit-result");
-            if (!resContainer) return;
-            resContainer.innerHTML = "";
-
-            if (!query) {
-                resContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.8rem;">Mobile number ya coupon code likhkar khojein...</p>`;
-                return;
-            }
-
-            const matched = allCredits.filter(cr =>
-                String(cr.customerPhone || "").toLowerCase().includes(query) ||
-                String(cr.couponCode || "").toLowerCase().includes(query)
-            );
-            if (matched.length === 0) {
-                resContainer.innerHTML = `<p style="color: #ef4444; font-size: 0.85rem;">Koi record nahi mila.</p>`;
-                return;
-            }
-
+            if (!resContainer) return; resContainer.innerHTML = "";
+            if (!query) return;
+            const matched = allCredits.filter(cr => String(cr.customerPhone || "").toLowerCase().includes(query) || String(cr.couponCode || "").toLowerCase().includes(query));
+            if (matched.length === 0) { resContainer.innerHTML = `<p style="color: #ef4444; font-size: 0.9rem;">Koi record nahi mila.</p>`; return; }
             matched.forEach(cr => {
                 const div = document.createElement("div");
                 div.className = "order-item-box";
-                div.style.background = cr.isUsed ? "#f1f5f9" : "#ecfdf5";
-                
-                let statusText = 'Upalabdh (Active)';
-                if(cr.isUsed) {
-                    statusText = cr.usedMode === 'Offline' ? 'Istemal ho chuka (Used Offline)' : (cr.usedMode === 'Online' ? 'Istemal ho chuka (Used Online)' : 'Istemal ho chuka (Used)');
-                }
-
-                div.innerHTML = `
-                    <b>Mobile:</b> ${cr.customerPhone}<br>
-                    <b>Coupon Code:</b> <b style="color:var(--primary);">${cr.couponCode}</b><br>
-                    <b>Raashi:</b> ₹${cr.amount} (${cr.type || 'Credit'})<br>
-                    <b>Sthiti:</b> <span style="color: ${cr.isUsed ? 'red' : 'green'}; font-weight: bold;">${statusText}</span>
-                    ${!cr.isUsed ? `<div class="order-actions"><button class="btn-danger" style="background:#64748b;" onclick="markCreditAsUsed('${cr.id}')"><i class="fa-solid fa-check"></i> Offline upyog ho gaya (Mark Used)</button></div>` : ''}
-                `;
+                div.innerHTML = `<b>Mobile:</b> ${cr.customerPhone}<br><b>Coupon Code:</b> <b style="color:var(--primary);">${cr.couponCode}</b><br><b>Raashi:</b> ₹${cr.amount}<br><b>Sthiti:</b> ${cr.isUsed ? 'Used' : 'Active'}`;
                 resContainer.appendChild(div);
             });
-        }
-
-        window.markCreditAsUsed = function(creditId) {
-            if (confirm("Kya aap is coupon ko offline upyog kiya hua mark karna chahte hain?")) {
-                update(ref(db, 'credits/' + creditId), { isUsed: true, usedMode: 'Offline' }).then(() => {
-                    showToast("Coupon offline used mark ho gaya!");
-                    searchAdminCredits();
-                });
-            }
         }
 
         window.renderOrders = function() {
             const liveContainer = document.getElementById("admin-live-orders-list");
             const historyContainer = document.getElementById("admin-order-history-list");
             if (!liveContainer || !historyContainer) return;
-
-            liveContainer.innerHTML = "";
-            historyContainer.innerHTML = "";
-
-            let pendingCount = 0;
-            let historyCount = 0;
+            liveContainer.innerHTML = ""; historyContainer.innerHTML = "";
+            let pCount = 0, hCount = 0;
 
             allOrders.forEach(ord => {
                 const status = ord.status || "Pending Admin Approval";
-                const div = document.createElement("div");
-                div.className = "order-item-box";
-
+                const div = document.createElement("div"); div.className = "order-item-box";
                 if (status.includes("Pending")) {
-                    pendingCount++;
-                    div.innerHTML = `
-                        <b>Time:</b> ${ord.timestamp}<br>
-                        <b>Customer:</b> ${ord.customerName} (${ord.customerPhone})<br>
-                        <b>Item:</b> ${ord.productName} (Qty: ${ord.quantity || 1})<br>
-                        <b>Paid Amount:</b> <b>₹${ord.productPrice}</b><br>
-                        <b>Payment:</b> ${ord.paymentType} ${ord.paymentScreenshot ? `<br><a href="${ord.paymentScreenshot}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Payment Screenshot</a>` : ''}<br>
-                        <b>Address:</b> ${ord.address}<br>
-                        <b>Status:</b> <span style="color: orange; font-weight: bold;">${status}</span>
-                        <div class="order-actions" style="display: ${isAdmin ? 'flex' : 'none'};">
-                            <button class="btn-success" onclick="acceptOrderPrompt('${ord.id}')"><i class="fa-solid fa-check"></i> Accept & Set Time</button>
-                            <button class="btn-danger" onclick="openRejectModal('${ord.id}')"><i class="fa-solid fa-xmark"></i> Reject / Cancel</button>
-                        </div>
-                    `;
+                    pCount++;
+                    div.innerHTML = `<b>Time:</b> ${ord.timestamp}<br><b>Customer:</b> ${ord.customerName} (${ord.customerPhone})<br><b>Item:</b> ${ord.productName} (Qty: ${ord.quantity || 1})<br><b>Paid Amount:</b> <b>₹${ord.productPrice}</b><br><b>Status:</b> <span style="color: orange; font-weight: bold;">${status}</span><div class="order-actions"><button class="btn-success" onclick="acceptOrderPrompt('${ord.id}')">Accept</button><button class="btn-danger" onclick="openRejectModal('${ord.id}')">Reject</button></div>`;
                     liveContainer.appendChild(div);
                 } else {
-                    historyCount++;
-                    let statusColor = status.includes("Confirmed") ? "green" : (status.includes("Accepted") ? "blue" : "red");
-                    div.innerHTML = `
-                        <b>Time:</b> ${ord.timestamp}<br>
-                        <b>Customer:</b> ${ord.customerName} (${ord.customerPhone})<br>
-                        <b>Item:</b> ${ord.productName} (Qty: ${ord.quantity || 1})<br>
-                        <b>Paid Amount:</b> ₹${ord.productPrice}<br>
-                        <b>Antim Status:</b> <span style="color: ${statusColor}; font-weight: bold;">${status}</span><br>
-                        ${ord.deliveryDateTime ? `<b>Delivery Date & Time:</b> ${ord.deliveryDateTime} <button class="btn-warning" style="padding:2px 6px; font-size:0.7rem;" onclick="updateDeliveryTimePrompt('${ord.id}')">Badlein</button><br>` : ''}
-                        ${ord.reason ? `<b>Kaaran:</b> ${ord.reason}<br>` : ''}
-                        <div class="order-actions" style="display: ${isAdmin ? 'flex' : 'none'};">
-                            ${!status.includes("Admin Confirmed") ? `<button class="btn-success" onclick="markAdminDelivered('${ord.id}')"><i class="fa-solid fa-check-double"></i> Delivered Tik Karein</button>` : ''}
-                            <button class="btn-danger" style="background: #64748b;" onclick="deleteOrderHistory('${ord.id}')"><i class="fa-solid fa-trash"></i> History se Delete Karein</button>
-                        </div>
-                    `;
+                    hCount++;
+                    div.innerHTML = `<b>Time:</b> ${ord.timestamp}<br><b>Customer:</b> ${ord.customerName} (${ord.customerPhone})<br><b>Item:</b> ${ord.productName}<br><b>Status:</b> ${status}<div class="order-actions"><button class="btn-danger" style="background: #64748b;" onclick="deleteOrderHistory('${ord.id}')">Delete History</button></div>`;
                     historyContainer.appendChild(div);
                 }
             });
-
-            if (pendingCount === 0) liveContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">Koi live pending order nahi hai.</p>`;
-            if (historyCount === 0) historyContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">Koi order history nahi hai.</p>`;
+            if (pCount === 0) liveContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.9rem;">Koi live pending order nahi hai.</p>`;
+            if (hCount === 0) historyContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.9rem;">Koi order history nahi hai.</p>`;
         }
 
         window.renderDeliveryPartnerView = function() {
             const container = document.getElementById("delivery-partner-orders-list");
-            if (!container) return;
-            container.innerHTML = "";
-
+            if (!container) return; container.innerHTML = "";
             let activeOrders = allOrders.filter(ord => !ord.status.includes("Delivered") && !ord.status.includes("Cancelled") && !ord.status.includes("Pending"));
-
-            if (activeOrders.length === 0) {
-                container.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">Delivery ke liye koi active order upalabdh nahi hai.</p>`;
-                return;
-            }
-
+            if (activeOrders.length === 0) { container.innerHTML = `<p style="color: var(--text-muted); font-size: 0.9rem;">Delivery ke liye koi active order upalabdh nahi hai.</p>`; return; }
             activeOrders.forEach(ord => {
-                const div = document.createElement("div");
-                div.className = "order-item-box";
-                div.style.background = "#f0fdf4";
-                div.innerHTML = `
-                    <b>Customer:</b> ${ord.customerName} (<a href="tel:${ord.customerPhone}" style="color:var(--primary)">${ord.customerPhone}</a>)<br>
-                    <b>Address:</b> ${ord.address}<br>
-                    <b>Item & Qty:</b> ${ord.productName} (Qty: ${ord.quantity || 1})<br>
-                    <b>Vasoolne Wala Amount (Paid):</b> <b style="color:var(--accent)">₹${ord.productPrice}</b> (${ord.paymentType})<br>
-                    ${ord.paymentScreenshot ? `<a href="${ord.paymentScreenshot}" target="_blank" style="color:var(--primary); text-decoration:underline;">View Online Payment Screenshot</a><br>` : ''}
-                    <b>Delivery Time:</b> <span style="color:#0284c7; font-weight:bold;">${ord.deliveryDateTime || 'Tay nahi hua'}</span>
-                    <div class="order-actions" style="margin-top:10px;">
-                        <button class="btn-warning" onclick="updateDeliveryTimePrompt('${ord.id}')"><i class="fa-solid fa-clock"></i> Timing Update Karein</button>
-                        <button class="btn-success" onclick="markPartnerDelivered('${ord.id}')"><i class="fa-solid fa-check-double"></i> Delivered Mark Karein</button>
-                    </div>
-                `;
+                const div = document.createElement("div"); div.className = "order-item-box";
+                div.innerHTML = `<b>Customer:</b> ${ord.customerName} (<a href="tel:${ord.customerPhone}">${ord.customerPhone}</a>)<br><b>Address:</b> ${ord.address}<br><b>Item:</b> ${ord.productName}<br><b>Delivery Time:</b> ${ord.deliveryDateTime || 'Tay nahi hua'}<div class="order-actions"><button class="btn-success" onclick="markPartnerDelivered('${ord.id}')">Delivered Mark Karein</button></div>`;
                 container.appendChild(div);
             });
         }
 
-        window.updateDeliveryTimePrompt = function(orderId) {
-            let newTime = prompt("Naya delivery samay ya tithi darj karein:", "30 minat mein");
-            if (newTime !== null && newTime.trim() !== "") {
-                update(ref(db, 'orders/' + orderId), { deliveryDateTime: newTime }).then(() => {
-                    showToast("Delivery timing update ho gayi!");
-                });
-            }
-        }
-
         window.markPartnerDelivered = function(orderId) {
-            update(ref(db, 'orders/' + orderId), { status: "Delivered & Confirmed (Partner)" }).then(() => {
-                showToast("Order delivered mark kar diya gaya!");
-                renderDeliveryPartnerView();
-            });
+            update(ref(db, 'orders/' + orderId), { status: "Delivered & Confirmed (Partner)" }).then(() => { showToast("Order delivered mark kar diya gaya!"); renderDeliveryPartnerView(); });
         }
 
         window.renderReturns = function() {
             const retContainer = document.getElementById("admin-return-requests-list");
-            if (!retContainer) return;
-            retContainer.innerHTML = "";
-
+            if (!retContainer) return; retContainer.innerHTML = "";
             let pendingReturns = allReturns.filter(r => r.status === "Pending Return Approval");
-
-            if (pendingReturns.length === 0) {
-                retContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">Koi naya return anurodh nahi hai.</p>`;
-                return;
-            }
-
+            if (pendingReturns.length === 0) { retContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.9rem;">Koi naya return anurodh nahi hai.</p>`; return; }
             pendingReturns.forEach(ret => {
-                const div = document.createElement("div");
-                div.className = "order-item-box";
-                div.innerHTML = `
-                    <b>Time:</b> ${ret.timestamp}<br>
-                    <b>Customer:</b> ${ret.customerName} (${ret.customerPhone})<br>
-                    <b>Dawai:</b> ${ret.productName} - <b>₹${ret.productPrice}</b><br>
-                    <b>Anurodh Type:</b> <b style="color: var(--primary);">${ret.returnType}</b><br>
-                    <div class="order-actions">
-                        <button class="btn-success" onclick="approveReturn('${ret.id}', '${ret.customerPhone}', ${ret.productPrice}, '${ret.returnType}')"><i class="fa-solid fa-check"></i> Accept Return & Generate Coupon</button>
-                        <button class="btn-danger" onclick="rejectReturn('${ret.id}')"><i class="fa-solid fa-xmark"></i> Reject</button>
-                    </div>
-                `;
+                const div = document.createElement("div"); div.className = "order-item-box";
+                div.innerHTML = `<b>Customer:</b> ${ret.customerName} (${ret.customerPhone})<br><b>Dawai:</b> ${ret.productName} - ₹${ret.productPrice}<br><b>Type:</b> ${ret.returnType}<div class="order-actions"><button class="btn-success" onclick="approveReturn('${ret.id}', '${ret.customerPhone}', ${ret.productPrice}, '${ret.returnType}')">Approve</button></div>`;
                 retContainer.appendChild(div);
             });
         }
 
         window.approveReturn = function(retId, phone, price, type) {
             let finalReturnAmount = parseFloat(price);
-            let couponMsg = "";
-            if (type === "Medicine for Cash") {
-                let deduction = finalReturnAmount * 0.03;
-                finalReturnAmount = finalReturnAmount - deduction;
-                couponMsg = `Cash Return (3% ded.): ₹${finalReturnAmount.toFixed(2)}`;
-            } else {
-                couponMsg = `Medicine Exchange Credit: ₹${finalReturnAmount}`;
-            }
-
-            const returnRecord = allReturns.find(r => r.id === retId) || {};
-            const linkedOrder = allOrders.find(o => o.id === returnRecord.orderId) || {};
-            const customerUid = returnRecord.customerUid || linkedOrder.customerUid || "";
-            const customerEmail = String(returnRecord.customerEmail || linkedOrder.customerEmail || "").trim().toLowerCase();
+            if (type === "Medicine for Cash") finalReturnAmount *= 0.97;
             const couponCode = "VERMA-" + Math.floor(100000 + Math.random() * 900000);
-            const creditRef = ref(db, 'credits');
-
-            push(creditRef, {
-                customerPhone: phone || returnRecord.customerPhone || linkedOrder.customerPhone || "",
-                customerName: returnRecord.customerName || linkedOrder.customerName || "",
-                customerUid: customerUid,
-                customerEmail: customerEmail,
-                orderId: returnRecord.orderId || "",
-                amount: finalReturnAmount,
-                couponCode: couponCode,
-                type: type,
-                isUsed: false,
-                createdAt: new Date().toISOString()
+            push(ref(db, 'credits'), {
+                customerPhone: phone, amount: finalReturnAmount, couponCode: couponCode, type: type, isUsed: false
             }).then(() => {
-                return update(ref(db, 'returns/' + retId), {
-                    status: `Approved (${couponMsg})`,
-                    customerUid: customerUid,
-                    customerEmail: customerEmail
+                update(ref(db, 'returns/' + retId), { status: `Approved (Coupon: ${couponCode})` }).then(() => {
+                    showToast(`Return swikaar ho gaya! Coupon: ${couponCode}`); renderReturns();
                 });
-            }).then(() => {
-                showToast(`Return swikaar ho gaya! Coupon: ${couponCode}`);
-                renderReturns();
-                searchAdminCredits();
-                if (auth.currentUser || currentCustomerUser) refreshCustomerOrdersView();
-            }).catch(err => {
-                console.error("Coupon create/return approval failed:", err);
-                alert("Coupon banane ya return approve karne mein dikkat hui. Firebase permissions aur connection check karein.");
-            });
-        }
-
-        window.rejectReturn = function(retId) {
-            update(ref(db, 'returns/' + retId), {
-                status: "Rejected by Admin"
-            }).then(() => {
-                showToast("Return anurodh aswiikaar kar diya gaya.");
-                renderReturns();
-            });
-        }
-
-        window.markAdminDelivered = function(orderId) {
-            let ord = allOrders.find(o => o.id === orderId);
-            let newStatus = ord.status.includes("Customer Confirmed") ? "Delivered & Confirmed (Both)" : "Accepted / Delivered (Admin Confirmed)";
-            update(ref(db, 'orders/' + orderId), { status: newStatus }).then(() => {
-                showToast("Order delivered mark kar diya gaya!");
             });
         }
 
         window.acceptOrderPrompt = function(orderId) {
-            let deliveryDateTime = prompt("Delivery ki tithi aur samay darj karein\n(Jaise: 30 minat mein ya 09/10/2026, sham 5:00 baje):", "30 minat mein");
-            if (deliveryDateTime !== null && deliveryDateTime.trim() !== "") {
-                update(ref(db, 'orders/' + orderId), { 
-                    status: "Accepted / Out for Delivery",
-                    deliveryDateTime: deliveryDateTime 
-                }).then(() => {
-                    showToast("Order swikaar ho gaya aur samay set ho gaya!");
-                });
+            let deliveryDateTime = prompt("Delivery ki tithi aur samay darj karein:", "30 minat mein");
+            if (deliveryDateTime) {
+                update(ref(db, 'orders/' + orderId), { status: "Accepted / Out for Delivery", deliveryDateTime }).then(() => { showToast("Order swikaar ho gaya!"); });
             }
         }
 
-        window.openRejectModal = function(orderId) {
-            selectedOrderForCancel = { id: orderId };
-            document.getElementById("reject-modal").style.display = "flex";
-        }
-
-        window.closeRejectModal = function() {
-            document.getElementById("reject-modal").style.display = "none";
-        }
-
-        window.toggleCustomReasonInput = function() {
-            const val = document.getElementById("reject-reason-select").value;
-            document.getElementById("custom-reason-box").style.display = (val === "Other") ? "block" : "none";
-        }
-
+        window.openRejectModal = function(orderId) { selectedOrderForCancel = { id: orderId }; document.getElementById("reject-modal").style.display = "flex"; }
+        window.closeRejectModal = function() { document.getElementById("reject-modal").style.display = "none"; }
         window.confirmOrderCancellation = function() {
             if (!selectedOrderForCancel) return;
-            const selectVal = document.getElementById("reject-reason-select").value;
-            let finalReason = selectVal;
-            if (selectVal === "Other") {
-                finalReason = document.getElementById("custom-reason-input").value.trim() || "Customer dwara radd kiya gaya";
-            }
-
-            update(ref(db, 'orders/' + selectedOrderForCancel.id), {
-                status: "Cancelled",
-                reason: finalReason
-            }).then(() => {
-                showToast("Order safalpurvak radd kar diya gaya!");
-                closeRejectModal();
-            });
+            update(ref(db, 'orders/' + selectedOrderForCancel.id), { status: "Cancelled", reason: "Customer/Admin cancelled" }).then(() => { showToast("Order radd kar diya gaya."); closeRejectModal(); });
         }
 
         window.deleteOrderHistory = function(orderId) {
-            if (!isAdmin || !auth.currentUser || auth.currentUser.uid !== ADMIN_UID) {
-                alert("Order history delete karne ke liye authorized admin login zaroori hai.");
-                return;
-            }
-            if (!confirm("Kya aap is order history ko delete karna chahte hain?")) return;
-            remove(ref(db, "orders/" + orderId))
-                .then(() => showToast("Order history delete ho gayi!"))
-                .catch(error => {
-                    console.error(error);
-                    alert("Order history delete nahi hui. Firebase Database Rules check karein.");
-                });
+            if (confirm("History delete karein?")) { remove(ref(db, "orders/" + orderId)).then(() => showToast("Deleted!")); }
         }
 
         function getVisibleProducts() {
@@ -1653,33 +1279,21 @@
             const container = document.getElementById("products-container");
             const visible = getVisibleProducts();
             container.innerHTML = "";
-
             const countEl = document.getElementById("result-count");
             if (countEl) countEl.textContent = `${visible.length} product${visible.length === 1 ? "" : "s"}`;
 
             if (!visible.length) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fa-solid fa-box-open"></i>
-                        <h3>Koi product nahi mila</h3>
-                        <p>Search ya category filter badal kar dekhein.</p>
-                    </div>`;
+                container.innerHTML = `<div class="empty-state"><i class="fa-solid fa-box-open"></i><h3>Koi product nahi mila</h3></div>`;
                 return;
             }
 
             visible.forEach(p => {
-                const card = document.createElement("div");
-                card.className = "product-card";
-                const safeName = escapeHTML(p.name);
-                const safeCategory = escapeHTML(p.category);
-                const safeImg = escapeHTML(p.img);
-                const safePrice = Number.parseFloat(p.price) || 0;
-                
+                const card = document.createElement("div"); card.className = "product-card";
+                const safeName = escapeHTML(p.name), safeCategory = escapeHTML(p.category), safeImg = escapeHTML(p.img), safePrice = Number.parseFloat(p.price) || 0;
                 card.innerHTML = `
                     <div class="product-img-container">
                         <span class="product-tag">${safeCategory}</span>
-                        <img src="${safeImg}" alt="${safeName}" loading="lazy"
-                             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80';">
+                        <img src="${safeImg}" alt="${safeName}" loading="lazy">
                     </div>
                     <div class="product-details">
                         <div class="product-title">${safeName}</div>
@@ -1687,17 +1301,13 @@
                             <div class="product-price">₹${safePrice.toFixed(2)}</div>
                             <span class="product-category-chip">${safeCategory}</span>
                         </div>
-                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;">
-                            <button class="btn-primary" type="button" onclick='addToCart(${JSON.stringify(String(p.name))}, ${safePrice}, ${JSON.stringify(String(p.img))}, ${JSON.stringify(String(p.category))})'>
-                                <i class="fa-solid fa-cart-plus"></i> Cart
-                            </button>
-                            <button class="btn-success" type="button" style="padding:10px;" onclick='openCheckoutModal(${JSON.stringify(String(p.name))}, ${safePrice})'>
-                                <i class="fa-solid fa-bolt"></i> Buy Now
-                            </button>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                            <button class="btn-primary" type="button" onclick='addToCart(${JSON.stringify(String(p.name))}, ${safePrice}, ${JSON.stringify(String(p.img))}, ${JSON.stringify(String(p.category))})'><i class="fa-solid fa-cart-plus"></i> Cart</button>
+                            <button class="btn-success" type="button" style="padding:10px;" onclick='openCheckoutModal(${JSON.stringify(String(p.name))}, ${safePrice})'><i class="fa-solid fa-bolt"></i> Buy</button>
                         </div>
                         <div class="admin-product-controls" style="display:${isAdmin ? 'flex' : 'none'};">
-                            <button class="btn-warning" style="flex:1;" onclick="editProduct('${escapeHTML(p.id)}')"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
-                            <button class="btn-danger" style="flex:1;" onclick="deleteProduct('${escapeHTML(p.id)}')"><i class="fa-solid fa-trash"></i> Delete</button>
+                            <button class="btn-warning" style="flex:1;" onclick="editProduct('${escapeHTML(p.id)}')">Edit</button>
+                            <button class="btn-danger" style="flex:1;" onclick="deleteProduct('${escapeHTML(p.id)}')">Delete</button>
                         </div>
                     </div>`;
                 container.appendChild(card);
@@ -1706,52 +1316,64 @@
 
         function saveCart(){ localStorage.setItem("newVermaCart", JSON.stringify(cartItems)); updateCartUI(); }
         function updateCartUI(){
-            const count=cartItems.reduce((a,i)=>a+i.qty,0), total=cartItems.reduce((a,i)=>a+i.price*i.qty,0);
-            const c=document.getElementById("cart-count"), t=document.getElementById("cart-total"), mt=document.getElementById("cart-modal-total");
+            const count = cartItems.reduce((a,i)=>a+i.qty,0), total = cartItems.reduce((a,i)=>a+i.price*i.qty,0);
+            const c = document.getElementById("cart-count"), t = document.getElementById("cart-total"), mt = document.getElementById("cart-modal-total");
             if(c)c.textContent=count; if(t)t.textContent=`₹${total.toFixed(2)}`; if(mt)mt.textContent=`₹${total.toFixed(2)}`;
         }
         window.addToCart=function(name,price,img,category){
-            const item=cartItems.find(i=>i.name===name); if(item)item.qty++; else cartItems.push({name,price,img,category,qty:1});
+            const item = cartItems.find(i=>i.name===name);
+            if(item) item.qty++; else cartItems.push({name,price,img,category,qty:1});
             saveCart(); showToast(`${name} cart mein add ho gaya.`);
         }
-        window.changeCartQty=function(name,delta){ const item=cartItems.find(i=>i.name===name); if(!item)return; item.qty+=delta; if(item.qty<=0)cartItems=cartItems.filter(i=>i.name!==name); saveCart(); renderCart(); }
+        window.changeCartQty=function(name,delta){
+            const item = cartItems.find(i=>i.name===name); if(!item)return;
+            item.qty+=delta; if(item.qty<=0) cartItems=cartItems.filter(i=>i.name!==name);
+            saveCart(); renderCart();
+        }
         window.removeFromCart=function(name){ cartItems=cartItems.filter(i=>i.name!==name); saveCart(); renderCart(); }
-        
+
         function renderCart(){
             const box=document.getElementById("cart-items"); if(!box)return; box.innerHTML="";
-            if(!cartItems.length){ box.innerHTML='<div class="empty-state" style="padding:25px"><i class="fa-solid fa-cart-shopping"></i><h3>Cart khaali hai</h3><p>Product par Cart button dabayein.</p></div>'; updateCartUI(); return; }
-            cartItems.forEach(i=>{ 
-                const row=document.createElement("div"); 
-                row.className="cart-list-item"; 
-                row.innerHTML=`
-                    <div style="flex:1">
-                        <b style="font-family:var(--heading-font); color:var(--text-main);">${escapeHTML(i.name)}</b><br>
-                        <small style="color:var(--text-muted);">₹${Number(i.price).toFixed(2)} × ${i.qty}</small>
-                    </div>
-                    <div class="qty-controls">
-                        <button onclick='changeCartQty(${JSON.stringify(i.name)},-1)'>−</button>
-                        <b style="min-width:16px; text-align:center;">${i.qty}</b>
-                        <button onclick='changeCartQty(${JSON.stringify(i.name)},1)'>+</button>
-                        <button class="btn-remove-cart" title="Remove Item" onclick='removeFromCart(${JSON.stringify(i.name)})'>&times;</button>
-                    </div>`; 
-                box.appendChild(row); 
-            }); 
+            if(!cartItems.length){ box.innerHTML='<div class="empty-state" style="padding:25px"><i class="fa-solid fa-cart-shopping"></i><h3>Cart khaali hai</h3></div>'; updateCartUI(); return; }
+            cartItems.forEach(i=>{
+                const row=document.createElement("div"); row.className="cart-list-item";
+                row.innerHTML=`<div style="flex:1"><b>${escapeHTML(i.name)}</b><br><small style="color:var(--text-muted);">₹${i.price} × ${i.qty}</small></div><div class="qty-controls"><button onclick='changeCartQty(${JSON.stringify(i.name)},-1)'>−</button><b>${i.qty}</b><button onclick='changeCartQty(${JSON.stringify(i.name)},1)'>+</button><button class="btn-remove-cart" onclick='removeFromCart(${JSON.stringify(i.name)})'>&times;</button></div>`;
+                box.appendChild(row);
+            });
             updateCartUI();
         }
 
         window.openCartModal=function(){ renderCart(); document.getElementById("cart-modal").style.display="flex"; }
         window.closeCartModal=function(){ document.getElementById("cart-modal").style.display="none"; }
         window.checkoutCart=function(){ if(!cartItems.length){showToast("Cart khaali hai.");return;} closeCartModal(); document.getElementById("cart-checkout-modal").style.display="flex"; renderCartCheckout(); }
-        function renderCartCheckout(){ const box=document.getElementById("cart-checkout-items"); const total=cartItems.reduce((a,i)=>a+i.price*i.qty,0); box.innerHTML=cartItems.map(i=>`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #e2e8f0;padding:7px 0"><span>${escapeHTML(i.name)} × ${i.qty}</span><b>₹${(i.price*i.qty).toFixed(2)}</b></div>`).join("")+`<div style="text-align:right;margin-top:10px;font-size:1.05rem"><b>Total: ₹${total.toFixed(2)}</b></div>`; }
+        function renderCartCheckout(){
+            const box=document.getElementById("cart-checkout-items");
+            const total=cartItems.reduce((a,i)=>a+i.price*i.qty,0);
+            box.innerHTML=cartItems.map(i=>`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #e2e8f0;padding:8px 0; font-size:0.95rem;"><span>${escapeHTML(i.name)} × ${i.qty}</span><b>₹${(i.price*i.qty).toFixed(2)}</b></div>`).join("")+`<div style="text-align:right;margin-top:12px;font-size:1.15rem"><b>Total: ₹${total.toFixed(2)}</b></div>`;
+        }
         window.closeCartCheckout=function(){document.getElementById("cart-checkout-modal").style.display="none";}
         window.submitCartOrder=async function(){
-            if(!cartItems.length){showToast("Cart khaali hai.");return;}
-            if(!requireCustomerLogin()) return;
-            const name=document.getElementById("cart-cust-name").value.trim(), phone=document.getElementById("cart-cust-phone").value.trim().replace(/\s+/g,""), address=document.getElementById("cart-cust-address").value.trim(), payment=document.getElementById("cart-payment-type").value, file=document.getElementById("cart-payment-file");
-            if(!name||!validPhone(phone)||!address){alert("Naam, valid mobile number aur address bharna zaroori hai.");return;}
-            if(payment==="Online" && (!file.files.length)){alert("Online payment ke liye payment screenshot upload karein.");return;}
+            if(!cartItems.length)return; if(!requireCustomerLogin())return;
+            const name=document.getElementById("cart-cust-name").value.trim(), phone=document.getElementById("cart-cust-phone").value.trim(), address=document.getElementById("cart-cust-address").value.trim(), payment=document.getElementById("cart-payment-type").value, file=document.getElementById("cart-payment-file");
+            if(!name||!validPhone(phone)||!address){alert("Naam, mobile aur address bharein.");return;}
             const btn=document.getElementById("cart-submit-btn"); setButtonLoading(btn,true,"Order save ho raha hai...");
-            try{ let screenshot=""; if(payment==="Online"&&file.files.length)screenshot=await compressImage(file.files[0],1400,.72); const total=cartItems.reduce((a,i)=>a+i.price*i.qty,0); const items=cartItems.map(i=>({productName:i.name,quantity:i.qty,unitPrice:Number(i.price).toFixed(2),category:i.category||""})); const timeStr=new Date().toLocaleString("en-IN"); const orderRef=await push(ref(db,"orders"),{customerName:name,customerPhone:phone,customerUid:auth.currentUser?.uid||"",customerEmail:auth.currentUser?.email||"",address,paymentType:payment,paymentScreenshot:screenshot,items,productName:items.map(i=>`${i.productName} × ${i.quantity}`).join(", "),quantity:items.reduce((a,i)=>a+i.quantity,0),unitPrice:"Multiple",productPrice:total.toFixed(2),discountAmount:"0.00",timestamp:timeStr,status:"Pending Admin Approval"}); cartItems=[]; saveCart(); document.getElementById("cart-cust-name").value="";document.getElementById("cart-cust-phone").value="";document.getElementById("cart-cust-address").value="";file.value="";closeCartCheckout(); showToast("Multi-medicine order submit ho gaya! Order ID: "+orderRef.key.slice(-6).toUpperCase()); }catch(e){console.error(e);alert("Order save nahi ho saka. Firebase/Internet check karein.");}finally{setButtonLoading(btn,false);} }
+            try{
+                let screenshot=""; 
+                if(payment==="Online"&&file.files.length) {
+                    screenshot = await compressImage(file.files[0], 1200, 0.7);
+                }
+                const total=cartItems.reduce((a,i)=>a+i.price*i.qty,0);
+                const items=cartItems.map(i=>({productName:i.name,quantity:i.qty,unitPrice:Number(i.price).toFixed(2),category:i.category||""}));
+                await push(ref(db,"orders"),{
+                    customerName:name,customerPhone:phone,customerUid:auth.currentUser?.uid||"",customerEmail:auth.currentUser?.email||"",
+                    address,paymentType:payment,paymentScreenshot:screenshot,items,
+                    productName:items.map(i=>`${i.productName} × ${i.quantity}`).join(", "),
+                    quantity:items.reduce((a,i)=>a+i.quantity,0),unitPrice:"Multiple",productPrice:total.toFixed(2),
+                    timestamp:new Date().toLocaleString("en-IN"),status:"Pending Admin Approval"
+                });
+                cartItems=[]; saveCart(); closeCartCheckout(); showToast("Order submit ho gaya!");
+            }catch(e){alert("Error saving order: " + e.message);}finally{setButtonLoading(btn,false);}
+        }
 
         window.filterByCategory = function(category) {
             activeCategory = category;
@@ -1760,140 +1382,64 @@
             });
             renderProducts();
         }
-
         window.searchProducts = function() { renderProducts(); }
 
         window.openCheckoutModal = function(name, price) {
             selectedProductForOrder = { name, unitPrice: parseFloat(price) };
-            appliedDiscountAmount = 0;
-            appliedCreditKey = null;
+            appliedDiscountAmount = 0; appliedCreditKey = null;
             document.getElementById("order-quantity").value = "1";
             document.getElementById("coupon-code-input").value = "";
             document.getElementById("coupon-msg").innerText = "";
             document.getElementById("payment-type").value = "COD";
             document.getElementById("upi-payment-container").style.display = "none";
-            document.getElementById("payment-file-input").value = "";
-            document.getElementById("payment-utr").value = "";
-            document.getElementById("modal-product-info").innerText = `Chuna gaya item: ${name} (Unit Price: ₹${price})`;
+            document.getElementById("modal-product-info").innerText = `Item: ${name} (Price: ₹${price})`;
             updateTotalPriceCalculation();
             document.getElementById("checkout-modal").style.display = "flex";
         }
-
         window.closeCheckoutModal = function() { document.getElementById("checkout-modal").style.display = "none"; }
         window.togglePaymentSection = function() {
-            const payType = document.getElementById("payment-type").value;
-            document.getElementById("upi-payment-container").style.display = (payType === "Online") ? "block" : "none";
+            document.getElementById("upi-payment-container").style.display = (document.getElementById("payment-type").value === "Online") ? "block" : "none";
         }
-
         window.updateTotalPriceCalculation = function() {
             let qty = parseInt(document.getElementById("order-quantity").value) || 1;
-            let totalMRP = selectedProductForOrder.unitPrice * qty;
-            let finalPayable = Math.max(0, totalMRP - appliedDiscountAmount);
-            document.getElementById("final-payable-box").innerText = `Kul dey rashi (Payable Amount): ₹${finalPayable.toFixed(2)}`;
+            let total = selectedProductForOrder.unitPrice * qty - appliedDiscountAmount;
+            document.getElementById("final-payable-box").innerText = `Kul dey rashi: ₹${Math.max(0, total).toFixed(2)}`;
         }
-
         window.applyCouponCode = function() {
             let code = document.getElementById("coupon-code-input").value.trim();
             let msgEl = document.getElementById("coupon-msg");
-            if (!code) { alert("Kripya coupon code darj karein!"); return; }
-
-            const phone = document.getElementById("cust-phone").value.trim();
-            if (!validPhone(phone)) {
-                msgEl.style.color = "#ef4444";
-                msgEl.innerText = "Pehle valid customer mobile number bharein.";
-                return;
-            }
-
-            let foundCredit = allCredits.find(cr =>
-                String(cr.couponCode || "").toUpperCase() === code.toUpperCase() &&
-                !cr.isUsed &&
-                String(cr.customerPhone || "") === phone
-            );
-            if (!foundCredit) {
-                msgEl.style.color = "#ef4444";
-                msgEl.innerText = "Coupon invalid hai, used hai, ya is mobile number se linked nahi hai.";
-                return;
-            }
-
-            const currentQty = parseInt(document.getElementById("order-quantity").value) || 1;
-            const orderTotal = selectedProductForOrder.unitPrice * currentQty;
-            appliedDiscountAmount = Math.min(parseFloat(foundCredit.amount) || 0, orderTotal);
-            appliedCreditKey = foundCredit.id;
-            updateTotalPriceCalculation();
-
-            msgEl.style.color = "var(--accent)";
-            msgEl.innerText = `Coupon lagu ho gaya! ₹${appliedDiscountAmount} ki chhoot mili.`;
+            let found = allCredits.find(c => c.couponCode === code && !c.isUsed);
+            if(found) {
+                appliedDiscountAmount = found.amount; appliedCreditKey = found.id;
+                msgEl.innerText = `Coupon applied! ₹${found.amount} off.`;
+                updateTotalPriceCalculation();
+            } else { msgEl.innerText = "Invalid coupon code."; }
         }
 
         window.submitOrder = async function() {
-            if (!requireCustomerLogin()) return;
-            if (isSubmittingOrder) return;
-
-            const name = document.getElementById("cust-name").value.trim();
-            const phone = document.getElementById("cust-phone").value.trim();
-            const address = document.getElementById("cust-address").value.trim();
-            const payment = document.getElementById("payment-type").value;
-            const qty = Math.min(5, Math.max(1, parseInt(document.getElementById("order-quantity").value) || 1));
+            if(!requireCustomerLogin())return;
+            const name=document.getElementById("cust-name").value.trim(), phone=document.getElementById("cust-phone").value.trim(), address=document.getElementById("cust-address").value.trim();
+            if(!name||!validPhone(phone)||!address){alert("Sabhi fields bharein!");return;}
+            const qty=parseInt(document.getElementById("order-quantity").value)||1;
+            const total=selectedProductForOrder.unitPrice*qty - appliedDiscountAmount;
+            const paymentType = document.getElementById("payment-type").value;
             const fileInput = document.getElementById("payment-file-input");
-            const paymentUtr = document.getElementById("payment-utr").value.trim();
-            const submitBtn = document.querySelector('#checkout-modal .btn-primary:last-child');
-
-            if (!name || !phone || !address) { alert("Kripya naam, mobile aur address bharein!"); return; }
-            if (!validPhone(phone)) { alert("Kripya valid 10 anko ka Indian mobile number darj karein."); return; }
-            if (!selectedProductForOrder || !Number.isFinite(selectedProductForOrder.unitPrice)) { alert("Product selection invalid hai. Dobara try karein."); return; }
-            if (payment === "Online" && fileInput.files.length === 0) { alert("Kripya online payment ka screenshot chunein!"); return; }
-            if (payment === "Online" && !/^\d{12}$/.test(paymentUtr)) { alert("Kripya valid 12 digit Transaction ID / UTR darj karein."); return; }
-            if (fileInput.files.length > 0 && fileInput.files[0].size > 5 * 1024 * 1024) { alert("Payment screenshot 5 MB se chhota hona chahiye."); return; }
-
-            const totalMRP = selectedProductForOrder.unitPrice * qty;
-            const finalPayable = Math.max(0, totalMRP - Math.min(appliedDiscountAmount, totalMRP));
-            const timeStr = new Date().toLocaleString();
-
-            isSubmittingOrder = true;
-            setButtonLoading(submitBtn, true, "Order save ho raha hai...");
-
+            
             try {
-                let screenshotBase64 = "";
-                if (payment === "Online" && fileInput.files.length > 0) {
-                    screenshotBase64 = await compressImage(fileInput.files[0], 1400, 0.72);
+                let screenshot = "";
+                if (paymentType === "Online" && fileInput.files.length > 0) {
+                    screenshot = await compressImage(fileInput.files[0], 1200, 0.7);
                 }
-
-                const orderRef = await push(ref(db, 'orders'), {
-                    customerName: name, customerPhone: phone,
-                    customerUid: auth.currentUser?.uid || "", customerEmail: auth.currentUser?.email || "",
-                    address: address, paymentType: payment, paymentScreenshot: screenshotBase64,
-                    paymentUtr: payment === "Online" ? paymentUtr : "",
-                    productName: selectedProductForOrder.name, quantity: qty,
-                    unitPrice: selectedProductForOrder.unitPrice.toFixed(2),
-                    productPrice: finalPayable.toFixed(2),
-                    couponCode: appliedCreditKey ? (allCredits.find(c => c.id === appliedCreditKey)?.couponCode || "") : "",
-                    discountAmount: Math.min(appliedDiscountAmount, totalMRP).toFixed(2),
-                    timestamp: timeStr, status: "Pending Admin Approval"
+                await push(ref(db,'orders'), {
+                    customerName:name, customerPhone:phone, customerUid:auth.currentUser?.uid||"", customerEmail:auth.currentUser?.email||"",
+                    address, paymentType: paymentType, paymentScreenshot: screenshot,
+                    productName:selectedProductForOrder.name, quantity:qty, productPrice:Math.max(0,total).toFixed(2),
+                    timestamp:new Date().toLocaleString(), status:"Pending Admin Approval"
                 });
-
-                if (appliedCreditKey) {
-                    await update(ref(db, 'credits/' + appliedCreditKey), {
-                        isUsed: true, usedMode: 'Online', usedOrderId: orderRef.key, usedAt: timeStr
-                    });
-                }
-
-                showToast("Order submit ho gaya! Admin approval ka wait karein.");
-                closeCheckoutModal();
-                ["cust-name", "cust-phone", "cust-address"].forEach(id => document.getElementById(id).value = "");
-                fileInput.value = ""; document.getElementById("payment-utr").value = "";
-                appliedDiscountAmount = 0; appliedCreditKey = null;
-            } catch (err) {
-                console.error(err);
-                alert("Order save nahi ho saka. Internet connection aur Firebase settings check karein.");
-            } finally {
-                isSubmittingOrder = false;
-                setButtonLoading(submitBtn, false);
-            }
+                showToast("Order submitted!"); closeCheckoutModal();
+            }catch(e){alert("Error submitting order: " + e.message);}
         }
-
         updateCartUI();
-        window.addEventListener("error", (event) => { console.error("Application error:", event.error || event.message); });
-        window.addEventListener("unhandledrejection", (event) => { console.error("Unhandled promise rejection:", event.reason); });
     </script>
 </body>
 </html>
